@@ -22,28 +22,23 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
   transactionId: any;
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  login(userName: string, password: string, doLogout: any) {
+  login(userName: any, password: string, doLogout: any) {
     console.log('environment.loginUrl', environment.loginUrl);
     return this.http.post(environment.loginUrl, {
       userName: userName,
       password: password,
       doLogout: doLogout,
     });
-    // .map((res: any) => res.json());
   }
-  userlogoutPreviousSession(userName: string) {
+  userlogoutPreviousSession(userName: any) {
     console.log(
       'environment.userlogoutPreviousSessionUrl',
       environment.userLogoutPreviousSessionUrl,
@@ -51,14 +46,12 @@ export class AuthService {
     return this.http.post(environment.userLogoutPreviousSessionUrl, {
       userName: userName,
     });
-    // .map(res => res.json());
   }
 
   getUserSecurityQuestionsAnswer(uname: any): Observable<any> {
     return this.http.post(environment.getUserSecurityQuestionsAnswerUrl, {
       userName: uname.toLowerCase(),
     });
-    // .map(res => res.json())
   }
 
   validateSecurityQuestionAndAnswer(ans: any, uname: any): Observable<any> {
@@ -66,19 +59,16 @@ export class AuthService {
       SecurityQuesAns: ans,
       userName: uname.toLowerCase(),
     });
-    // .map(res => res.json())
   }
 
-  // getTransactionIdForChangePassword(uname: any): Observable<any> {
-  //   return this.http.post(environment.getTransactionIdForChangePasswordUrl, {
-  //     userName: uname.toLowerCase(),
-  //   });
-  //   // .map(res => res.json())
-  // }
+  getTransactionIdForChangePassword(uname: any): Observable<any> {
+    return this.http.post(environment.getTransacIDForPasswordChange, {
+      userName: uname.toLowerCase(),
+    });
+  }
 
   getSecurityQuestions() {
     return this.http.get(environment.getSecurityQuestionUrl);
-    // .map(res => res.json())
   }
 
   saveUserSecurityQuestionsAnswer(userQuestionAnswer: any) {
@@ -86,7 +76,6 @@ export class AuthService {
       environment.saveUserSecurityQuestionsAnswerUrl,
       userQuestionAnswer,
     );
-    // .map(res => res.json())
   }
 
   setNewPassword(userName: string, password: string, transactionId: string) {
@@ -95,25 +84,24 @@ export class AuthService {
       password: password,
       transactionId: this.transactionId,
     });
-    // .map(res => res.json())
   }
 
   validateSessionKey() {
     return this.http.post(environment.getSessionExistsURL, {});
-    // .map(res => res.json());
   }
 
   logout() {
     return this.http.post(environment.logoutUrl, '');
-    // .map((res) => res.json());
+  }
+
+  getSwymedLogout() {
+    return this.http.get(environment.getSwymedLogoutUrl);
   }
 
   getUIVersionAndCommitDetails(url: any) {
     return this.http.get(url);
-    // .map((res) => res.json());
   }
   getAPIVersionAndCommitDetails() {
     return this.http.get(environment.apiVersionUrl);
-    // .map((res) => res.json());
   }
 }

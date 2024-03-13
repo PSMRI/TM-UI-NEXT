@@ -1,0 +1,33 @@
+.input-full-width {
+  width: 100%;
+}
+
+mat-pagination {
+  text-align: right;
+}
+
+mat-input-container {
+  width: 60%;
+}
+
+.norecord {
+  text-align: center;
+}
+
+::ng-deep.pagination {
+  margin: 0;
+}
+
+mat-card {
+  min-height: 400px;
+  padding: 15px;
+}
+
+@media (max-width: 481px) {
+  mat-input-container {
+    width: 100%;
+  }
+  #caseSheetButton {
+    width: 100%;
+  }
+}

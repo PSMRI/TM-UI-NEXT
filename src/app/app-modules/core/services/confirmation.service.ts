@@ -21,7 +21,6 @@ export class ConfirmationService {
     btnOkText = 'OK',
     btnCancelText = 'Cancel',
   ): Observable<boolean> {
-    const config = new MatDialogConfig();
     const dialogRef = this.dialog.open(CommonDialogComponent, {
       width: '420px',
       disableClose: false,
@@ -35,7 +34,6 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = false;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
     dialogRef.disableClose = true;
 
     return dialogRef.afterClosed();
@@ -59,13 +57,16 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = false;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
     dialogRef.disableClose = true;
 
     return dialogRef.afterClosed();
   }
 
-  public alert(message: string, status = 'info', btnOkText = 'OK'): void {
+  public alert(
+    message: string,
+    status = 'info',
+    btnOkText = 'OK',
+  ): MatDialogRef<CommonDialogComponent> {
     const config = {
       width: '420px',
     };
@@ -78,7 +79,8 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = true;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
+
+    return dialogRef;
   }
 
   public remarks(
@@ -99,7 +101,6 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = false;
     dialogRef.componentInstance.remarks = true;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
     dialogRef.componentInstance.btnCancelText = btnCancelText;
 
     return dialogRef.afterClosed();
@@ -183,7 +184,6 @@ export class ConfirmationService {
     btnOkText = 'Continue',
     btnCancelText = 'Cancel',
   ): Observable<any> {
-    const config = new MatDialogConfig();
     const dialogRef = this.dialog.open(CommonDialogComponent, {
       width: '420px',
       disableClose: true,
@@ -199,7 +199,6 @@ export class ConfirmationService {
     dialogRef.componentInstance.editRemarks = false;
     dialogRef.componentInstance.sessionTimeout = true;
     dialogRef.componentInstance.updateTimer(timer);
-    // dialogRef.componentInstance.comments = null;
 
     return dialogRef.afterClosed();
   }
@@ -257,7 +256,6 @@ export class ConfirmationService {
     dialogRef.componentInstance.alertFetsenseMessage = true;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
   }
   /*END*/
   public confirmCalibration(
@@ -266,7 +264,6 @@ export class ConfirmationService {
     btnOkText = 'Yes',
     btnCancelText = 'No',
   ): Observable<boolean> {
-    const config = new MatDialogConfig();
     const dialogRef = this.dialog.open(CommonDialogComponent, {
       width: '420px',
       disableClose: false,
@@ -280,7 +277,6 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = false;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
 
     return dialogRef.afterClosed();
   }
@@ -291,7 +287,6 @@ export class ConfirmationService {
     btnOkText = 'OK',
     btnCancelText = 'Cancel',
   ): Observable<boolean> {
-    const config = new MatDialogConfig();
     const dialogRef = this.dialog.open(CommonDialogComponent, {
       width: '420px',
       disableClose: false,
@@ -306,36 +301,7 @@ export class ConfirmationService {
     dialogRef.componentInstance.alert = false;
     dialogRef.componentInstance.remarks = false;
     dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
     dialogRef.componentInstance.cbacData = data;
-
-    return dialogRef.afterClosed();
-  }
-
-  public confirmCareContext(
-    title: string,
-    message: string,
-    btnOkText = 'Yes',
-    btnCancelText = 'No',
-  ): Observable<boolean> {
-    const config = new MatDialogConfig();
-    const dialogRef = this.dialog.open(CommonDialogComponent, {
-      width: '420px',
-      disableClose: false,
-    });
-    dialogRef.componentInstance.title = title;
-    dialogRef.componentInstance.message = message;
-    dialogRef.componentInstance.btnOkText = btnOkText;
-    dialogRef.componentInstance.btnCancelText = btnCancelText;
-    dialogRef.componentInstance.confirmAlert = false;
-    dialogRef.componentInstance.confirmCareContext = true;
-    dialogRef.componentInstance.confirmCBAC = false;
-    dialogRef.componentInstance.confirmcalibration = false;
-    dialogRef.componentInstance.alert = false;
-    dialogRef.componentInstance.remarks = false;
-    dialogRef.componentInstance.editRemarks = false;
-    // dialogRef.componentInstance.comments = null;
-    dialogRef.disableClose = true;
 
     return dialogRef.afterClosed();
   }

@@ -20,7 +20,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   Router,
   RouteConfigLoadStart,
@@ -38,23 +38,29 @@ import { SpinnerService } from './app-modules/core/services/spinner.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private spinnerService: SpinnerService,
   ) {}
 
-  OnInit() {
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof ResolveStart || event instanceof RouteConfigLoadStart) {
-    //     this.spinnerService.show();
-    //   } else if (event instanceof NavigationEnd || event instanceof RouteConfigLoadEnd) {
-    //     setTimeout(this.spinnerService.hide(), 500);
-    //   } else if (event instanceof NavigationError) {
-    //     setTimeout(this.spinnerService.hide(), 500);
-    //   } else if (event instanceof NavigationCancel) {
-    //     setTimeout(this.spinnerService.hide(), 500);
-    //   }
-    // });
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (
+        event instanceof ResolveStart ||
+        event instanceof RouteConfigLoadStart
+      ) {
+        this.spinnerService.show();
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof RouteConfigLoadEnd
+      ) {
+        setTimeout(() => this.spinnerService.hide(), 500);
+      } else if (event instanceof NavigationError) {
+        setTimeout(() => this.spinnerService.hide(), 500);
+      } else if (event instanceof NavigationCancel) {
+        setTimeout(() => this.spinnerService.hide(), 500);
+      }
+    });
   }
 }

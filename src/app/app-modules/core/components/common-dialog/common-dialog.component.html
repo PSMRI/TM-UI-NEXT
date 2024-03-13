@@ -57,7 +57,7 @@
 <div *ngIf="remarks">
   <h3 class="title info">{{ message | titlecase }}</h3>
   <div class="message">
-    <mat-form-field [style.width]="'100%'">
+    <mat-form-field [style.width]="'120%'">
       <input
         autocomplete="off"
         matInput
@@ -124,6 +124,7 @@
     <ul class="list-group">
       <li
         class="list-group-item alert alert-danger"
+        style="margin-bottom: 5px"
         *ngFor="let items of mandatories"
       >
         <div
@@ -134,11 +135,10 @@
             items.toLowerCase() !== 'ABHA Generation Mode'.toLowerCase()
           "
         >
-          <span
-            class="glyphicon glyphicon-hand-right"
-            style="color: #cd807e; margin-right: 5px"
-          ></span>
-          <span> {{ items | titlecase }}</span>
+          <span class="glyphicon glyphicon-hand-right"></span>
+          <span style="color: #cd807e; margin-right: 5px">
+            {{ items | titlecase }}</span
+          >
         </div>
         <div
           *ngIf="
