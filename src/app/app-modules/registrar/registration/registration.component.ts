@@ -210,7 +210,7 @@ export class RegistrationComponent
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
         console.log('Registrar master data', res);
-        if (res != null) {
+        if (res !== null) {
           this.masterData = Object.assign({}, res);
           this.govIDMaster = Object.assign({}, res);
           this.otherGovIDMaster = Object.assign({}, res);
@@ -228,7 +228,7 @@ export class RegistrationComponent
     // this.registrarService.getPatientDataAsObservable(benRegID);
     this.revisitDataSubscription =
       this.registrarService.beneficiaryEditDetails$.subscribe((res) => {
-        if (res != null && benID == res.beneficiaryID) {
+        if (res !== null && benID === res.beneficiaryID) {
           this.revisitData = Object.assign({}, res);
         } else {
           this.redirectToSearch();
@@ -274,7 +274,7 @@ export class RegistrationComponent
   confirmFormReset(reset: any) {
     // let resetflag = reset;
     if (this.beneficiaryRegistrationForm.dirty) {
-      if (reset == true) {
+      if (reset === true) {
         this.confirmationService
           .confirm('warn', this.currentLanguageSet.alerts.info.resetDetails)
           .subscribe((res) => {
@@ -283,7 +283,7 @@ export class RegistrationComponent
             }
           });
       } else {
-        if (reset == false) {
+        if (reset === false) {
           this.confirmationService
             .confirm(
               `info`,
@@ -299,7 +299,7 @@ export class RegistrationComponent
         }
       }
     } else {
-      if (reset == false) {
+      if (reset === false) {
         this.router.navigate(['/registrar/search/']);
       }
     }
@@ -379,48 +379,48 @@ export class RegistrationComponent
 
     Object.keys(personalForm.controls).forEach((control) => {
       if (!personalForm.controls[control].valid) {
-        if (control == 'maritalStatus') {
+        if (control === 'maritalStatus') {
           if (
             personalForm.value.age >= 12 &&
-            personalForm.value.ageUnit == 'Years'
+            personalForm.value.ageUnit === 'Years'
           ) {
             required.push(
               this.currentLanguageSet.ro.personalInfo.maritalStatus,
             );
           }
-        } else if (control == 'firstName') {
+        } else if (control === 'firstName') {
           required.push(this.currentLanguageSet.ro.personalInfo.firstName);
-        } else if (control == 'gender') {
+        } else if (control === 'gender') {
           required.push(this.currentLanguageSet.ro.personalInfo.gender);
-        } else if (control == 'phoneNo') {
+        } else if (control === 'phoneNo') {
           required.push(this.currentLanguageSet.bendetails.phoneNo);
-        } else if (control == 'age') {
+        } else if (control === 'age') {
           required.push(this.currentLanguageSet.bendetails.age);
-        } else if (control == 'ageAtMarriage') {
+        } else if (control === 'ageAtMarriage') {
           if (
             personalForm.value.age >= 12 &&
-            personalForm.value.ageUnit == 'Years' &&
-            personalForm.value.maritalStatus != 1 &&
-            personalForm.value.maritalStatus != 7
+            personalForm.value.ageUnit === 'Years' &&
+            personalForm.value.maritalStatus !== 1 &&
+            personalForm.value.maritalStatus !== 7
           )
             required.push(
               this.currentLanguageSet.ro.personalInfo.ageAtMarriage,
             );
-        } else if (control == 'spouseName') {
+        } else if (control === 'spouseName') {
           if (
             personalForm.value.age >= 12 &&
-            personalForm.value.ageUnit == 'Years' &&
-            personalForm.value.maritalStatus == 2
+            personalForm.value.ageUnit === 'Years' &&
+            personalForm.value.maritalStatus === 2
           )
             required.push(this.currentLanguageSet.ro.personalInfo.spouseName);
-        } else if (control == 'occupationOther') {
+        } else if (control === 'occupationOther') {
           required.push(
             this.currentLanguageSet.ro.personalInfo.otherOccupation,
           );
-        } else if (control == 'educationQualification') {
+        } else if (control === 'educationQualification') {
           if (
             personalForm.value.literacyStatus &&
-            personalForm.value.literacyStatus == 'Literate'
+            personalForm.value.literacyStatus === 'Literate'
           )
             required.push(
               this.currentLanguageSet.ro.personalInfo.educationalQualification,
@@ -432,19 +432,19 @@ export class RegistrationComponent
     });
     Object.keys(demographicsForm.controls).forEach((control) => {
       if (!demographicsForm.controls[control].valid) {
-        if (control == 'stateID') {
+        if (control === 'stateID') {
           required.push(this.currentLanguageSet.ro.locInfo.state);
-        } else if (control == 'districtID') {
+        } else if (control === 'districtID') {
           required.push(this.currentLanguageSet.ro.locInfo.district_Town_City);
-        } else if (control == 'blockID') {
+        } else if (control === 'blockID') {
           required.push(this.currentLanguageSet.ro.locInfo.taluk);
-        } else if (control == 'villageID') {
+        } else if (control === 'villageID') {
           required.push(this.currentLanguageSet.ro.locInfo.street);
-        } else if (control == 'parkingPlace') {
+        } else if (control === 'parkingPlace') {
           /* required.push('Parking Place'); */
-        } else if (control == 'zoneID') {
+        } else if (control === 'zoneID') {
           /*  required.push('Zone'); */
-        } else if (control == 'servicePoint') {
+        } else if (control === 'servicePoint') {
           /* required.push('Service Point'); */
         }
       }
@@ -452,19 +452,19 @@ export class RegistrationComponent
     let govCount = 0;
     Object.keys(otherDetailsForm.controls).forEach((control) => {
       if (!otherDetailsForm.controls[control].valid) {
-        if (control == 'emailID') {
+        if (control === 'emailID') {
           required.push(this.currentLanguageSet.emailAddress);
-        } else if (control == 'blockID') {
+        } else if (control === 'blockID') {
           required.push(this.currentLanguageSet.block);
-        } else if (control == 'religionOther') {
+        } else if (control === 'religionOther') {
           required.push(this.currentLanguageSet.otherReligionName);
-        } else if (control == 'govID') {
+        } else if (control === 'govID') {
           govCount++;
-        } else if (control == 'otherGovID') {
+        } else if (control === 'otherGovID') {
           required.push(this.currentLanguageSet.otherGovtID);
-        } else if (control == 'fatherName') {
+        } else if (control === 'fatherName') {
           required.push(this.currentLanguageSet.ro.otherInfo.fName);
-        } else if (control == 'community') {
+        } else if (control === 'community') {
           required.push(this.currentLanguageSet.ro.otherInfo.community);
         }
       }
@@ -542,14 +542,14 @@ export class RegistrationComponent
       let authMode = null;
       if (
         (otherDetailsForm.controls['healthIdMode'].valid &&
-          otherDetailsForm.controls['healthIdMode'].value != undefined &&
-          otherDetailsForm.controls['healthIdMode'].value != null) ||
-        otherDetailsForm.controls['healthIdMode'].value != ''
+          otherDetailsForm.controls['healthIdMode'].value !== undefined &&
+          otherDetailsForm.controls['healthIdMode'].value !== null) ||
+        otherDetailsForm.controls['healthIdMode'].value !== ''
       )
         authMode = otherDetailsForm.controls['healthIdMode'].value;
       if (
         control === 'phoneNo' &&
-        personalForm.controls[control].value == null &&
+        personalForm.controls[control].value === null &&
         authMode === 'MOBILE'
       ) {
         required.push(this.currentLanguageSet.bendetails.phoneNo);
@@ -557,11 +557,11 @@ export class RegistrationComponent
     });
     if (
       !personalForm.controls['lastName'].valid ||
-      personalForm.controls['lastName'].value == null ||
-      personalForm.controls['lastName'].value == ''
+      personalForm.controls['lastName'].value === null ||
+      personalForm.controls['lastName'].value === ''
     ) {
       if (
-        otherDetailsForm.controls['healthIdMode'].value != undefined &&
+        otherDetailsForm.controls['healthIdMode'].value !== undefined &&
         otherDetailsForm.controls['healthIdMode'].value === 'MOBILE'
       )
         required.push(this.currentLanguageSet.ro.personalInfo.lastName);
@@ -569,21 +569,21 @@ export class RegistrationComponent
 
     if (
       !otherDetailsForm.controls['healthId'].valid ||
-      otherDetailsForm.controls['healthId'].value == null ||
-      otherDetailsForm.controls['healthId'].value == ''
+      otherDetailsForm.controls['healthId'].value === null ||
+      otherDetailsForm.controls['healthId'].value === ''
     ) {
       required.push(this.currentLanguageSet.aBHA);
     }
     if (
-      otherDetailsForm.controls['healthId'].value != '' &&
-      otherDetailsForm.controls['healthId'].value != undefined &&
-      otherDetailsForm.controls['healthId'].value != null
+      otherDetailsForm.controls['healthId'].value !== '' &&
+      otherDetailsForm.controls['healthId'].value !== undefined &&
+      otherDetailsForm.controls['healthId'].value !== null
     ) {
       const hid = otherDetailsForm.controls['healthId'].value;
       for (let i = 0; i < hid.length; i++) {
         if (!this.is_numeric(hid.charAt(i))) {
           if (!this.isLetter(hid.charAt(i))) {
-            if (hid.charAt(i) == '.') {
+            if (hid.charAt(i) === '.') {
               c++;
               if (i <= 3) {
                 cflag = true;
@@ -596,7 +596,7 @@ export class RegistrationComponent
           }
         }
       }
-      if (c > 1 || c == 0 || cflag) {
+      if (c > 1 || c === 0 || cflag) {
         this.confirmationService.alert(
           this.currentLanguageSet.validHealthIDMessage,
           'error',
@@ -606,8 +606,8 @@ export class RegistrationComponent
     }
     if (
       !otherDetailsForm.controls['healthIdMode'].valid ||
-      otherDetailsForm.controls['healthIdMode'].value == null ||
-      otherDetailsForm.controls['healthIdMode'].value == ''
+      otherDetailsForm.controls['healthIdMode'].value === null ||
+      otherDetailsForm.controls['healthIdMode'].value === ''
     ) {
       required.push(this.currentLanguageSet.aBHAGenerationMode);
     }
@@ -615,22 +615,22 @@ export class RegistrationComponent
       let govtypeCount = 0;
       let aadharCount = 0;
       otherDetailsForm.controls['govID'].value.forEach((control: any) => {
-        if (control.type == null && aadharCount == 0) {
+        if (control.type === null && aadharCount === 0) {
           required.push(this.currentLanguageSet.aadhar);
         }
-        if (control.type == 1) {
+        if (control.type === 1) {
           aadharCount++;
         }
-        if (control.type != null) {
+        if (control.type !== null) {
           govtypeCount++;
         }
       });
-      if (aadharCount == 0 && !required.includes('Aadhar'))
+      if (aadharCount === 0 && !required.includes('Aadhar'))
         required.push(this.currentLanguageSet.aadhar);
       if (govtypeCount) {
         let govAadharCount = 0;
         otherDetailsForm.value.govID.forEach((element: any) => {
-          if (element.idValue == null) {
+          if (element.idValue === null) {
             govAadharCount++;
           } else if (
             element.idValue &&
@@ -769,7 +769,7 @@ export class RegistrationComponent
 
     console.log(JSON.stringify(iEMRForm, null, 4), ' biEMRFOrm');
     this.registrarService.submitBeneficiary(iEMRForm).subscribe((res: any) => {
-      if (res.statusCode == 200) {
+      if (res.statusCode === 200) {
         this.confirmationService.alert(res.data.response, 'success');
         if (this.checkValidHealthID('save')) {
           const txt = res.data.response;
@@ -790,7 +790,7 @@ export class RegistrationComponent
               otherDetailsForm.controls['healthIdNumber'].value !== null)
           ) {
             this.registrarService.mapHealthId(reqObj).subscribe((res: any) => {
-              if (res.statusCode == 200) {
+              if (res.statusCode === 200) {
                 console.log('res', res);
               } else {
                 this.confirmationService.alert(
@@ -830,7 +830,7 @@ export class RegistrationComponent
     );
 
     this.registrarService.updateBeneficiary(iEMRForm).subscribe((res: any) => {
-      if (res && res.statusCode == 200) {
+      if (res && res.statusCode === 200) {
         this.confirmationService.alert(res.data.response, 'success');
         const reqObj = {
           beneficiaryRegID: null,
@@ -849,7 +849,7 @@ export class RegistrationComponent
             otherDetailsForm.controls['healthIdNumber'].value !== null)
         ) {
           this.registrarService.mapHealthId(reqObj).subscribe((res: any) => {
-            if (res.statusCode == 200) {
+            if (res.statusCode === 200) {
               console.log('res', res);
             } else {
               this.confirmationService.alert(
@@ -887,7 +887,7 @@ export class RegistrationComponent
       this.registrarService
         .updateBeneficiary(iEMRForm)
         .subscribe((res: any) => {
-          if (res && res.statusCode == 200) {
+          if (res && res.statusCode === 200) {
             this.confirmationService.alert(res.data.response, 'success');
             // var txt = res.data.response;
             // var numb = txt.replace(/\D/g,'');
@@ -913,7 +913,7 @@ export class RegistrationComponent
                 this.registrarService
                   .mapHealthId(reqObj)
                   .subscribe((res: any) => {
-                    if (res.statusCode == 200) {
+                    if (res.statusCode === 200) {
                       console.log('res', res);
                     } else {
                       this.confirmationService.alert(
@@ -1122,16 +1122,16 @@ export class RegistrationComponent
   }
 
   getBenPhMapID(benPhMapID: any) {
-    if (benPhMapID == 'null') {
+    if (benPhMapID === 'null') {
       return null;
     } else {
       return benPhMapID;
     }
   }
   getRelationTypeForUpdate(parentRelation: any, benRelationshipType: any) {
-    if (parentRelation == 1) {
+    if (parentRelation === 1) {
       return 'Self';
-    } else if (parentRelation == 11) {
+    } else if (parentRelation === 11) {
       return 'Other';
     } else {
       return null;
@@ -1155,7 +1155,7 @@ export class RegistrationComponent
     );
     this.govIDMaster.filter(function (item: any) {
       const i = govArr.findIndex(
-        (x: any) => x.govtIdentityTypeID == item.govtIdentityTypeID,
+        (x: any) => x.govtIdentityTypeID === item.govtIdentityTypeID,
       );
       if (i <= -1) {
         govArr.push(item);
@@ -1165,7 +1165,7 @@ export class RegistrationComponent
 
     this.otherGovIDMaster.filter(function (item: any) {
       const j = otherGovArr.findIndex(
-        (x: any) => x.govtIdentityTypeID == item.govtIdentityTypeID,
+        (x: any) => x.govtIdentityTypeID === item.govtIdentityTypeID,
       );
       if (j <= -1) {
         otherGovArr.push(item);
@@ -1180,7 +1180,7 @@ export class RegistrationComponent
           gov.type &&
           gov.idValue &&
           gov.type === id.govtIdentityTypeID &&
-          gov.deleted == false &&
+          gov.deleted === false &&
           gov.benIdentityId
         ) {
           iEMRids.push({
@@ -1204,7 +1204,7 @@ export class RegistrationComponent
         if (
           othergov.type &&
           othergov.idValue &&
-          othergov.deleted == false &&
+          othergov.deleted === false &&
           othergov.benIdentityId
         ) {
           if (othergov.type === id.govtIdentityTypeID) {
@@ -1517,19 +1517,19 @@ export class RegistrationComponent
     //combining address
     let addessValue = null;
     if (
-      demographicsForm.controls['addressLine2'].value == null &&
-      demographicsForm.controls['addressLine3'].value == null
+      demographicsForm.controls['addressLine2'].value === null &&
+      demographicsForm.controls['addressLine3'].value === null
     ) {
       addessValue = demographicsForm.controls['addressLine1'].value;
-    } else if (demographicsForm.controls['addressLine2'].value == null) {
+    } else if (demographicsForm.controls['addressLine2'].value === null) {
       addessValue =
         demographicsForm.controls['addressLine1'].value +
         '|' +
         demographicsForm.controls['addressLine3'].value;
     } else if (
-      demographicsForm.controls['addressLine3'].value == null ||
-      demographicsForm.controls['addressLine3'].value == undefined ||
-      demographicsForm.controls['addressLine3'].value == ''
+      demographicsForm.controls['addressLine3'].value === null ||
+      demographicsForm.controls['addressLine3'].value === undefined ||
+      demographicsForm.controls['addressLine3'].value === ''
     ) {
       addessValue =
         demographicsForm.controls['addressLine1'].value +
@@ -1543,10 +1543,10 @@ export class RegistrationComponent
         '|' +
         demographicsForm.controls['addressLine3'].value;
     }
-    if (otherDetailsForm.controls['healthIdMode'].value == 'AADHAR') {
+    if (otherDetailsForm.controls['healthIdMode'].value === 'AADHAR') {
       let aadharNumber = null;
       otherDetailsForm.value.govID.forEach((element: any) => {
-        if (element.type == 1) {
+        if (element.type === 1) {
           aadharNumber = element.idValue;
         }
       });
@@ -1561,9 +1561,9 @@ export class RegistrationComponent
     //     lastName: personalForm.controls['lastName'].value,
     //     fullName: personalForm.controls['fullName'].value,
     //     gender:
-    //       personalForm.controls['genderName'].value == 'Female'
+    //       personalForm.controls['genderName'].value === 'Female'
     //         ? 'F'
-    //         : personalForm.controls['genderName'].value == 'Male'
+    //         : personalForm.controls['genderName'].value === 'Male'
     //           ? 'M'
     //           : 'O',
     //     dayOfBirth: date1.getDate().toString(),
@@ -1572,7 +1572,7 @@ export class RegistrationComponent
     //     mobileNumber: personalForm.controls['phoneNo'].value,
     //     address: addessValue,
     //     pincode:
-    //       demographicsForm.controls['pincode'].value == null
+    //       demographicsForm.controls['pincode'].value === null
     //         ? 0
     //         : demographicsForm.controls['pincode'].value,
     //     email: otherDetailsForm.controls['emailID'].value,
@@ -1609,7 +1609,7 @@ export class RegistrationComponent
     };
     this.registrarService.getHealthIdDetails(reqObj).subscribe(
       (res: any) => {
-        if (res.statusCode == 200) {
+        if (res.statusCode === 200) {
           // this.dialog.open(HealthIdDisplayModalComponent, {
           //   data: { dataList: res },
           // });

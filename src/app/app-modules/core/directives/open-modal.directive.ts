@@ -54,7 +54,7 @@ export class OpenModalDirective implements OnInit, DoCheck {
   }
 
   @HostListener('click') onClick() {
-    if (this.el.nativeElement.nodeName != 'INPUT') this.openDialog();
+    if (this.el.nativeElement.nodeName !== 'INPUT') this.openDialog();
   }
 
   // utils = new GeneralUtils(this.fb);

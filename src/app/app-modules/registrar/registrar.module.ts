@@ -77,6 +77,16 @@ import { QuickSearchComponent } from './quick-search/quick-search.component';
     RegisterDemographicDetailsComponent,
     RegisterOtherDetailsComponent,
     QuickSearchComponent,
+    // HealthIdOtpGenerationComponent,
+    // HealthIdOtpSuccessComponent,
+    // HealthIdValidateComponent,
+    // ViewHealthIdCardComponent,
+    // GenerateMobileOtpGenerationComponent,
+    // SetPasswordForAbhaComponent,
+    // GenerateAbhaComponent,
+    // BiometricAuthenticationComponent,
+    // RdservicebioComponent,
+    // authMethodComponent,
   ],
 })
 export class RegistrarModule {}

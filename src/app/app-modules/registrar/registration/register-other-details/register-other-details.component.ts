@@ -135,7 +135,7 @@ export class RegisterOtherDetailsComponent
     const govIdValue = this.govIDMaster[0].govIdEntityMaster;
     let aadharId: any;
     console.log(govIdValue);
-    if (govIdValue != undefined && govIdValue != null) {
+    if (govIdValue !== undefined && govIdValue !== null) {
       for (let i = 0; i < govIdValue.length; i++) {
         if (govIdValue[i].identityType === 'Aadhar') {
           aadharId = govIdValue[i].govtIdentityTypeID;
@@ -251,7 +251,7 @@ export class RegisterOtherDetailsComponent
   checkIDPattern(index: any) {
     const values = this.otherDetailsForm.value.govID[index];
     const id = (<FormArray>this.otherDetailsForm.controls['govID']).at(index);
-    if (values.idValue.length == values.maxLength) {
+    if (values.idValue.length === values.maxLength) {
       console.log('ok');
     }
   }
@@ -263,7 +263,7 @@ export class RegisterOtherDetailsComponent
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
         // console.log('res other', res)
-        if (res != null) {
+        if (res !== null) {
           // console.log(res,'res other')
           this.masterData = Object.assign({}, res);
           this.govIDMaster[0] = Object.assign({}, res);
@@ -332,7 +332,7 @@ export class RegisterOtherDetailsComponent
       );
       const identityData: any = [];
       unFilteredIdentityData.forEach((element: any) => {
-        if (!element.deleted || element.deleted == false) {
+        if (!element.deleted || element.deleted === false) {
           identityData.push(element);
         }
       });
@@ -342,12 +342,12 @@ export class RegisterOtherDetailsComponent
       const govIDs: any = [];
       const otherGovIDs: any = [];
       identityData.forEach((item: any) => {
-        if (item.govtIdentityType.isGovtID == true) {
+        if (item.govtIdentityType.isGovtID === true) {
           govIDs.push(item);
         }
       });
       identityData.forEach((item: any) => {
-        if (item.govtIdentityType.isGovtID == false) {
+        if (item.govtIdentityType.isGovtID === false) {
           otherGovIDs.push(item);
         }
       });
@@ -375,7 +375,11 @@ export class RegisterOtherDetailsComponent
     const idValue = id.value;
     const idToRemove: any = [];
     idValue.forEach((element: any, i: any) => {
-      if (!element.type || element.type == null || element.type == undefined) {
+      if (
+        !element.type ||
+        element.type === null ||
+        element.type === undefined
+      ) {
         idToRemove.push(i);
       }
     });
@@ -384,7 +388,11 @@ export class RegisterOtherDetailsComponent
     const idOtherToRemove: any = [];
 
     otherIdValue.forEach((element: any, i: any) => {
-      if (!element.type || element.type == null || element.type == undefined) {
+      if (
+        !element.type ||
+        element.type === null ||
+        element.type === undefined
+      ) {
         idOtherToRemove.push(i);
       }
     });
@@ -434,7 +442,7 @@ export class RegisterOtherDetailsComponent
   getAllowedGovChars(govtTypeID: any) {
     let allowedText = null;
     this.patterns.forEach((element: any) => {
-      if (element.govtIdentityTypeID == govtTypeID) {
+      if (element.govtIdentityTypeID === govtTypeID) {
         allowedText = element.allow;
       }
     });
@@ -473,7 +481,7 @@ export class RegisterOtherDetailsComponent
   filtergovIDs(selectedID: any, index: number) {
     const nextIndex = index + 1;
 
-    if (this.previousGovID[index] == undefined) {
+    if (this.previousGovID[index] === undefined) {
       this.previousGovID[index] = selectedID;
 
       const govIDs = this.otherDetailsForm.value.govID;
@@ -484,24 +492,24 @@ export class RegisterOtherDetailsComponent
         this.govIDMaster[nextIndex].govIdEntityMaster = this.govIDMaster[
           nextIndex
         ].govIdEntityMaster.filter((item: any) => {
-          return item.govtIdentityTypeID != value;
+          return item.govtIdentityTypeID !== value;
         });
       });
 
       for (let i = 0; i < this.govIDMaster.length; i++) {
         let indexToRemove;
         let newDataforOtherLists;
-        if (i != index) {
+        if (i !== index) {
           const temp = JSON.parse(
             JSON.stringify(this.govIDMaster[i].govIdEntityMaster),
           );
           temp.forEach((removing: any, j: any) => {
-            if (removing.govtIdentityTypeID == selectedID) {
+            if (removing.govtIdentityTypeID === selectedID) {
               indexToRemove = j;
             }
           });
 
-          if (indexToRemove != undefined) {
+          if (indexToRemove !== undefined) {
             temp.splice(indexToRemove, 1);
             this.govIDMaster[i].govIdEntityMaster = temp;
           }
@@ -519,7 +527,7 @@ export class RegisterOtherDetailsComponent
 
       const toBePushed = this.masterData.govIdEntityMaster.filter(
         (item: any) => {
-          return item.govtIdentityTypeID == this.previousGovID[index];
+          return item.govtIdentityTypeID === this.previousGovID[index];
         },
       );
       // })
@@ -529,19 +537,19 @@ export class RegisterOtherDetailsComponent
       for (let i = 0; i < this.govIDMaster.length; i++) {
         let indexToRemove;
         let newDataforOtherLists;
-        if (i != index) {
-          if (toBePushed[0] != undefined) {
+        if (i !== index) {
+          if (toBePushed[0] !== undefined) {
             this.govIDMaster[i].govIdEntityMaster.push(toBePushed[0]);
           }
           const temp = JSON.parse(
             JSON.stringify(this.govIDMaster[i].govIdEntityMaster),
           );
           temp.forEach((removing: any, j: any) => {
-            if (removing.govtIdentityTypeID == selectedID) {
+            if (removing.govtIdentityTypeID === selectedID) {
               indexToRemove = j;
             }
           });
-          if (indexToRemove != undefined) {
+          if (indexToRemove !== undefined) {
             temp.splice(indexToRemove, 1);
             this.govIDMaster[i].govIdEntityMaster = temp;
           }
@@ -557,7 +565,7 @@ export class RegisterOtherDetailsComponent
     const id = <FormArray>this.otherDetailsForm.controls['govID'];
 
     this.patterns.forEach((element: any, i: any) => {
-      if (type == element.govtIdentityTypeID) {
+      if (type === element.govtIdentityTypeID) {
         id.at(index).patchValue({
           pattern: element.pattern,
           error: element.error,
@@ -577,7 +585,7 @@ export class RegisterOtherDetailsComponent
   filterOtherGovIDs(selectedID: any, index: number) {
     const nextIndex = index + 1;
 
-    if (this.previousOtherGovID[index] == undefined) {
+    if (this.previousOtherGovID[index] === undefined) {
       this.previousOtherGovID[index] = selectedID;
 
       const govIDs = this.otherDetailsForm.value.otherGovID;
@@ -590,7 +598,7 @@ export class RegisterOtherDetailsComponent
         this.otherGovIDMaster[nextIndex].otherGovIdEntityMaster =
           this.otherGovIDMaster[nextIndex].otherGovIdEntityMaster.filter(
             (item: any) => {
-              return item.govtIdentityTypeID != value;
+              return item.govtIdentityTypeID !== value;
             },
           );
       });
@@ -598,17 +606,17 @@ export class RegisterOtherDetailsComponent
       for (let i = 0; i < this.otherGovIDMaster.length; i++) {
         let indexToRemove;
         let newDataforOtherLists;
-        if (i != index) {
+        if (i !== index) {
           const temp = JSON.parse(
             JSON.stringify(this.otherGovIDMaster[i].otherGovIdEntityMaster),
           );
           temp.forEach((removing: any, j: any) => {
-            if (removing.govtIdentityTypeID == selectedID) {
+            if (removing.govtIdentityTypeID === selectedID) {
               indexToRemove = j;
             }
           });
 
-          if (indexToRemove != undefined) {
+          if (indexToRemove !== undefined) {
             temp.splice(indexToRemove, 1);
             this.otherGovIDMaster[i].otherGovIdEntityMaster = temp;
           }
@@ -624,7 +632,7 @@ export class RegisterOtherDetailsComponent
       });
       const toBePushed = this.masterData.otherGovIdEntityMaster.filter(
         (item: any) => {
-          return item.govtIdentityTypeID == this.previousOtherGovID[index];
+          return item.govtIdentityTypeID === this.previousOtherGovID[index];
         },
       );
       let indexToRemove;
@@ -633,20 +641,20 @@ export class RegisterOtherDetailsComponent
       for (let i = 0; i < this.otherGovIDMaster.length; i++) {
         let indexToRemove;
         let newDataforOtherLists;
-        if (i != index) {
-          if (toBePushed[0] != undefined) {
+        if (i !== index) {
+          if (toBePushed[0] !== undefined) {
             this.otherGovIDMaster[i].otherGovIdEntityMaster.push(toBePushed[0]);
           }
           const temp = JSON.parse(
             JSON.stringify(this.otherGovIDMaster[i].otherGovIdEntityMaster),
           );
           temp.forEach((removing: any, j: any) => {
-            if (removing.govtIdentityTypeID == selectedID) {
+            if (removing.govtIdentityTypeID === selectedID) {
               indexToRemove = j;
             }
           });
 
-          if (indexToRemove != undefined) {
+          if (indexToRemove !== undefined) {
             temp.splice(indexToRemove, 1);
             this.otherGovIDMaster[i].otherGovIdEntityMaster = temp;
           }
@@ -676,8 +684,8 @@ export class RegisterOtherDetailsComponent
     // console.log(length, 'length')
     //id type '1' means govID
     //id type '0' means otherGovID
-    if (idtype == 1) {
-      if (this.otherDetailsForm.value.govID[index].type != null) {
+    if (idtype === 1) {
+      if (this.otherDetailsForm.value.govID[index].type !== null) {
         if (
           this.patientRevisit &&
           this.otherDetailsForm.value.govID[index].createdBy
@@ -689,7 +697,7 @@ export class RegisterOtherDetailsComponent
         const values = this.govIDMaster[index].govIdEntityMaster.filter(
           (item: any) => {
             return (
-              item.govtIdentityTypeID ==
+              item.govtIdentityTypeID ===
               this.otherDetailsForm.value.govID[index].type
             );
           },
@@ -716,8 +724,8 @@ export class RegisterOtherDetailsComponent
       } else {
         id.removeAt(index);
       }
-    } else if (idtype == 0) {
-      if (this.otherDetailsForm.value.otherGovID[index].type != null) {
+    } else if (idtype === 0) {
+      if (this.otherDetailsForm.value.otherGovID[index].type !== null) {
         if (
           this.patientRevisit &&
           this.otherDetailsForm.value.otherGovID[index].createdBy
@@ -732,7 +740,7 @@ export class RegisterOtherDetailsComponent
           index
         ].otherGovIdEntityMaster.filter((item: any) => {
           return (
-            item.govtIdentityTypeID ==
+            item.govtIdentityTypeID ===
             this.otherDetailsForm.value.otherGovID[index].type
           );
         });
@@ -770,7 +778,7 @@ export class RegisterOtherDetailsComponent
     //id type '0' means otherGovID
 
     // console.log(index, 'index');
-    if (idtype == 1) {
+    if (idtype === 1) {
       if (
         this.otherDetailsForm.value.govID[index] &&
         this.otherDetailsForm.value.govID[index].type &&
@@ -786,7 +794,7 @@ export class RegisterOtherDetailsComponent
 
         // console.log('please enter value for This ID')
       }
-    } else if (idtype == 0) {
+    } else if (idtype === 0) {
       if (
         this.otherDetailsForm.value.otherGovID[index] &&
         this.otherDetailsForm.value.otherGovID[index].type &&
@@ -812,7 +820,7 @@ export class RegisterOtherDetailsComponent
   getReligionName() {
     this.masterData.religionMaster.forEach((religion: any) => {
       if (
-        this.otherDetailsForm.value.religion != 7 &&
+        this.otherDetailsForm.value.religion !== 7 &&
         this.otherDetailsForm.value.religion === religion.religionID
       ) {
         this.otherDetailsForm.patchValue({
@@ -860,7 +868,7 @@ export class RegisterOtherDetailsComponent
   }
   isFatherRequired = true;
   checkFatherIsRequired(val: any) {
-    if (val.checked == true) {
+    if (val.checked === true) {
       this.isFatherRequired = true;
     } else {
       this.isFatherRequired = false;
@@ -869,7 +877,7 @@ export class RegisterOtherDetailsComponent
 
   isCommunityRequired = true;
   checkCommunityIsRequired(val: any) {
-    if (val.checked == true) {
+    if (val.checked === true) {
       this.isCommunityRequired = true;
     } else {
       this.isCommunityRequired = false;
@@ -878,7 +886,7 @@ export class RegisterOtherDetailsComponent
 
   isGidRequired = true;
   checkGidIsRequired(val: any) {
-    if (val.checked == true) {
+    if (val.checked === true) {
       this.isGidRequired = true;
     } else {
       this.isGidRequired = false;
@@ -894,13 +902,17 @@ export class RegisterOtherDetailsComponent
     const healthidval = this.otherDetailsForm.controls['healthId'].value;
     let c = 0;
     let cflag = false;
-    if (healthidval != '' && healthidval != undefined && healthidval != null) {
+    if (
+      healthidval !== '' &&
+      healthidval !== undefined &&
+      healthidval !== null
+    ) {
       const hid = healthidval;
       if (hid.length >= 4 && hid.length <= 32) {
         for (let i = 0; i < hid.length; i++) {
           if (!this.is_numeric(hid.charAt(i))) {
             if (!this.isLetter(hid.charAt(i))) {
-              if (hid.charAt(i) == '.') {
+              if (hid.charAt(i) === '.') {
                 c++;
                 if (i <= 3) {
                   cflag = true;
@@ -913,7 +925,7 @@ export class RegisterOtherDetailsComponent
             }
           }
         }
-        if (c > 1 || c == 0 || cflag) return false;
+        if (c > 1 || c === 0 || cflag) return false;
         else return true;
       } else return false;
     } else return false;
@@ -922,12 +934,16 @@ export class RegisterOtherDetailsComponent
     const healthidval = this.otherDetailsForm.controls['healthId'].value;
     let c = 0;
     let cflag = false;
-    if (healthidval != '' && healthidval != undefined && healthidval != null) {
+    if (
+      healthidval !== '' &&
+      healthidval !== undefined &&
+      healthidval !== null
+    ) {
       const hid = healthidval;
       for (let i = 0; i < hid.length; i++) {
         if (!this.is_numeric(hid.charAt(i))) {
           if (!this.isLetter(hid.charAt(i))) {
-            if (hid.charAt(i) == '.') {
+            if (hid.charAt(i) === '.') {
               c++;
               if (i <= 3) {
                 cflag = true;
@@ -940,13 +956,13 @@ export class RegisterOtherDetailsComponent
           }
         }
       }
-      if (c > 1 || c == 0 || cflag)
+      if (c > 1 || c === 0 || cflag)
         this.confirmationService.alert(
           this.currentLanguageSet.validHealthIDMessage,
           'error',
         );
     }
-    if (healthidval && c == 1 && !cflag) {
+    if (healthidval && c === 1 && !cflag) {
       this.openDialogForValidate();
     }
   }
@@ -1007,12 +1023,12 @@ export class RegisterOtherDetailsComponent
     };
     this.registrarService.generateOTPValidateHealthID(reqObj).subscribe(
       (res: any) => {
-        if (res.statusCode == 200) {
+        if (res.statusCode === 200) {
           // this.showProgressBar = false;
           // this.transactionId = res.data.txnId;
           if (res.data && res.data.txnId) {
             if (
-              this.otherDetailsForm.controls['healthIdMode'].value == 'MOBILE'
+              this.otherDetailsForm.controls['healthIdMode'].value === 'MOBILE'
             ) {
               this.confirmationService
                 .confirmHealthId(
@@ -1025,7 +1041,7 @@ export class RegisterOtherDetailsComponent
                   }
                 });
             } else if (
-              this.otherDetailsForm.controls['healthIdMode'].value == 'AADHAR'
+              this.otherDetailsForm.controls['healthIdMode'].value === 'AADHAR'
             ) {
               this.confirmationService
                 .confirmHealthId(
@@ -1220,16 +1236,16 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
         };
         this.registrarService.generateHealthIDCard(reqObj).subscribe(
           (res: any) => {
-            if (res.statusCode == 200 && Object.keys(res.data).length > 0) {
+            if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
               this.showProgressBar = false;
               this.transactionId = res.data.txnId;
               this.enablehealthIdOTP = 'OTP';
-              if (this.healthIdMode == 'MOBILE')
+              if (this.healthIdMode === 'MOBILE')
                 this.confirmationValService.alert(
                   this.currentLanguageSet.OTPSentToRegMobNo,
                   'success',
                 );
-              else if (this.healthIdMode == 'AADHAAR')
+              else if (this.healthIdMode === 'AADHAAR')
                 this.confirmationValService.alert(
                   this.currentLanguageSet.OTPSentToAadharLinkedNo,
                   'success',
@@ -1265,17 +1281,17 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
           };
           this.registrarService.generateHealthIDCard(reqObj).subscribe(
             (res: any) => {
-              if (res.statusCode == 200 && Object.keys(res.data).length > 0) {
+              if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
                 this.showProgressBar = false;
                 this.transactionId = res.data.txnId;
                 downloadABHACard = true;
                 this.router.navigate(['/registrar/rdServiceBio/']);
                 this.rdservice.pidDetailDetails$.subscribe((piddata) => {
-                  if (piddata != null && piddata != undefined) {
+                  if (piddata !== null && piddata !== undefined) {
                     this.pidRes = piddata;
                   }
                   if (
-                    this.pidRes != null &&
+                    this.pidRes !== null &&
                     this.pidRes !== undefined &&
                     downloadABHACard === true
                   ) {
@@ -1287,7 +1303,7 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
                     };
                     this.registrarService.confirmAadhar(requestObj).subscribe(
                       (res: any) => {
-                        if (res.statusCode == 200 && res.data != null) {
+                        if (res.statusCode === 200 && res.data !== null) {
                           this.healthIDCard = res.data.response;
                           this.dialog.open(ViewHealthIdCardComponent, {
                             height: '530px',
@@ -1346,15 +1362,15 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
       };
       this.registrarService.generateOTPValidateHealthID(reqObj).subscribe(
         (res: any) => {
-          if (res.statusCode == 200) {
+          if (res.statusCode === 200) {
             this.showProgressBar = false;
             this.enablehealthIdOTP = 'OTP';
-            if (this.healthIdMode == 'MOBILE')
+            if (this.healthIdMode === 'MOBILE')
               this.confirmationValService.alert(
                 this.currentLanguageSet.OTPSentToRegMobNo,
                 'success',
               );
-            else if (this.healthIdMode == 'AADHAR')
+            else if (this.healthIdMode === 'AADHAR')
               this.confirmationValService.alert(
                 this.currentLanguageSet.OTPSentToAadharLinkedNo,
                 'success',
@@ -1415,16 +1431,16 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
         };
         this.registrarService.generateHealthIDCard(reqObj).subscribe(
           (res: any) => {
-            if (res.statusCode == 200 && Object.keys(res.data).length > 0) {
+            if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
               this.showProgressBar = false;
               this.transactionId = res.data.txnId;
 
-              if (this.healthIdMode == 'MOBILE')
+              if (this.healthIdMode === 'MOBILE')
                 this.confirmationValService.alert(
                   this.currentLanguageSet.OTPSentToRegMobNo,
                   'success',
                 );
-              else if (this.healthIdMode == 'AADHAAR')
+              else if (this.healthIdMode === 'AADHAAR')
                 this.confirmationValService.alert(
                   this.currentLanguageSet.OTPSentToAadharLinkedNo,
                   'success',
@@ -1455,11 +1471,11 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
         };
         this.registrarService.generateHealthIDCard(reqObj).subscribe(
           (res: any) => {
-            if (res.statusCode == 200 && Object.keys(res.data).length > 0) {
+            if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
               this.showProgressBar = false;
               this.transactionId = res.data.txnId;
 
-              if (this.healthIdMode == 'AADHAAR_BIO')
+              if (this.healthIdMode === 'AADHAAR_BIO')
                 this.confirmationValService.alert(
                   this.currentLanguageSet.OTPSentToRegMobNo,
                   'success',
@@ -1487,15 +1503,15 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
       };
       this.registrarService.generateOTPValidateHealthID(reqObj).subscribe(
         (res: any) => {
-          if (res.statusCode == 200) {
+          if (res.statusCode === 200) {
             this.showProgressBar = false;
 
-            if (this.healthIdMode == 'MOBILE')
+            if (this.healthIdMode === 'MOBILE')
               this.confirmationValService.alert(
                 this.currentLanguageSet.OTPSentToRegMobNo,
                 'success',
               );
-            else if (this.healthIdMode == 'AADHAR')
+            else if (this.healthIdMode === 'AADHAR')
               this.confirmationValService.alert(
                 this.currentLanguageSet.OTPSentToAadharLinkedNo,
                 'success',
@@ -1578,7 +1594,7 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
     };
     this.registrarService.verifyOTPForHealthIDValidation(reqObjOTP).subscribe(
       (res: any) => {
-        if (res.statusCode == 200) {
+        if (res.statusCode === 200) {
           this.showProgressBar = false;
           this.RequestId = res.data.RequestId;
           if (this.RequestId) {
@@ -1586,20 +1602,20 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
             // gender - 1 - female
             // gender other - transgender
             this.gender =
-              res.data.Auth.Patient.Gender == '0'
+              res.data.Auth.Patient.Gender === '0'
                 ? 1
-                : res.data.Auth.Patient.Gender == '1'
+                : res.data.Auth.Patient.Gender === '1'
                   ? 2
-                  : res.data.Auth.Patient.Gender == '2'
+                  : res.data.Auth.Patient.Gender === '2'
                     ? 3
                     : 3;
 
             this.firstName =
-              res.data.Auth.Patient.Name.split(' ')[0] == undefined
+              res.data.Auth.Patient.Name.split(' ')[0] === undefined
                 ? ''
                 : res.data.Auth.Patient.Name.split(' ')[0];
             this.lastName =
-              res.data.Auth.Patient.Name.split(' ')[1] == undefined
+              res.data.Auth.Patient.Name.split(' ')[1] === undefined
                 ? ''
                 : res.data.Auth.Patient.Name.split(' ')[1];
             this.userHealthId = res.data.Auth.Patient.Id;
@@ -1655,7 +1671,7 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
     };
     this.registrarService.verifyOTPForHealthIDCard(reqObjOTP).subscribe(
       (res: any) => {
-        if (res.statusCode == 200) {
+        if (res.statusCode === 200) {
           this.showProgressBar = false;
           this.healthIDCard = res.data.data;
           if (this.healthIDCard !== undefined && this.healthIDCard !== null) {
@@ -1692,7 +1708,7 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
   checkOTP() {
     const otp = this.healthIdValidateForm.controls['validateotp'].value;
     let cflag = false;
-    if (otp != '' && otp != undefined && otp != null) {
+    if (otp !== '' && otp !== undefined && otp !== null) {
       const hid = otp;
       if (hid.length >= 4 && hid.length <= 32) {
         for (let i = 0; i < hid.length; i++) {

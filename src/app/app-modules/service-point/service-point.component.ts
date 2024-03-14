@@ -112,14 +112,14 @@ export class ServicePointComponent implements OnInit, DoCheck {
     this.route.data.subscribe({
       next: (res: any) => {
         if (
-          res.servicePoints.statusCode == 200 &&
-          res.servicePoints.data != null
+          res.servicePoints.statusCode === 200 &&
+          res.servicePoints.data !== null
         ) {
           const data = res.servicePoints.data;
           if (data.UserVanSpDetails)
             this.vanServicepointDetails = data.UserVanSpDetails;
           this.filterVanList(this.vanServicepointDetails);
-        } else if (res.servicePoints.statusCode == 5002) {
+        } else if (res.servicePoints.statusCode === 5002) {
           this.confirmationService.alert(
             res.servicePoints.errorMessage,
             'error',
@@ -141,7 +141,7 @@ export class ServicePointComponent implements OnInit, DoCheck {
   filterVanList(vanServicepointDetails: any) {
     console.log('vanServicepointDetails', vanServicepointDetails);
     this.vansList = vanServicepointDetails.filter((item: any) => {
-      if (item.vanSession == '3') {
+      if (item.vanSession === '3') {
         return item.vanSession;
       }
     });
@@ -149,8 +149,8 @@ export class ServicePointComponent implements OnInit, DoCheck {
       (item: any, index: any, self: any) => {
         return (
           self.findIndex((t: any) => {
-            return t.vanID == item.vanID;
-          }) == index
+            return t.vanID === item.vanID;
+          }) === index
         );
       },
     );
@@ -164,7 +164,7 @@ export class ServicePointComponent implements OnInit, DoCheck {
 
     const serviceLineDetails: any = this.vansList.find(
       (van: any) =>
-        // this.vanID == van.vanID)[0];
+        // this.vanID === van.vanID)[0];
         van.vanID === selectedVanID,
     );
     if (serviceLineDetails)
@@ -217,7 +217,7 @@ export class ServicePointComponent implements OnInit, DoCheck {
 
   getDemographics() {
     this.servicePointService.getMMUDemographics().subscribe((res: any) => {
-      if (res && res.statusCode == 200) {
+      if (res && res.statusCode === 200) {
         this.saveDemographicsToStorage(res.data);
       } else {
         this.locationGathetingIssues();

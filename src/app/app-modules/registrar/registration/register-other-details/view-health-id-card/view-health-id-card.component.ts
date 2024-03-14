@@ -61,7 +61,7 @@ export class ViewHealthIdCardComponent implements OnInit, DoCheck {
   }
 
   convertIMGToPDF(baseResponse: any) {
-    if (baseResponse != undefined) {
+    if (baseResponse !== undefined) {
       const byteCharacters = atob(baseResponse);
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {

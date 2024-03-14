@@ -33,7 +33,7 @@
           >
             <p>
               {{ key.name }}&nbsp;&nbsp;
-              <!-- {{ key.status != undefined ? (key.status ? "YES" : "NO") : "" }} -->
+              <!-- {{ key.status !== undefined ? (key.status ? "YES" : "NO") : "" }} -->
               <span
                 *ngIf="key.status"
                 class="glyphicon glyphicon-ok"

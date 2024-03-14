@@ -117,7 +117,7 @@ export class RegisterPersonalDetailsComponent
     this.registrarService.changePersonalDetailsData(null);
     this.personalDataOnHealthIDSubscription =
       this.registrarService.dialogResult$.subscribe((res) => {
-        if (res != null && res != undefined)
+        if (res !== null && res !== undefined)
           this.setPersonalDetailsFromHealthId(res);
       });
   }
@@ -186,7 +186,7 @@ export class RegisterPersonalDetailsComponent
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
         // console.log('res personal', res)
-        if (res != null) {
+        if (res !== null) {
           this.masterData = res;
           if (this.patientRevisit) {
             this.loadPersonalDataForEditing();
@@ -196,20 +196,20 @@ export class RegisterPersonalDetailsComponent
   }
 
   validateMaritalStatusMaster(revisitData: any) {
-    if (revisitData.m_gender.genderID == 3) {
+    if (revisitData.m_gender.genderID === 3) {
       this.maritalStatusMaster = this.masterData.maritalStatusMaster;
     } else {
       this.maritalStatusMaster = this.masterData.maritalStatusMaster.filter(
         (maritalStatus: any) => {
           if (
-            revisitData.m_gender.genderID == '1' &&
-            maritalStatus.maritalStatusID != '5'
+            revisitData.m_gender.genderID === '1' &&
+            maritalStatus.maritalStatusID !== '5'
           ) {
             return maritalStatus;
           }
           if (
-            revisitData.m_gender.genderID == '2' &&
-            maritalStatus.maritalStatusID != '6'
+            revisitData.m_gender.genderID === '2' &&
+            maritalStatus.maritalStatusID !== '6'
           ) {
             return maritalStatus;
           }
@@ -309,7 +309,7 @@ export class RegisterPersonalDetailsComponent
     this.masterData.incomeMaster.forEach((stat: any) => {
       if (
         element.i_bendemographics.incomeStatus &&
-        stat.incomeStatus == element.i_bendemographics.incomeStatus
+        stat.incomeStatus === element.i_bendemographics.incomeStatus
       ) {
         this.personalDetailsForm.patchValue({
           income: stat.incomeStatusID,
@@ -319,8 +319,8 @@ export class RegisterPersonalDetailsComponent
     this.dobChangeByCalender(undefined);
 
     if (
-      element.maritalStatus.maritalStatusID == 1 ||
-      element.maritalStatus.maritalStatusID == 7
+      element.maritalStatus.maritalStatusID === 1 ||
+      element.maritalStatus.maritalStatusID === 7
     ) {
       this.enableMarriageDetails = false;
       this.clearMarriageDetails();
@@ -408,7 +408,7 @@ export class RegisterPersonalDetailsComponent
    */
   isMobileNoRequired = true;
   checkMobileNoIsRequired(val: any) {
-    if (val.checked == true) {
+    if (val.checked === true) {
       this.isMobileNoRequired = true;
     } else {
       this.isMobileNoRequired = false;
@@ -421,7 +421,7 @@ export class RegisterPersonalDetailsComponent
    */
   isFingerPrintRequired = true;
   checkFingerPrintIsRequired(val: any) {
-    if (val.checked == true) {
+    if (val.checked === true) {
       this.isFingerPrintRequired = true;
     } else {
       this.isFingerPrintRequired = false;
@@ -449,7 +449,7 @@ export class RegisterPersonalDetailsComponent
       this.masterData.maritalStatusMaster,
     );
 
-    if (this.personalDetailsForm.value.gender == '3') {
+    if (this.personalDetailsForm.value.gender === '3') {
       this.confirmationService
         .confirm('info', this.current_language_set.alerts.info.transGender)
         .subscribe(
@@ -469,14 +469,14 @@ export class RegisterPersonalDetailsComponent
       this.maritalStatusMaster = this.masterData.maritalStatusMaster.filter(
         (maritalStatus: any) => {
           if (
-            this.personalDetailsForm.value.gender == '1' &&
-            maritalStatus.maritalStatusID != '5'
+            this.personalDetailsForm.value.gender === '1' &&
+            maritalStatus.maritalStatusID !== '5'
           ) {
             return maritalStatus;
           }
           if (
-            this.personalDetailsForm.value.gender == '2' &&
-            maritalStatus.maritalStatusID != '6'
+            this.personalDetailsForm.value.gender === '2' &&
+            maritalStatus.maritalStatusID !== '6'
           ) {
             return maritalStatus;
           }
@@ -488,7 +488,7 @@ export class RegisterPersonalDetailsComponent
   changeLiteracyStatus() {
     const literacyStatus = this.personalDetailsForm.value.literacyStatus;
 
-    if (literacyStatus != 'Literate') {
+    if (literacyStatus !== 'Literate') {
       console.log(this.personalDetailsForm.controls, 'controls');
       // this.personalDetailsForm.controls['educationQualification'].clearValidators();
       console.log(
@@ -581,7 +581,7 @@ export class RegisterPersonalDetailsComponent
     if (valueEntered) {
       if (
         valueEntered > this.ageLimit &&
-        this.personalDetailsForm.value.ageUnit == 'Years'
+        this.personalDetailsForm.value.ageUnit === 'Years'
       ) {
         this.confirmationService.alert(
           `Age can only be set between Today to ${this.ageLimit} Years`,
@@ -606,7 +606,7 @@ export class RegisterPersonalDetailsComponent
   }
 
   onAgeUnitEntered() {
-    if (this.personalDetailsForm.value.age != null) {
+    if (this.personalDetailsForm.value.age !== null) {
       this.onAgeEntered();
     }
   }
@@ -622,7 +622,7 @@ export class RegisterPersonalDetailsComponent
     // console.log(date,'new')
     if (
       this.dateForCalendar &&
-      (!dobval || dobval.length == 10) &&
+      (!dobval || dobval.length === 10) &&
       this.personalDetailsForm.controls['dob'].valid
     ) {
       const dateDiff = Date.now() - date.getTime();
@@ -640,14 +640,14 @@ export class RegisterPersonalDetailsComponent
         this.personalDetailsForm.patchValue({ age: dob });
         this.personalDetailsForm.patchValue({ ageUnit: 'Days' });
       }
-      if (date.setHours(0, 0, 0, 0) == this.today.setHours(0, 0, 0, 0)) {
+      if (date.setHours(0, 0, 0, 0) === this.today.setHours(0, 0, 0, 0)) {
         this.personalDetailsForm.patchValue({ age: 1 });
         this.personalDetailsForm.patchValue({ ageUnit: 'Days' });
       }
 
       this.checkAgeAtMarriage();
       this.confirmMarriageEligible();
-    } else if (dobval == 'Invalid date') {
+    } else if (dobval === 'Invalid date') {
       this.personalDetailsForm.patchValue({ dob: null });
       this.dateForCalendar = null;
       this.confirmationService.alert(
@@ -665,7 +665,7 @@ export class RegisterPersonalDetailsComponent
   confirmMarriageEligible() {
     if (
       this.personalDetailsForm.value.age >= this.ageforMarriage &&
-      this.personalDetailsForm.value.ageUnit == 'Years'
+      this.personalDetailsForm.value.ageUnit === 'Years'
     ) {
       this.enableMaritalStatus = true;
     } else {
@@ -679,7 +679,7 @@ export class RegisterPersonalDetailsComponent
    * Clear Marital Status if previously entered
    */
   clearMaritalStatus() {
-    if (this.personalDetailsForm.value.maritalStatus != null) {
+    if (this.personalDetailsForm.value.maritalStatus !== null) {
       this.personalDetailsForm.patchValue({
         maritalStatus: null,
         maritalStatusName: null,
@@ -714,15 +714,15 @@ export class RegisterPersonalDetailsComponent
   enableSpouseMandatory = false;
   onMaritalStatusChanged() {
     if (
-      this.personalDetailsForm.value.maritalStatus == 1 ||
-      this.personalDetailsForm.value.maritalStatus == 7
+      this.personalDetailsForm.value.maritalStatus === 1 ||
+      this.personalDetailsForm.value.maritalStatus === 7
     ) {
       this.enableMarriageDetails = false;
       this.clearMarriageDetails();
     } else {
       this.enableMarriageDetails = true;
     }
-    if (this.personalDetailsForm.value.maritalStatus == 2) {
+    if (this.personalDetailsForm.value.maritalStatus === 2) {
       this.enableSpouseMandatory = true;
       this.clearMarriageDetails();
     } else {
@@ -747,10 +747,10 @@ export class RegisterPersonalDetailsComponent
    *
    */
   clearMarriageDetails() {
-    if (this.personalDetailsForm.value.spouseName != null) {
+    if (this.personalDetailsForm.value.spouseName !== null) {
       this.personalDetailsForm.patchValue({ spouseName: null });
     }
-    if (this.personalDetailsForm.value.ageAtMarriage != null) {
+    if (this.personalDetailsForm.value.ageAtMarriage !== null) {
       this.personalDetailsForm.patchValue({ ageAtMarriage: null });
     }
   }
@@ -760,14 +760,14 @@ export class RegisterPersonalDetailsComponent
    * check for validity of Age At Marriage with other Details
    */
   checkAgeAtMarriage() {
-    if (this.personalDetailsForm.value.ageAtMarriage != null) {
-      if (this.personalDetailsForm.value.age == null) {
+    if (this.personalDetailsForm.value.ageAtMarriage !== null) {
+      if (this.personalDetailsForm.value.age === null) {
         this.confirmationService.alert(
           this.current_language_set.common.PleaseenterBeneficiaryagefirst,
           'info',
         );
         this.personalDetailsForm.patchValue({ ageAtMarriage: null });
-      } else if (this.personalDetailsForm.value.ageUnit != 'Years') {
+      } else if (this.personalDetailsForm.value.ageUnit !== 'Years') {
         this.confirmationService.alert(
           this.current_language_set.alerts.info.marriageAge +
             ' ' +
@@ -831,7 +831,7 @@ export class RegisterPersonalDetailsComponent
 
     if (
       !this.personalDetailsForm.value.occupationOther ||
-      this.personalDetailsForm.value.occupation == 7
+      this.personalDetailsForm.value.occupation === 7
     ) {
       this.personalDetailsForm.patchValue({
         occupationOther: null,
@@ -863,7 +863,7 @@ export class RegisterPersonalDetailsComponent
     this.lname = this.personalDetailsForm.controls['lastName'].value;
 
     if (this.fname) {
-      if (this.fname && (this.lname === undefined || this.lname == null))
+      if (this.fname && (this.lname === undefined || this.lname === null))
         this.personalDetailsForm.patchValue({
           fullName: this.fname,
         });
@@ -873,7 +873,7 @@ export class RegisterPersonalDetailsComponent
         });
     }
     if (this.lname) {
-      if (this.lname && (this.fname === undefined || this.fname == null))
+      if (this.lname && (this.fname === undefined || this.fname === null))
         this.personalDetailsForm.patchValue({
           fullName: this.lname,
         });

@@ -192,9 +192,9 @@ export class RegistrarService {
   }
 
   generateOTP(mobileNo: any, mode: any) {
-    if (mode == 'MOBILE') {
+    if (mode === 'MOBILE') {
       return this.http.post(environment.otpGenerationUrl, mobileNo);
-    } else if (mode == 'AADHAR') {
+    } else if (mode === 'AADHAR') {
       return this.http.post(environment.otpGenerationWithUIDUrl, mobileNo);
     } else {
       // Default return statement if mode is neither "MOBILE" nor "AADHAR"

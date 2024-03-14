@@ -50,16 +50,16 @@ export class PreviousDetailsComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.assignSelectedLanguage();
     if (
-      this.input.dataList.data != null &&
-      this.input.dataList.data != undefined &&
+      this.input.dataList.data !== null &&
+      this.input.dataList.data !== undefined &&
       this.input.dataList.data instanceof Array
     ) {
       this.dataList = this.input.dataList.data;
       this.filteredDataList.data = this.dataList.slice();
     }
     if (
-      this.input.dataList.columns != null &&
-      this.input.dataList.columns != undefined &&
+      this.input.dataList.columns !== null &&
+      this.input.dataList.columns !== undefined &&
       this.input.dataList.columns instanceof Array
     )
       this.columnList = this.input.dataList.columns;
@@ -69,7 +69,7 @@ export class PreviousDetailsComponent implements OnInit, DoCheck {
       }
     });
 
-    if (this.input.title == 'MMU Referral Details') {
+    if (this.input.title === 'MMU Referral Details') {
       const newArray = [];
       let additionalArray;
       if (this.input.dataList.data.refrredToAdditionalServiceList) {
@@ -103,7 +103,7 @@ export class PreviousDetailsComponent implements OnInit, DoCheck {
       this.filteredDataList = this.dataList.slice();
     }
 
-    if (this.input.title == 'MMU Investigation Details') {
+    if (this.input.title === 'MMU Investigation Details') {
       let laboratoryArray;
       if (this.input.dataList.data.laboratoryList) {
         laboratoryArray = this.input.dataList.data.laboratoryList;
@@ -118,7 +118,7 @@ export class PreviousDetailsComponent implements OnInit, DoCheck {
       this.filteredDataList = this.dataList.slice();
     }
 
-    if (this.input.title == 'MMU Prescription Details') {
+    if (this.input.title === 'MMU Prescription Details') {
       this.dataList = [];
       this.columnList = [];
       this.dataList = this.loadDataPrescriptionList(this.input.dataList.data);

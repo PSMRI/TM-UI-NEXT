@@ -40,7 +40,7 @@ export class DiagnosisSearchDirective {
   }
 
   @HostListener('click') onClick() {
-    if (this.el.nativeElement.nodeName != 'INPUT') this.openDialog();
+    if (this.el.nativeElement.nodeName !== 'INPUT') this.openDialog();
   }
   // utils = new QuickConsultUtils(this.fb);
 

@@ -1,4 +1,4 @@
-<!-- <div *ngIf="enablehealthIdOTP == 'OTP'">
+<!-- <div *ngIf="enablehealthIdOTP === 'OTP'">
   <div class="title info">
     <h4>{{currentLanguageSet?.aBHAValidation}}</h4>
     <button class="pull-right close-btn" tooltip="{{currentLanguageSet?.common?.close}}" matDialogClose (click)="closeDialog()" md-icon-button>
@@ -33,7 +33,7 @@
 </div>
 
 
-<div *ngIf="enablehealthIdOTP == 'form'">
+<div *ngIf="enablehealthIdOTP === 'form'">
   <div class="title info">
     <h4>Download and Search Abha Card</h4>
     <button class="pull-right close-btn" tooltip="{{currentLanguageSet?.common?.close}}" matDialogClose (click)="closeDialog()" mat-icon-button>

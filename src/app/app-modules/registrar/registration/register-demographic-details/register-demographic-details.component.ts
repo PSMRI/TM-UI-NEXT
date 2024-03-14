@@ -91,7 +91,7 @@ export class RegisterDemographicDetailsComponent
     }
     this.personalDataOnHealthIDSubscription =
       this.registrarService.dialogResult$.subscribe((abhaResponse) => {
-        if (abhaResponse != null && abhaResponse != undefined) {
+        if (abhaResponse !== null && abhaResponse !== undefined) {
           this.abhaSearchResponse = abhaResponse;
           this.setPersonalDetailsFromABHA(abhaResponse);
         }
@@ -132,7 +132,7 @@ export class RegisterDemographicDetailsComponent
   loadMasterDataObservable() {
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
-        if (res != null) {
+        if (res !== null) {
           this.masterData = res;
         }
       });

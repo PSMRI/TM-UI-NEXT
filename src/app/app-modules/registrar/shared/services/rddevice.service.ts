@@ -61,21 +61,21 @@ export class RddeviceService {
     //     const $doc = $.parseXML(data);
     //     const CmbData1 = $($doc).find('RDService').attr('status');
     //     const CmbData2 = $($doc).find('RDService').attr('info');
-    //     if (RegExp('\\b' + 'Mantra' + '\\b').test(CmbData2) == true) {
+    //     if (RegExp('\\b' + 'Mantra' + '\\b').test(CmbData2) === true) {
     //       $('#txtDeviceInfo').val(data);
 
-    //       if ($($doc).find('Interface').eq(0).attr('path') == '/rd/capture') {
+    //       if ($($doc).find('Interface').eq(0).attr('path') === '/rd/capture') {
     //         this.MethodCapture = $($doc).find('Interface').eq(0).attr('path');
     //         console.log(this.MethodCapture);
     //       }
-    //       if ($($doc).find('Interface').eq(1).attr('path') == '/rd/capture') {
+    //       if ($($doc).find('Interface').eq(1).attr('path') === '/rd/capture') {
     //         // this.MethodCapture=$($doc).find('Interface').eq(1).attr('path');
     //       }
-    //       if ($($doc).find('Interface').eq(0).attr('path') == '/rd/info') {
+    //       if ($($doc).find('Interface').eq(0).attr('path') === '/rd/info') {
     //         this.MethodInfo = $($doc).find('Interface').eq(0).attr('path');
     //         console.log(this.MethodInfo);
     //       }
-    //       if ($($doc).find('Interface').eq(1).attr('path') == '/rd/info') {
+    //       if ($($doc).find('Interface').eq(1).attr('path') === '/rd/info') {
     //         //this.MethodInfo=$($doc).find('Interface').eq(1).attr('path');
     //       }
 

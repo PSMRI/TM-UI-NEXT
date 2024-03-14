@@ -51,8 +51,8 @@ export class WorkareaComponent
   ngOnInit() {
     this.assignSelectedLanguage();
     if (
-      localStorage.getItem('serverKey') != null ||
-      localStorage.getItem('serverKey') != undefined
+      localStorage.getItem('serverKey') !== null ||
+      localStorage.getItem('serverKey') !== undefined
     ) {
       this.getDataSYNCGroup();
     } else {
@@ -74,7 +74,7 @@ export class WorkareaComponent
 
   getDataSYNCGroup() {
     this.dataSyncService.getDataSYNCGroup().subscribe((res: any) => {
-      if (res.statusCode == 200) {
+      if (res.statusCode === 200) {
         this.syncTableGroupList = this.createSyncActivity(res.data);
         console.log('syncTableGroupList', this.syncTableGroupList);
       }
@@ -92,13 +92,13 @@ export class WorkareaComponent
   checkSelectedGroup(syncTableGroup: any) {
     console.log(syncTableGroup, 'syncTableGroup');
 
-    if (syncTableGroup.processed == 'N') {
-      if (syncTableGroup.syncTableGroupID == 1) {
+    if (syncTableGroup.processed === 'N') {
+      if (syncTableGroup.syncTableGroupID === 1) {
         this.syncUploadData(syncTableGroup);
-      } else if (syncTableGroup.syncTableGroupID == 2) {
+      } else if (syncTableGroup.syncTableGroupID === 2) {
         if (
-          syncTableGroup.benDetailSynced == false &&
-          syncTableGroup.visitSynced == false
+          syncTableGroup.benDetailSynced === false &&
+          syncTableGroup.visitSynced === false
         ) {
           this.confirmationService.alert(
             this.current_language_set.alerts.info.syncBeneficiary,
@@ -108,15 +108,15 @@ export class WorkareaComponent
         }
       } else {
         if (
-          syncTableGroup.benDetailSynced == false &&
-          syncTableGroup.visitSynced == false
+          syncTableGroup.benDetailSynced === false &&
+          syncTableGroup.visitSynced === false
         ) {
           this.confirmationService.alert(
             this.current_language_set.alerts.info.syncBeneficiaryDetails,
           );
         } else if (
-          syncTableGroup.benDetailSynced == true &&
-          syncTableGroup.visitSynced == false
+          syncTableGroup.benDetailSynced === true &&
+          syncTableGroup.visitSynced === false
         ) {
           this.confirmationService.alert(
             this.current_language_set.alerts.info.syncVisitFirst,
@@ -142,7 +142,7 @@ export class WorkareaComponent
             .subscribe(
               (res: any) => {
                 console.log(res);
-                if (res.statusCode == 200) {
+                if (res.statusCode === 200) {
                   const syncTableGroups = this.syncTableGroupList;
                   this.syncTableGroupList = [];
                   this.syncTableGroupList = this.modifySYNCEDGroup(
@@ -169,14 +169,14 @@ export class WorkareaComponent
   modifySYNCEDGroup(syncTableGroups: any, syncTableGroup: any) {
     console.log('syncTableGroup', syncTableGroup);
     syncTableGroups.forEach((element: any) => {
-      if (element.syncTableGroupID == syncTableGroup.syncTableGroupID) {
+      if (element.syncTableGroupID === syncTableGroup.syncTableGroupID) {
         element.processed = 'D';
       }
-      if (syncTableGroup.syncTableGroupID == 1) {
+      if (syncTableGroup.syncTableGroupID === 1) {
         element.benDetailSynced = true;
         element.visitSynced = false;
       }
-      if (syncTableGroup.syncTableGroupID == 2) {
+      if (syncTableGroup.syncTableGroupID === 2) {
         element.benDetailSynced = true;
         element.visitSynced = true;
       }
@@ -208,7 +208,7 @@ export class WorkareaComponent
           this.dataSyncService
             .syncDownloadData(reqObj)
             .subscribe((res: any) => {
-              if (res.statusCode == 200) {
+              if (res.statusCode === 200) {
                 this.showProgressBar = true;
                 this.intervalref = setInterval(() => {
                   this.syncDownloadProgressStatus();
@@ -223,16 +223,17 @@ export class WorkareaComponent
 
   syncDownloadProgressStatus() {
     this.dataSyncService.syncDownloadDataProgress().subscribe((res: any) => {
-      if (res.statusCode == 200 && res.data) {
+      if (res.statusCode === 200 && res.data) {
         this.progressValue = res.data.percentage;
 
         if (this.progressValue >= 100) {
           this.failedMasterList = res.data.failedMasters.split('|');
           if (
-            this.failedMasterList != undefined &&
-            this.failedMasterList != null &&
+            this.failedMasterList !== undefined &&
+            this.failedMasterList !== null &&
             this.failedMasterList.length > 0 &&
-            this.failedMasterList[this.failedMasterList.length - 1].trim() == ''
+            this.failedMasterList[this.failedMasterList.length - 1].trim() ===
+              ''
           )
             this.failedMasterList.pop();
           this.showProgressBar = false;

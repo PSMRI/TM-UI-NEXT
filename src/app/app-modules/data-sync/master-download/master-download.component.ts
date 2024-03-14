@@ -68,7 +68,7 @@ export class MasterDownloadComponent implements OnInit, DoCheck {
   getVanDetails() {
     this.dataSyncService.getVanDetailsForMasterDownload().subscribe(
       (res: any) => {
-        if (res && res.statusCode == 200 && res.data) {
+        if (res && res.statusCode === 200 && res.data) {
           if (res.data.vanID && res.data.vehicalNo) {
             this.showVanDetails = true;
           } else {
@@ -102,7 +102,7 @@ export class MasterDownloadComponent implements OnInit, DoCheck {
           this.dataSyncService
             .syncDownloadData(reqObj)
             .subscribe((res: any) => {
-              if (res && res.statusCode == 200) {
+              if (res && res.statusCode === 200) {
                 this.showProgressBar = true;
                 this.intervalref = setInterval(() => {
                   this.syncDownloadProgressStatus();
@@ -117,16 +117,17 @@ export class MasterDownloadComponent implements OnInit, DoCheck {
 
   syncDownloadProgressStatus() {
     this.dataSyncService.syncDownloadDataProgress().subscribe((res: any) => {
-      if (res.statusCode == 200 && res.data) {
+      if (res.statusCode === 200 && res.data) {
         this.progressValue = res.data.percentage;
 
         if (this.progressValue >= 100) {
           this.failedMasterList = res.data.failedMasters.split('|');
           if (
-            this.failedMasterList != undefined &&
-            this.failedMasterList != null &&
+            this.failedMasterList !== undefined &&
+            this.failedMasterList !== null &&
             this.failedMasterList.length > 0 &&
-            this.failedMasterList[this.failedMasterList.length - 1].trim() == ''
+            this.failedMasterList[this.failedMasterList.length - 1].trim() ===
+              ''
           )
             this.failedMasterList.pop();
           this.showProgressBar = false;

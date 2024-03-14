@@ -71,7 +71,7 @@ export class ViewFileComponent implements OnInit, DoCheck {
           if (index >= 0) {
             this.input.viewFileObj[this.input.procedureID].splice(index, 1);
           }
-          if (this.input.viewFileObj[this.input.procedureID].length == 0) {
+          if (this.input.viewFileObj[this.input.procedureID].length === 0) {
             this.closeDialog();
           }
         }

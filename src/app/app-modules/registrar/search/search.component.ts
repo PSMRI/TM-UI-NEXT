@@ -153,7 +153,7 @@ export class SearchComponent implements OnInit, DoCheck {
     if (
       searchTerm === undefined ||
       searchTerm === null ||
-      searchTerm.trim() == '' ||
+      searchTerm.trim() === '' ||
       searchTerm.trim().length <= 0
     ) {
       this.resetWorklist();
@@ -297,7 +297,7 @@ export class SearchComponent implements OnInit, DoCheck {
         }`,
         phoneNo: this.getCorrectPhoneNo(element.benPhoneMaps, benObject),
         age:
-          moment(element.dOB).fromNow(true) == 'a few seconds'
+          moment(element.dOB).fromNow(true) === 'a few seconds'
             ? 'Not Available'
             : moment(element.dOB).fromNow(true),
         registeredOn: moment(element.createdDate).format('DD-MM-YYYY'),
@@ -311,9 +311,9 @@ export class SearchComponent implements OnInit, DoCheck {
   getHealthIDDetails(data: any) {
     console.log('data', data);
     if (
-      data.benObject != undefined &&
-      data.benObject.abhaDetails != undefined &&
-      data.benObject.abhaDetails != null &&
+      data.benObject !== undefined &&
+      data.benObject.abhaDetails !== undefined &&
+      data.benObject.abhaDetails !== null &&
       data.benObject.abhaDetails.length > 0
     ) {
       // this.dialog.open(HealthIdDisplayModalComponent, {
@@ -355,7 +355,7 @@ export class SearchComponent implements OnInit, DoCheck {
       this.filteredBeneficiaryList = [];
       this.beneficiaryList.forEach((item: any) => {
         for (const key in item) {
-          if (key != 'benObject') {
+          if (key !== 'benObject') {
             const value: string = '' + item[key];
             if (value.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
               this.filteredBeneficiaryList.push(item);
@@ -479,9 +479,9 @@ export class SearchComponent implements OnInit, DoCheck {
   patientImageView(benregID: any) {
     if (
       benregID &&
-      benregID != null &&
-      benregID != '' &&
-      benregID != undefined
+      benregID !== null &&
+      benregID !== '' &&
+      benregID !== undefined
     ) {
       this.beneficiaryDetailsService
         .getBeneficiaryImage(benregID)
@@ -558,7 +558,7 @@ export class SearchComponent implements OnInit, DoCheck {
     });
   }
   searchBeneficiaryInMongo(pageNo: any) {
-    if (this.externalSearchTerm.pageNo != undefined && pageNo != null)
+    if (this.externalSearchTerm.pageNo !== undefined && pageNo !== null)
       this.externalSearchTerm.pageNo = pageNo - 1;
     this.registrarService
       .externalSearchIdentity(this.externalSearchTerm)
@@ -671,10 +671,10 @@ export class SearchComponent implements OnInit, DoCheck {
     );
   }
   assignStateIDAndDistrictID(benDetails: any) {
-    if (this.statesList != null && this.statesList.length > 0) {
+    if (this.statesList !== null && this.statesList.length > 0) {
       this.statesList.forEach((element: any) => {
         if (
-          element.stateName.toLowerCase() ==
+          element.stateName.toLowerCase() ===
           benDetails.profile.patient.address.state.toLowerCase()
         )
           this.stateID = element.stateID;
@@ -761,10 +761,10 @@ export class SearchComponent implements OnInit, DoCheck {
       .subscribe((res: any) => {
         if (res && res.statusCode === 200) {
           this.districtList = res.data;
-          if (this.districtList != null && this.districtList.length > 0) {
+          if (this.districtList !== null && this.districtList.length > 0) {
             this.districtList.forEach((element: any) => {
               if (
-                element.districtName.toLowerCase() ==
+                element.districtName.toLowerCase() ===
                 benDetails.profile.patient.address.district.toLowerCase()
               )
                 this.districtID = element.districtID;
@@ -822,7 +822,7 @@ export class SearchComponent implements OnInit, DoCheck {
   }
   nextPage() {
     this.pageNo = this.pageNo + 1;
-    if (this.externalSearchTerm.pageNo != undefined && this.pageNo != null)
+    if (this.externalSearchTerm.pageNo !== undefined && this.pageNo !== null)
       this.externalSearchTerm.pageNo = this.pageNo - 1;
     // this.searchBeneficiaryInMongo(this.pageNo);
     this.registrarService
@@ -874,12 +874,12 @@ export class SearchComponent implements OnInit, DoCheck {
     const link = '/registrar/registration';
     const currentRoute = this.router.routerState.snapshot.url;
     console.log('currentRoute', currentRoute);
-    if (currentRoute != link) {
+    if (currentRoute !== link) {
       console.log('log in');
-      if (this.beneficiaryList == undefined) {
+      if (this.beneficiaryList === undefined) {
         this.router.navigate([link]);
-      } else if (this.beneficiaryList != undefined) {
-        if (this.beneficiaryList.length == 0) {
+      } else if (this.beneficiaryList !== undefined) {
+        if (this.beneficiaryList.length === 0) {
           this.router.navigate([link]);
         } else {
           this.confirmationService

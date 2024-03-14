@@ -199,7 +199,11 @@ export class CameraDialogComponent implements OnInit, DoCheck, AfterViewInit {
   }
 
   handleKeyDownRecaptureImg(event: KeyboardEvent): void {
-    if (event.key == 'Enter' || event.key == 'Spacebar' || event.key == ' ') {
+    if (
+      event.key === 'Enter' ||
+      event.key === 'Spacebar' ||
+      event.key === ' '
+    ) {
       this.recaptureImage();
     }
   }
