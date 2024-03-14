@@ -377,7 +377,7 @@
                 <mat-select
                   [style.width]="'100%'"
                   formControlName="type"
-                  (change)="filterOtherGovIDs(id.value.type, i)"
+                  (selectionChange)="filterOtherGovIDs(id.value.type, i)"
                   style="line-height: unset"
                 >
                   <mat-option

@@ -1,16 +1,15 @@
-<section id="searchDialog" class="container-fluid">
+<section id="searchDialog" class="container-fluid" style="overflow: hidden">
   <div class="title info">
     <h4>{{ currentLanguageSet?.common?.advanceBeneficiarySearch }}</h4>
-    <button
-      class="pull-right close-btn"
+    <mat-icon
+      class="pull-right md-24"
+      style="cursor: pointer"
       (click)="matDialogRef.close(false)"
-      mat-icon-button
+      >close</mat-icon
     >
-      <mat-icon class="mat-24">close</mat-icon>
-    </button>
   </div>
 
-  <mat-dialog-content>
+  <mat-dialog-content style="overflow: hidden">
     <form [formGroup]="newSearchForm">
       <section class="row m-t-10">
         <div class="col-xs-12 col-sm-6 box">

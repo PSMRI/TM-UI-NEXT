@@ -500,7 +500,7 @@ export class SearchComponent implements OnInit, DoCheck {
     const mdDialogRef: MatDialogRef<SearchDialogComponent> = this.dialog.open(
       SearchDialogComponent,
       {
-        width: '60%',
+        width: '80%',
         disableClose: false,
       },
     );
