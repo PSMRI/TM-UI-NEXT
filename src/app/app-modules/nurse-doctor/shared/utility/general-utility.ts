@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -47,13 +47,13 @@ export class GeneralUtils {
       sPO2: null,
       systolicBP_1stReading: null,
       diastolicBP_1stReading: null,
-      rbsTestResult: null,
-      rbsTestRemarks: null,
-      rbsCheckBox: true,
       bloodGlucose_Fasting: null,
       bloodGlucose_Random: null,
       bloodGlucose_2hr_PP: null,
       respiratoryRate: null,
+      rbsTestResult: null,
+      rbsTestRemarks: null,
+      rbsCheckBox: true,
       frequentCoughChecked: null,
       sputumChecked: null,
       coughAtNightChecked: null,
@@ -82,7 +82,6 @@ export class GeneralUtils {
    **/
   createGeneralExaminationForm() {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
-
     return this.fb.group({
       consciousness: null,
       coherence: null,
@@ -300,6 +299,7 @@ export class GeneralUtils {
       expDelDt: null,
       duration: null,
       trimesterNumber: null,
+      bloodGroup: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
@@ -508,10 +508,6 @@ export class GeneralUtils {
       pregOutcomeID: null,
       pregOutcome: null,
 
-      // postNatalComplicationID: null,
-      // postNatalComplication: null,
-      // otherPostNatalComplication: null,
-
       newBornComplicationID: null,
       newBornComplication: null,
       otherNewBornComplication: null,
@@ -572,7 +568,7 @@ export class GeneralUtils {
       clinicalObservation: null,
       otherSymptoms: null,
       significantFindings: null,
-      isForHistory: false,
+      isForHistory: null,
       complaints: this.fb.array([this.initChiefComplaints()]),
       createdBy: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
@@ -597,13 +593,13 @@ export class GeneralUtils {
   createGeneralDiagnosisForm() {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     return this.fb.group({
-      provisionalDiagnosisList: this.fb.array([
-        this.initProvisionalDiagnosisList(),
-      ]),
       instruction: null,
       prescriptionID: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
+      provisionalDiagnosisList: this.fb.array([
+        this.initProvisionalDiagnosisList(),
+      ]),
     });
   }
 
@@ -611,14 +607,14 @@ export class GeneralUtils {
     return this.fb.group({
       conceptID: [null, Validators.required],
       term: [null, Validators.required],
-      provisionalDiagnosis: [null],
+      viewProvisionalDiagnosisProvided: [null],
     });
   }
   initConfirmatoryDiagnosisList() {
     return this.fb.group({
       conceptID: [null, Validators.required],
       term: [null, Validators.required],
-      confirmatoryDiagnosis: [null],
+      viewConfirmatoryDiagnosisProvided: [null],
     });
   }
 
@@ -636,6 +632,7 @@ export class GeneralUtils {
       dateOfDeath: null,
       causeOfDeath: null,
       prescriptionID: null,
+      specialistDiagnosis: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
@@ -651,6 +648,7 @@ export class GeneralUtils {
       ncdCareType: null,
       ncdComplication: null,
       prescriptionID: null,
+      specialistDiagnosis: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
       provisionalDiagnosisList: this.fb.array([
@@ -659,34 +657,12 @@ export class GeneralUtils {
     });
   }
 
-  createCovidCareDiagnosisForm() {
+  createCovidDiagnosisForm() {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     return this.fb.group({
       prescriptionID: null,
       specialistDiagnosis: null,
       doctorDiagnosis: null,
-      vanID: JSON.parse(serviceLineDetails).vanID,
-      parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
-    });
-  }
-  // createNCDScreeningDiagnosisForm() {
-  //   return this.fb.group({
-  //     prescriptionID : null,
-  //     specialistDiagnosis: null,
-  //     doctorDiagnosis: null,
-  //     vanID: JSON.parse(serviceLineDetails).vanID,
-  //     parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
-  //   });
-  // }
-
-  createNCDScreeningDiagnosisForm() {
-    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
-    return this.fb.group({
-      provisionalDiagnosisList: this.fb.array([
-        this.initProvisionalDiagnosisList(),
-      ]),
-      instruction: null,
-      prescriptionID: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
@@ -706,6 +682,7 @@ export class GeneralUtils {
       dateOfDeath: null,
       causeOfDeath: null,
       prescriptionID: null,
+      specialistDiagnosis: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
@@ -771,7 +748,29 @@ export class GeneralUtils {
       drugPrescriptionForm: this.createDrugPrescriptionForm(),
     });
   }
-
+  createNCDScreeningCaseRecord() {
+    return this.fb.group({
+      generalFindingsForm: this.createGeneralFindingsForm(),
+      generalDiagnosisForm: this.createNCDScreeningDiagnosisForm(),
+      generalDoctorInvestigationForm:
+        this.createGeneraldoctorinvestigationForm(),
+      drugPrescriptionForm: this.createDrugPrescriptionForm(),
+    });
+  }
+  createNCDScreeningDiagnosisForm() {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
+    return this.fb.group({
+      instruction: null,
+      prescriptionID: null,
+      vanID: JSON.parse(serviceLineDetails).vanID,
+      parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
+      provisionalDiagnosisList: this.fb.array([
+        this.initProvisionalDiagnosisList(),
+      ]),
+      diabetesConfirmed: null,
+      hypertensionConfirmed: null,
+    });
+  }
   createANCCaseRecord() {
     return this.fb.group({
       generalFindingsForm: this.createGeneralFindingsForm(),
@@ -792,24 +791,16 @@ export class GeneralUtils {
     });
   }
 
-  createCovidCareCaseRecord() {
+  createCovidCaseRecord() {
     return this.fb.group({
       generalFindingsForm: this.createGeneralFindingsForm(),
-      generalDiagnosisForm: this.createCovidCareDiagnosisForm(),
+      generalDiagnosisForm: this.createCovidDiagnosisForm(),
       generalDoctorInvestigationForm:
         this.createGeneraldoctorinvestigationForm(),
       drugPrescriptionForm: this.createDrugPrescriptionForm(),
     });
   }
-  createNCDScreeningCaseRecord() {
-    return this.fb.group({
-      generalFindingsForm: this.createGeneralFindingsForm(),
-      generalDiagnosisForm: this.createNCDScreeningDiagnosisForm(),
-      generalDoctorInvestigationForm:
-        this.createGeneraldoctorinvestigationForm(),
-      drugPrescriptionForm: this.createDrugPrescriptionForm(),
-    });
-  }
+
   createPNCCaseRecord() {
     return this.fb.group({
       generalFindingsForm: this.createGeneralFindingsForm(),
@@ -839,7 +830,6 @@ export class GeneralUtils {
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
   }
-
   /**
    * NCD Screening History Forms
    */

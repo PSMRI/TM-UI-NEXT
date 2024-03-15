@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -23,12 +23,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class CancerUtils {
-  // serviceLineDetails: any = null;
   constructor(private fb: FormBuilder) {}
-
-  ngOnInIt() {
-    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
-  }
 
   createCancerPatientFamilyMedicalHistoryForm() {
     return this.fb.group({
@@ -332,11 +327,7 @@ export class CancerUtils {
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
       lymphNodes: this.fb.array(
-        this.lymphNodesArray.map((item) => ({
-          ...item,
-          vanID: JSON.parse(serviceLineDetails).vanID,
-          parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
-        })),
+        this.lymphNodesArray.map((item) => this.fb.group(item)),
       ),
     });
   }
@@ -347,8 +338,8 @@ export class CancerUtils {
       referredToInstituteID: null,
       refrredToAdditionalServiceList: null,
       referredToInstituteName: null,
-      revisitDate: null,
       referralReason: null,
+      revisitDate: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });

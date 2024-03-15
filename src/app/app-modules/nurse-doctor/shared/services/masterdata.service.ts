@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -46,8 +46,9 @@ export class MasterdataService {
   nurseMasterDataUrl = environment.nurseMasterDataUrl;
   doctorMasterDataUrl = environment.doctorMasterDataUrl;
   snoMedDataURL = environment.snomedCTRecordURL;
-  // diagnosisSnomedCTRecordUrl = environment.diagnosisSnomedCTRecordUrl;
-  // diagnosisSnomedCTRecordUrl1 = environment.diagnosisSnomedCTRecordUrl1;
+  diagnosisSnomedCTRecordUrl = environment.snomedCTRecordListURL;
+  diagnosisSnomedCTRecordUrl1 = environment.snomedCTRecordListURL1;
+  getCalibrationStrips = environment.getCalibrationStrips;
   vaccinationTypeAndDoseMasterUrl = environment.vaccinationTypeAndDoseMasterUrl;
   previousCovidVaccinationUrl = environment.previousCovidVaccinationUrl;
 
@@ -69,8 +70,6 @@ export class MasterdataService {
   doctorMasterDataSource = new BehaviorSubject<any>(null);
   doctorMasterData$ = this.doctorMasterDataSource.asObservable();
 
-  getCalibrationStrips = environment.getCalibrationStrips;
-
   constructor(private http: HttpClient) {}
 
   /**
@@ -89,21 +88,18 @@ export class MasterdataService {
    */
   getNurseMasterData(visitID: string, providerServiceID: any) {
     const gender = localStorage.getItem('beneficiaryGender');
-    return (
-      this.http
-        .get(
-          this.nurseMasterDataUrl +
-            visitID +
-            '/' +
-            providerServiceID +
-            '/' +
-            gender,
-        )
-        // return this.http.get(this.nurseMasterDataUrl+visitID)
-        .subscribe((res: any) => {
-          this.nurseMasterDataSource.next(res.data);
-        })
-    );
+    return this.http
+      .get(
+        this.nurseMasterDataUrl +
+          visitID +
+          '/' +
+          providerServiceID +
+          '/' +
+          gender,
+      )
+      .subscribe((res: any) => {
+        this.nurseMasterDataSource.next(res.data);
+      });
   }
 
   /**
@@ -142,65 +138,15 @@ export class MasterdataService {
           vanID,
       )
       .subscribe((res: any) => {
-        console.log('res.data', res.data);
+        console.log('res.json().data', res.data);
 
         this.doctorMasterDataSource.next(res.data);
       });
   }
 
-  getDoctorMasterDataForNurse(visitID: string, providerServiceID: any) {
-    let facilityID = 0;
-    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
-    if (
-      JSON.parse(serviceLineDetails).facilityID !== undefined &&
-      JSON.parse(serviceLineDetails).facilityID !== null
-    ) {
-      facilityID = JSON.parse(serviceLineDetails).facilityID;
-    }
-    let vanID = 0;
-    if (
-      JSON.parse(serviceLineDetails).vanID !== undefined &&
-      JSON.parse(serviceLineDetails).vanID !== null
-    ) {
-      vanID = JSON.parse(serviceLineDetails).vanID;
-    }
-    const gender = localStorage.getItem('beneficiaryGender');
-    console.log('facility', facilityID);
-
-    return this.http.get(
-      this.doctorMasterDataUrl +
-        visitID +
-        '/' +
-        providerServiceID +
-        '/' +
-        gender +
-        '/' +
-        facilityID +
-        '/' +
-        vanID,
-    );
-  }
-
   getSnomedCTRecord(term: any) {
     return this.http.post(this.snoMedDataURL, { term: term });
   }
-
-  // getVanMaster() {
-  //   const providerServiceID = localStorage.getItem('providerServiceID');
-  //   return this.http.get(environment.getVanMasterUrl + providerServiceID);
-  // }
-
-  // getReportData(reportRequst: any) {
-  //   return this.http.post(environment.getReportDataUrl, reportRequst);
-  // }
-
-  // searchDiagnosisBasedOnPageNo(searchTerm: any, pageNo: any) {
-  //   const body = {
-  //     term: searchTerm,
-  //     pageNo: pageNo,
-  //   };
-  //   return this.http.post(this.diagnosisSnomedCTRecordUrl, body);
-  // }
 
   reset() {
     this.visitDetailMasterDataSource.next(null);
@@ -208,13 +154,26 @@ export class MasterdataService {
     this.doctorMasterDataSource.next(null);
   }
 
-  // searchDiagnosisBasedOnPageNo1(searchTerm: any, pageNo: any) {
-  //   const body = {
-  //     term: searchTerm,
-  //     pageNo: pageNo,
-  //   };
-  //   return this.http.post(this.diagnosisSnomedCTRecordUrl1, body);
-  // }
+  getJSON(_jsonURL: any) {
+    return this.http.get(_jsonURL);
+  }
+
+  searchDiagnosisBasedOnPageNo(searchTerm: any, pageNo: any) {
+    const body = {
+      term: searchTerm,
+      pageNo: pageNo,
+    };
+    return this.http.post(this.diagnosisSnomedCTRecordUrl, body);
+  }
+
+  searchDiagnosisBasedOnPageNo1(searchTerm: any, pageNo: any) {
+    const body = {
+      term: searchTerm,
+      pageNo: pageNo,
+    };
+    return this.http.post(this.diagnosisSnomedCTRecordUrl1, body);
+  }
+
   fetchCalibrationStrips(providerServiceID: any, pageNo: any) {
     const body = {
       providerServiceMapID: providerServiceID,

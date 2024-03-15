@@ -1,8 +1,8 @@
-md2-pagination {
+mat-pagination {
   float: right;
 }
 
-md-card {
+mat-card {
   min-height: 400px;
   padding: 15px;
 }
@@ -11,21 +11,20 @@ md-card {
   text-align: center;
 }
 
-md-input-container {
+mat-input-container {
   width: 60%;
 }
 
 @media (max-width: 481px) {
-  md-input-container {
+  mat-input-container {
     width: 100%;
   }
-
   #caseSheetButton {
     width: 100%;
   }
 }
 
-::ng-deep.pagination {
+:host /deep/ .pagination {
   margin: 0;
 }
 

@@ -28,17 +28,10 @@ import {
   ViewChild,
   HostListener,
   DoCheck,
-  AfterViewInit,
   OnDestroy,
   AfterViewChecked,
 } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormArray,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
 import { CameraService } from '../../../core/services/camera.service';
 import { RegistrarService } from '../../shared/services/registrar.service';
@@ -57,7 +50,7 @@ import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-la
   styleUrls: ['./register-personal-details.component.css'],
 })
 export class RegisterPersonalDetailsComponent
-  implements OnInit, DoCheck, AfterViewInit, OnDestroy, AfterViewChecked
+  implements OnInit, DoCheck, OnDestroy, AfterViewChecked
 {
   colorTheme = 'theme-dark-blue';
 
@@ -101,9 +94,6 @@ export class RegisterPersonalDetailsComponent
     // dateAdapter: DateAdapter<NativeDateAdapter>
     // dateAdapter.setLocale('en-IN');
     setTheme('bs4'); // or 'bs4'
-  }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   ngOnInit() {

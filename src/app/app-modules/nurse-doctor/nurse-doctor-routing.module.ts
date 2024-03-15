@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -22,13 +22,17 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WorkareaComponent } from './workarea/workarea.component';
-import { WorkareaCanActivate } from './workarea/workarea-can-activate.service';
-import { CanDeactivateGuardService } from '../core/services/can-deactivate-guard.service';
-import { NurseWorklistTabsComponent } from './nurse-worklist-tabs/nurse-worklist-tabs.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NurseWorklistWrapperComponent } from './nurse-worklist-wrapper/nurse-worklist-wrapper.component';
+import { DoctorTmWorklistWrapperComponent } from './doctor-tm-worklist-wrapper/doctor-tm-worklist-wrapper.component';
 import { RadiologistWorklistComponent } from './radiologist-worklist/radiologist-worklist.component';
 import { OncologistWorklistComponent } from './oncologist-worklist/oncologist-worklist.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { WorkareaComponent } from './workarea/workarea.component';
+import { TcSpecialistWorklistWrapperComponent } from './tc-specialist-worklist-wrapper/tc-specialist-worklist-wrapper.component';
+import { CanDeactivateGuardService } from '../core/services/can-deactivate-guard.service';
+
+import { WorkareaCanActivate } from './workarea/workarea-can-activate.service';
 
 const routes: Routes = [
   {
@@ -42,16 +46,12 @@ const routes: Routes = [
       },
       {
         path: 'nurse-worklist',
-        component: NurseWorklistTabsComponent,
+        component: NurseWorklistWrapperComponent,
       },
-      // {
-      //   path: 'doctor-worklist',
-      //   component: DoctorWorklistComponent,
-      // },
-      // {
-      //   path: 'doctor-worklist',
-      //   component: DoctorTmWorklistWrapperComponent
-      // },
+      {
+        path: 'doctor-worklist',
+        component: DoctorTmWorklistWrapperComponent,
+      },
       {
         path: 'radiologist-worklist',
         component: RadiologistWorklistComponent,
@@ -60,10 +60,10 @@ const routes: Routes = [
         path: 'oncologist-worklist',
         component: OncologistWorklistComponent,
       },
-      // {
-      //   path: 'tcspecialist-worklist',
-      //   component: TcSpecialistWorklistWrapperComponent
-      // },
+      {
+        path: 'tcspecialist-worklist',
+        component: TcSpecialistWorklistWrapperComponent,
+      },
       {
         path: 'attendant/:attendant/patient/:beneficiaryRegID',
         component: WorkareaComponent,

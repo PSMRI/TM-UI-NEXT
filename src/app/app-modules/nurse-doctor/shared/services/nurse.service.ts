@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -24,7 +24,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { SpinnerService } from '../../../core/services/spinner.service';
 import { shareReplay } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -34,6 +34,7 @@ export class NurseService {
   private _listners = new Subject<any>();
   ncdTemp = new BehaviorSubject(this.temp);
   ncdTemp$ = this.ncdTemp.asObservable();
+
   rbsSelectedInvestigation = false;
   rbsSelectedInInvestigation = new BehaviorSubject(
     this.rbsSelectedInvestigation,
@@ -43,9 +44,14 @@ export class NurseService {
   rbsCurrentTestResult: any = null;
   rbsTestResultCurrent = new BehaviorSubject(this.rbsCurrentTestResult);
   rbsTestResultCurrent$ = this.rbsTestResultCurrent.asObservable();
+
+  ismmutc = new BehaviorSubject('no');
+  ismmutc$ = this.ismmutc.asObservable();
+  mmuVisitData = false;
   isAssessmentDone = false;
   enableLAssessment = new BehaviorSubject(this.temp);
   enableLAssessment$ = this.enableLAssessment.asObservable();
+
   enableProvisionalDiag = new BehaviorSubject(this.temp);
   enableProvisionalDiag$ = this.enableProvisionalDiag.asObservable();
 
@@ -56,8 +62,15 @@ export class NurseService {
   filter(filterBy: string) {
     this._listners.next(filterBy);
   }
-
+  contactfilter(filterBy: string) {
+    this._listners.next(filterBy);
+  }
   fileData: any; // To store fileIDs
+
+  lmpFetosenseTest: any = null;
+
+  lmpFetosenseTestValue = new BehaviorSubject(this.lmpFetosenseTest);
+  lmpFetosenseTestValue$ = this.lmpFetosenseTestValue.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -76,30 +89,36 @@ export class NurseService {
       `/${localStorage.getItem('serviceID')}/${vanID}`;
     return this.http.get(environment.nurseWorklist + fetchUrl);
   }
-  getPreviousDiabetesHistory(benRegID: string, visitCategory: any) {
-    return this.http.post(environment.previousDiabetesHistoryUrl, {
-      benRegID: benRegID,
-    });
-  }
-  getPreviousVisitData(obj: any) {
-    return this.http.post(environment.previousVisitDataUrl, obj);
-  }
-  getNurseWorklistTMreferred() {
-    console.log(
-      'getNurseWorklistUrl',
-      localStorage.getItem('providerServiceID'),
-    );
+
+  getNurseTMFutureWorklist() {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
     const fetchUrl =
       localStorage.getItem('providerServiceID') +
       `/${localStorage.getItem('serviceID')}/${vanID}`;
-    // return this.http.get(environment.nurseWorklistTMreferred + fetchUrl);
+    return this.http.get(environment.getNurseTMFutureWorklistUrl + fetchUrl);
+  }
+  getNurseTMWorklist() {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
+    const vanID = JSON.parse(serviceLineDetails).vanID;
+    const fetchUrl =
+      localStorage.getItem('providerServiceID') +
+      `/${localStorage.getItem('serviceID')}/${vanID}`;
+    return this.http.get(environment.getNurseTMWorklistUrl + fetchUrl);
+  }
+  getMMUNurseWorklist() {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
+    const vanID = JSON.parse(serviceLineDetails).vanID;
+    const fetchUrl =
+      localStorage.getItem('providerServiceID') +
+      `/${localStorage.getItem('serviceID')}/${vanID}`;
+    return this.http.get(environment.mmuNurseWorklist + fetchUrl);
   }
   postNurseCancerVisitForm(
     medicalForm: any,
     imageCoordinates: any,
     sendToDoctorWorklist: any,
+    tcRequest: any,
   ) {
     const temp = {
       beneficiaryRegID: '' + localStorage.getItem('beneficiaryRegID'),
@@ -155,7 +174,6 @@ export class NurseService {
     }
 
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
-
     const vanID = JSON.parse(serviceLineDetails).vanID;
     const parkingPlaceID = JSON.parse(serviceLineDetails).parkingPlaceID;
     const serviceID = localStorage.getItem('serviceID');
@@ -172,6 +190,9 @@ export class NurseService {
         vanID: vanID,
         serviceID: serviceID,
         createdBy: createdBy,
+        tcRequest: tcRequest,
+        beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+        providerServiceMapID: localStorage.getItem('providerServiceID'),
       },
     );
 
@@ -184,6 +205,7 @@ export class NurseService {
       environment.saveNurseCancerScreeningDetails,
       cancerVisitDetails,
     );
+
     // return Observable.of({});
   }
 
@@ -359,7 +381,9 @@ export class NurseService {
     // console.log("Nurse examination Details", JSON.stringify(examinationDetails, null, 4));
     return examinationDetails;
   }
-
+  getPreviousVisitData(obj: any) {
+    return this.http.post(environment.previousVisitDataUrl, obj);
+  }
   getPreviousCancerFamilyHistory(benRegID: string) {
     return this.http.post(environment.previousCancerFamilyHistoryUrl, {
       benRegID: benRegID,
@@ -384,7 +408,7 @@ export class NurseService {
     });
   }
 
-  postNurseGeneralQCVisitForm(medicalForm: any) {
+  postNurseGeneralQCVisitForm(medicalForm: any, tcRequest: any) {
     const temp = {
       beneficiaryRegID: '' + localStorage.getItem('beneficiaryRegID'),
       providerServiceMapID: localStorage.getItem('providerServiceID'),
@@ -420,6 +444,9 @@ export class NurseService {
         vanID: vanID,
         serviceID: serviceID,
         createdBy: createdBy,
+        tcRequest: tcRequest,
+        beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+        providerServiceMapID: localStorage.getItem('providerServiceID'),
       },
     );
 
@@ -439,6 +466,7 @@ export class NurseService {
     benVisitID: any,
     visitCategory: any,
     benAge: any,
+    tcRequest: any,
   ) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -476,6 +504,9 @@ export class NurseService {
       vanID: vanID,
       serviceID: serviceID,
       createdBy: createdBy,
+      tcRequest: tcRequest,
+      beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+      providerServiceMapID: localStorage.getItem('providerServiceID'),
     };
 
     console.log(
@@ -499,7 +530,7 @@ export class NurseService {
     visitCategory: any,
   ): Observable<any> {
     if (visitCategory === 'ANC') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -517,10 +548,10 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     if (visitCategory === 'General OPD') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -530,10 +561,10 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     if (visitCategory === 'PNC') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -543,10 +574,10 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     if (visitCategory === 'NCD care') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -560,10 +591,10 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     if (visitCategory === 'COVID-19 Screening') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -573,10 +604,10 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     if (visitCategory === 'NCD screening') {
-      const visitDeatilsData: any = {
+      const visitDetailsData: any = {
         visitDetails: this.postPatientVisitDetails(
           patientVisitForm.controls.patientVisitDetailsForm.value,
           patientVisitForm.controls.patientFileUploadDetailsForm.value,
@@ -586,7 +617,7 @@ export class NurseService {
           benVisitID,
         ),
       };
-      return visitDeatilsData;
+      return visitDetailsData;
     }
     return new Observable((observer) => {
       observer.complete();
@@ -599,7 +630,7 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    console.log('visit details', JSON.stringify(patientVisitDetails, null, 4));
+    // console.log('visit details', JSON.stringify(patientVisitDetails, null, 4));
     return patientVisitDetails;
   }
 
@@ -1423,10 +1454,11 @@ export class NurseService {
       personalHistoryFormValue,
       otherDetails,
       {
-        riskySexualPracticesStatus: personalHistoryForm.value
-          .riskySexualPracticesStatus
-          ? +personalHistoryForm.value.riskySexualPracticesStatus
-          : null,
+        riskySexualPracticesStatus:
+          personalHistoryForm.value.riskySexualPracticesStatus !== undefined &&
+          personalHistoryForm.value.riskySexualPracticesStatus !== null
+            ? +personalHistoryForm.value.riskySexualPracticesStatus
+            : null,
         tobaccoList: tobaccoList,
         alcoholList: alcoholList,
         allergicList: allergyList,
@@ -1519,13 +1551,28 @@ export class NurseService {
       benRegID: benRegID,
     });
   }
-
   getPreviousPhysicalActivityHistory(benRegID: string, visitCategory: any) {
     return this.http.post(environment.previousPhyscialactivityHistoryUrl, {
       benRegID: benRegID,
     });
   }
-  postNCDScreeningForm(medicalForm: any, visitCategory: any) {
+  getPreviousDiabetesHistory(benRegID: string, visitCategory: any) {
+    return this.http.post(environment.previousDiabetesHistoryUrl, {
+      benRegID: benRegID,
+    });
+  }
+  getPreviousReferredHistory(benRegID: string, visitCategory: any) {
+    return this.http.post(environment.previousReferredHistoryUrl, {
+      benRegID: benRegID,
+    });
+  }
+
+  postNCDScreeningForm(
+    medicalForm: any,
+    visitCategory: any,
+    beneficiary: any,
+    tcRequest: any,
+  ) {
     const serviceDetails = {
       beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
       benVisitID: null,
@@ -1574,41 +1621,15 @@ export class NurseService {
     //   postNCDScreeningFormValue.isBPPrescribed = bP;
     // }
 
-    const laboratoryList = [
-      {
-        procedureID: 31,
-        procedureName: 'BP Measurement',
-      },
-      {
-        procedureID: 31,
-        procedureName: 'Blood Glucose Measurement',
-      },
-    ];
-
-    // postNCDScreeningFormValue.labTestOrders = postNCDScreeningFormValue.screeningTestList;
-    // postNCDScreeningFormValue.screeningTestList = undefined;
-
     // ncdScreeningVisitDetails
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
     const parkingPlaceID = JSON.parse(serviceLineDetails).parkingPlaceID;
-    // let visitDetails = Object.assign({}, medicalForm.controls.patientVisitForm.controls.patientVisitDetailsForm.value, medicalForm.controls.patientVisitForm.controls.patientFileUploadDetailsForm.value, serviceDetails);
-    // let ncdScreeningDetails = Object.assign({}, postNCDScreeningFormValue, serviceDetails);
-    const ncdScreeningVitalDetails = Object.assign(
-      {},
-      medicalForm.controls.patientVitalsForm.value,
-    );
     const ncdScreeningidrsDetails = Object.assign(
       {},
       medicalForm.controls.idrsScreeningForm.value,
       serviceDetails,
     );
-    // let ncdScreeningVisitDetails = Object.assign({}, { 'visitDetails': visitDetails }, { 'ncdScreeningDetails': ncdScreeningDetails }, {
-    //   benFlowID: localStorage.getItem('benFlowID'), beneficiaryID: localStorage.getItem('beneficiaryID'), sessionID: localStorage.getItem('sessionID'),
-    //   parkingPlaceID: parkingPlaceID, vanID: vanID
-    // });
-
-    // let chiefComplaints=  Object.assign({}, medicalForm.controls.patientVisitForm.controls.patientChiefComplaintsForm.value);
 
     const ncdScreeningVisitDetails = Object.assign(
       {},
@@ -1628,7 +1649,7 @@ export class NurseService {
       {
         historyDetails: this.postNCDScreeningHistoryForm(
           medicalForm.controls.patientHistoryForm,
-          null,
+          beneficiary,
           visitCategory,
         ),
       },
@@ -1638,14 +1659,16 @@ export class NurseService {
         beneficiaryID: localStorage.getItem('beneficiaryID'),
         sessionID: localStorage.getItem('sessionID'),
         parkingPlaceID: parkingPlaceID,
+        createdBy: localStorage.getItem('userName'),
+        tcRequest: tcRequest,
         vanID: vanID,
+        beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+        benVisitID: null,
+        providerServiceMapID: localStorage.getItem('providerServiceID'),
       },
     );
 
-    console.log(
-      'postNCDScreeningFormData',
-      JSON.stringify(ncdScreeningVisitDetails, null, 4),
-    );
+    //console.log('postNCDScreeningFormData', JSON.stringify(ncdScreeningVisitDetails, null, 4));
 
     return this.http.post(
       environment.postNCDScreeningDetails,
@@ -1657,6 +1680,7 @@ export class NurseService {
     medicalForm: any,
     visitCategory: any,
     beneficiary: any,
+    tcRequest: any,
   ) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -1689,6 +1713,9 @@ export class NurseService {
       vanID: vanID,
       serviceID: serviceID,
       createdBy: createdBy,
+      tcRequest: tcRequest,
+      beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+      providerServiceMapID: localStorage.getItem('providerServiceID'),
     };
 
     console.log(
@@ -1789,6 +1816,7 @@ export class NurseService {
     medicalForm: any,
     visitCategory: any,
     beneficiary: any,
+    tcRequest: any,
   ) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -1816,6 +1844,9 @@ export class NurseService {
       vanID: vanID,
       serviceID: serviceID,
       createdBy: createdBy,
+      tcRequest: tcRequest,
+      beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+      providerServiceMapID: localStorage.getItem('providerServiceID'),
     };
 
     console.log(
@@ -1829,10 +1860,11 @@ export class NurseService {
     );
   }
 
-  postNurseCovidCareVisitForm(
+  postNurseCovidVisitForm(
     medicalForm: any,
     visitCategory: any,
     beneficiary: any,
+    tcRequest: any,
   ) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -1860,23 +1892,27 @@ export class NurseService {
       vanID: vanID,
       serviceID: serviceID,
       createdBy: createdBy,
+      tcRequest: tcRequest,
+      beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+      providerServiceMapID: localStorage.getItem('providerServiceID'),
     };
 
     console.log(
-      'Nurse Covid CARE Visit Details',
+      'Nurse Covid-19 Visit Details',
       JSON.stringify(nurseGeneralOPDVisitDetails, null, 4),
     );
 
-    // return this.http.post(
-    //   environment.saveNurseCovidCareDetails,
-    //   nurseGeneralOPDVisitDetails
-    // );
+    return this.http.post(
+      environment.saveNurseCovidDetails,
+      nurseGeneralOPDVisitDetails,
+    );
   }
 
   postNursePNCVisitForm(
     medicalForm: any,
     visitCategory: any,
     beneficiary: any,
+    tcRequest: any,
   ) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -1914,6 +1950,9 @@ export class NurseService {
       vanID: vanID,
       serviceID: serviceID,
       createdBy: createdBy,
+      tcRequest: tcRequest,
+      beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
+      providerServiceMapID: localStorage.getItem('providerServiceID'),
     };
 
     console.log(
@@ -1984,12 +2023,6 @@ export class NurseService {
       environment.getNcdScreeningVisitCountUrl + beneficiaryRegID,
     );
   }
-  getCountryName() {
-    return this.http.get(environment.getCountryName);
-  }
-  getCityName(countryID: any) {
-    return this.http.get(environment.getCityName + countryID + '/');
-  }
   getStateName(value: any) {
     return this.http.get(environment.getStateName + value);
   }
@@ -1999,7 +2032,12 @@ export class NurseService {
   getSubDistrictName(districtID: any) {
     return this.http.get(environment.getSubDistrictName + districtID);
   }
-
+  getCountryName() {
+    return this.http.get(environment.getCountryName);
+  }
+  getCityName(countryID: any) {
+    return this.http.get(environment.getCityName + countryID + countryID + '/');
+  }
   postNCDScreeningHistoryForm(
     medicalForm: any,
     beneficiary: any,
@@ -2037,29 +2075,47 @@ export class NurseService {
     // console.log('General examination', JSON.stringify(generalExaminationForm, null, 4));
     return physicalActivityHistoryForm;
   }
-
-  getPreviousReferredHistory(benRegID: string, visitCategory: any) {
-    return this.http.post(environment.previousReferredHistoryUrl, {
-      benRegID: benRegID,
-    });
-  }
-
   setNCDTemp(score: any) {
     this.temp = score;
     this.ncdTemp.next(score);
   }
-
-  clearMessage() {
+  clearNCDTemp() {
     this.temp = false;
     this.ncdTemp.next(false);
   }
-  getTMReferredCasesheetData(reqObj: any) {
-    // return this.http.post(environment.getTMCasesheetData, reqObj);
+  setIsMMUTC(isMMUTC: any) {
+    this.ismmutc.next(isMMUTC);
   }
 
+  /**
+   * (C)
+   * DE40034072
+   *25-06-21
+   */
+
+  /*ANC Fetosense Test service*/
+
+  sendTestDetailsToFetosense(reqObj: any) {
+    return this.http.post(environment.savefetosenseTestDetailsUrl, reqObj);
+  }
+
+  fetchPrescribedFetosenseTests(benFlowId: any) {
+    return this.http.get(environment.getPrescribedFetosenseTests + benFlowId);
+  }
+
+  setLMPForFetosenseTest(value: any) {
+    this.lmpFetosenseTest = value;
+    this.lmpFetosenseTestValue.next(value);
+  }
+
+  clearLMPForFetosenseTest() {
+    this.lmpFetosenseTest = null;
+    this.lmpFetosenseTestValue.next(null);
+  }
   calculateBmiStatus(obj: any) {
     return this.http.post(environment.calculateBmiStatus, obj);
   }
+  /*END*/
 
   setRbsSelectedInInvestigation(score: any) {
     this.rbsSelectedInvestigation = score;

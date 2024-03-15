@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -36,7 +36,7 @@ export class TestInVitalsService {
   vitalRBSTestResultInUpdate = new BehaviorSubject(this.vitalRBSTestUpdate);
   vitalRBSTestResultInUpdate$ = this.vitalRBSTestResultInUpdate.asObservable();
 
-  //change in systolic Bp
+  //Change in Vitals RBS Test result during fetch
   setVitalsRBSValueInReports(value: any) {
     this.vitalRBSTest = value;
     this.vitalRBSTestResult.next(value);

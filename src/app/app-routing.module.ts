@@ -79,14 +79,14 @@ const routes: Routes = [
         (module) => module.RegistrarModule,
       ),
   },
-  // {
-  //   path: 'nurse-doctor',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () =>
-  //     import('./app-modules/nurse-doctor/nurse-doctor.module').then(
-  //       module => module.NurseDoctorModule
-  //     ),
-  // },
+  {
+    path: 'nurse-doctor',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/nurse-doctor/nurse-doctor.module').then(
+        (module) => module.NurseDoctorModule,
+      ),
+  },
   {
     path: 'lab',
     canActivate: [AuthGuard],

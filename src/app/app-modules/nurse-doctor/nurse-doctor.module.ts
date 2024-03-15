@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -25,33 +25,49 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { NurseDoctorRoutingModule } from './nurse-doctor-routing.module';
-import { DoctorService } from './shared/services/doctor.service';
-import { MasterdataService, NurseService } from './shared/services';
+
+import { NurseWorklistComponent } from './nurse-worklist-wrapper/nurse-worklist/nurse-worklist.component';
+import { DoctorWorklistComponent } from './doctor-worklist/doctor-worklist.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+import {
+  NurseService,
+  DoctorService,
+  MasterdataService,
+} from './shared/services';
+import { WorkareaComponent } from './workarea/workarea.component';
+
+import { RadiologistWorklistComponent } from './radiologist-worklist/radiologist-worklist.component';
+import { OncologistWorklistComponent } from './oncologist-worklist/oncologist-worklist.component';
+
 import { WorkareaCanActivate } from './workarea/workarea-can-activate.service';
-import { HttpServiceService } from '../core/services/http-service.service';
-import { TestInVitalsService } from './shared/services/test-in-vitals.service';
+import { TcSpecialistWorklistComponent } from './tc-specialist-worklist/tc-specialist-worklist.component';
+import { DoctorTmWorklistWrapperComponent } from './doctor-tm-worklist-wrapper/doctor-tm-worklist-wrapper.component';
+import { TmFutureWorklistComponent } from './doctor-tm-future-worklist/tm-future-worklist.component';
+import { TcSpecialistWorklistWrapperComponent } from './tc-specialist-worklist-wrapper/tc-specialist-worklist-wrapper.component';
+import { TcSpecialistFutureWorklistComponent } from './tc-specialist-future-worklist/tc-specialist-future-worklist.component';
+import { NurseWorklistWrapperComponent } from './nurse-worklist-wrapper/nurse-worklist-wrapper.component';
+import { NurseTmWorklistComponent } from './nurse-worklist-wrapper/nurse-tm-worklist/nurse-tm-worklist.component';
+import { NurseTmFutureWorklistComponent } from './nurse-worklist-wrapper/nurse-tm-future-worklist/nurse-tm-future-worklist.component';
+import { LabService } from '../../app-modules/lab/shared/services';
 import { IdrsscoreService } from './shared/services/idrsscore.service';
+import { NurseMmuTmReferredWorklistComponent } from './nurse-worklist-wrapper/nurse-mmu-tm-referred-worklist/nurse-mmu-tm-referred-worklist.component';
+import { RegistrarService } from '../registrar/shared/services/registrar.service';
+import { TestInVitalsService } from './shared/services/test-in-vitals.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MaterialModule } from '../core/material.module';
-import { NurseWorklistComponent } from './nurse-worklist/nurse-worklist.component';
 import { MatTableModule } from '@angular/material/table';
-import { NurseWorklistTabsComponent } from './nurse-worklist-tabs/nurse-worklist-tabs.component';
-import { NurseRefferedWorklistComponent } from './nurse-worklist-tabs/nurse-reffered-worklist/nurse-reffered-worklist.component';
-import { WorkareaComponent } from './workarea/workarea.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DoctorWorklistComponent } from './doctor-worklist/doctor-worklist.component';
-import { LabService } from '../lab/shared/services';
-import { RadiologistWorklistComponent } from './radiologist-worklist/radiologist-worklist.component';
-import { OncologistWorklistComponent } from './oncologist-worklist/oncologist-worklist.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialModule } from '../core/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    // ChartsModule,
     NurseDoctorRoutingModule,
     CoreModule,
     ReactiveFormsModule,
@@ -68,12 +84,118 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   declarations: [
     NurseWorklistComponent,
+    // PrintPageSelectComponent,
+    // QuickConsultComponent,
+    // CancerExaminationComponent,
+    // GynecologicalExaminationComponent,
+    // AbdominalExaminationComponent,
+    // BreastExaminationComponent,
+    // OralExaminationComponent,
+    // SignsAndSymptomsComponent,
+    // ObstetricExaminationComponent,
+    // GenitoUrinarySystemComponent,
+    // CentralNervousSystemComponent,
+    // MusculoskeletalSystemComponent,
+    // RespiratorySystemComponent,
+    // GastroIntestinalSystemComponent,
+    // CardioVascularSystemComponent,
+    // SystemicExaminationComponent,
+    // HeadToToeExaminationComponent,
+    // GeneralExaminationComponent,
+    // GeneralOpdExaminationComponent,
+    // CancerPatientVitalsComponent,
+    // GeneralPatientVitalsComponent,
+    // MedicationHistoryComponent,
+    // DevelopmentHistoryComponent,
+    // FeedingHistoryComponent,
+    // OtherVaccinesComponent,
+    // ImmunizationHistoryComponent,
+    // PastObstericHistoryComponent,
+    // PerinatalHistoryComponent,
+    // MenstrualHistoryComponent,
+    // FamilyHistoryComponent,
+    // ComorbidityConcurrentConditionsComponent,
+    // GeneralPersonalHistoryComponent,
+    // PastHistoryComponent,
+    // GeneralOpdHistoryComponent,
+    // CancerHistoryComponent,
+    // ObstetricHistoryComponent,
+    // FamilyDiseaseHistoryComponent,
+    // PersonalHistoryComponent,
     DoctorWorklistComponent,
+    // AncComponent,
+    // AncDetailsComponent,
+    // AncImmunizationComponent,
+    // ObstetricFormulaComponent,
+    // VisitDetailsComponent,
+    // VisitCategoryComponent,
+    // ChiefComplaintsComponent,
+    // AdherenceComponent,
+    // TravelHistoryComponent,
+    // SymptomsComponent,
+    // ContactHistoryComponent,
+    // InvestigationsComponent,
+    // UploadFilesComponent,
+    // HistoryComponent,
+    // ExaminationComponent,
+    // VitalsComponent,
+    // CaseRecordComponent,
+    // AncComponent,
+    // PncComponent,
+    // NcdScreeningComponent,
+    DashboardComponent,
     WorkareaComponent,
+    // CancerCaseRecordComponent,
+    // GeneralCaseRecordComponent,
+    // CancerReferComponent,
+    // GeneralReferComponent,
+    // CancerCaseSheetComponent,
+    // GeneralCaseSheetComponent,
+    // ReferComponent,
+    // PrintPageSelectComponent,
+    // PreviousVisitDetailsComponent,
+    // FindingsComponent,
+    // DiagnosisComponent,
+    // PrescriptionComponent,
+    // DoctorInvestigationsComponent,
+    // TestAndRadiologyComponent,
     RadiologistWorklistComponent,
     OncologistWorklistComponent,
-    NurseWorklistTabsComponent,
-    NurseRefferedWorklistComponent,
+    // GeneralOpdDiagnosisComponent,
+    // AncDiagnosisComponent,
+    // CaseSheetComponent,
+    // NcdCareDiagnosisComponent,
+    // PncDiagnosisComponent,
+    // PreviousSignificiantFindingsComponent,
+    // ViewTestReportComponent,
+    // HistoryCaseSheetComponent,
+    // ExaminationCaseSheetComponent,
+    // AncCaseSheetComponent,
+    // PncCaseSheetComponent,
+    // DoctorDiagnosisCaseSheetComponent,
+    // ImageToCanvasComponent,
+    // CancerDoctorDiagnosisCaseSheetComponent,
+    // CancerHistoryCaseSheetComponent,
+    // CancerExaminationCaseSheetComponent,
+    // BeneficiaryMctsCallHistoryComponent,
+    // BeneficiaryPlatformHistoryComponent,
+    TcSpecialistWorklistComponent,
+    DoctorTmWorklistWrapperComponent,
+    TmFutureWorklistComponent,
+    // SchedulerComponent,
+    TcSpecialistWorklistWrapperComponent,
+    TcSpecialistFutureWorklistComponent,
+    NurseWorklistWrapperComponent,
+    NurseTmWorklistComponent,
+    NurseTmFutureWorklistComponent,
+    // CovidDiagnosisComponent,
+    // IdrsComponent,
+    // PhysicalActivityHistoryComponent,
+    // FamilyHistoryNcdscreeningComponent,
+    // NcdScreeningDiagnosisComponent,
+    NurseMmuTmReferredWorklistComponent,
+    // DiseaseconfirmationComponent,
+    // CovidVaccinationStatusComponent,
   ],
 
   providers: [
@@ -81,10 +203,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DoctorService,
     MasterdataService,
     WorkareaCanActivate,
-    HttpServiceService,
-    IdrsscoreService,
-    TestInVitalsService,
     LabService,
+    IdrsscoreService,
+    RegistrarService,
+    TestInVitalsService,
   ],
 })
 export class NurseDoctorModule {}

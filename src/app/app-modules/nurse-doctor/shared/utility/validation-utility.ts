@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -56,7 +56,7 @@ export class ValidationUtils {
   getAgeValue(age: any) {
     if (!age) return 0;
 
-    const arr = age.trim().split(' ');
+    const arr = age !== undefined && age !== null ? age.trim().split(' ') : age;
     const ageUnit = arr[1];
     if (ageUnit.toLowerCase() === 'years') return parseInt(arr[0]) * 365;
     else if (ageUnit.toLowerCase() === 'months') return parseInt(arr[0]) * 30;

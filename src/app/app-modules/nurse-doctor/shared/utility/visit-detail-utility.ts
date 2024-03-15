@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -20,7 +20,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class VisitDetailUtils {
   constructor(private fb: FormBuilder) {}
@@ -37,7 +37,6 @@ export class VisitDetailUtils {
       patientFileUploadDetailsForm:
         this.createPatientFileUploadDetailsForm(diasableFlag),
       patientDiseaseForm: this.createPatientDiseaseForm(diasableFlag),
-      tmcConfirmationForm: this.createPatientTmcConfirmationForm(diasableFlag),
       covidVaccineStatusForm: this.createCovidVaccineStatusForm(diasableFlag),
     });
   }
@@ -117,12 +116,47 @@ export class VisitDetailUtils {
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
   }
+
   createPatientFileUploadDetailsForm(disableFlag = false) {
     return this.fb.group({
       fileIDs: null,
     });
   }
 
+  createPatientDiseaseForm(disableFlag = false) {
+    return this.fb.group({
+      diseaseFormsArray: this.fb.array([]),
+    });
+  }
+
+  createPatientDiseaseArrayForm(data: any) {
+    if (!data) {
+      data = {
+        diseaseName: null,
+        flag: null,
+        selected: null,
+      };
+    }
+    return this.fb.group({
+      diseaseName: data.disease,
+      flag: data.flag,
+      selected: data.selected,
+    });
+  }
+
+  createPatientSymptomsForm(disableFlag = false) {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
+    return this.fb.group({
+      beneficiaryRegID: null,
+      benVisitID: null,
+      providerServiceMapID: null,
+      conceptID: null,
+      symptoms: { value: null, disabled: disableFlag },
+      createdBy: null,
+      vanID: JSON.parse(serviceLineDetails).vanID,
+      parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
+    });
+  }
   createPatientCovidForm(disableFlag = false) {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     return this.fb.group({
@@ -130,11 +164,8 @@ export class VisitDetailUtils {
       benVisitID: null,
       providerServiceMapID: null,
       conceptID: null,
-      symptom: [{ value: null, disabled: disableFlag }, Validators.required],
-      contactStatus: [
-        { value: null, disabled: disableFlag },
-        Validators.required,
-      ],
+      symptom: { value: null, disabled: disableFlag },
+      contactStatus: { value: null, disabled: disableFlag },
       travelStatus: { value: null, disabled: disableFlag },
       travelList: this.fb.array([]),
       modeOfTravelDomestic: { value: null, disabled: disableFlag },
@@ -156,22 +187,7 @@ export class VisitDetailUtils {
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });
   }
-  createPatientDiseaseForm(disableFlag = false) {
-    return this.fb.group({
-      diseaseFormsArray: this.fb.array([]),
-    });
-  }
-
-  createPatientTmcConfirmationForm(disableFlag = false) {
-    return this.fb.group({
-      tmcConfirmed: null,
-      refrredToAdditionalServiceList: null,
-      isDiabetic: null,
-      isHypertensionConfirmed: null,
-    });
-  }
-
-  createCovidVaccineStatusForm(disableFlag: any): FormGroup {
+  createCovidVaccineStatusForm(disableFlag = false): FormGroup {
     return this.fb.group({
       covidVSID: null,
       ageGroup: null,
@@ -182,21 +198,6 @@ export class VisitDetailUtils {
       doseOneDate: null,
       doseTwoDate: null,
       boosterDoseDate: null,
-    });
-  }
-
-  createPatientDiseaseArrayForm(data: any) {
-    if (!data) {
-      data = {
-        diseaseName: null,
-        flag: null,
-        selected: null,
-      };
-    }
-    return this.fb.group({
-      diseaseName: data.disease,
-      flag: data.flag,
-      selected: data.selected,
     });
   }
 }

@@ -1,5 +1,5 @@
 /*
- * AMRIT – Accessible Medical Records via Integrated Technology
+ * AMRIT � Accessible Medical Records via Integrated Technology
  * Integrated EHR (Electronic Health Records) Solution
  *
  * Copyright (C) "Piramal Swasthya Management and Research Institute"
@@ -23,30 +23,31 @@
 import {
   Component,
   DoCheck,
-  Input,
   OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from '../../core/services/confirmation.service';
-import { NurseService } from '../shared/services';
-import { CameraService } from '../../core/services/camera.service';
-import { BeneficiaryDetailsService } from '../../core/services/beneficiary-details.service';
-import { HttpServiceService } from '../../core/services/http-service.service';
-import { SetLanguageComponent } from '../../core/components/set-language.component';
+import { ConfirmationService } from '../../../core/services/confirmation.service';
+import { NurseService } from '../../shared/services';
+import { CameraService } from '../../../core/services/camera.service';
+import { BeneficiaryDetailsService } from '../../../core/services/beneficiary-details.service';
+import { HttpServiceService } from 'src/app/app-modules/core/services/http-service.service';
+import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-language.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-nurse-worklist',
-  templateUrl: './nurse-worklist.component.html',
-  styleUrls: ['./nurse-worklist.component.css'],
+  selector: 'app-nurse-mmu-tm-referred-worklist',
+  templateUrl: './nurse-mmu-tm-referred-worklist.component.html',
+  styleUrls: ['./nurse-mmu-tm-referred-worklist.component.css'],
 })
-export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
+export class NurseMmuTmReferredWorklistComponent
+  implements OnInit, DoCheck, OnDestroy
+{
   rowsPerPage = 5;
   activePage = 1;
-  pagedList: any = [];
+  pagedList = [];
   rotate = true;
 
   blankTable = [1, 2, 3, 4, 5];
@@ -54,7 +55,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
   filteredBeneficiaryList: any = [];
   filterTerm: any;
   currentLanguageSet: any;
-  currentPage = 0;
+  currentPage!: number;
   displayedColumns: any = [
     'sno',
     'beneficiaryID',
@@ -76,7 +77,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
     private router: Router,
     private cameraService: CameraService,
     private beneficiaryDetailsService: BeneficiaryDetailsService,
-    private httpServices: HttpServiceService,
+    public httpServiceService: HttpServiceService,
   ) {}
 
   ngOnInit() {
@@ -86,18 +87,14 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
     this.getNurseWorklist();
     this.beneficiaryDetailsService.reset();
   }
-  /*
-   * JA354063 - Multilingual Changes added on 13/10/21
-   */
   ngDoCheck() {
     this.assignSelectedLanguage();
   }
   assignSelectedLanguage() {
-    const getLanguageJson = new SetLanguageComponent(this.httpServices);
+    const getLanguageJson = new SetLanguageComponent(this.httpServiceService);
     getLanguageJson.setLanguage();
     this.currentLanguageSet = getLanguageJson.currentLanguageObject;
   }
-  // Ends
   ngOnDestroy() {
     localStorage.removeItem('currentRole');
   }
@@ -113,11 +110,14 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
     localStorage.removeItem('doctorFlag');
     localStorage.removeItem('nurseFlag');
     localStorage.removeItem('pharmacist_flag');
-    localStorage.removeItem('caseSheetTMFlag');
+    localStorage.removeItem('specialistFlag');
+    localStorage.removeItem('visitCat');
+    localStorage.removeItem('mmuReferredVisitCode');
+    localStorage.removeItem('referredVisitCode');
   }
 
   getNurseWorklist() {
-    this.nurseService.getNurseWorklist().subscribe(
+    this.nurseService.getMMUNurseWorklist().subscribe(
       (res: any) => {
         if (res.statusCode === 200 && res.data !== null) {
           const benlist = this.loadDataToBenList(res.data);
@@ -129,19 +129,11 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
           this.dataSource.data.forEach((sectionCount: any, index: number) => {
             sectionCount.sno = index + 1;
           });
-          // this.pageChanged({
-          //   page: this.activePage,
-          //   itemsPerPage: this.rowsPerPage,
-          // });
-          this.filterTerm = null;
-          // this.currentPage=1;
-        } else {
-          this.confirmationService.alert(res.errorMessage, 'error');
-          this.dataSource.data = [];
-          this.dataSource.paginator = this.paginator;
-        }
+        } else this.confirmationService.alert(res.errorMessage, 'error');
+        this.dataSource.data = [];
+        this.dataSource.paginator = this.paginator;
       },
-      (err) => {
+      (err: any) => {
         this.confirmationService.alert(err, 'error');
       },
     );
@@ -181,24 +173,33 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
   loadNursePatientDetails(beneficiary: any) {
     localStorage.removeItem('visitCategory');
 
-    //for WDF requirment
-    // if (beneficiary.nurseFlag === 100) {
-    //   this.confirmationService.confirm(`info`, `Please confirm to proceed further`)
-    //     .subscribe(result => {
-    //       if (result) {
-    //         localStorage.setItem('visitCode', beneficiary.visitCode);
-    //         localStorage.setItem('beneficiaryGender', beneficiary.genderName);
-    //         localStorage.setItem('visitCategory', "NCD screening");
-    //         localStorage.setItem('visitID', beneficiary.benVisitID);
-    //         localStorage.setItem('nurseFlag', beneficiary.nurseFlag);
-    //         localStorage.setItem('beneficiaryRegID', beneficiary.beneficiaryRegID);
-    //         localStorage.setItem('benFlowID', beneficiary.benFlowID);
-    //         localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
-    //         this.router.navigate(['/common/attendant/nurse/patient/', beneficiary.beneficiaryRegID]);
-    //       }
-    //     });
-    // } else
-    {
+    if (beneficiary.nurseFlag === 100) {
+      this.confirmationService
+        .confirm(
+          `info`,
+          this.currentLanguageSet.alerts.info.confirmtoProceedFurther,
+        )
+        .subscribe((result) => {
+          if (result) {
+            localStorage.setItem('visitCode', beneficiary.visitCode);
+            localStorage.setItem('beneficiaryGender', beneficiary.genderName);
+            localStorage.setItem('visitCategory', 'NCD screening');
+            localStorage.setItem('visitID', beneficiary.benVisitID);
+            localStorage.setItem('nurseFlag', beneficiary.nurseFlag);
+            localStorage.setItem(
+              'beneficiaryRegID',
+              beneficiary.beneficiaryRegID,
+            );
+            localStorage.setItem('benFlowID', beneficiary.benFlowID);
+            localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
+            localStorage.setItem('specialistFlag', beneficiary.specialist_flag);
+            this.router.navigate([
+              '/nurse-doctor/attendant/nurse/patient/',
+              beneficiary.beneficiaryRegID,
+            ]);
+          }
+        });
+    } else {
       this.confirmationService
         .confirm(
           `info`,
@@ -213,7 +214,16 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
             );
             localStorage.setItem('benFlowID', beneficiary.benFlowID);
             localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
-            localStorage.setItem('benVisitNo', beneficiary.benVisitNo);
+            localStorage.setItem('specialistFlag', beneficiary.specialist_flag);
+
+            localStorage.setItem('visitCode', beneficiary.referredVisitCode);
+            localStorage.setItem('visitCat', beneficiary.VisitCategory);
+            localStorage.setItem('visitID', beneficiary.referred_visit_id);
+            localStorage.setItem(
+              'mmuReferredVisitCode',
+              beneficiary.referredVisitCode,
+            );
+
             this.router.navigate([
               '/nurse-doctor/attendant/nurse/patient/',
               beneficiary.beneficiaryRegID,
@@ -288,18 +298,5 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
         }
       });
     }
-    // this.activePage = 1;
-    // this.pageChanged({
-    //   page: 1,
-    //   itemsPerPage: this.rowsPerPage,
-    // });
-    // this.currentPage=1;
   }
-
-  // rebash() {
-  //   this.beneficiaryDetailsService.getCheck()
-  //   .subscribe(data => {
-  //     console.log(data);
-  //   })
-  // }
 }
