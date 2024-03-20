@@ -20,7 +20,13 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { Component, OnInit, ChangeDetectorRef, DoCheck } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  DoCheck,
+  ViewChild,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
@@ -36,6 +42,8 @@ import { CommonService } from '../../core/services/common-services.service';
 import { HttpServiceService } from '../../core/services/http-service.service';
 import { QuickSearchComponent } from '../quick-search/quick-search.component';
 import * as moment from 'moment';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-search',
@@ -54,8 +62,8 @@ export class SearchComponent implements OnInit, DoCheck {
   blankTable = [1, 2, 3, 4, 5];
   currentLanguageSet: any;
   externalSearchTerm: any;
-  externalBeneficiaryList = [];
-  filteredExternalBeneficiaryList = [];
+  externalBeneficiaryList: any = [];
+  filteredExternalBeneficiaryList: any = [];
   externalPagedList = [];
   districtList: any;
   districtID: any;
@@ -71,7 +79,22 @@ export class SearchComponent implements OnInit, DoCheck {
   genderID: any;
   pageNo = 1;
   searchPattern!: string;
-  // searchType: string;
+  displayedColumns: string[] = [
+    'edit',
+    'beneficiaryID',
+    'benName',
+    'genderName',
+    'age',
+    'fatherName',
+    'districtVillage',
+    'phoneNo',
+    'registeredOn',
+    'abhaAddress',
+    'image',
+  ];
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  dataSource = new MatTableDataSource<any>();
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
@@ -86,8 +109,6 @@ export class SearchComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit() {
-    // this.searchType = 'ID';
-    // this.httpServiceService.currentLangugae$.subscribe(response =>this.currentLanguageSet = response);
     this.searchPattern = '/^[a-zA-Z0-9](.|@|-)*$/;';
     this.assignSelectedLanguage();
     this.stateMaster();
@@ -125,6 +146,8 @@ export class SearchComponent implements OnInit, DoCheck {
           if (!beneficiaryList || beneficiaryList?.length <= 0) {
             this.beneficiaryList = [];
             this.filteredBeneficiaryList = [];
+            this.dataSource.data = [];
+            this.dataSource.paginator = this.paginator;
             this.pagedList = [];
             this.confirmationService.alert(
               this.currentLanguageSet.alerts.info.beneNotFound,
@@ -136,10 +159,8 @@ export class SearchComponent implements OnInit, DoCheck {
               searchObject,
             );
             this.filteredBeneficiaryList = this.beneficiaryList;
-            this.pageChanged({
-              page: this.activePage,
-              itemsPerPage: this.rowsPerPage,
-            });
+            this.dataSource.data = this.beneficiaryList;
+            this.dataSource.paginator = this.paginator;
           }
           console.log('hi', JSON.stringify(beneficiaryList, null, 4));
         },
@@ -282,7 +303,7 @@ export class SearchComponent implements OnInit, DoCheck {
    */
   searchRestruct(benList: any, benObject: any) {
     const requiredBenData: any = [];
-    benList.forEach((element: any, i: any) => {
+    benList.data.forEach((element: any, i: any) => {
       requiredBenData.push({
         beneficiaryID: element.beneficiaryID,
         beneficiaryRegID: element.beneficiaryRegID,
@@ -353,23 +374,27 @@ export class SearchComponent implements OnInit, DoCheck {
     if (!searchTerm) this.filteredBeneficiaryList = this.beneficiaryList;
     else {
       this.filteredBeneficiaryList = [];
+      this.dataSource.data = [];
+      this.dataSource.paginator = this.paginator;
       this.beneficiaryList.forEach((item: any) => {
         for (const key in item) {
           if (key !== 'benObject') {
             const value: string = '' + item[key];
             if (value.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
               this.filteredBeneficiaryList.push(item);
+              this.dataSource.data.push(item);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.data.forEach(
+                (sectionCount: any, index: number) => {
+                  sectionCount.sno = index + 1;
+                },
+              );
               break;
             }
           }
         }
       });
     }
-    this.activePage = 1;
-    this.pageChanged({
-      page: 1,
-      itemsPerPage: this.rowsPerPage,
-    });
   }
 
   filterExternalBeneficiaryList(searchTerm?: string) {
@@ -377,21 +402,23 @@ export class SearchComponent implements OnInit, DoCheck {
       this.filteredExternalBeneficiaryList = this.externalBeneficiaryList;
     else {
       this.filteredExternalBeneficiaryList = [];
-      this.externalBeneficiaryList.forEach((item) => {
+      this.dataSource.data = [];
+      this.dataSource.paginator = this.paginator;
+      this.externalBeneficiaryList.forEach((item: any) => {
         for (const key in item) {
           const value: string = '' + item[key];
           if (value.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
             this.filteredExternalBeneficiaryList.push(item);
+            this.dataSource.data.push(item);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.data.forEach((sectionCount: any, index: number) => {
+              sectionCount.sno = index + 1;
+            });
             break;
           }
         }
       });
     }
-    this.activePage = 1;
-    this.pageChangedExternal({
-      page: 1,
-      itemsPerPage: this.rowsPerPage,
-    });
   }
 
   patientRevisited(benObject: any) {
@@ -452,17 +479,13 @@ export class SearchComponent implements OnInit, DoCheck {
 
   sendToNurseWindow(userResponse: boolean, benObject: any) {
     if (userResponse) {
-      // let regIdObject = { beneficiaryRegID: "" };
-      // regIdObject.beneficiaryRegID = benregID;
       this.registrarService.identityPatientRevisit(benObject).subscribe(
         (result: any) => {
           if (result.data)
-            // this.confirmationService.alert(result.data.response, "success");
             this.confirmationService.alert(
               this.currentLanguageSet.common.beneficiaryMovedtoNurse,
               'success',
             );
-          //this.confirmationService.alert(result.status, "warn");
           else
             this.confirmationService.alert(
               this.currentLanguageSet.common.beneAlreadyAdded,
@@ -517,6 +540,8 @@ export class SearchComponent implements OnInit, DoCheck {
               if (!beneficiaryList || beneficiaryList.length <= 0) {
                 this.beneficiaryList = [];
                 this.filteredBeneficiaryList = [];
+                this.dataSource.data = [];
+                this.dataSource.paginator = this.paginator;
                 this.quicksearchTerm = null;
                 this.confirmationService.alert(
                   this.currentLanguageSet.alerts.info.beneNotFound,
@@ -525,11 +550,13 @@ export class SearchComponent implements OnInit, DoCheck {
               } else {
                 this.beneficiaryList = this.searchRestruct(beneficiaryList, {});
                 this.filteredBeneficiaryList = this.beneficiaryList;
-                this.activePage = 1;
-                this.pageChanged({
-                  page: this.activePage,
-                  itemsPerPage: this.rowsPerPage,
-                });
+                this.dataSource.data = this.beneficiaryList;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.data.forEach(
+                  (sectionCount: any, index: number) => {
+                    sectionCount.sno = index + 1;
+                  },
+                );
               }
               console.log(JSON.stringify(beneficiaryList, null, 4));
             },
@@ -579,14 +606,18 @@ export class SearchComponent implements OnInit, DoCheck {
                 this.searchExternalRestruct(externalBenList);
               this.filteredExternalBeneficiaryList =
                 this.externalBeneficiaryList;
-              this.activePage = 1;
-              this.pageChangedExternal({
-                page: this.activePage,
-                itemsPerPage: this.rowsPerPage,
-              });
+              this.dataSource.data = this.externalBeneficiaryList;
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.data.forEach(
+                (sectionCount: any, index: number) => {
+                  sectionCount.sno = index + 1;
+                },
+              );
             } else {
               this.externalBeneficiaryList = [];
               this.filteredExternalBeneficiaryList = [];
+              this.dataSource.data = [];
+              this.dataSource.paginator = this.paginator;
             }
           }
         },
@@ -844,11 +875,13 @@ export class SearchComponent implements OnInit, DoCheck {
                 this.searchExternalRestruct(externalBenList);
               this.filteredExternalBeneficiaryList =
                 this.externalBeneficiaryList;
-              // this.activePage = 1;
-              // this.pageChangedExternal({
-              //   page: this.activePage,
-              //   itemsPerPage: this.rowsPerPage,
-              // });
+              this.dataSource.data = this.externalBeneficiaryList;
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.data.forEach(
+                (sectionCount: any, index: number) => {
+                  sectionCount.sno = index + 1;
+                },
+              );
             } else {
               this.confirmationService.alert(
                 'No further records to show',

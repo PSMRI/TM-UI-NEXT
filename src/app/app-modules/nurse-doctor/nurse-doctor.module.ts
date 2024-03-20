@@ -63,6 +63,43 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from '../core/material.module';
+import { VisitDetailsComponent } from './visit-details/visit-details.component';
+import { AdherenceComponent } from './visit-details/adherence/adherence.component';
+import { TravelHistoryComponent } from './visit-details/travel-history/travel-history.component';
+import { SymptomsComponent } from './visit-details/symptoms/symptoms.component';
+import { ContactHistoryComponent } from './visit-details/contact-history/contact-history.component';
+import { InvestigationsComponent } from './visit-details/investigations/investigations.component';
+import { UploadFilesComponent } from './visit-details/upload-files/upload-files.component';
+import { ChiefComplaintsComponent } from './visit-details/chief-complaints/chief-complaints.component';
+import { DiseaseconfirmationComponent } from './visit-details/diseaseconfirmation/diseaseconfirmation.component';
+import { CovidVaccinationStatusComponent } from './visit-details/covid-vaccination-status/covid-vaccination-status.component';
+import { PatientVisitDetailsComponent } from './visit-details/visit-details/visit-details.component';
+import { VitalsComponent } from './vitals/vitals.component';
+import { CancerPatientVitalsComponent } from './vitals/cancer-patient-vitals/cancer-patient-vitals.component';
+import { GeneralPatientVitalsComponent } from './vitals/general-patient-vitals/general-patient-vitals.component';
+import { AbdominalExaminationComponent } from './examination/cancer-examination/abdominal-examination/abdominal-examination.component';
+import { BreastExaminationComponent } from './examination/cancer-examination/breast-examination/breast-examination.component';
+import { CancerExaminationComponent } from './examination/cancer-examination/cancer-examination.component';
+import { GynecologicalExaminationComponent } from './examination/cancer-examination/gynecological-examination/gynecological-examination.component';
+import { OralExaminationComponent } from './examination/cancer-examination/oral-examination/oral-examination.component';
+import { SignsAndSymptomsComponent } from './examination/cancer-examination/signs-and-symptoms/signs-and-symptoms.component';
+import { ExaminationComponent } from './examination/examination.component';
+import { GeneralExaminationComponent } from './examination/general-opd-examination/general-examination/general-examination.component';
+import { GeneralOpdExaminationComponent } from './examination/general-opd-examination/general-opd-examination.component';
+import { HeadToToeExaminationComponent } from './examination/general-opd-examination/head-to-toe-examination/head-to-toe-examination.component';
+import { CardioVascularSystemComponent } from './examination/general-opd-examination/systemic-examination/cardio-vascular-system/cardio-vascular-system.component';
+import { CentralNervousSystemComponent } from './examination/general-opd-examination/systemic-examination/central-nervous-system/central-nervous-system.component';
+import { GastroIntestinalSystemComponent } from './examination/general-opd-examination/systemic-examination/gastro-intestinal-system/gastro-intestinal-system.component';
+import { GenitoUrinarySystemComponent } from './examination/general-opd-examination/systemic-examination/genito-urinary-system/genito-urinary-system.component';
+import { MusculoskeletalSystemComponent } from './examination/general-opd-examination/systemic-examination/musculoskeletal-system/musculoskeletal-system.component';
+import { ObstetricExaminationComponent } from './examination/general-opd-examination/systemic-examination/obstetric-examination/obstetric-examination.component';
+import { RespiratorySystemComponent } from './examination/general-opd-examination/systemic-examination/respiratory-system/respiratory-system.component';
+import { SystemicExaminationComponent } from './examination/general-opd-examination/systemic-examination/systemic-examination.component';
+import { AncDetailsComponent } from './anc/anc-details/anc-details.component';
+import { AncImmunizationComponent } from './anc/anc-immunization/anc-immunization.component';
+import { AncComponent } from './anc/anc.component';
+import { ObstetricFormulaComponent } from './anc/obstetric-formula/obstetric-formula.component';
+import { PncComponent } from './pnc/pnc.component';
 
 @NgModule({
   imports: [
@@ -86,25 +123,25 @@ import { MaterialModule } from '../core/material.module';
     NurseWorklistComponent,
     // PrintPageSelectComponent,
     // QuickConsultComponent,
-    // CancerExaminationComponent,
-    // GynecologicalExaminationComponent,
-    // AbdominalExaminationComponent,
-    // BreastExaminationComponent,
-    // OralExaminationComponent,
-    // SignsAndSymptomsComponent,
-    // ObstetricExaminationComponent,
-    // GenitoUrinarySystemComponent,
-    // CentralNervousSystemComponent,
-    // MusculoskeletalSystemComponent,
-    // RespiratorySystemComponent,
-    // GastroIntestinalSystemComponent,
-    // CardioVascularSystemComponent,
-    // SystemicExaminationComponent,
-    // HeadToToeExaminationComponent,
-    // GeneralExaminationComponent,
-    // GeneralOpdExaminationComponent,
-    // CancerPatientVitalsComponent,
-    // GeneralPatientVitalsComponent,
+    CancerExaminationComponent,
+    GynecologicalExaminationComponent,
+    AbdominalExaminationComponent,
+    BreastExaminationComponent,
+    OralExaminationComponent,
+    SignsAndSymptomsComponent,
+    ObstetricExaminationComponent,
+    GenitoUrinarySystemComponent,
+    CentralNervousSystemComponent,
+    MusculoskeletalSystemComponent,
+    RespiratorySystemComponent,
+    GastroIntestinalSystemComponent,
+    CardioVascularSystemComponent,
+    SystemicExaminationComponent,
+    HeadToToeExaminationComponent,
+    GeneralExaminationComponent,
+    GeneralOpdExaminationComponent,
+    CancerPatientVitalsComponent,
+    GeneralPatientVitalsComponent,
     // MedicationHistoryComponent,
     // DevelopmentHistoryComponent,
     // FeedingHistoryComponent,
@@ -123,25 +160,25 @@ import { MaterialModule } from '../core/material.module';
     // FamilyDiseaseHistoryComponent,
     // PersonalHistoryComponent,
     DoctorWorklistComponent,
-    // AncComponent,
-    // AncDetailsComponent,
-    // AncImmunizationComponent,
-    // ObstetricFormulaComponent,
-    // VisitDetailsComponent,
+    AncComponent,
+    AncDetailsComponent,
+    AncImmunizationComponent,
+    ObstetricFormulaComponent,
+    VisitDetailsComponent,
+    PatientVisitDetailsComponent,
     // VisitCategoryComponent,
-    // ChiefComplaintsComponent,
-    // AdherenceComponent,
-    // TravelHistoryComponent,
-    // SymptomsComponent,
-    // ContactHistoryComponent,
-    // InvestigationsComponent,
-    // UploadFilesComponent,
+    ChiefComplaintsComponent,
+    AdherenceComponent,
+    TravelHistoryComponent,
+    SymptomsComponent,
+    ContactHistoryComponent,
+    InvestigationsComponent,
+    UploadFilesComponent,
     // HistoryComponent,
-    // ExaminationComponent,
-    // VitalsComponent,
+    ExaminationComponent,
+    VitalsComponent,
     // CaseRecordComponent,
-    // AncComponent,
-    // PncComponent,
+    PncComponent,
     // NcdScreeningComponent,
     DashboardComponent,
     WorkareaComponent,
@@ -194,8 +231,8 @@ import { MaterialModule } from '../core/material.module';
     // FamilyHistoryNcdscreeningComponent,
     // NcdScreeningDiagnosisComponent,
     NurseMmuTmReferredWorklistComponent,
-    // DiseaseconfirmationComponent,
-    // CovidVaccinationStatusComponent,
+    DiseaseconfirmationComponent,
+    CovidVaccinationStatusComponent,
   ],
 
   providers: [

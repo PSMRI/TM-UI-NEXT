@@ -144,6 +144,11 @@ export class WorkareaComponent
   showProgressBar = false;
   enableLungAssessment = false;
   enableProvisionalDiag = false;
+  patientVisitForm!: FormGroup;
+  patientVitalsForm!: FormGroup;
+  patientExaminationForm!: FormGroup;
+  patientANCForm!: FormGroup;
+  patientPNCForm!: FormGroup;
 
   constructor(
     private router: Router,
@@ -235,6 +240,10 @@ export class WorkareaComponent
         disableFlag,
       ),
     });
+    this.patientVisitForm = this.patientMedicalForm.get(
+      'patientVisitForm',
+    ) as FormGroup;
+
     this.setVitalsUpdateButtonValue();
     this.getBeneficiaryDetails();
     this.getVisitReasonAndCategory();
@@ -380,6 +389,9 @@ export class WorkareaComponent
             'patientVitalsForm',
             new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
           );
+          this.patientVitalsForm = this.patientMedicalForm.get(
+            'patientVitalsForm',
+          ) as FormGroup;
           this.showVitals = true;
         }
       } else if (categoryValue === 'Cancer Screening') {
@@ -391,10 +403,16 @@ export class WorkareaComponent
           'patientVitalsForm',
           new CancerUtils(this.fb).createNurseCancerPatientVitalsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientExaminationForm',
           new CancerUtils(this.fb).createCancerExaminationForm(),
         );
+        this.patientExaminationForm = this.patientMedicalForm.get(
+          'patientExaminationForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
 
@@ -436,10 +454,16 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientExaminationForm',
           new GeneralUtils(this.fb).createPatientExaminationForm(),
         );
+        this.patientExaminationForm = this.patientMedicalForm.get(
+          'patientExaminationForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
 
@@ -477,6 +501,9 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientHistoryForm',
           new GeneralUtils(this.fb).createNCDScreeningHistoryForm(),
@@ -520,6 +547,9 @@ export class WorkareaComponent
           'patientPNCForm',
           new GeneralUtils(this.fb).createPatientPNCForm(),
         );
+        this.patientPNCForm = this.patientMedicalForm.get(
+          'patientPNCForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(),
@@ -528,10 +558,16 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientExaminationForm',
           new GeneralUtils(this.fb).createPatientExaminationForm(),
         );
+        this.patientExaminationForm = this.patientMedicalForm.get(
+          'patientExaminationForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
 
@@ -571,6 +607,9 @@ export class WorkareaComponent
           'patientANCForm',
           new GeneralUtils(this.fb).createPatientANCForm(),
         );
+        this.patientANCForm = this.patientMedicalForm.get(
+          'patientANCForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(),
@@ -579,10 +618,16 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientExaminationForm',
           new GeneralUtils(this.fb).createPatientExaminationForm(),
         );
+        this.patientExaminationForm = this.patientMedicalForm.get(
+          'patientExaminationForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
         this.patchLMPDate();
@@ -629,6 +674,9 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
 
@@ -668,6 +716,9 @@ export class WorkareaComponent
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
         );
+        this.patientVitalsForm = this.patientMedicalForm.get(
+          'patientVitalsForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
 
@@ -3398,11 +3449,26 @@ export class WorkareaComponent
     let changedForm: any;
 
     if (!this.newLookupMode) {
+      const ancForm = <FormGroup>(
+        this.patientMedicalForm.controls['patientANCForm']
+      );
+
+      const patientVisitFormDet = <FormGroup>(
+        this.patientMedicalForm.controls['patientVisitForm']
+      );
+      const covidVaccinationForm =
+        patientVisitFormDet.controls['covidVaccineStatusForm'];
+
+      const vitalsForm = <FormGroup>(
+        this.patientMedicalForm.controls['patientVitalsForm']
+      );
+
+      const examinationForm = <FormGroup>(
+        this.patientMedicalForm.controls['patientExaminationForm']
+      );
+
       switch (event.previouslySelectedStep.label) {
         case 'ANC': {
-          const ancForm = <FormGroup>(
-            this.patientMedicalForm.controls['patientANCForm']
-          );
           if (ancForm.dirty) {
             this.lableName = this.current_language_set.ancData.anc;
             dirty = true;
@@ -3425,9 +3491,6 @@ export class WorkareaComponent
         }
 
         case 'Vitals': {
-          const vitalsForm = <FormGroup>(
-            this.patientMedicalForm.controls['patientVitalsForm']
-          );
           if (vitalsForm.dirty || this.enableUpdateButtonInVitals) {
             this.lableName =
               this.current_language_set.vitalsDetails.vitalsDataANC_OPD_NCD_PNC.vitals;
@@ -3438,9 +3501,6 @@ export class WorkareaComponent
         }
 
         case 'Examination': {
-          const examinationForm = <FormGroup>(
-            this.patientMedicalForm.controls['patientExaminationForm']
-          );
           if (examinationForm.dirty) {
             this.lableName =
               this.current_language_set.ExaminationData.examination;
@@ -3463,11 +3523,6 @@ export class WorkareaComponent
         }
 
         case 'Visit Details': {
-          const patientVisitFormDet = <FormGroup>(
-            this.patientMedicalForm.controls['patientVisitForm']
-          );
-          const covidVaccinationForm =
-            patientVisitFormDet.controls['covidVaccineStatusForm'];
           this.lableName = this.current_language_set.covidVaccinationStatus;
           if (
             this.doctorService.covidVaccineAgeGroup === '>=12 years' &&
@@ -3486,13 +3541,14 @@ export class WorkareaComponent
         }
       }
     } else {
+      const patientVisitFormDet = <FormGroup>(
+        this.patientMedicalForm.controls['patientVisitForm']
+      );
+      const covidVaccinationForm =
+        patientVisitFormDet.controls['covidVaccineStatusForm'];
+
       switch (event.previouslySelectedStep.label) {
         case 'Visit Details': {
-          const patientVisitFormDet = <FormGroup>(
-            this.patientMedicalForm.controls['patientVisitForm']
-          );
-          const covidVaccinationForm =
-            patientVisitFormDet.controls['covidVaccineStatusForm'];
           this.lableName = this.current_language_set.covidVaccinationStatus;
           if (
             this.doctorService.covidVaccineAgeGroup === '>=12 years' &&

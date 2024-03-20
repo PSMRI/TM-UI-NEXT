@@ -295,7 +295,6 @@ export class RegisterPersonalDetailsComponent
         null,
     });
     this.setFullName();
-    // this.onMaritalStatusChanged(); // Marital status Changed
     this.masterData.incomeMaster.forEach((stat: any) => {
       if (
         element.i_bendemographics.incomeStatus &&
@@ -441,7 +440,7 @@ export class RegisterPersonalDetailsComponent
 
     if (this.personalDetailsForm.value.gender === '3') {
       this.confirmationService
-        .confirm('info', this.current_language_set.alerts.info.transGender)
+        .confirm('info', 'You have selected Transgender, please confirm')
         .subscribe(
           (res) => {
             if (!res) {
@@ -674,8 +673,6 @@ export class RegisterPersonalDetailsComponent
         maritalStatus: null,
         maritalStatusName: null,
       });
-      //  this.personalDetailsForm.controls['maritalStatus'].setErrors(null);
-      //  this.personalDetailsForm.controls['maritalStatus'].updateValueAndValidity();
 
       this.enableMarriageDetails = false;
       this.clearMarriageDetails();
@@ -704,15 +701,15 @@ export class RegisterPersonalDetailsComponent
   enableSpouseMandatory = false;
   onMaritalStatusChanged() {
     if (
-      this.personalDetailsForm.value.maritalStatus === 1 ||
-      this.personalDetailsForm.value.maritalStatus === 7
+      this.personalDetailsForm.value.maritalStatus === '1' ||
+      this.personalDetailsForm.value.maritalStatus === '7'
     ) {
       this.enableMarriageDetails = false;
       this.clearMarriageDetails();
     } else {
       this.enableMarriageDetails = true;
     }
-    if (this.personalDetailsForm.value.maritalStatus === 2) {
+    if (this.personalDetailsForm.value.maritalStatus === '2') {
       this.enableSpouseMandatory = true;
       this.clearMarriageDetails();
     } else {

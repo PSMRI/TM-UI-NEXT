@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResetPasswordComponent } from './app-modules/reset-password/reset-password.component';
 import { RegistrarModule } from './app-modules/registrar/registrar.module';
 import { NgFor } from '@angular/common';
+import { AudioRecordingService } from './app-modules/nurse-doctor/shared/services/audio-recording.service';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { NgFor } from '@angular/common';
     HttpClient,
     ServicePointResolve,
     ServicePointService,
+    AudioRecordingService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

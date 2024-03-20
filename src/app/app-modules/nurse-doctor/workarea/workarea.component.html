@@ -40,21 +40,21 @@
           linear="false"
           (selectionChange)="updatePending($event)"
         >
-          <!-- <mat-step selected label="Visit Details">
+          <mat-step selected label="Visit Details">
             <ng-template matStepLabel>{{
               current_language_set?.nurseData?.visitDetails
             }}</ng-template>
             <app-visit-details
               [mode]="visitMode"
-              [patientVisitForm]="patientMedicalForm.controls.patientVisitForm"
+              [patientVisitDataForm]="patientVisitForm"
             >
             </app-visit-details>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
-                  mdStepperNext
+                  class="mat_blue"
+                  matStepperNext
                   type="button"
                   (click)="checkMandatory()"
                 >
@@ -63,12 +63,11 @@
                 <button
                   *ngIf="
                     !isSpecialist &&
-                    visitCategory != null &&
-                    visitCategory != undefined
+                    visitCategory !== null &&
+                    visitCategory !== undefined
                   "
                   mat-raised-button
-                  class="btn-green"
-                  color="primary"
+                  class="mat_blue"
                   type="button"
                   (click)="openScheduler()"
                 >
@@ -77,8 +76,7 @@
                 <button
                   *ngIf="isSpecialist"
                   mat-raised-button
-                  class="btn-green"
-                  color="primary"
+                  class="mat_blue"
                   type="button"
                   (click)="startTC()"
                 >
@@ -92,16 +90,16 @@
             <ng-template matStepLabel>{{
               current_language_set?.ancData?.anc
             }}</ng-template>
-            <nurse-anc
+            <app-nurse-anc
               [mode]="ancMode"
-              [patientANCForm]="patientMedicalForm.controls.patientANCForm"
-            ></nurse-anc>
+              [patientANCForm]="patientANCForm"
+            ></app-nurse-anc>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
@@ -109,7 +107,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -119,7 +117,9 @@
                   color="primary"
                   class="btn-green"
                   *ngIf="ancMode"
-                  [disabled]="!patientMedicalForm.controls.patientANCForm.dirty"
+                  [disabled]="
+                    !patientMedicalForm.controls['patientANCForm'].dirty
+                  "
                   (click)="updatePatientANC()"
                   type="button"
                 >
@@ -133,16 +133,16 @@
             <ng-template matStepLabel>{{
               current_language_set?.pncData?.pnc
             }}</ng-template>
-            <nurse-pnc
+            <app-nurse-pnc
               [mode]="pncMode"
-              [patientPNCForm]="patientMedicalForm.controls.patientPNCForm"
-            ></nurse-pnc>
+              [patientPNCForm]="patientPNCForm"
+            ></app-nurse-pnc>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
@@ -150,7 +150,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -160,7 +160,9 @@
                   color="primary"
                   class="btn-green"
                   *ngIf="pncMode"
-                  [disabled]="!patientMedicalForm.controls.patientPNCForm.dirty"
+                  [disabled]="
+                    !patientMedicalForm.controls['patientPNCForm'].dirty
+                  "
                   (click)="updatePatientPNC()"
                   type="button"
                 >
@@ -170,7 +172,7 @@
             </div>
           </mat-step>
 
-          <mat-step *ngIf="showHistory" label="History">
+          <!-- <mat-step *ngIf="showHistory" label="History">
             <ng-template matStepLabel>{{
               current_language_set?.common?.history
             }}</ng-template>
@@ -188,7 +190,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
@@ -196,7 +198,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -216,27 +218,24 @@
                 </button>
               </div>
             </div>
-          </mat-step>
+          </mat-step> -->
 
           <mat-step *ngIf="showVitals" label="Vitals">
             <ng-template matStepLabel>{{
               current_language_set?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
                 ?.vitals
             }}</ng-template>
-            <nurse-vitals
+            <app-nurse-vitals
               [vitalsMode]="vitalsMode"
               [pregnancyStatus]="pregnancyStatus"
               [visitCategory]="visitCategory"
-              [patientVitalsForm]="
-                patientMedicalForm.controls.patientVitalsForm
-              "
-            ></nurse-vitals>
+              [patientVitalsDataForm]="patientVitalsForm"
+            ></app-nurse-vitals>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   type="button"
                   [disabled]="disableSubmitButton"
                   *ngIf="!showExamination && !showRefer && !showNCDScreening"
@@ -246,17 +245,17 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   *ngIf="showExamination || showCaseRecord || showNCDScreening"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
-                  mdStepperPrevious
+                  class="mat_blue"
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -268,7 +267,7 @@
                   *ngIf="vitalsMode"
                   (click)="updatePatientVitals()"
                   [disabled]="
-                    !patientMedicalForm.controls.patientVitalsForm.dirty &&
+                    !patientMedicalForm.controls['patientVitalsForm'].dirty &&
                     !enableUpdateButtonInVitals
                   "
                   type="button"
@@ -283,19 +282,16 @@
             <ng-template matStepLabel>{{
               current_language_set?.ExaminationData?.examination
             }}</ng-template>
-            <nurse-examination
+            <app-nurse-examination
               [examinationMode]="examinationMode"
               [visitCategory]="visitCategory"
-              [patientExaminationForm]="
-                patientMedicalForm.controls.patientExaminationForm
-              "
-            ></nurse-examination>
+              [patientExaminationDataForm]="patientExaminationForm"
+            ></app-nurse-examination>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   type="button"
                   *ngIf="!showRefer"
                   [disabled]="disableSubmitButton"
@@ -305,17 +301,17 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   *ngIf="showCaseRecord"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
-                  mdStepperPrevious
+                  class="mat_blue"
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -327,7 +323,7 @@
                   *ngIf="examinationMode"
                   (click)="updatePatientExamination()"
                   [disabled]="
-                    !patientMedicalForm.controls.patientExaminationForm.dirty
+                    !patientMedicalForm.controls['patientExaminationForm'].dirty
                   "
                   type="button"
                 >
@@ -337,7 +333,7 @@
             </div>
           </mat-step>
 
-          <mat-step *ngIf="showNCDScreening" label="IDRS">
+          <!-- <mat-step *ngIf="showNCDScreening" label="IDRS">
             <ng-template matStepLabel>{{
               current_language_set?.idrs?.screening
             }}</ng-template>
@@ -366,7 +362,7 @@
                   *ngIf="showCaseRecord"
                   mat-raised-button
                   color="primary"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
@@ -374,7 +370,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
@@ -392,9 +388,9 @@
                 </button>
               </div>
             </div>
-          </mat-step>
-          
-          <mat-step
+          </mat-step> -->
+
+          <!-- <mat-step
             *ngIf="showCaseRecord"
             label="{{ current_language_set?.common?.caseRecord }}"
           >
@@ -417,7 +413,7 @@
                   mat-raised-button
                   color="primary"
                   *ngIf="showExamination || showHistory"
-                  mdStepperNext
+                  matStepperNext
                   type="button"
                 >
                   {{ current_language_set?.common?.next }}
@@ -425,16 +421,16 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
                 </button>
               </div>
             </div>
-          </mat-step>
+          </mat-step> -->
 
-          <mat-step
+          <!-- <mat-step
             *ngIf="showRefer"
             label="{{ current_language_set?.Refeails?.refer }}"
           >
@@ -474,16 +470,16 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}
                 </button>
               </div>
             </div>
-          </mat-step>
+          </mat-step> -->
 
-          <mat-step *ngIf="showQuickConsult">
+          <!-- <mat-step *ngIf="showQuickConsult">
             <ng-template matStepLabel>{{
               current_language_set?.historyData?.QuickConsultDetails
                 ?.quickconsult
@@ -523,7 +519,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  mdStepperPrevious
+                  matStepperPrevious
                   type="button"
                 >
                   {{ current_language_set?.common?.back }}

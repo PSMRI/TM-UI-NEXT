@@ -252,7 +252,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
                         beneficiary.benVisitNo,
                       );
                       this.router.navigate([
-                        '/common/attendant/nurse/patient/',
+                        '/nurse-doctor/attendant/nurse/patient/',
                         beneficiary.beneficiaryRegID,
                       ]);
                     }
@@ -283,7 +283,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
                         beneficiary.benVisitNo,
                       );
                       this.router.navigate([
-                        '/common/attendant/nurse/patient/',
+                        '/nurse-doctor/attendant/nurse/patient/',
                         beneficiary.beneficiaryRegID,
                       ]);
                     }
@@ -332,7 +332,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
               localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
               localStorage.setItem('benVisitNo', beneficiary.benVisitNo);
               this.router.navigate([
-                '/common/attendant/nurse/patient/',
+                '/nurse-doctor/attendant/nurse/patient/',
                 beneficiary.beneficiaryRegID,
               ]);
             }
@@ -355,7 +355,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
               localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
               localStorage.setItem('benVisitNo', beneficiary.benVisitNo);
               this.router.navigate([
-                '/common/attendant/nurse/patient/',
+                '/nurse-doctor/attendant/nurse/patient/',
                 beneficiary.beneficiaryRegID,
               ]);
             }
@@ -386,7 +386,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
               localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
               localStorage.setItem('benVisitNo', beneficiary.benVisitNo);
               this.router.navigate([
-                '/common/attendant/nurse/patient/',
+                '/nurse-doctor/attendant/nurse/patient/',
                 beneficiary.beneficiaryRegID,
               ]);
             }
@@ -408,7 +408,7 @@ export class NurseWorklistComponent implements OnInit, DoCheck, OnDestroy {
               localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
               localStorage.setItem('benVisitNo', beneficiary.benVisitNo);
               this.router.navigate([
-                '/common/attendant/nurse/patient/',
+                '/nurse-doctor/attendant/nurse/patient/',
                 beneficiary.beneficiaryRegID,
               ]);
             }
