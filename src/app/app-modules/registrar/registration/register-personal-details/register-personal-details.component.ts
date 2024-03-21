@@ -192,14 +192,14 @@ export class RegisterPersonalDetailsComponent
       this.maritalStatusMaster = this.masterData.maritalStatusMaster.filter(
         (maritalStatus: any) => {
           if (
-            revisitData.m_gender.genderID === '1' &&
-            maritalStatus.maritalStatusID !== '5'
+            revisitData.m_gender.genderID === 1 &&
+            maritalStatus.maritalStatusID !== 5
           ) {
             return maritalStatus;
           }
           if (
-            revisitData.m_gender.genderID === '2' &&
-            maritalStatus.maritalStatusID !== '6'
+            revisitData.m_gender.genderID === 2 &&
+            maritalStatus.maritalStatusID !== 6
           ) {
             return maritalStatus;
           }
@@ -438,7 +438,7 @@ export class RegisterPersonalDetailsComponent
       this.masterData.maritalStatusMaster,
     );
 
-    if (this.personalDetailsForm.value.gender === '3') {
+    if (this.personalDetailsForm.value.gender === 3) {
       this.confirmationService
         .confirm('info', 'You have selected Transgender, please confirm')
         .subscribe(
@@ -458,14 +458,14 @@ export class RegisterPersonalDetailsComponent
       this.maritalStatusMaster = this.masterData.maritalStatusMaster.filter(
         (maritalStatus: any) => {
           if (
-            this.personalDetailsForm.value.gender === '1' &&
-            maritalStatus.maritalStatusID !== '5'
+            this.personalDetailsForm.value.gender === 1 &&
+            maritalStatus.maritalStatusID !== 5
           ) {
             return maritalStatus;
           }
           if (
-            this.personalDetailsForm.value.gender === '2' &&
-            maritalStatus.maritalStatusID !== '6'
+            this.personalDetailsForm.value.gender === 2 &&
+            maritalStatus.maritalStatusID !== 6
           ) {
             return maritalStatus;
           }
@@ -701,15 +701,15 @@ export class RegisterPersonalDetailsComponent
   enableSpouseMandatory = false;
   onMaritalStatusChanged() {
     if (
-      this.personalDetailsForm.value.maritalStatus === '1' ||
-      this.personalDetailsForm.value.maritalStatus === '7'
+      this.personalDetailsForm.value.maritalStatus === 1 ||
+      this.personalDetailsForm.value.maritalStatus === 7
     ) {
       this.enableMarriageDetails = false;
       this.clearMarriageDetails();
     } else {
       this.enableMarriageDetails = true;
     }
-    if (this.personalDetailsForm.value.maritalStatus === '2') {
+    if (this.personalDetailsForm.value.maritalStatus === 2) {
       this.enableSpouseMandatory = true;
       this.clearMarriageDetails();
     } else {

@@ -44,6 +44,10 @@ export class IdrsscoreService {
     this._listners.next(filterBy);
   }
 
+  dummuy: any = false;
+  dummyValue = new BehaviorSubject(this.dummuy);
+  dummyValue$ = this.dummyValue.asObservable();
+
   IRDSscore: any = null;
 
   IDRSFamilyScore = new BehaviorSubject(this.IRDSscore);
@@ -162,6 +166,11 @@ export class IdrsscoreService {
     console.log('score', score);
     this.confirmed.next(score);
     console.log('score value', this.confirmed);
+  }
+
+  setdymmyvalue(disease: any) {
+    this.dummyValue.next(disease);
+    console.log('testing');
   }
 
   clearMessage() {

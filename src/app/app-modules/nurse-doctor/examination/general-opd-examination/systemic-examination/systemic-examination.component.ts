@@ -128,5 +128,6 @@ export class SystemicExaminationComponent
         this.displayGeneral = true;
       }
     }
+    this.loadFormData();
   }
 }

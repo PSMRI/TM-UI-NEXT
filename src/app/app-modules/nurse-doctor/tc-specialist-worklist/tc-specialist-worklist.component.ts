@@ -288,7 +288,9 @@ export class TcSpecialistWorklistComponent
             beneficiary.beneficiaryRegID,
           );
           localStorage.setItem('caseSheetVisitID', beneficiary.benVisitID);
-          this.router.navigate(['/common/print/' + 'TM' + '/' + 'current']);
+          this.router.navigate([
+            '/nurse-doctor/print/' + 'TM' + '/' + 'current',
+          ]);
         }
       });
   }
@@ -387,7 +389,7 @@ export class TcSpecialistWorklistComponent
                       const dataSetted = this.setDataForWorkArea(beneficiary);
                       if (dataSetted) {
                         this.router.navigate([
-                          '/common/attendant/tcspecialist/patient/',
+                          '/nurse-doctor/attendant/tcspecialist/patient/',
                           beneficiary.beneficiaryRegID,
                         ]);
                       }
@@ -406,7 +408,7 @@ export class TcSpecialistWorklistComponent
                       const dataSetted = this.setDataForWorkArea(beneficiary);
                       if (dataSetted) {
                         this.router.navigate([
-                          '/common/attendant/tcspecialist/patient/',
+                          '/nurse-doctor/attendant/tcspecialist/patient/',
                           beneficiary.beneficiaryRegID,
                         ]);
                       }
@@ -426,7 +428,7 @@ export class TcSpecialistWorklistComponent
                     const dataSetted = this.setDataForWorkArea(beneficiary);
                     if (dataSetted) {
                       this.router.navigate([
-                        '/common/attendant/tcspecialist/patient/',
+                        '/nurse-doctor/attendant/tcspecialist/patient/',
                         beneficiary.beneficiaryRegID,
                       ]);
                     }

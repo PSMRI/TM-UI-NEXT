@@ -100,6 +100,29 @@ import { AncImmunizationComponent } from './anc/anc-immunization/anc-immunizatio
 import { AncComponent } from './anc/anc.component';
 import { ObstetricFormulaComponent } from './anc/obstetric-formula/obstetric-formula.component';
 import { PncComponent } from './pnc/pnc.component';
+import { IdrsComponent } from './idrs/idrs.component';
+import { NcdScreeningComponent } from './ncd-screening/ncd-screening.component';
+import { QuickConsultComponent } from './quick-consult/quick-consult.component';
+import { CancerHistoryComponent } from './history/cancer-history/cancer-history.component';
+import { FamilyDiseaseHistoryComponent } from './history/cancer-history/family-disease-history/family-disease-history.component';
+import { ObstetricHistoryComponent } from './history/cancer-history/obstetric-history/obstetric-history.component';
+import { PersonalHistoryComponent } from './history/cancer-history/personal-history/personal-history.component';
+import { ComorbidityConcurrentConditionsComponent } from './history/general-opd-history/comorbidity-concurrent-conditions/comorbidity-concurrent-conditions.component';
+import { DevelopmentHistoryComponent } from './history/general-opd-history/development-history/development-history.component';
+import { FamilyHistoryNcdscreeningComponent } from './history/general-opd-history/family-history-ncdscreening/family-history-ncdscreening.component';
+import { FamilyHistoryComponent } from './history/general-opd-history/family-history/family-history.component';
+import { FeedingHistoryComponent } from './history/general-opd-history/feeding-history/feeding-history.component';
+import { GeneralOpdHistoryComponent } from './history/general-opd-history/general-opd-history.component';
+import { ImmunizationHistoryComponent } from './history/general-opd-history/immunization-history/immunization-history.component';
+import { MedicationHistoryComponent } from './history/general-opd-history/medication-history/medication-history.component';
+import { MenstrualHistoryComponent } from './history/general-opd-history/menstrual-history/menstrual-history.component';
+import { OtherVaccinesComponent } from './history/general-opd-history/other-vaccines/other-vaccines.component';
+import { PastHistoryComponent } from './history/general-opd-history/past-history/past-history.component';
+import { PastObstericHistoryComponent } from './history/general-opd-history/past-obsteric-history/past-obsteric-history.component';
+import { PerinatalHistoryComponent } from './history/general-opd-history/perinatal-history/perinatal-history.component';
+import { GeneralPersonalHistoryComponent } from './history/general-opd-history/personal-history/personal-history.component';
+import { PhysicalActivityHistoryComponent } from './history/general-opd-history/physical-activity-history/physical-activity-history.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   imports: [
@@ -122,7 +145,7 @@ import { PncComponent } from './pnc/pnc.component';
   declarations: [
     NurseWorklistComponent,
     // PrintPageSelectComponent,
-    // QuickConsultComponent,
+    QuickConsultComponent,
     CancerExaminationComponent,
     GynecologicalExaminationComponent,
     AbdominalExaminationComponent,
@@ -142,23 +165,23 @@ import { PncComponent } from './pnc/pnc.component';
     GeneralOpdExaminationComponent,
     CancerPatientVitalsComponent,
     GeneralPatientVitalsComponent,
-    // MedicationHistoryComponent,
-    // DevelopmentHistoryComponent,
-    // FeedingHistoryComponent,
-    // OtherVaccinesComponent,
-    // ImmunizationHistoryComponent,
-    // PastObstericHistoryComponent,
-    // PerinatalHistoryComponent,
-    // MenstrualHistoryComponent,
-    // FamilyHistoryComponent,
-    // ComorbidityConcurrentConditionsComponent,
-    // GeneralPersonalHistoryComponent,
-    // PastHistoryComponent,
-    // GeneralOpdHistoryComponent,
-    // CancerHistoryComponent,
-    // ObstetricHistoryComponent,
-    // FamilyDiseaseHistoryComponent,
-    // PersonalHistoryComponent,
+    MedicationHistoryComponent,
+    DevelopmentHistoryComponent,
+    FeedingHistoryComponent,
+    OtherVaccinesComponent,
+    ImmunizationHistoryComponent,
+    PastObstericHistoryComponent,
+    PerinatalHistoryComponent,
+    MenstrualHistoryComponent,
+    FamilyHistoryComponent,
+    ComorbidityConcurrentConditionsComponent,
+    GeneralPersonalHistoryComponent,
+    PastHistoryComponent,
+    GeneralOpdHistoryComponent,
+    CancerHistoryComponent,
+    ObstetricHistoryComponent,
+    FamilyDiseaseHistoryComponent,
+    PersonalHistoryComponent,
     DoctorWorklistComponent,
     AncComponent,
     AncDetailsComponent,
@@ -174,12 +197,12 @@ import { PncComponent } from './pnc/pnc.component';
     ContactHistoryComponent,
     InvestigationsComponent,
     UploadFilesComponent,
-    // HistoryComponent,
+    HistoryComponent,
     ExaminationComponent,
     VitalsComponent,
     // CaseRecordComponent,
     PncComponent,
-    // NcdScreeningComponent,
+    NcdScreeningComponent,
     DashboardComponent,
     WorkareaComponent,
     // CancerCaseRecordComponent,
@@ -226,9 +249,9 @@ import { PncComponent } from './pnc/pnc.component';
     NurseTmWorklistComponent,
     NurseTmFutureWorklistComponent,
     // CovidDiagnosisComponent,
-    // IdrsComponent,
-    // PhysicalActivityHistoryComponent,
-    // FamilyHistoryNcdscreeningComponent,
+    IdrsComponent,
+    PhysicalActivityHistoryComponent,
+    FamilyHistoryNcdscreeningComponent,
     // NcdScreeningDiagnosisComponent,
     NurseMmuTmReferredWorklistComponent,
     DiseaseconfirmationComponent,

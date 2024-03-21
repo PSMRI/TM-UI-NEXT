@@ -59,13 +59,13 @@ export class QuickConsultUtils {
   }
 
   initMedicineWithData(prescription: any, id?: null): FormGroup {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     let unit;
     if (prescription.drugUnit) {
       unit = `${prescription.drugStrength}${prescription.drugUnit}`;
     } else {
       unit = prescription.drugStrength;
     }
-    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     return this.fb.group({
       id: id,
       drugID: prescription.drugID,
@@ -114,25 +114,27 @@ export class QuickConsultUtils {
       rbsTestResult: { value: null, disabled: false },
       rbsTestRemarks: { value: null, disabled: false },
       clinicalObservation: [null, Validators.required],
+      provisionalDiagnosisList: this.fb.array([
+        this.initProvisionalDiagnosisList(),
+      ]),
       labTestOrders: [],
       radiology: [],
       test: [],
       externalInvestigation: null,
+      diagnosisProvided: [null, Validators.required],
       instruction: null,
       prescription: this.createDrugPrescriptionForm(),
       prescriptionID: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
-      provisionalDiagnosisList: this.fb.array([
-        this.initProvisionalDiagnosisList(),
-      ]),
     });
   }
+
   initProvisionalDiagnosisList() {
     return this.fb.group({
       conceptID: [null, Validators.required],
       term: [null, Validators.required],
-      viewProvisionalDiagnosisProvided: [null, Validators.required],
+      provisionalDiagnosis: [null, Validators.required],
     });
   }
 }

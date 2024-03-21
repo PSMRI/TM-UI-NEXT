@@ -149,6 +149,9 @@ export class WorkareaComponent
   patientExaminationForm!: FormGroup;
   patientANCForm!: FormGroup;
   patientPNCForm!: FormGroup;
+  patientHistoryForm!: FormGroup;
+  patientQuickConsultForm!: FormGroup;
+  idrsScreeningForm!: FormGroup;
 
   constructor(
     private router: Router,
@@ -381,6 +384,9 @@ export class WorkareaComponent
             'patientQuickConsultForm',
             new QuickConsultUtils(this.fb).createQuickConsultForm(),
           );
+          this.patientQuickConsultForm = this.patientMedicalForm.get(
+            'patientQuickConsultForm',
+          ) as FormGroup;
           this.visitMode = String(mode);
           this.showQuickConsult = true;
           this.quickConsultMode = String(mode);
@@ -399,6 +405,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new CancerUtils(this.fb).createNurseCancerHistoryForm(),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new CancerUtils(this.fb).createNurseCancerPatientVitalsForm(),
@@ -450,6 +459,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(false),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
@@ -508,6 +520,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createNCDScreeningHistoryForm(),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
 
         this.getCurrentVitals();
         this.showNCDScreening = true;
@@ -518,6 +533,9 @@ export class WorkareaComponent
           'idrsScreeningForm',
           new NCDScreeningUtils(this.fb).createIDRSForm(),
         );
+        this.idrsScreeningForm = this.patientMedicalForm.get(
+          'idrsScreeningForm',
+        ) as FormGroup;
         if (mode) {
           this.patientMedicalForm.addControl(
             'patientCaseRecordForm',
@@ -554,6 +572,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
@@ -614,6 +635,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
@@ -670,6 +694,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(false),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
@@ -712,6 +739,9 @@ export class WorkareaComponent
           'patientHistoryForm',
           new GeneralUtils(this.fb).createGeneralHistoryForm(false),
         );
+        this.patientHistoryForm = this.patientMedicalForm.get(
+          'patientHistoryForm',
+        ) as FormGroup;
         this.patientMedicalForm.addControl(
           'patientVitalsForm',
           new GeneralUtils(this.fb).createGeneralVitalDetailsForm(),
@@ -813,7 +843,7 @@ export class WorkareaComponent
   navigateToNurseWorklist() {
     this.patientMedicalForm.reset();
     this.removeBeneficiaryDataForNurseVisit();
-    this.router.navigate(['/common/nurse-worklist']);
+    this.router.navigate(['/nurse-doctor/nurse-worklist']);
   }
 
   checkForPrescribedTests(temp: any) {
@@ -2993,13 +3023,13 @@ export class WorkareaComponent
     this.patientMedicalForm.reset();
     this.testsPrescribed = null;
     this.removeBeneficiaryDataForDoctorVisit();
-    this.router.navigate(['/common/doctor-worklist']);
+    this.router.navigate(['/nurse-doctor/doctor-worklist']);
   }
   navigateToSpecialistWorklist() {
     this.patientMedicalForm.reset();
     this.testsPrescribed = null;
     this.removeBeneficiaryDataForDoctorVisit();
-    this.router.navigate(['/common/tcspecialist-worklist']);
+    this.router.navigate(['/nurse-doctor/tcspecialist-worklist']);
   }
   basedOnRoleNavigateToWorklist() {
     if (this.isSpecialist) {
@@ -3094,7 +3124,7 @@ export class WorkareaComponent
           );
           this.patientMedicalForm.reset();
           this.removeBeneficiaryDataForNurseVisit();
-          this.router.navigate(['/common/nurse-worklist']);
+          this.router.navigate(['/nurse-doctor/nurse-worklist']);
         }
       },
       (err) => {
@@ -3104,7 +3134,7 @@ export class WorkareaComponent
         );
         this.patientMedicalForm.reset();
         this.removeBeneficiaryDataForNurseVisit();
-        this.router.navigate(['/common/nurse-worklist']);
+        this.router.navigate(['/nurse-doctor/nurse-worklist']);
       },
     );
   }
@@ -3467,6 +3497,14 @@ export class WorkareaComponent
         this.patientMedicalForm.controls['patientExaminationForm']
       );
 
+      const historyForm = <FormGroup>(
+        this.patientMedicalForm.controls['patientHistoryForm']
+      );
+
+      const IDRSForm = <FormGroup>(
+        this.patientMedicalForm.controls['idrsScreeningForm']
+      );
+
       switch (event.previouslySelectedStep.label) {
         case 'ANC': {
           if (ancForm.dirty) {
@@ -3478,9 +3516,6 @@ export class WorkareaComponent
         }
 
         case 'History': {
-          const historyForm = <FormGroup>(
-            this.patientMedicalForm.controls['patientHistoryForm']
-          );
           if (historyForm.dirty) {
             this.lableName = this.current_language_set.common.history;
 
@@ -3511,9 +3546,6 @@ export class WorkareaComponent
         }
 
         case 'IDRS': {
-          const IDRSForm = <FormGroup>(
-            this.patientMedicalForm.controls['idrsScreeningForm']
-          );
           this.lableName = 'Screening';
           if (this.enableIDRSUpdate === false) {
             dirty = true;

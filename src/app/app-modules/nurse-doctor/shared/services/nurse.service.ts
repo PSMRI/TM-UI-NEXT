@@ -384,25 +384,25 @@ export class NurseService {
   getPreviousVisitData(obj: any) {
     return this.http.post(environment.previousVisitDataUrl, obj);
   }
-  getPreviousCancerFamilyHistory(benRegID: string) {
+  getPreviousCancerFamilyHistory(benRegID: any) {
     return this.http.post(environment.previousCancerFamilyHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousCancerPersonalHabitHistory(benRegID: string) {
+  getPreviousCancerPersonalHabitHistory(benRegID: any) {
     return this.http.post(environment.previousCancerPersonalHabitHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousCancerPersonalDietHistory(benRegID: string) {
+  getPreviousCancerPersonalDietHistory(benRegID: any) {
     return this.http.post(environment.previousCancerPersonalDietHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousCancerPastObstetricHistory(benRegID: string) {
+  getPreviousCancerPastObstetricHistory(benRegID: any) {
     return this.http.post(environment.previousCancerPastObstetricHistoryUrl, {
       benRegID: benRegID,
     });
@@ -1468,79 +1468,79 @@ export class NurseService {
     return personalHistoryData;
   }
 
-  getPreviousPastHistory(benRegID: string, visitCategory: any) {
+  getPreviousPastHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousPastHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousMedicationHistory(benRegID: string, visitCategory: any) {
+  getPreviousMedicationHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousMedicationHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousOtherVaccines(benRegID: string, visitCategory: any) {
+  getPreviousOtherVaccines(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousOtherVaccineHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousTobaccoHistory(benRegID: string, visitCategory: any) {
+  getPreviousTobaccoHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousTobaccoHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousAlcoholHistory(benRegID: string, visitCategory: any) {
+  getPreviousAlcoholHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousAlcoholHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousAllergyHistory(benRegID: string, visitCategory: any) {
+  getPreviousAllergyHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousAllergyHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousFamilyHistory(benRegID: string, visitCategory: any) {
+  getPreviousFamilyHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousFamilyHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousMenstrualHistory(benRegID: string, visitCategory: any) {
+  getPreviousMenstrualHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousMestrualHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousObstetricHistory(benRegID: string, visitCategory: any) {
+  getPreviousObstetricHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousPastObstetricHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousComorbidityHistory(benRegID: string, visitCategory: any) {
+  getPreviousComorbidityHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousComorbidityHistoryUrl, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousDevelopmentalHistory(benRegID: string, visitCategory: any) {
+  getPreviousDevelopmentalHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousDevelopmentHistory, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousPerinatalHistory(benRegID: string, visitCategory: any) {
+  getPreviousPerinatalHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousPerinatalHistory, {
       benRegID: benRegID,
     });
   }
 
-  getPreviousFeedingHistory(benRegID: string, visitCategory: any) {
+  getPreviousFeedingHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousFeedingHistory, {
       benRegID: benRegID,
     });
@@ -1551,12 +1551,12 @@ export class NurseService {
       benRegID: benRegID,
     });
   }
-  getPreviousPhysicalActivityHistory(benRegID: string, visitCategory: any) {
+  getPreviousPhysicalActivityHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousPhyscialactivityHistoryUrl, {
       benRegID: benRegID,
     });
   }
-  getPreviousDiabetesHistory(benRegID: string, visitCategory: any) {
+  getPreviousDiabetesHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousDiabetesHistoryUrl, {
       benRegID: benRegID,
     });

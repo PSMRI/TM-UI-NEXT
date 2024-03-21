@@ -402,7 +402,7 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
     const dataSeted = this.setDataForWorkArea(beneficiary);
     if (dataSeted) {
       this.router.navigate([
-        '/common/attendant/doctor/patient/',
+        '/nurse-doctor/attendant/doctor/patient/',
         beneficiary.beneficiaryRegID,
       ]);
     }

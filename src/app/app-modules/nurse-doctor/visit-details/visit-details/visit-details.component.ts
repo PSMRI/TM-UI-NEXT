@@ -93,7 +93,7 @@ export class PatientVisitDetailsComponent
       specialistFlagString !== null &&
       parseInt(specialistFlagString) === 100
     ) {
-      console.log('MMUSpecialist===========');
+      console.log('MMUSpecialist');
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.getMMUVisitDetails(visitID, benRegID);

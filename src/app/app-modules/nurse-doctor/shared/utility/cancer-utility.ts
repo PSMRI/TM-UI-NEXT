@@ -25,6 +25,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class CancerUtils {
   constructor(private fb: FormBuilder) {}
 
+  ngOnInIt() {
+    const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
+  }
+
   createCancerPatientFamilyMedicalHistoryForm() {
     return this.fb.group({
       diseases: this.fb.array([this.initDiseases()]),
@@ -327,7 +331,11 @@ export class CancerUtils {
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
       lymphNodes: this.fb.array(
-        this.lymphNodesArray.map((item) => this.fb.group(item)),
+        this.lymphNodesArray.map((item) => ({
+          ...item,
+          vanID: JSON.parse(serviceLineDetails).vanID,
+          parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
+        })),
       ),
     });
   }
@@ -338,8 +346,8 @@ export class CancerUtils {
       referredToInstituteID: null,
       refrredToAdditionalServiceList: null,
       referredToInstituteName: null,
-      referralReason: null,
       revisitDate: null,
+      referralReason: null,
       vanID: JSON.parse(serviceLineDetails).vanID,
       parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
     });

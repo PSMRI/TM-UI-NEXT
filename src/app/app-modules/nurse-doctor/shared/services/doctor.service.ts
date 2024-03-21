@@ -1311,7 +1311,11 @@ export class DoctorService {
     });
   }
 
-  updateGeneralHistory(generalHistoryForm: any, temp: any): Observable<any> {
+  updateGeneralHistory(
+    generalHistoryForm: any,
+    temp: any,
+    beneficiaryAge: any,
+  ): Observable<any> {
     const visitCategory = localStorage.getItem('visitCategory');
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -2844,6 +2848,7 @@ export class DoctorService {
   updateNCDScreeningHistory(
     NCDScreeningHistoryForm: any,
     temp: any,
+    beneficiaryAge: any,
   ): Observable<any> {
     const visitCategory = localStorage.getItem('visitCategory');
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');

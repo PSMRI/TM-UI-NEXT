@@ -4,24 +4,6 @@
       <mat-spinner></mat-spinner>
     </div>
   </div>
-  <!-- <button
-    mat-mini-fab
-    class="example-fab"
-    color="primary"
-    (click)="sideNavModeChange(sidenav)"
-  >
-    <mat-icon>account_box</mat-icon>
-  </button>
-
-  <button
-    mat-mini-fab
-    class="previousIcon"
-    color="primary"
-    (click)="openBenPreviousisitDetails()"
-    tooltip="{{ current_language_set?.benPreviousVisitDetails }}"
-  >
-    <mat-icon class="iconStyle"> description</mat-icon>
-  </button> -->
 
   <mat-sidenav-container class="example-sidenav-fab-container">
     <mat-sidenav #sidenav mode="side" opened="false">
@@ -98,7 +80,7 @@
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperNext
                   type="button"
                 >
@@ -106,7 +88,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -114,8 +96,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   *ngIf="ancMode"
                   [disabled]="
                     !patientMedicalForm.controls['patientANCForm'].dirty
@@ -141,7 +122,7 @@
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperNext
                   type="button"
                 >
@@ -149,7 +130,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -157,8 +138,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   *ngIf="pncMode"
                   [disabled]="
                     !patientMedicalForm.controls['patientPNCForm'].dirty
@@ -172,24 +152,22 @@
             </div>
           </mat-step>
 
-          <!-- <mat-step *ngIf="showHistory" label="History">
+          <mat-step *ngIf="showHistory" label="History">
             <ng-template matStepLabel>{{
               current_language_set?.common?.history
             }}</ng-template>
-            <nurse-history
-              [historyMode]="historyMode"
+            <app-nurse-history
+              [mode]="historyMode"
               [visitCategory]="visitCategory"
               [pregnancyStatus]="pregnancyStatus"
               [primeGravidaStatus]="primeGravidaStatus"
-              [patientHistoryForm]="
-                patientMedicalForm.controls.patientHistoryForm
-              "
-            ></nurse-history>
+              [patientHistoryForm]="patientHistoryForm"
+            ></app-nurse-history>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperNext
                   type="button"
                 >
@@ -197,7 +175,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -205,12 +183,11 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   *ngIf="historyMode"
                   (click)="updatePatientHistory()"
                   [disabled]="
-                    !patientMedicalForm.controls.patientHistoryForm.dirty
+                    !patientMedicalForm.controls['patientHistoryForm'].dirty
                   "
                   type="button"
                 >
@@ -218,7 +195,7 @@
                 </button>
               </div>
             </div>
-          </mat-step> -->
+          </mat-step>
 
           <mat-step *ngIf="showVitals" label="Vitals">
             <ng-template matStepLabel>{{
@@ -333,26 +310,23 @@
             </div>
           </mat-step>
 
-          <!-- <mat-step *ngIf="showNCDScreening" label="IDRS">
+          <mat-step *ngIf="showNCDScreening" label="IDRS">
             <ng-template matStepLabel>{{
               current_language_set?.idrs?.screening
             }}</ng-template>
             <app-idrs
-              [ncdScreeningMode]="ncdScreeningMode"
+              [mode]="ncdScreeningMode"
               [patientMedicalForm]="patientMedicalForm"
               (IDRSChanged)="idrsChange($event)"
-              [idrsScreeningForm]="
-                patientMedicalForm.controls.idrsScreeningForm
-              "
+              [idrsScreeningForm]="idrsScreeningForm"
             ></app-idrs>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   *ngIf="!ncdScreeningMode"
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   [disabled]="disableSubmitButton"
-                  class="btn-green"
                   (click)="submitPatientMedicalDetailsForm(patientMedicalForm)"
                   type="button"
                 >
@@ -361,7 +335,7 @@
                 <button
                   *ngIf="showCaseRecord"
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperNext
                   type="button"
                 >
@@ -369,7 +343,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -378,8 +352,7 @@
                 <button
                   *ngIf="ncdScreeningMode"
                   mat-raised-button
-                  class="btn-green"
-                  color="primary"
+                  class="mat_blue"
                   type="button"
                   (click)="updatePatientNcdScreening()"
                   [disabled]="enableIDRSUpdate"
@@ -388,7 +361,7 @@
                 </button>
               </div>
             </div>
-          </mat-step> -->
+          </mat-step>
 
           <!-- <mat-step
             *ngIf="showCaseRecord"
@@ -479,27 +452,24 @@
             </div>
           </mat-step> -->
 
-          <!-- <mat-step *ngIf="showQuickConsult">
+          <mat-step *ngIf="showQuickConsult">
             <ng-template matStepLabel>{{
               current_language_set?.historyData?.QuickConsultDetails
                 ?.quickconsult
             }}</ng-template>
-            <doctor-quick-consult
+            <app-doctor-quick-consult
               [quickConsultMode]="quickConsultMode"
-              [patientQuickConsultForm]="
-                patientMedicalForm.controls.patientQuickConsultForm
-              "
-            ></doctor-quick-consult>
+              [patientQuickConsultForm]="patientQuickConsultForm"
+            ></app-doctor-quick-consult>
 
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   *ngIf="isDoctorSave"
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   [disabled]="disableSubmitButton"
-                  (click)="submitDoctorDiagnosisForm(patientMedicalForm)"
+                  (click)="submitDoctorDiagnosisForm()"
                   type="button"
                 >
                   {{ doctorSaveAndTCSave }}
@@ -507,8 +477,7 @@
                 <button
                   *ngIf="isDoctorUpdate"
                   mat-raised-button
-                  color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   [disabled]="disableSubmitButton"
                   (click)="updateQuickConsultDiagnosisForm()"
                   type="button "
@@ -518,7 +487,7 @@
 
                 <button
                   mat-raised-button
-                  color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -526,9 +495,25 @@
                 </button>
               </div>
             </div>
-          </mat-step> -->
+          </mat-step>
         </mat-horizontal-stepper>
       </form>
     </div>
+    <button
+      style="margin-left: 10px; position: absolute"
+      class="mat_blue_circle"
+      (click)="sideNavModeChange(sidenav)"
+    >
+      <mat-icon>account_box</mat-icon>
+    </button>
+
+    <button
+      style="margin-left: 55px; position: absolute"
+      class="mat_blue_circle"
+      (click)="openBenPreviousisitDetails()"
+      matTooltip="{{ current_language_set?.benPreviousVisitDetails }}"
+    >
+      <mat-icon class="iconStyle"> description</mat-icon>
+    </button>
   </mat-sidenav-container>
 </div>

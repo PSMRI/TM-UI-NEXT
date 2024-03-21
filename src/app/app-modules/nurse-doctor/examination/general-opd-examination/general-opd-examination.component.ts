@@ -63,11 +63,11 @@ export class GeneralOpdExaminationComponent
 
   ngOnInit() {
     this.assignSelectedLanguage();
+    this.loadFormData();
   }
 
   ngDoCheck() {
     this.assignSelectedLanguage();
-    this.loadFormData();
   }
   assignSelectedLanguage() {
     const getLanguageJson = new SetLanguageComponent(this.httpServiceService);
@@ -93,6 +93,7 @@ export class GeneralOpdExaminationComponent
   }
 
   ngOnChanges() {
+    this.loadFormData();
     if (this.mode === 'view') {
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
