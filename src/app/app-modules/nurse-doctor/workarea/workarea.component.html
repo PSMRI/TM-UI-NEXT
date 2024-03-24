@@ -295,7 +295,7 @@
                 </button>
                 <button
                   mat-raised-button
-                  class="btn-green"
+                  class="mat_blue"
                   color="primary"
                   *ngIf="examinationMode"
                   (click)="updatePatientExamination()"
@@ -363,7 +363,7 @@
             </div>
           </mat-step>
 
-          <!-- <mat-step
+          <mat-step
             *ngIf="showCaseRecord"
             label="{{ current_language_set?.common?.caseRecord }}"
           >
@@ -371,20 +371,19 @@
               current_language_set?.common?.caseRecord
             }}</ng-template>
             <app-case-record
-              [caseRecordMode]="caseRecordMode"
+              [caseRecordModeData]="caseRecordMode"
               [visitCategory]="visitCategory"
               [pregnancyStatus]="pregnancyStatus"
               [findings]="findings"
-              [currentVitals]="currentVitals"
-              [patientCaseRecordForm]="
-                patientMedicalForm.controls.patientCaseRecordForm
-              "
+              [currentVitalsData]="currentVitals"
+              [patientCaseRecordForm]="patientCaseRecordForm"
             ></app-case-record>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
                 <button
                   mat-raised-button
                   color="primary"
+                  class="mat_blue"
                   *ngIf="showExamination || showHistory"
                   matStepperNext
                   type="button"
@@ -394,6 +393,7 @@
                 <button
                   mat-raised-button
                   color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -401,9 +401,9 @@
                 </button>
               </div>
             </div>
-          </mat-step> -->
+          </mat-step>
 
-          <!-- <mat-step
+          <mat-step
             *ngIf="showRefer"
             label="{{ current_language_set?.Refeails?.refer }}"
           >
@@ -413,7 +413,7 @@
             <app-refer
               [referMode]="referMode"
               [visitCategory]="visitCategory"
-              [patientReferForm]="patientMedicalForm.controls.patientReferForm"
+              [patientReferForm]="patientReferForm"
             ></app-refer>
             <div class="row m-t-20">
               <div class="col-sm-12 step-btn m-b-40">
@@ -421,7 +421,7 @@
                   *ngIf="isDoctorSave"
                   mat-raised-button
                   color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   [disabled]="disableSubmitButton"
                   (click)="submitDoctorDiagnosisForm()"
                   type="submit"
@@ -432,7 +432,7 @@
                   *ngIf="isDoctorUpdate"
                   mat-raised-button
                   color="primary"
-                  class="btn-green"
+                  class="mat_blue"
                   [disabled]="disableSubmitButton"
                   (click)="updateDoctorDiagnosisForm()"
                   type="submit"
@@ -443,6 +443,7 @@
                 <button
                   mat-raised-button
                   color="primary"
+                  class="mat_blue"
                   matStepperPrevious
                   type="button"
                 >
@@ -450,7 +451,7 @@
                 </button>
               </div>
             </div>
-          </mat-step> -->
+          </mat-step>
 
           <mat-step *ngIf="showQuickConsult">
             <ng-template matStepLabel>{{

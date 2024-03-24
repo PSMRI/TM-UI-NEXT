@@ -123,6 +123,42 @@ import { PerinatalHistoryComponent } from './history/general-opd-history/perinat
 import { GeneralPersonalHistoryComponent } from './history/general-opd-history/personal-history/personal-history.component';
 import { PhysicalActivityHistoryComponent } from './history/general-opd-history/physical-activity-history/physical-activity-history.component';
 import { HistoryComponent } from './history/history.component';
+import { PrintPageSelectComponent } from './print-page-select/print-page-select.component';
+import { CancerReferComponent } from './refer/cancer-refer/cancer-refer.component';
+import { GeneralReferComponent } from './refer/general-refer/general-refer.component';
+import { ReferComponent } from './refer/refer.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { BeneficiaryMctsCallHistoryComponent } from './case-record/beneficiary-mcts-call-history/beneficiary-mcts-call-history.component';
+import { BeneficiaryPlatformHistoryComponent } from './case-record/beneficiary-platform-history/beneficiary-platform-history.component';
+import { CancerCaseRecordComponent } from './case-record/cancer-case-record/cancer-case-record.component';
+import { CaseRecordComponent } from './case-record/case-record.component';
+import { AncDiagnosisComponent } from './case-record/general-case-record/diagnosis/anc-diagnosis/anc-diagnosis.component';
+import { CovidDiagnosisComponent } from './case-record/general-case-record/diagnosis/covid-diagnosis/covid-diagnosis.component';
+import { DiagnosisComponent } from './case-record/general-case-record/diagnosis/diagnosis.component';
+import { GeneralOpdDiagnosisComponent } from './case-record/general-case-record/diagnosis/general-opd-diagnosis/general-opd-diagnosis.component';
+import { NcdCareDiagnosisComponent } from './case-record/general-case-record/diagnosis/ncd-care-diagnosis/ncd-care-diagnosis.component';
+import { NcdScreeningDiagnosisComponent } from './case-record/general-case-record/diagnosis/ncd-screening-diagnosis/ncd-screening-diagnosis.component';
+import { PncDiagnosisComponent } from './case-record/general-case-record/diagnosis/pnc-diagnosis/pnc-diagnosis.component';
+import { DoctorInvestigationsComponent } from './case-record/general-case-record/doctor-investigations/doctor-investigations.component';
+import { FindingsComponent } from './case-record/general-case-record/findings/findings.component';
+import { GeneralCaseRecordComponent } from './case-record/general-case-record/general-case-record.component';
+import { PrescriptionComponent } from './case-record/general-case-record/prescription/prescription.component';
+import { PreviousSignificiantFindingsComponent } from './case-record/general-case-record/previous-significiant-findings/previous-significiant-findings.component';
+import { PreviousVisitDetailsComponent } from './case-record/general-case-record/previous-visit-details/previous-visit-details.component';
+import { TestAndRadiologyComponent } from './case-record/general-case-record/test-and-radiology/test-and-radiology.component';
+import { ViewTestReportComponent } from './case-record/general-case-record/test-and-radiology/view-test-report/view-test-report.component';
+import { CancerCaseSheetComponent } from './case-sheet/cancer-case-sheet/cancer-case-sheet.component';
+import { CancerDoctorDiagnosisCaseSheetComponent } from './case-sheet/cancer-case-sheet/cancer-doctor-diagnosis-case-sheet/cancer-doctor-diagnosis-case-sheet.component';
+import { CancerExaminationCaseSheetComponent } from './case-sheet/cancer-case-sheet/cancer-examination-case-sheet/cancer-examination-case-sheet.component';
+import { CancerHistoryCaseSheetComponent } from './case-sheet/cancer-case-sheet/cancer-history-case-sheet/cancer-history-case-sheet.component';
+import { ImageToCanvasComponent } from './case-sheet/cancer-case-sheet/image-to-canvas/image-to-canvas.component';
+import { CaseSheetComponent } from './case-sheet/case-sheet.component';
+import { AncCaseSheetComponent } from './case-sheet/general-case-sheet/anc-case-sheet/anc-case-sheet.component';
+import { DoctorDiagnosisCaseSheetComponent } from './case-sheet/general-case-sheet/doctor-diagnosis-case-sheet/doctor-diagnosis-case-sheet.component';
+import { ExaminationCaseSheetComponent } from './case-sheet/general-case-sheet/examination-case-sheet/examination-case-sheet.component';
+import { GeneralCaseSheetComponent } from './case-sheet/general-case-sheet/general-case-sheet.component';
+import { HistoryCaseSheetComponent } from './case-sheet/general-case-sheet/history-case-sheet/history-case-sheet.component';
+import { PncCaseSheetComponent } from './case-sheet/general-case-sheet/pnc-case-sheet/pnc-case-sheet.component';
 
 @NgModule({
   imports: [
@@ -144,7 +180,6 @@ import { HistoryComponent } from './history/history.component';
   ],
   declarations: [
     NurseWorklistComponent,
-    // PrintPageSelectComponent,
     QuickConsultComponent,
     CancerExaminationComponent,
     GynecologicalExaminationComponent,
@@ -189,7 +224,6 @@ import { HistoryComponent } from './history/history.component';
     ObstetricFormulaComponent,
     VisitDetailsComponent,
     PatientVisitDetailsComponent,
-    // VisitCategoryComponent,
     ChiefComplaintsComponent,
     AdherenceComponent,
     TravelHistoryComponent,
@@ -200,59 +234,59 @@ import { HistoryComponent } from './history/history.component';
     HistoryComponent,
     ExaminationComponent,
     VitalsComponent,
-    // CaseRecordComponent,
+    CaseRecordComponent,
     PncComponent,
     NcdScreeningComponent,
     DashboardComponent,
     WorkareaComponent,
-    // CancerCaseRecordComponent,
-    // GeneralCaseRecordComponent,
-    // CancerReferComponent,
-    // GeneralReferComponent,
-    // CancerCaseSheetComponent,
-    // GeneralCaseSheetComponent,
-    // ReferComponent,
-    // PrintPageSelectComponent,
-    // PreviousVisitDetailsComponent,
-    // FindingsComponent,
-    // DiagnosisComponent,
-    // PrescriptionComponent,
-    // DoctorInvestigationsComponent,
-    // TestAndRadiologyComponent,
+    CancerCaseRecordComponent,
+    GeneralCaseRecordComponent,
+    CancerReferComponent,
+    GeneralReferComponent,
+    CancerCaseSheetComponent,
+    GeneralCaseSheetComponent,
+    ReferComponent,
+    PrintPageSelectComponent,
+    PreviousVisitDetailsComponent,
+    FindingsComponent,
+    DiagnosisComponent,
+    PrescriptionComponent,
+    DoctorInvestigationsComponent,
+    TestAndRadiologyComponent,
     RadiologistWorklistComponent,
     OncologistWorklistComponent,
-    // GeneralOpdDiagnosisComponent,
-    // AncDiagnosisComponent,
-    // CaseSheetComponent,
-    // NcdCareDiagnosisComponent,
-    // PncDiagnosisComponent,
-    // PreviousSignificiantFindingsComponent,
-    // ViewTestReportComponent,
-    // HistoryCaseSheetComponent,
-    // ExaminationCaseSheetComponent,
-    // AncCaseSheetComponent,
-    // PncCaseSheetComponent,
-    // DoctorDiagnosisCaseSheetComponent,
-    // ImageToCanvasComponent,
-    // CancerDoctorDiagnosisCaseSheetComponent,
-    // CancerHistoryCaseSheetComponent,
-    // CancerExaminationCaseSheetComponent,
-    // BeneficiaryMctsCallHistoryComponent,
-    // BeneficiaryPlatformHistoryComponent,
+    GeneralOpdDiagnosisComponent,
+    AncDiagnosisComponent,
+    CaseSheetComponent,
+    NcdCareDiagnosisComponent,
+    PncDiagnosisComponent,
+    PreviousSignificiantFindingsComponent,
+    ViewTestReportComponent,
+    HistoryCaseSheetComponent,
+    ExaminationCaseSheetComponent,
+    AncCaseSheetComponent,
+    PncCaseSheetComponent,
+    DoctorDiagnosisCaseSheetComponent,
+    ImageToCanvasComponent,
+    CancerDoctorDiagnosisCaseSheetComponent,
+    CancerHistoryCaseSheetComponent,
+    CancerExaminationCaseSheetComponent,
+    BeneficiaryMctsCallHistoryComponent,
+    BeneficiaryPlatformHistoryComponent,
     TcSpecialistWorklistComponent,
     DoctorTmWorklistWrapperComponent,
     TmFutureWorklistComponent,
-    // SchedulerComponent,
+    SchedulerComponent,
     TcSpecialistWorklistWrapperComponent,
     TcSpecialistFutureWorklistComponent,
     NurseWorklistWrapperComponent,
     NurseTmWorklistComponent,
     NurseTmFutureWorklistComponent,
-    // CovidDiagnosisComponent,
+    CovidDiagnosisComponent,
     IdrsComponent,
     PhysicalActivityHistoryComponent,
     FamilyHistoryNcdscreeningComponent,
-    // NcdScreeningDiagnosisComponent,
+    NcdScreeningDiagnosisComponent,
     NurseMmuTmReferredWorklistComponent,
     DiseaseconfirmationComponent,
     CovidVaccinationStatusComponent,

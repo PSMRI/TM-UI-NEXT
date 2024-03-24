@@ -430,8 +430,8 @@ export class GeneralPatientVitalsComponent
         if (vitalsData) {
           const temp = Object.assign(
             {},
-            vitalsData.benAnthropometryDetail,
-            vitalsData.benPhysicalVitalDetail,
+            vitalsData.data.benAnthropometryDetail,
+            vitalsData.data.benPhysicalVitalDetail,
           );
           this.patientVitalsForm.patchValue(temp);
           this.rbsResult = temp.rbsTestResult;

@@ -1,0 +1,173 @@
+<!-- {{ generalDiagnosisForm.value | json}} -->
+<div class="m-t-10" [formGroup]="generalDiagnosisForm">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <header class="mat-expansion-panel-header">
+        <h4 *ngIf="enableProvisionalDiag">
+          {{ current_language_set?.casesheet?.provisionalDiag }}*
+        </h4>
+        <h4 *ngIf="!enableProvisionalDiag">
+          {{ current_language_set?.casesheet?.provisionalDiag }}
+        </h4>
+      </header>
+      <ng-container formArrayName="provisionalDiagnosisList">
+        <div
+          *ngFor="
+            let diagnosis of getProvisionalDiagnosisList();
+            let i = index;
+            let isLast = last
+          "
+        >
+          <ng-container [formGroupName]="i">
+            <div class="col-6 m-t-10">
+              <mat-form-field class="input-full-width">
+                <input
+                  matInput
+                  allowText="inputFieldValidator"
+                  appDiagnosisSearch
+                  [diagnosisListForm]="diagnosis"
+                  name="viewProvisionalDiagnosisProvided"
+                  formControlName="viewProvisionalDiagnosisProvided"
+                  maxlength="100"
+                  minlength="3"
+                  [addedDiagnosis]="
+                    generalDiagnosisForm.value.provisionalDiagnosisList
+                  "
+                />
+                <mat-icon
+                  class="search-btn cursorPointer"
+                  matSuffix
+                  appDiagnosisSearch
+                  [diagnosisListForm]="diagnosis"
+                  [addedDiagnosis]="
+                    generalDiagnosisForm.value.provisionalDiagnosisList
+                  "
+                  >search</mat-icon
+                >
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-3 m-t-10">
+              <button
+                mat-mini-fab
+                type="button"
+                color="warn"
+                class="mat_warn_circle"
+                *ngIf="
+                  diagnosis.get('viewProvisionalDiagnosisProvided')?.disabled ||
+                  i !== 0 ||
+                  (i === 0 &&
+                    generalDiagnosisForm.get('provisionalDiagnosisList')?.value
+                      .viewProvisionalDiagnosisProvided !== null &&
+                    generalDiagnosisForm.get('provisionalDiagnosisList')?.value
+                      .viewProvisionalDiagnosisProvided !== '')
+                "
+                (click)="removeDiagnosisFromList(i, diagnosis)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+              <button
+                mat-mini-fab
+                type="button"
+                style="margin-right: 3px"
+                *ngIf="isLast"
+                [disabled]="checkProvisionalDiagnosisValidity(diagnosis)"
+                color="primary"
+                class="mat_blue_circle"
+                (click)="addDiagnosis()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-t-6">
+      <header class="mat-expansion-panel-header">
+        <h4>{{ current_language_set?.DiagnosisDetails?.specialistssdvice }}</h4>
+      </header>
+      <mat-form-field class="input-full-width">
+        <textarea
+          matInput
+          defaultNull
+          matTextareaAutosize
+          maxlength="300"
+          name="specialistAdvice"
+          formControlName="instruction"
+        >
+        </textarea>
+      </mat-form-field>
+    </div>
+    <div *ngIf="designation === 'TC Specialist'">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 m-t-20">
+        <header class="mat-expansion-panel-header">
+          <h4>{{ current_language_set?.finalDiagnosis }}*</h4>
+        </header>
+        <div class="col-xs-6 col-sm-6 align">
+          <label for="diabetesConfirmed">{{
+            current_language_set?.isDiabetesConfirmed
+          }}</label>
+        </div>
+        <div class="col-xs-6 col-sm-6 align" style="margin-left: -30px">
+          <mat-radio-group
+            name="diabetesConfirmed"
+            formControlName="diabetesConfirmed"
+            id="diabetesConfirmed"
+            (change)="
+              addToConfirmDisease(
+                this.generalDiagnosisForm.value.diabetesConfirmed
+              )
+            "
+            required
+          >
+            <mat-radio-button
+              color="primary"
+              [checked]="diabetesChecked"
+              [value]="true"
+              style="margin-left: 40px"
+              >{{ current_language_set?.common?.yes }}</mat-radio-button
+            >
+            <mat-radio-button
+              color="primary"
+              class="radio-btn"
+              [value]="false"
+              >{{ current_language_set?.common?.no }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <div class="col-xs-6 col-sm-6 align">
+          <mat-label>{{
+            current_language_set?.isHypertensionConfirmed
+          }}</mat-label>
+        </div>
+        <div class="col-xs-6 col-sm-6 align">
+          <mat-radio-group
+            name="hypertensionConfirmed"
+            formControlName="hypertensionConfirmed"
+            id="hypertensionConfirmed"
+            (change)="
+              addHyperTensionToConfirmDisease(
+                this.generalDiagnosisForm.value.hypertensionConfirmed
+              )
+            "
+            required
+          >
+            <mat-radio-button
+              color="primary"
+              [checked]="hyperTensionChecked"
+              style="margin-left: 10px"
+              [value]="true"
+              >{{ current_language_set?.common?.yes }}</mat-radio-button
+            >
+            <mat-radio-button
+              color="primary"
+              class="radio-btn"
+              [value]="false"
+              >{{ current_language_set?.common?.no }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

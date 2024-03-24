@@ -594,7 +594,7 @@
                   <h4>
                     {{
                       currentLanguageSet?.DiagnosisDetails
-                        ?.provisionaldiagnosis
+                        ?.viewProvisionalDiagnosisProvided
                     }}*
                   </h4>
                 </header>
@@ -616,7 +616,7 @@
                             allowText="inputFieldValidator"
                             appOpenModal
                             [diagnosisListForm]="diagnosis"
-                            formControlName="provisionalDiagnosis"
+                            formControlName="viewProvisionalDiagnosisProvided"
                             name="diagnosisProvided"
                             maxlength="100"
                             minlength="3"
@@ -669,10 +669,12 @@
                             (i === 0 &&
                               patientQuickConsultForm.get(
                                 'provisionalDiagnosisList'
-                              )?.value[i]?.provisionalDiagnosis !== null &&
+                              )?.value[i]?.viewProvisionalDiagnosisProvided !==
+                                null &&
                               patientQuickConsultForm.get(
                                 'provisionalDiagnosisList'
-                              )?.value[i]?.provisionalDiagnosis !== '')
+                              )?.value[i]?.viewProvisionalDiagnosisProvided !==
+                                '')
                           "
                           (click)="removeDiagnosisFromList(i, diagnosis)"
                         >

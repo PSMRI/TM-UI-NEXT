@@ -38,16 +38,16 @@ import { SetLanguageComponent } from '../../core/components/set-language.compone
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface Beneficary {
-  firstName: any;
-  lastName: any;
-  fatherName: any;
-  dob: any;
-  gender: any;
-  genderName: any;
-  govtIDtype: any;
-  govtIDvalue: any;
-  stateID: any;
-  districtID: any;
+  firstName: string;
+  lastName: string;
+  fatherName: string;
+  dob: string;
+  gender: string;
+  genderName: string;
+  govtIDtype: string;
+  govtIDvalue: string;
+  stateID: string;
+  districtID: string;
 }
 
 @Component({
@@ -71,7 +71,6 @@ export class SearchDialogComponent implements OnInit, DoCheck {
   today!: Date;
   languageComponent!: SetLanguageComponent;
   currentLanguageSet: any;
-  locations: any;
 
   newSearchForm!: FormGroup;
   maxDate = new Date();
@@ -188,12 +187,11 @@ export class SearchDialogComponent implements OnInit, DoCheck {
     this.location = JSON.parse(location);
     console.log(location, 'gotit');
     if (location) {
-      this.states = this.locations.stateMaster;
+      this.states = this.location.stateMaster;
       if (location.otherLoc) {
-        this.newSearchForm.controls['stateID'] =
-          this.locations.otherLoc.stateID;
+        this.newSearchForm.controls['stateID'] = this.location.otherLoc.stateID;
         this.newSearchForm.controls['districtID'] =
-          this.locations.otherLoc.districtList[0].districtID;
+          this.location.otherLoc.districtList[0].districtID;
         this.onStateChange();
       }
     }

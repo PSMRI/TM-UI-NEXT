@@ -117,6 +117,7 @@ export class VisitDetailsComponent implements OnInit, DoCheck {
 
   conditionCheck() {
     if (!this.mode) this.hideAllTab();
+    localStorage.setItem('visiCategoryANC', this.visitCategory);
     if (this.visitCategory === 'NCD screening') {
       this.enableFileSelection = true;
       this.showNcdScreeningVisit = true;

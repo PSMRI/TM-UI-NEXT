@@ -20,10 +20,13 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { Component, OnInit, Inject, DoCheck } from '@angular/core';
+import { Component, OnInit, Inject, DoCheck, ViewChild } from '@angular/core';
 import { HttpServiceService } from '../../services/http-service.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SetLanguageComponent } from '../set-language.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MasterdataService } from 'src/app/app-modules/nurse-doctor/shared/services';
 
 @Component({
   selector: 'app-diagnosis-search',
@@ -31,11 +34,15 @@ import { SetLanguageComponent } from '../set-language.component';
   styleUrls: ['./diagnosis-search.component.css'],
 })
 export class DiagnosisSearchComponent implements OnInit, DoCheck {
-  searchTerm!: string;
+  searchTerm: any;
   // diagnosis$: Observable<any>;
   diagnosis$ = [];
   pageCount: any;
   selectedDiagnosisList: any = [];
+  displayedColumns: any = ['ConceptID', 'term', 'empty'];
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  diagnosis = new MatTableDataSource<any>();
+
   currentPage = 1;
   pager: any = {
     totalItems: 0,
@@ -52,13 +59,12 @@ export class DiagnosisSearchComponent implements OnInit, DoCheck {
   constructor(
     @Inject(MAT_DIALOG_DATA) public input: any,
     public dialogRef: MatDialogRef<DiagnosisSearchComponent>,
-    // private masterdataService: MasterdataService,
+    private masterdataService: MasterdataService,
     public httpServiceService: HttpServiceService,
   ) {}
 
   ngOnInit() {
     this.assignSelectedLanguage();
-    //this.httpServiceService.currentLangugae$.subscribe(response =>this.currentLanguageSet = response);
     this.search(this.input.searchTerm, 0);
     if (this.input.diagonasisType)
       this.placeHolderSearch = this.input.diagonasisType;
@@ -84,6 +90,29 @@ export class DiagnosisSearchComponent implements OnInit, DoCheck {
       item.selected = false;
     }
   }
+
+  selectedDiagnosis(item: any) {
+    const addedDiagnosis = this.input.addedDiagnosis;
+    const temp = addedDiagnosis.filter(
+      (diagnosis: any) => diagnosis.conceptID === item.conceptID,
+    );
+    if (temp.length > 0) return true;
+    else {
+      const currentSelection = this.selectedDiagnosisList.filter(
+        (diagnosis: any) => diagnosis.conceptID === item.conceptID,
+      );
+      if (currentSelection.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  submitDiagnosisList() {
+    this.dialogRef.close(this.selectedDiagnosisList);
+  }
+
   checkSelectedDiagnosis(item: any) {
     const addedDiagnosis = this.input.addedDiagnosis;
     if (addedDiagnosis.length > 1) {
@@ -118,19 +147,26 @@ export class DiagnosisSearchComponent implements OnInit, DoCheck {
   }
   disableSelection(item: any) {
     const addedDiagnosis = this.input.addedDiagnosis;
-    if (addedDiagnosis.length > 1) {
-      const temp = addedDiagnosis.filter(
+    const temp = addedDiagnosis.filter(
+      (diagnosis: any) => diagnosis.conceptID === item.conceptID,
+    );
+    if (temp.length > 0) {
+      return true;
+    } else {
+      const currentSelection = this.selectedDiagnosisList.filter(
         (diagnosis: any) => diagnosis.conceptID === item.conceptID,
       );
-      if (temp.length > 0) {
-        return true;
+      const selectedDiagnosislength =
+        this.input.addedDiagnosis.length +
+        this.selectedDiagnosisList.length -
+        1;
+      if (currentSelection.length > 0) {
+        return false;
+      } else if (selectedDiagnosislength < 30) {
+        return false;
       } else {
-        const enableCurrent = this.enableCurrentSelection(item);
-        return enableCurrent;
+        return true;
       }
-    } else {
-      const enableCurrent = this.enableCurrentSelection(item);
-      return enableCurrent;
     }
   }
   enableCurrentSelection(item: any) {
@@ -160,36 +196,40 @@ export class DiagnosisSearchComponent implements OnInit, DoCheck {
     }
   }
 
-  submitDiagnosisList() {
-    this.dialogRef.close(this.selectedDiagnosisList);
-  }
   showProgressBar = false;
   search(term: string, pageNo: any): void {
     if (term.length > 2) {
       this.showProgressBar = true;
-      // this.masterdataService.searchDiagnosisBasedOnPageNo(term, pageNo).subscribe((res: any) => {
-      //   if (res.statusCode === 200) {
-      //     this.showProgressBar = false;
-      //     if (res.data && res.data.sctMaster.length > 0) {
-      //       this.showProgressBar = true;
-      //       this.diagnosis$ = res.data.sctMaster;
-      //       if (pageNo === 0) {
-      //         this.pageCount = res.data.pageCount;
-      //       }
-      //       this.showProgressBar = false;
-      //     }
-      //   } else {
-      //     this.resetData();
-      //     this.showProgressBar = false;
-      //   }
-      // }, (err: any) => {
-      //   this.resetData();
-      //   this.showProgressBar = false;
-      // })
+      this.masterdataService
+        .searchDiagnosisBasedOnPageNo(term, pageNo)
+        .subscribe(
+          (res: any) => {
+            if (res.statusCode === 200) {
+              this.showProgressBar = false;
+              if (res.data && res.data.sctMaster.length > 0) {
+                this.showProgressBar = true;
+                this.diagnosis.data = res.data.sctMaster;
+                this.diagnosis.paginator = this.paginator;
+                if (pageNo === 0) {
+                  this.pageCount = res.data.pageCount;
+                }
+                this.showProgressBar = false;
+              }
+            } else {
+              this.resetData();
+              this.showProgressBar = false;
+            }
+          },
+          (err: any) => {
+            this.resetData();
+            this.showProgressBar = false;
+          },
+        );
     }
   }
 
   resetData() {
-    this.diagnosis$ = [];
+    this.diagnosis.data = [];
+    this.diagnosis.paginator = this.paginator;
   }
 }

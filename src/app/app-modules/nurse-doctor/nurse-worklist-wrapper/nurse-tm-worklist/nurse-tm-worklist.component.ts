@@ -38,6 +38,7 @@ import { HttpServiceService } from 'src/app/app-modules/core/services/http-servi
 import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-language.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SchedulerComponent } from '../../scheduler/scheduler.component';
 
 @Component({
   selector: 'app-nurse-tm-worklist',
@@ -79,6 +80,7 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
     private beneficiaryDetailsService: BeneficiaryDetailsService,
     public httpServiceService: HttpServiceService,
     private doctorService: DoctorService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -412,14 +414,16 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   openScheduler(beneficiary: any) {
-    // let mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(SchedulerComponent, {
-    // })
-    // mdDialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.scheduleTC(beneficiary, result.tmSlot);
-    //   }
-    //   console.log(JSON.stringify(result, null, 4));
-    // })
+    const mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(
+      SchedulerComponent,
+      {},
+    );
+    mdDialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.scheduleTC(beneficiary, result.tmSlot);
+      }
+      console.log(JSON.stringify(result, null, 4));
+    });
   }
   scheduleTC(beneficiary: any, tcRequest: any) {
     const scedulerRequest = {

@@ -37,6 +37,8 @@ import {
 import { SetLanguageComponent } from '../components/set-language.component';
 import { HttpServiceService } from '../services/http-service.service';
 import { MatDialog } from '@angular/material/dialog';
+import { GeneralUtils } from '../../nurse-doctor/shared/utility';
+import { DiagnosisSearchComponent } from '../components/diagnosis-search/diagnosis-search.component';
 @Directive({
   selector: '[appConfirmatoryDiagnosis]',
 })
@@ -56,7 +58,7 @@ export class ConfirmatoryDiagnosisDirective implements OnInit, DoCheck {
   @HostListener('click') onClick() {
     if (this.el.nativeElement.nodeName !== 'INPUT') this.openDialog();
   }
-  // utils = new GeneralUtils(this.fb);
+  utils = new GeneralUtils(this.fb);
 
   constructor(
     private fb: FormBuilder,
@@ -72,39 +74,39 @@ export class ConfirmatoryDiagnosisDirective implements OnInit, DoCheck {
   openDialog(): void {
     const searchTerm = this.diagnosisListForm.value.confirmatoryDiagnosis;
     if (searchTerm.length > 2) {
-      // const dialogRef = this.dialog.open(ProvisionalSearchComponent, {
-      //   width: '800px',
-      //   // panelClass: 'fit-screen',
-      //   data: {
-      //     searchTerm: searchTerm,
-      //     addedDiagnosis: this.previousSelected,
-      //     diagonasisType: this.currentLanguageSet.confirmDiagnosis,
-      //   },
-      // });
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('result', result);
-      //   if (result) {
-      //     const formArray = this.diagnosisListForm.parent as FormArray;
-      //     const len = formArray.length;
-      //     for (let i = len - 1, j = 0; i < len + result.length - 1; i++, j++) {
-      //       (<FormGroup>formArray.at(i)).controls['term'].setValue(
-      //         result[j].term
-      //       );
-      //       (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(
-      //         result[j].conceptID
-      //       );
-      //       (<FormGroup>formArray.at(i)).controls[
-      //         'confirmatoryDiagnosis'
-      //       ].setValue(result[j].term);
-      //       (<FormGroup>formArray.at(i)).controls[
-      //         'confirmatoryDiagnosis'
-      //       ].disable();
-      //       this.diagnosisListForm.markAsDirty();
-      //       if (formArray.length < len + result.length - 1)
-      //         formArray.push(this.utils.initConfirmatoryDiagnosisList());
-      //     }
-      //   }
-      // });
+      const dialogRef = this.dialog.open(DiagnosisSearchComponent, {
+        width: '800px',
+        // panelClass: 'fit-screen',
+        data: {
+          searchTerm: searchTerm,
+          addedDiagnosis: this.previousSelected,
+          diagonasisType: this.currentLanguageSet.confirmDiagnosis,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('result', result);
+        if (result) {
+          const formArray = this.diagnosisListForm.parent as FormArray;
+          const len = formArray.length;
+          for (let i = len - 1, j = 0; i < len + result.length - 1; i++, j++) {
+            (<FormGroup>formArray.at(i)).controls['term'].setValue(
+              result[j].term,
+            );
+            (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(
+              result[j].conceptID,
+            );
+            (<FormGroup>formArray.at(i)).controls[
+              'confirmatoryDiagnosis'
+            ].setValue(result[j].term);
+            (<FormGroup>formArray.at(i)).controls[
+              'confirmatoryDiagnosis'
+            ].disable();
+            this.diagnosisListForm.markAsDirty();
+            if (formArray.length < len + result.length - 1)
+              formArray.push(this.utils.initConfirmatoryDiagnosisList());
+          }
+        }
+      });
     }
   }
   ngDoCheck() {

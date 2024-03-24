@@ -53,11 +53,12 @@ import { RegistrarService } from '../../registrar/shared/services/registrar.serv
 import { Observable, Subscription, of } from 'rxjs';
 import { HttpServiceService } from '../../core/services/http-service.service';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SetLanguageComponent } from '../../core/components/set-language.component';
 import { environment } from 'src/environments/environment';
 import { HealthIdDisplayModalComponent } from '../../core/components/health-id-display-modal/health-id-display-modal.component';
 import { OpenPreviousVisitDetailsComponent } from '../../core/components/open-previous-visit-details/open-previous-visit-details.component';
+import { SchedulerComponent } from '../scheduler/scheduler.component';
 
 @Component({
   selector: 'app-workarea',
@@ -152,6 +153,8 @@ export class WorkareaComponent
   patientHistoryForm!: FormGroup;
   patientQuickConsultForm!: FormGroup;
   idrsScreeningForm!: FormGroup;
+  patientCaseRecordForm!: FormGroup;
+  patientReferForm!: FormGroup;
 
   constructor(
     private router: Router,
@@ -291,7 +294,7 @@ export class WorkareaComponent
           console.log(
             'here for submit' + this.current_language_set.common.submit,
           );
-        } else if (this.specialistFlag === 3) {
+        } else if (this.specialistFlag === '3') {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.update;
           this.isDoctorUpdate = true;
@@ -301,7 +304,7 @@ export class WorkareaComponent
         }
       } else {
         this.isDoctorUpdate = true;
-        if (this.specialistFlag === 1) {
+        if (this.specialistFlag === '1') {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.submit;
         } else {
@@ -314,7 +317,7 @@ export class WorkareaComponent
       }
     } else {
       this.isSpecialist = false;
-      if (this.doctorFlag === 1) {
+      if (this.doctorFlag === '1') {
         this.isDoctorSave = true;
         this.doctorSaveAndTCSave = this.current_language_set.common.submit;
       } else {
@@ -434,10 +437,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new CancerUtils(this.fb).createCancerDiagnosisForm(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchCancerFindings();
 
@@ -488,10 +497,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createGeneralCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchGeneralFinding();
 
@@ -541,6 +556,9 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createNCDScreeningCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patchGeneralFinding();
           this.showCaseRecord = true;
           this.visitMode = String(mode);
@@ -552,6 +570,9 @@ export class WorkareaComponent
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
           this.showCaseRecord = true;
           this.showRefer = true;
 
@@ -602,10 +623,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createPNCCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchGeneralFinding();
 
@@ -667,10 +694,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createANCCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchGeneralFinding();
           this.getANCDiagnosis();
@@ -715,10 +748,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createCovidCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchGeneralFinding();
 
@@ -760,10 +799,16 @@ export class WorkareaComponent
             'patientCaseRecordForm',
             new GeneralUtils(this.fb).createNCDCareCaseRecord(),
           );
+          this.patientCaseRecordForm = this.patientMedicalForm.get(
+            'patientCaseRecordForm',
+          ) as FormGroup;
           this.patientMedicalForm.addControl(
             'patientReferForm',
             new CancerUtils(this.fb).createCancerReferForm(),
           );
+          this.patientReferForm = this.patientMedicalForm.get(
+            'patientReferForm',
+          ) as FormGroup;
 
           this.patchGeneralFinding();
 
@@ -790,7 +835,7 @@ export class WorkareaComponent
     this.patientMedicalForm.removeControl('patientANCForm');
     this.patientMedicalForm.removeControl('patientCaseRecordForm');
     this.patientMedicalForm.removeControl('patientReferForm');
-    this.patientMedicalForm.removeControl('NCDScreeningForm');
+    // this.patientMedicalForm.removeControl('NCDScreeningForm');
     this.patientMedicalForm.removeControl('idrsScreeningForm');
 
     this.showQuickConsult = false;
@@ -802,8 +847,6 @@ export class WorkareaComponent
     this.showPNC = false;
     this.showCaseRecord = false;
     this.showRefer = false;
-
-    this.changeDetectorRef.detectChanges();
   }
 
   submitPatientMedicalDetailsForm(medicalForm: any) {
@@ -1136,6 +1179,7 @@ export class WorkareaComponent
     if (this.checkCancerRequiredData(medicalForm)) {
       // check if the form is valid
       const imageCoordiantes = this.getImageCoordinates(medicalForm);
+      this.showProgressBar = false;
 
       this.confirmationService
         .confirm(
@@ -1369,7 +1413,8 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -1477,7 +1522,8 @@ export class WorkareaComponent
 
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -1549,7 +1595,8 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -1595,7 +1642,8 @@ export class WorkareaComponent
 
       if (diagForm1.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
     }
@@ -1609,7 +1657,8 @@ export class WorkareaComponent
       const diagForm1 = <FormGroup>diagForm.controls['diagnosisForm'];
       if (diagForm1.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
     }
@@ -1982,7 +2031,8 @@ export class WorkareaComponent
 
       if (diagForm.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
     }
@@ -1997,7 +2047,8 @@ export class WorkareaComponent
 
       if (diagForm.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
     }
@@ -2259,7 +2310,8 @@ export class WorkareaComponent
         this.enableProvisionalDiag === true
       ) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -2394,7 +2446,8 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -2426,7 +2479,8 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+          this.current_language_set.DiagnosisDetails
+            .viewProvisionalDiagnosisProvided,
         );
       }
 
@@ -2451,7 +2505,8 @@ export class WorkareaComponent
 
     if (form.controls['provisionalDiagnosisList'].errors) {
       required.push(
-        this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
+        this.current_language_set.DiagnosisDetails
+          .viewProvisionalDiagnosisProvided,
       );
     }
 
@@ -3162,9 +3217,13 @@ export class WorkareaComponent
           (res: any) => {
             if (res.statusCode === 200 && res.data !== null) {
               if (this.isSpecialist) {
+                this.patientMedicalForm.reset();
                 this.linkCareContextBasedOnSpecialistScheduled();
+                this.confirmationService.alert(res.data.response, 'success');
+                this.router.navigate(['/nurse-doctor/doctor-worklist']);
               } else {
                 this.linkCareContextBasedOnTestsPrescribed();
+                this.confirmationService.alert(res.errorMessage, 'error');
               }
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
@@ -3640,35 +3699,35 @@ export class WorkareaComponent
   schedulerFormData: any;
   schedulerButton: any;
   openScheduler() {
-    // let mdDialogRef: MatDialogRef<SchedulerComponent> = this.mdDialog.open(
-    //   SchedulerComponent,
-    //   {
-    //     data: this.schedulerFormData,
-    //   }
-    // );
-    // mdDialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     console.log("result", result);
-    //     if (result.clear) {
-    //       this.schedulerFormData = null;
-    //       this.schedulerData = null;
-    //       this.schedulerButton =
-    //         this.current_language_set.common.scheduleforTM +
-    //         " " +
-    //         this.serviceType;
-    //     } else if (
-    //       result.tmSlot &&
-    //       result.tmSlot !== null &&
-    //       result.tmSlot !== undefined
-    //     ) {
-    //       this.schedulerFormData = result;
-    //       this.schedulerData = this.schedulerFormData.tmSlot;
-    //       this.schedulerButton = "View " + this.serviceType + " Schedule";
-    //     }
-    //   } else {
-    //     console.log("result", result);
-    //   }
-    // });
+    const mdDialogRef: MatDialogRef<SchedulerComponent> = this.mdDialog.open(
+      SchedulerComponent,
+      {
+        data: this.schedulerFormData,
+      },
+    );
+    mdDialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('result', result);
+        if (result.clear) {
+          this.schedulerFormData = null;
+          this.schedulerData = null;
+          this.schedulerButton =
+            this.current_language_set.common.scheduleforTM +
+            ' ' +
+            this.serviceType;
+        } else if (
+          result.tmSlot &&
+          result.tmSlot !== null &&
+          result.tmSlot !== undefined
+        ) {
+          this.schedulerFormData = result;
+          this.schedulerData = this.schedulerFormData.tmSlot;
+          this.schedulerButton = 'View ' + this.serviceType + ' Schedule';
+        }
+      } else {
+        console.log('result', result);
+      }
+    });
   }
 
   startTC() {

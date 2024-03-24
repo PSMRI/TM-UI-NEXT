@@ -37,6 +37,8 @@ import {
 import { SetLanguageComponent } from '../components/set-language.component';
 import { HttpServiceService } from '../services/http-service.service';
 import { MatDialog } from '@angular/material/dialog';
+import { GeneralUtils } from '../../nurse-doctor/shared/utility';
+import { DiagnosisSearchComponent } from '../components/diagnosis-search/diagnosis-search.component';
 
 @Directive({
   selector: '[appOpenModal]',
@@ -57,7 +59,7 @@ export class OpenModalDirective implements OnInit, DoCheck {
     if (this.el.nativeElement.nodeName !== 'INPUT') this.openDialog();
   }
 
-  // utils = new GeneralUtils(this.fb);
+  utils = new GeneralUtils(this.fb);
 
   constructor(
     private fb: FormBuilder,
@@ -73,39 +75,39 @@ export class OpenModalDirective implements OnInit, DoCheck {
   openDialog(): void {
     const searchTerm = this.diagnosisListForm.value.provisionalDiagnosis;
     if (searchTerm.length > 2) {
-      // const dialogRef = this.dialog.open(ProvisionalSearchComponent, {
-      //   width: '800px',
-      //   hasBackdrop: false,
-      //   data: {
-      //     searchTerm: searchTerm,
-      //     addedDiagnosis: this.previousSelected,
-      //     diagonasisType:
-      //       this.currentLanguageSet.DiagnosisDetails.provisionaldiagnosis,
-      //   },
-      // });
-      // dialogRef.afterClosed().subscribe(result => {
-      //   if (result) {
-      //     const formArray = this.diagnosisListForm.parent as FormArray;
-      //     const len = formArray.length;
-      //     for (let i = len - 1, j = 0; i < len + result.length - 1; i++, j++) {
-      //       (<FormGroup>formArray.at(i)).controls['term'].setValue(
-      //         result[j].term
-      //       );
-      //       (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(
-      //         result[j].conceptID
-      //       );
-      //       (<FormGroup>formArray.at(i)).controls[
-      //         'provisionalDiagnosis'
-      //       ].setValue(result[j].term);
-      //       (<FormGroup>formArray.at(i)).controls[
-      //         'provisionalDiagnosis'
-      //       ].disable();
-      //       this.diagnosisListForm.markAsDirty();
-      //       if (formArray.length < len + result.length - 1)
-      //         formArray.push(this.utils.initProvisionalDiagnosisList());
-      //     }
-      //   }
-      // });
+      const dialogRef = this.dialog.open(DiagnosisSearchComponent, {
+        width: '800px',
+        hasBackdrop: false,
+        data: {
+          searchTerm: searchTerm,
+          addedDiagnosis: this.previousSelected,
+          diagonasisType:
+            this.currentLanguageSet.DiagnosisDetails.provisionaldiagnosis,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          const formArray = this.diagnosisListForm.parent as FormArray;
+          const len = formArray.length;
+          for (let i = len - 1, j = 0; i < len + result.length - 1; i++, j++) {
+            (<FormGroup>formArray.at(i)).controls['term'].setValue(
+              result[j].term,
+            );
+            (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(
+              result[j].conceptID,
+            );
+            (<FormGroup>formArray.at(i)).controls[
+              'provisionalDiagnosis'
+            ].setValue(result[j].term);
+            (<FormGroup>formArray.at(i)).controls[
+              'provisionalDiagnosis'
+            ].disable();
+            this.diagnosisListForm.markAsDirty();
+            if (formArray.length < len + result.length - 1)
+              formArray.push(this.utils.initProvisionalDiagnosisList());
+          }
+        }
+      });
     }
   }
   ngDoCheck() {

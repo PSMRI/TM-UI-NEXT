@@ -21,9 +21,15 @@
  */
 
 import { Directive, HostListener, Input, ElementRef } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
 import { DiagnosisSearchComponent } from '../components/diagnosis-search/diagnosis-search.component';
 import { MatDialog } from '@angular/material/dialog';
+import { QuickConsultUtils } from '../../nurse-doctor/shared/utility';
 
 @Directive({
   selector: '[appDiagnosisSearch]',
@@ -33,7 +39,7 @@ export class DiagnosisSearchDirective {
   addedDiagnosis: any;
 
   @Input()
-  diagnosisListForm!: FormGroup;
+  diagnosisListForm!: AbstractControl<any, any>;
 
   @HostListener('keyup.enter') onKeyDown() {
     this.openDialog();
@@ -42,7 +48,7 @@ export class DiagnosisSearchDirective {
   @HostListener('click') onClick() {
     if (this.el.nativeElement.nodeName !== 'INPUT') this.openDialog();
   }
-  // utils = new QuickConsultUtils(this.fb);
+  utils = new QuickConsultUtils(this.fb);
 
   constructor(
     private fb: FormBuilder,
@@ -70,15 +76,23 @@ export class DiagnosisSearchDirective {
         if (result) {
           const formArray = this.diagnosisListForm.parent as FormArray;
           const len = formArray.length;
-          // for (let i = len - 1, j = 0; i < len + result.length - 1; i++ , j++) {
-          //     (<FormGroup>formArray.at(i)).controls['term'].setValue(result[j].term);
-          //     (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(result[j].conceptID);
-          //     (<FormGroup>formArray.at(i)).controls['viewProvisionalDiagnosisProvided'].setValue(result[j].term);
-          //     (<FormGroup>formArray.at(i)).controls['viewProvisionalDiagnosisProvided'].disable();
-          //     this.diagnosisListForm.markAsDirty();
-          //     if (formArray.length < len + result.length - 1)
-          //         formArray.push(this.utils.initProvisionalDiagnosisList());
-          // }
+          for (let i = len - 1, j = 0; i < len + result.length - 1; i++, j++) {
+            (<FormGroup>formArray.at(i)).controls['term'].setValue(
+              result[j].term,
+            );
+            (<FormGroup>formArray.at(i)).controls['conceptID'].setValue(
+              result[j].conceptID,
+            );
+            (<FormGroup>formArray.at(i)).controls[
+              'viewProvisionalDiagnosisProvided'
+            ].setValue(result[j].term);
+            (<FormGroup>formArray.at(i)).controls[
+              'viewProvisionalDiagnosisProvided'
+            ].disable();
+            this.diagnosisListForm.markAsDirty();
+            if (formArray.length < len + result.length - 1)
+              formArray.push(this.utils.initProvisionalDiagnosisList());
+          }
         }
       });
     }

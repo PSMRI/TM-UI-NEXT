@@ -1,0 +1,133 @@
+<div class="container" *ngIf="!hideBack">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="pull-right mat_blue"
+          (click)="downloadCasesheet()"
+        >
+          {{ current_language_set?.casesheet?.print }}
+        </button>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="pull-left mat_blue"
+          (click)="goBack()"
+        >
+          {{ current_language_set?.common?.back }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 button_postion">
+  <div>
+    <button
+      mat-mini-fab
+      matTooltip="{{ current_language_set?.casesheet?.caseComponent }}"
+      matTooltipPosition="left"
+      style="margin-bottom: 5px"
+      matTooltipClass="iemr-tooltip"
+      class="example-fab select non-printable mat_blue_circle"
+      color="primary"
+      (click)="selectPrintPage()"
+    >
+      <mat-icon>view_module</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button
+      mat-mini-fab
+      matTooltip="{{ current_language_set?.casesheet?.goTop }}"
+      matTooltipPosition="left"
+      style="margin-bottom: 5px"
+      class="example-fab upward non-printable mat_blue_circle"
+      color="primary"
+      (click)="goToTop()"
+      *ngIf="!previous"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button
+      mat-mini-fab
+      matTooltip="{{ current_language_set?.casesheet?.printCaseheet }}"
+      matTooltipPosition="left"
+      class="example-fab print non-printable mat_blue_circle"
+      color="primary"
+      style="margin-bottom: 5px"
+      (click)="downloadCasesheet()"
+      *ngIf="!previous"
+    >
+      <mat-icon>print</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button
+      mat-mini-fab
+      matTooltip="{{ current_language_set?.casesheet?.workList }}"
+      matTooltipPosition="left"
+      class="example-fab back non-printable mat_blue_circle"
+      style="margin-bottom: 5px"
+      color="primary"
+      (click)="goBack()"
+      *ngIf="!hideBack"
+    >
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div style="margin-top: 20px">
+  <app-doctor-diagnosis-case-sheet
+    [printPagePreviewSelect]="printPagePreviewSelect"
+    [casesheetData]="caseSheetData"
+    [previous]="previous"
+  ></app-doctor-diagnosis-case-sheet>
+  <div class="page-break" *ngIf="visitCategory !== 'General OPD (QC)'"></div>
+  <ng-container *ngIf="printPagePreviewSelect?.caseSheetANC">
+    <app-anc-case-sheet
+      *ngIf="visitCategory === 'ANC'"
+      [caseSheetData]="caseSheetData"
+      [previous]="previous"
+    ></app-anc-case-sheet>
+    <div class="page-break"></div>
+  </ng-container>
+  <ng-container *ngIf="printPagePreviewSelect?.caseSheetPNC">
+    <app-pnc-case-sheet
+      *ngIf="visitCategory === 'PNC'"
+      [caseSheetData]="caseSheetData"
+      [previous]="previous"
+    ></app-pnc-case-sheet>
+    <div class="page-break"></div>
+  </ng-container>
+  <ng-container *ngIf="printPagePreviewSelect?.caseSheetHistory">
+    <app-history-case-sheet
+      *ngIf="visitCategory !== 'General OPD (QC)'"
+      [caseSheetData]="caseSheetData"
+      [previous]="previous"
+    ></app-history-case-sheet>
+    <div class="page-break"></div>
+  </ng-container>
+  <ng-container *ngIf="printPagePreviewSelect?.caseSheetExamination">
+    <app-examination-case-sheet
+      *ngIf="
+        visitCategory !== 'NCD care' &&
+        visitCategory !== 'General OPD (QC)' &&
+        visitCategory !== 'NCD screening' &&
+        visitCategory !== 'COVID-19 Screening'
+      "
+      [casesheetData]="caseSheetData"
+      [previous]="previous"
+    ></app-examination-case-sheet>
+  </ng-container>
+</div>

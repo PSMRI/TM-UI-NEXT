@@ -1,7 +1,7 @@
 <!-- {{patientVisitDetailsForm.value | json}} -->
 
 <div class="row m-t-20" [formGroup]="patientVisitDetailsForm">
-  <ng-container
+  <!-- <ng-container
     *ngIf="cbacData !== undefined && cbacData !== null && cbacData.length > 0"
   >
     <div
@@ -24,12 +24,12 @@
     >
       Please perform the necessary examinations to confirm.
     </div>
-  </ng-container>
+  </ng-container> -->
   <div
     class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box"
     *ngIf="mode?.toLowerCase() === 'view'"
   >
-    <mat-form-field class="input-full-width">
+    <mat-form-field class="input-full-width mat_form_field_width">
       <mat-label class="mat-label-text">{{
         currentLanguageSet?.Reports?.visitcode
       }}</mat-label>
@@ -38,7 +38,7 @@
   </div>
 
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-    <mat-form-field class="input-full-width">
+    <mat-form-field class="input-full-width mat_form_field_width">
       <mat-label class="mat-label-text">{{
         currentLanguageSet?.nurseData?.visitDetailsForm?.reasonForVisit
       }}</mat-label>
@@ -66,7 +66,7 @@
     class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box"
     *ngIf="patientVisitDetailsForm!.controls['visitReason']?.value"
   >
-    <mat-form-field class="input-full-width">
+    <mat-form-field class="input-full-width mat_form_field_width">
       <mat-label class="mat-label-text">{{
         currentLanguageSet?.nurseData?.visitDetailsForm?.visitCategory
       }}</mat-label>
@@ -101,26 +101,28 @@
       patientVisitDetailsForm!.controls['visitCategory']?.value !== 'PNC'
     "
   >
-    <mat-label class="mat-label-text">{{
-      currentLanguageSet?.nurseData?.visitDetailsForm?.pregnancyStatus
-    }}</mat-label>
-    <mat-select
-      matInput
-      class="input-full-width"
-      id="pregnancyStatus"
-      name="pregnancyStatus"
-      formControlName="pregnancyStatus"
-      [attr.readonly]="
-        patientVisitDetailsForm.controls['visitCategory'].value === 'ANC'
-      "
-    >
-      <mat-option
-        *ngFor="let pregnancyStatus of templatePregnancyStatus"
-        [value]="pregnancyStatus"
+    <mat-form-field class="mat_form_field_width">
+      <mat-label class="mat-label-text">{{
+        currentLanguageSet?.nurseData?.visitDetailsForm?.pregnancyStatus
+      }}</mat-label>
+      <mat-select
+        matInput
+        class="input-full-width"
+        id="pregnancyStatus"
+        name="pregnancyStatus"
+        formControlName="pregnancyStatus"
+        [attr.readonly]="
+          patientVisitDetailsForm.controls['visitCategory'].value === 'ANC'
+        "
       >
-        {{ pregnancyStatus }}
-      </mat-option>
-    </mat-select>
+        <mat-option
+          *ngFor="let pregnancyStatus of templatePregnancyStatus"
+          [value]="pregnancyStatus"
+        >
+          {{ pregnancyStatus }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div
@@ -131,7 +133,7 @@
       patientVisitDetailsForm!.controls['visitCategory']?.value !== 'PNC'
     "
   >
-    <mat-form-field class="input-full-width">
+    <mat-form-field class="input-full-width mat_form_field_width">
       <mat-label class="mat-label-text">{{
         currentLanguageSet?.nurseData?.visitDetailsForm?.MCTSOrRCHID
       }}</mat-label>

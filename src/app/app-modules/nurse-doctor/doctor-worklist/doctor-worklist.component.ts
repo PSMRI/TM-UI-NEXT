@@ -24,7 +24,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  Input,
   ViewChild,
   DoCheck,
 } from '@angular/core';
@@ -39,6 +38,8 @@ import { SetLanguageComponent } from '../../core/components/set-language.compone
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SchedulerComponent } from '../scheduler/scheduler.component';
 
 @Component({
   selector: 'app-doctor-worklist',
@@ -81,6 +82,7 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
     public httpServiceService: HttpServiceService,
     private beneficiaryDetailsService: BeneficiaryDetailsService,
     private doctorService: DoctorService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -154,7 +156,6 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
           const benlist = this.loadDataToBenList(data.data);
           this.beneficiaryList = benlist;
           this.filteredBeneficiaryList = benlist;
-          this.dataSource.data = [];
           this.dataSource.data = benlist;
           this.dataSource.paginator = this.paginator;
           this.dataSource.data.forEach((sectionCount: any, index: number) => {
@@ -434,7 +435,7 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
     }
   }
 
-  toggleArrivalStatus(evt: any, benFlowID: any, index: any) {
+  toggleArrivalStatus(evt: any, benFlowID: any) {
     let message: string;
     if (evt.checked) {
       message = this.currentLanguageSet.alerts.info.beneficiaryArrive;
@@ -497,7 +498,7 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
               );
           }
         } else {
-          this.pagedList[index].benArrivedFlag = !evt.checked;
+          // this.pagedList[index].benArrivedFlag = !evt.checked;
         }
       });
 
@@ -614,14 +615,16 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
       });
   }
   openScheduler(beneficiary: any) {
-    // let mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(SchedulerComponent, {
-    // })
-    // mdDialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.scheduleTC(beneficiary, result.tmSlot);
-    //   }
-    //   console.log(JSON.stringify(result, null, 4));
-    // })
+    const mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(
+      SchedulerComponent,
+      {},
+    );
+    mdDialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.scheduleTC(beneficiary, result.tmSlot);
+      }
+      console.log(JSON.stringify(result, null, 4));
+    });
   }
   scheduleTC(beneficiary: any, tcRequest: any) {
     const scedulerRequest = {

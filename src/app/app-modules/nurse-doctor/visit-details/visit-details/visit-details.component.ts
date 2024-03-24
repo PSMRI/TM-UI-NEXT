@@ -40,7 +40,7 @@ import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-la
   styleUrls: ['./visit-details.component.css'],
 })
 export class PatientVisitDetailsComponent
-  implements OnInit, OnDestroy, OnChanges, OnDestroy, DoCheck
+  implements OnInit, OnDestroy, OnChanges, DoCheck
 {
   @Input()
   patientVisitDetailsForm!: FormGroup;
@@ -86,6 +86,7 @@ export class PatientVisitDetailsComponent
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.disableVisit = true;
+      console.log('disable Visit', this.disableVisit);
       this.getVisitDetails(visitID, benRegID);
     }
     const specialistFlagString = localStorage.getItem('specialistFlag');

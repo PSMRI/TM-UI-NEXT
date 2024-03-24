@@ -179,15 +179,18 @@
                               >
                                 <ng-container
                                   *ngFor="
-                                    let provisionalDiagnosis of visit
+                                    let viewProvisionalDiagnosisProvided of visit
                                       .benPreviousData?.doctorData?.diagnosis
                                       ?.provisionalDiagnosisList
                                   "
                                 >
                                   <ng-container
-                                    *ngIf="provisionalDiagnosis.term !== ''"
+                                    *ngIf="
+                                      viewProvisionalDiagnosisProvided.term !==
+                                      ''
+                                    "
                                   >
-                                    {{ provisionalDiagnosis.term }},
+                                    {{ viewProvisionalDiagnosisProvided.term }},
                                   </ng-container>
                                 </ng-container>
                                 <ng-container

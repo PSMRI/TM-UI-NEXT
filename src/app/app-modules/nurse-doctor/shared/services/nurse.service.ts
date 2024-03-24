@@ -1561,7 +1561,7 @@ export class NurseService {
       benRegID: benRegID,
     });
   }
-  getPreviousReferredHistory(benRegID: string, visitCategory: any) {
+  getPreviousReferredHistory(benRegID: any, visitCategory: any) {
     return this.http.post(environment.previousReferredHistoryUrl, {
       benRegID: benRegID,
     });

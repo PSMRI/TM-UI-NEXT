@@ -31,12 +31,13 @@ import { BeneficiaryDetailsService } from '../../core/services/beneficiary-detai
 import { ConfirmationService } from '../../core/services/confirmation.service';
 import { DoctorService } from '../shared/services';
 import { CameraService } from '../../core/services/camera.service';
-import { MatDialog } from '@angular/material/dialog';
 import { HttpServiceService } from '../../core/services/http-service.service';
 import { SetLanguageComponent } from '../../core/components/set-language.component';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SchedulerComponent } from '../scheduler/scheduler.component';
 
 @Component({
   selector: 'app-tm-future-worklist',
@@ -74,6 +75,7 @@ export class TmFutureWorklistComponent implements OnInit, DoCheck, OnDestroy {
     public httpServiceService: HttpServiceService,
     private beneficiaryDetailsService: BeneficiaryDetailsService,
     private doctorService: DoctorService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -263,14 +265,16 @@ export class TmFutureWorklistComponent implements OnInit, DoCheck, OnDestroy {
     this.openScheduler(beneficiary);
   }
   openScheduler(beneficiary: any) {
-    // let mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(SchedulerComponent, {
-    // })
-    // mdDialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.scheduleTC(beneficiary, result.tmSlot);
-    //   }
-    //   console.log(JSON.stringify(result, null, 4));
-    // })
+    const mdDialogRef: MatDialogRef<SchedulerComponent> = this.dialog.open(
+      SchedulerComponent,
+      {},
+    );
+    mdDialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.scheduleTC(beneficiary, result.tmSlot);
+      }
+      console.log(JSON.stringify(result, null, 4));
+    });
   }
   scheduleTC(beneficiary: any, tcRequest: any) {
     const scedulerRequest = {

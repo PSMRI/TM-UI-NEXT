@@ -134,7 +134,7 @@ export class QuickConsultUtils {
     return this.fb.group({
       conceptID: [null, Validators.required],
       term: [null, Validators.required],
-      provisionalDiagnosis: [null, Validators.required],
+      viewProvisionalDiagnosisProvided: [null, Validators.required],
     });
   }
 }

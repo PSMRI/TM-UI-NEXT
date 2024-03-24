@@ -680,10 +680,10 @@ export class QuickConsultComponent
             generalArray.at(j).patchValue({
               conceptID: i.conceptID,
               term: i.term,
-              provisionalDiagnosis: i.term,
+              viewProvisionalDiagnosisProvided: i.term,
             });
             (<FormGroup>generalArray.at(j)).controls[
-              'provisionalDiagnosis'
+              'viewProvisionalDiagnosisProvided'
             ].disable();
             if (generalArray.length < previousArray.length) {
               this.addDiagnosis();
@@ -1318,8 +1318,8 @@ export class QuickConsultComponent
       }
     }
   }
-  checkProvisionalDiagnosisValidity(provisionalDiagnosis: any) {
-    const temp = provisionalDiagnosis.value;
+  checkProvisionalDiagnosisValidity(viewProvisionalDiagnosisProvided: any) {
+    const temp = viewProvisionalDiagnosisProvided.value;
     if (temp.term && temp.conceptID) {
       return false;
     } else {
