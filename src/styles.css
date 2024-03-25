@@ -88,6 +88,24 @@
   line-height: 36px;
   min-width: 88px;
 }
+.mat_blue_table {
+  background-color: #0277bd !important;
+  border-color: unset !important;
+  color: white;
+  border: unset;
+  border-radius: 3px;
+  line-height: 36px;
+  width: 90px;
+}
+.mat_blue_table:disabled {
+  background-color: #e0e0e0 !important;
+  border-color: unset !important;
+  color: rgba(0, 0, 0, 0.38);
+  border: unset;
+  border-radius: 3px;
+  line-height: 36px;
+  width: 90px;
+}
 .mat_green {
   background-color: #43a047 !important;
   border-color: unset !important;
