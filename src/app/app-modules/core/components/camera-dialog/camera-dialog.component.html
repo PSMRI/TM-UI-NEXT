@@ -189,14 +189,15 @@
     <h4 *ngIf="graph?.type === 'bp'">
       {{ current_language_set?.previousvisit?.bloodPressureTrends }}
     </h4>
-    <!-- <canvas
+    <canvas
       baseChart
       [datasets]="graph?.chartData"
       [labels]="graph?.chartLabels"
       [options]="graph?.lineChartOptions"
       [legend]="graph?.chartLegend"
       [data]="barChartData"
-      [type]="barChartType"></canvas> -->
+      [type]="barChartType"
+    ></canvas>
   </mat-dialog-content>
 
   <mat-dialog-actions align="center">

@@ -284,7 +284,7 @@ export class DoctorWorklistComponent implements OnInit, OnDestroy, DoCheck {
       beneficiary.beneficiaryRegID,
     );
     localStorage.setItem('caseSheetVisitID', beneficiary.benVisitID);
-    this.router.navigate(['/nurse-docotor/print/' + 'TM' + '/' + 'current']);
+    this.router.navigate(['/nurse-doctor/print/' + 'TM' + '/' + 'current']);
   }
 
   routeToWorkArea(beneficiary: any) {

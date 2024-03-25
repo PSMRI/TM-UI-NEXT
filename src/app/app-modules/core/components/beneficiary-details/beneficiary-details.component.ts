@@ -26,6 +26,7 @@ import { BeneficiaryDetailsService } from '../../services/beneficiary-details.se
 import { HttpServiceService } from '../../services/http-service.service';
 import { SetLanguageComponent } from '../set-language.component';
 import { ConfirmationService } from '../../services';
+import { RegistrarService } from 'src/app/app-modules/registrar/shared/services/registrar.service';
 
 @Component({
   selector: 'app-beneficiary-details',
@@ -45,7 +46,7 @@ export class BeneficiaryDetailsComponent implements OnInit, DoCheck, OnDestroy {
     private route: ActivatedRoute,
     public httpServiceService: HttpServiceService,
     private beneficiaryDetailsService: BeneficiaryDetailsService,
-    // private registrarService: RegistrarService,
+    private registrarService: RegistrarService,
     private confirmationService: ConfirmationService,
   ) {}
 
@@ -99,62 +100,62 @@ export class BeneficiaryDetailsComponent implements OnInit, DoCheck, OnDestroy {
         beneficiaryRegID: param['beneficiaryRegID'],
         beneficiaryID: null,
       };
-      // this.registrarService.getHealthIdDetails(data).subscribe(
-      //   (healthIDDetails: any) => {
-      //     if (healthIDDetails.statusCode200) {
-      //       console.log('healthID', healthIDDetails);
-      //       if (
-      //         healthIDDetails.data.BenHealthDetails !== undefined &&
-      //         healthIDDetails.data.BenHealthDetails !== null
-      //       ) {
-      //         this.benDetails = healthIDDetails.data.BenHealthDetails;
-      //         if (this.benDetails.length > 0) {
-      //           this.benDetails.forEach((healthID: any, index: any) => {
-      //             if (
-      //               healthID.healthId !== undefined &&
-      //               healthID.healthId !== null &&
-      //               index !== this.benDetails.length - 1
-      //             )
-      //               this.healthIDArray.push(healthID.healthId + ',');
-      //             else if (
-      //               healthID.healthId !== undefined &&
-      //               healthID.healthId !== null
-      //             )
-      //               this.healthIDArray.push(healthID.healthId);
-      //             if (
-      //               healthID.healthId !== undefined &&
-      //               healthID.healthId !== null
-      //             )
-      //               this.healthIDValue =
-      //                 this.healthIDValue + healthID.healthId + ',';
-      //           });
-      //         }
-      //         if (
-      //           this.healthIDValue !== undefined &&
-      //           this.healthIDValue !== null &&
-      //           this.healthIDValue.length > 1
-      //         ) {
-      //           this.healthIDValue = this.healthIDValue.substring(
-      //             0,
-      //             this.healthIDValue.length - 1,
-      //           );
-      //           //this.beneficiaryDetailsService.healthID= this.healthIDValue;
-      //         }
-      //       }
-      //     } else {
-      //       this.confirmationService.alert(
-      //         this.current_language_set.issueInGettingBeneficiaryABHADetails,
-      //         'error',
-      //       );
-      //     }
-      //   },
-      //   (err: any) => {
-      //     this.confirmationService.alert(
-      //       this.current_language_set.issueInGettingBeneficiaryABHADetails,
-      //       'error',
-      //     );
-      //   },
-      // );
+      this.registrarService.getHealthIdDetails(data).subscribe(
+        (healthIDDetails: any) => {
+          if (healthIDDetails.statusCode200) {
+            console.log('healthID', healthIDDetails);
+            if (
+              healthIDDetails.data.BenHealthDetails !== undefined &&
+              healthIDDetails.data.BenHealthDetails !== null
+            ) {
+              this.benDetails = healthIDDetails.data.BenHealthDetails;
+              if (this.benDetails.length > 0) {
+                this.benDetails.forEach((healthID: any, index: any) => {
+                  if (
+                    healthID.healthId !== undefined &&
+                    healthID.healthId !== null &&
+                    index !== this.benDetails.length - 1
+                  )
+                    this.healthIDArray.push(healthID.healthId + ',');
+                  else if (
+                    healthID.healthId !== undefined &&
+                    healthID.healthId !== null
+                  )
+                    this.healthIDArray.push(healthID.healthId);
+                  if (
+                    healthID.healthId !== undefined &&
+                    healthID.healthId !== null
+                  )
+                    this.healthIDValue =
+                      this.healthIDValue + healthID.healthId + ',';
+                });
+              }
+              if (
+                this.healthIDValue !== undefined &&
+                this.healthIDValue !== null &&
+                this.healthIDValue.length > 1
+              ) {
+                this.healthIDValue = this.healthIDValue.substring(
+                  0,
+                  this.healthIDValue.length - 1,
+                );
+                //this.beneficiaryDetailsService.healthID= this.healthIDValue;
+              }
+            }
+          } else {
+            this.confirmationService.alert(
+              this.current_language_set.issueInGettingBeneficiaryABHADetails,
+              'error',
+            );
+          }
+        },
+        (err: any) => {
+          this.confirmationService.alert(
+            this.current_language_set.issueInGettingBeneficiaryABHADetails,
+            'error',
+          );
+        },
+      );
     });
   }
 }

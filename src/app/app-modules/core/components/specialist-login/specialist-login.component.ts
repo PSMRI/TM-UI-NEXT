@@ -44,16 +44,17 @@ export class SpecialistLoginComponent implements OnInit {
     this.specialistTMLoginForm = this.createSpecialistTMLoginForm();
 
     if (localStorage.getItem('swymedLogin')) {
-      // let logggedInDoctor = JSON.parse(localStorage.getItem('swymedLogin')).userName
-      // let loginPassWord = JSON.parse(localStorage.getItem('swymedLogin')).password
-      // let domainValue = JSON.parse(localStorage.getItem('swymedLogin')).domain
-      // if (logggedInDoctor !== null && domainValue !== null && loginPassWord) {
-      //   this.specialistTMLoginForm.patchValue({
-      //     userName: logggedInDoctor,
-      //     password: loginPassWord,
-      //     domain: domainValue
-      //   })
-      // }
+      const swymedLoginData: any = localStorage.getItem('swymedLogin');
+      const logggedInDoctor = JSON.parse(swymedLoginData).userName;
+      const loginPassWord = JSON.parse(swymedLoginData).password;
+      const domainValue = JSON.parse(swymedLoginData).domain;
+      if (logggedInDoctor !== null && domainValue !== null && loginPassWord) {
+        this.specialistTMLoginForm.patchValue({
+          userName: logggedInDoctor,
+          password: loginPassWord,
+          domain: domainValue,
+        });
+      }
     }
   }
 

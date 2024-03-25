@@ -26,8 +26,13 @@ import { RegistrarService } from '../../../registrar/shared/services/registrar.s
 import { ConfirmationService } from '../../services/confirmation.service';
 import { DatePipe } from '@angular/common';
 import { SetLanguageComponent } from '../set-language.component';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { HttpServiceService } from '../../services/http-service.service';
+import { HealthIdValidateComponent } from 'src/app/app-modules/registrar/registration/register-other-details/register-other-details.component';
 
 @Component({
   selector: 'app-health-id-display-modal',
@@ -58,8 +63,8 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
     private registrarService: RegistrarService,
     private confirmationService: ConfirmationService,
     private datePipe: DatePipe,
+    private dialogMd: MatDialog,
   ) {
-    // private dialogMd: Matdialog;
     dialogRef.disableClose = true;
   }
 
@@ -71,7 +76,6 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
     this.assignSelectedLanguage();
     this.searchPopup =
       this.input.search !== undefined ? this.input.search : false;
-    // this.httpServiceService.currentLangugae$.subscribe(response => this.currentLanguageSet = response);
     this.healthIDMapping = this.input.healthIDMapping;
     if (
       this.input.dataList !== undefined &&
@@ -236,21 +240,21 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
   }
 
   openDialogForprintHealthIDCard(data: any, txnId: any) {
-    //  let dialogRefValue=this.dialogMd.open(HealthIdValidateComponent, {
-    //   height: '250px',
-    //   width: '420px',
-    //     disableClose: true,
-    //     data: {
-    //       "healthId": data.healthId,
-    //       "authenticationMode": data.authenticationMode,
-    //       "generateHealthIDCard": true,
-    //       "healthIDDetailsTxnID":txnId
-    //     }
-    //   });
-    // dialogRefValue.afterClosed().subscribe((result: any) => {
-    //   console.log('result', result)
-    // });
-    // this.closeDialog();
+    const dialogRefValue = this.dialogMd.open(HealthIdValidateComponent, {
+      height: '250px',
+      width: '420px',
+      disableClose: true,
+      data: {
+        healthId: data.healthId,
+        authenticationMode: data.authenticationMode,
+        generateHealthIDCard: true,
+        healthIDDetailsTxnID: txnId,
+      },
+    });
+    dialogRefValue.afterClosed().subscribe((result: any) => {
+      console.log('result', result);
+    });
+    this.closeDialog();
   }
 
   printHealthIDCard(data: any) {

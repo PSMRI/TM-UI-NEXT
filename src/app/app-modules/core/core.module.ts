@@ -74,6 +74,9 @@ import { HealthIdDisplayModalComponent } from './components/health-id-display-mo
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { TelemedicineService } from './services/telemedicine.service';
 import { MyHealthIdDirective } from './directives/myHealthId/myHealthId.directive';
+import { NgChartsModule } from 'ng2-charts';
+import { MasterdataService } from '../nurse-doctor/shared/services';
+import { RegistrarService } from '../registrar/shared/services/registrar.service';
 
 @NgModule({
   imports: [
@@ -83,7 +86,7 @@ import { MyHealthIdDirective } from './directives/myHealthId/myHealthId.directiv
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    // NgChartsModule,
+    NgChartsModule,
     WebcamModule,
     MatTableModule,
   ],
@@ -150,7 +153,7 @@ import { MyHealthIdDirective } from './directives/myHealthId/myHealthId.directiv
     WebcamModule,
     DiagnosisSearchComponent,
     DiagnosisSearchDirective,
-    // NgChartsModule,
+    NgChartsModule,
   ],
 })
 export class CoreModule {
@@ -174,7 +177,8 @@ export class CoreModule {
         IotService,
         HttpServiceService,
         SetLanguageComponent,
-        // MasterdataService,
+        MasterdataService,
+        RegistrarService,
       ],
     };
   }

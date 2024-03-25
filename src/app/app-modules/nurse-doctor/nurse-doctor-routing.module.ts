@@ -33,6 +33,8 @@ import { TcSpecialistWorklistWrapperComponent } from './tc-specialist-worklist-w
 import { CanDeactivateGuardService } from '../core/services/can-deactivate-guard.service';
 
 import { WorkareaCanActivate } from './workarea/workarea-can-activate.service';
+import { GeneralCaseRecordComponent } from './case-record/general-case-record/general-case-record.component';
+import { CaseSheetComponent } from './case-sheet/case-sheet.component';
 
 const routes: Routes = [
   {
@@ -72,14 +74,14 @@ const routes: Routes = [
       },
     ],
   },
-  // {
-  //   path: 'print/:serviceType/:printablePage',
-  //   component: CaseSheetComponent,
-  // },
-  // {
-  //   path: 'generalcaserec',
-  //   component: GeneralCaseRecordComponent,
-  // },
+  {
+    path: 'print/:serviceType/:printablePage',
+    component: CaseSheetComponent,
+  },
+  {
+    path: 'generalcaserec',
+    component: GeneralCaseRecordComponent,
+  },
 ];
 
 @NgModule({

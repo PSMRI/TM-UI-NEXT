@@ -92,11 +92,13 @@
             <ng-container [formGroupName]="i">
               <div class="col-xs-12 col-sm-3">
                 <mat-form-field class="input-full-width">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Find?.chiefcomplaint
+                  }}</mat-label>
                   <input
                     autocomplete="off"
                     type="text"
                     matInput
-                    placeholder="{{ currentLanguageSet?.Find?.chiefcomplaint }}"
                     name="chiefComplaint"
                     formControlName="chiefComplaint"
                     (keyup)="suggestChiefComplaintList(chiefComplaint, i)"
@@ -122,15 +124,14 @@
 
               <div class="col-xs-12 col-sm-3" [hidden]="true">
                 <mat-form-field class="input-full-width">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.nurseData?.chiefComplaintsDetails?.SCTID
+                  }}</mat-label>
                   <input
                     matInput
                     defaultNull
                     name="conceptID"
                     formControlName="conceptID"
-                    placeholder="{{
-                      currentLanguageSet?.nurseData?.chiefComplaintsDetails
-                        ?.SCTID
-                    }}"
                     readonly
                   />
                 </mat-form-field>
@@ -138,6 +139,10 @@
 
               <div class="col-xs-10 col-sm-4">
                 <mat-form-field class="input-full-width">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.historyData?.QuickConsultDetails
+                      ?.chiefcomplaintsdescription
+                  }}</mat-label>
                   <input
                     matInput
                     allowText="textAreaValidator"
@@ -145,10 +150,6 @@
                     name="description"
                     formControlName="description"
                     maxlength="300"
-                    placeholder="{{
-                      currentLanguageSet?.historyData?.QuickConsultDetails
-                        ?.chiefcomplaintsdescription
-                    }}"
                   />
                 </mat-form-field>
               </div>
@@ -210,14 +211,14 @@
         <div class="row m-t-10">
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails
+                  ?.AnthropometryDataANC_OPD_NCD_PNC?.height
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails
-                    ?.AnthropometryDataANC_OPD_NCD_PNC?.height
-                }}"
                 allowText="number"
                 name="height_cm"
                 formControlName="height_cm"
@@ -227,14 +228,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails
+                  ?.AnthropometryDataANC_OPD_NCD_PNC?.weight
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails
-                    ?.AnthropometryDataANC_OPD_NCD_PNC?.weight
-                }}"
                 allowText="number"
                 name="weight_Kg"
                 formControlName="weight_Kg"
@@ -244,14 +245,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails
+                  ?.AnthropometryDataANC_OPD_NCD_PNC?.BMI
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails
-                    ?.AnthropometryDataANC_OPD_NCD_PNC?.BMI
-                }}"
                 allowText="number"
                 name="bMI"
                 formControlName="bMI"
@@ -262,14 +263,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails
+                  ?.AnthropometryDataANC_OPD_NCD_PNC?.BodyTemperature
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails
-                    ?.AnthropometryDataANC_OPD_NCD_PNC?.BodyTemperature
-                }}"
                 allowText="decimal"
                 name="temperature"
                 formControlName="temperature"
@@ -280,11 +281,13 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.casesheet?.pulseRate
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{ currentLanguageSet?.casesheet?.pulseRate }}"
                 allowText="number"
                 name="pulseRate"
                 formControlName="pulseRate"
@@ -295,11 +298,13 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.sPOTwoWithUnit
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{ currentLanguageSet?.sPOTwoWithUnit }}"
                 allowText="number"
                 name="sPO2"
                 formControlName="sPO2"
@@ -310,14 +315,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
+                  ?.respiratoryRate
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
-                    ?.respiratoryRate
-                }}"
                 allowText="number"
                 name="respiratoryRate"
                 formControlName="respiratoryRate"
@@ -330,14 +335,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
+                  ?.systolicBP
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
-                    ?.systolicBP
-                }}"
                 allowText="number"
                 name="systolicBP_1stReading"
                 formControlName="systolicBP_1stReading"
@@ -351,14 +356,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
+                  ?.diastolicBP
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsDataANC_OPD_NCD_PNC
-                    ?.diastolicBP
-                }}"
                 allowText="number"
                 name="diastolicBP_1stReading"
                 formControlName="diastolicBP_1stReading"
@@ -372,14 +377,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
+                  ?.BloodGlucoseFasting
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
-                    ?.BloodGlucoseFasting
-                }}"
                 type="number"
                 [min]="1"
                 allowMax="199"
@@ -395,14 +400,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
+                  ?.BloodGlucoseRandom
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
-                    ?.BloodGlucoseRandom
-                }}"
                 type="number"
                 [min]="1"
                 allowMax="199"
@@ -415,14 +420,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
+                  ?.BloodGlucosePP
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{
-                  currentLanguageSet?.vitalsDetails?.vitalsCancerscreening_QC
-                    ?.BloodGlucosePP
-                }}"
                 [min]="1"
                 type="number"
                 name="bloodGlucose_2hr_PP"
@@ -443,11 +448,13 @@
           </div>
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.rbsTestResult
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 defaultNull
-                placeholder="{{ currentLanguageSet?.rbsTestResult }}"
                 allowText="number"
                 [disabled]="rbsResultChange()"
                 name="rbsTestResult"
@@ -474,12 +481,14 @@
 
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.rbsTestRemarks
+              }}</mat-label>
               <input
                 autocomplete="off"
                 matInput
                 allowText="textAreaValidator"
                 defaultNull
-                placeholder="{{ currentLanguageSet?.rbsTestRemarks }}"
                 [ngClass]=""
                 name="rbsTestRemarks"
                 id="rbsTestRemarks"
@@ -503,6 +512,9 @@
         <div class="row m-t-10">
           <div class="col-sm-12 col-md-12">
             <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.casesheet?.clinicalObs
+              }}</mat-label>
               <textarea
                 matInput
                 defaultNull
@@ -510,7 +522,6 @@
                 name="clinicalObservation"
                 formControlName="clinicalObservation"
                 maxlength="500"
-                placeholder="{{ currentLanguageSet?.casesheet?.clinicalObs }}"
                 required
               >
               </textarea>
@@ -531,10 +542,12 @@
 
           <div class="row">
             <div class="col-xs-12 col-sm-6 m-t-10">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.common?.SelectTestname
+              }}</mat-label>
               <mat-select
                 class="input-full-width"
                 multiple
-                placeholder="{{ currentLanguageSet?.common?.SelectTestname }}"
                 name="test"
                 formControlName="test"
                 (selectionChange)="checkTestName($event)"
@@ -550,12 +563,12 @@
             </div>
 
             <div class="col-xs-12 col-sm-6 m-t-10">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.labTechnicianData?.radiologyimaging
+              }}</mat-label>
               <mat-select
                 class="input-full-width"
                 multiple
-                placeholder="{{
-                  currentLanguageSet?.labTechnicianData?.radiologyimaging
-                }}"
                 name="radiology"
                 formControlName="radiology"
               >
@@ -571,6 +584,10 @@
 
             <div class="col-sm-12 col-md-12 m-t-10">
               <mat-form-field class="input-full-width">
+                <mat-label class="mat-label-text">{{
+                  currentLanguageSet?.Investigationdetails
+                    ?.externalinvestigations
+                }}</mat-label>
                 <textarea
                   matInput
                   allowText="textAreaValidator"
@@ -579,10 +596,6 @@
                   name="externalInvestigation"
                   formControlName="externalInvestigation"
                   maxlength="300"
-                  placeholder="{{
-                    currentLanguageSet?.Investigationdetails
-                      ?.externalinvestigations
-                  }}"
                 >
                 </textarea>
               </mat-form-field>
@@ -754,11 +767,13 @@
               </section>
               <section class="row no-row">
                 <div class="col-md-3">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.casesheet?.form
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="form"
                     [(ngModel)]="tempform"
-                    placeholder=" {{ currentLanguageSet?.casesheet?.form }}"
                     (selectionChange)="getFormValueChanged()"
                     required
                   >
@@ -772,6 +787,9 @@
                 </div>
                 <div class="col-md-3">
                   <mat-form-field class="input-full-width">
+                    <mat-label class="mat-label-text">{{
+                      currentLanguageSet?.Prescription?.medicine
+                    }}</mat-label>
                     <input
                       autocomplete="off"
                       type="text"
@@ -780,9 +798,6 @@
                       matInput
                       [(ngModel)]="tempDrugName"
                       (keyup)="filterMedicine(tempDrugName)"
-                      placeholder="{{
-                        currentLanguageSet?.Prescription?.medicine
-                      }}"
                       (blur)="reEnterMedicine()"
                       required
                       [matAutocomplete]="autoGroup"
@@ -810,12 +825,14 @@
                   </mat-form-field>
                 </div>
                 <div class="col-md-2">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Prescription?.dosage
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="dose"
                     [(ngModel)]="currentPrescription.dose"
                     [disabled]="!currentPrescription.drugID"
-                    placeholder="{{ currentLanguageSet?.Prescription?.dosage }}"
                     required
                   >
                     <mat-option
@@ -827,14 +844,14 @@
                   </mat-select>
                 </div>
                 <div class="col-md-4">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Prescription?.frequency
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="frequency"
                     [(ngModel)]="currentPrescription.frequency"
                     [disabled]="!currentPrescription.drugID"
-                    placeholder="{{
-                      currentLanguageSet?.Prescription?.frequency
-                    }}"
                     required
                   >
                     <mat-option
@@ -848,15 +865,15 @@
               </section>
               <section class="row no-row" style="margin-top: 10px !important">
                 <div class="col-md-3">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.nurseData?.chiefComplaintsDetails
+                      ?.duration
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="duration"
                     [(ngModel)]="currentPrescription.duration"
                     [disabled]="!currentPrescription.drugID"
-                    placeholder="{{
-                      currentLanguageSet?.nurseData?.chiefComplaintsDetails
-                        ?.duration
-                    }}"
                     required
                   >
                     <mat-option
@@ -868,11 +885,13 @@
                   </mat-select>
                 </div>
                 <div class="col-md-3">
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Prescription?.unit
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="unit"
                     [(ngModel)]="currentPrescription.unit"
-                    placeholder="{{ currentLanguageSet?.Prescription?.unit }}"
                     [disabled]="!currentPrescription.drugID"
                     required
                   >
@@ -892,14 +911,14 @@
                     currentPrescription.formID !== '2'
                   "
                 >
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Prescription?.quantity
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="quantity"
                     [(ngModel)]="currentPrescription.qtyPrescribed"
                     [disabled]="!currentPrescription.drugID"
-                    placeholder="{{
-                      currentLanguageSet?.Prescription?.quantity
-                    }}"
                     required
                   >
                     <mat-option
@@ -921,11 +940,13 @@
                       currentPrescription.formID > '2'
                   }"
                 >
+                  <mat-label class="mat-label-text">{{
+                    currentLanguageSet?.Prescription?.Route
+                  }}</mat-label>
                   <mat-select
                     class="input-full-width"
                     name="route"
                     [(ngModel)]="currentPrescription.route"
-                    placeholder="{{ currentLanguageSet?.Prescription?.Route }}"
                     [disabled]="!currentPrescription.drugID"
                   >
                     <mat-option
@@ -940,6 +961,9 @@
               <section class="row no-row" style="margin-top: 10px !important">
                 <div class="col-md-10">
                   <mat-form-field class="input-full-width">
+                    <mat-label class="mat-label-text">{{
+                      currentLanguageSet?.Prescription?.instructions
+                    }}</mat-label>
                     <textarea
                       matInput
                       allowText="textAreaValidator"
@@ -950,9 +974,6 @@
                       name="instructions"
                       [disabled]="!currentPrescription.drugID"
                       [(ngModel)]="currentPrescription.instructions"
-                      placeholder="{{
-                        currentLanguageSet?.Prescription?.instructions
-                      }}"
                     >
                     </textarea>
                   </mat-form-field>
@@ -1004,78 +1025,81 @@
                         <div class="row">
                           <div class="col-md-1 right-padding-remove-desktop">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.Prescription?.form
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
                                 type="text"
                                 matInput
                                 formControlName="formName"
-                                placeholder="{{
-                                  currentLanguageSet?.Prescription?.form
-                                }}"
                               />
                             </mat-form-field>
                             <!-- {{drug.value.formName}} -->
                           </div>
                           <div class="col-md-2">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.casesheet?.dose
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
                                 type="text"
                                 matInput
                                 formControlName="dose"
-                                placeholder=" {{
-                                  currentLanguageSet?.casesheet?.dose
-                                }}"
                               />
                             </mat-form-field>
                           </div>
                           <div class="col-md-2 p-a-0">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.Prescription?.frequency
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
                                 type="text"
                                 matInput
                                 formControlName="frequency"
-                                placeholder=" {{
-                                  currentLanguageSet?.Prescription?.frequency
-                                }}"
                               />
                             </mat-form-field>
                           </div>
                           <div class="col-md-2">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.nurseData
+                                  ?.chiefComplaintsDetails?.duration
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
                                 type="text"
                                 matInput
                                 formControlName="durationView"
-                                placeholder="{{
-                                  currentLanguageSet?.nurseData
-                                    ?.chiefComplaintsDetails?.duration
-                                }}"
                               />
                             </mat-form-field>
                           </div>
                           <div class="col-md-1 p-a-0">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.Prescription?.quantity
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
                                 type="text"
                                 matInput
                                 formControlName="qtyPrescribed"
-                                placeholder="{{
-                                  currentLanguageSet?.Prescription?.quantity
-                                }}"
                               />
                             </mat-form-field>
                           </div>
                           <div class="col-md-3">
                             <mat-form-field class="input-full-width">
+                              <mat-label class="mat-label-text">{{
+                                currentLanguageSet?.Prescription?.instructions
+                              }}</mat-label>
                               <input
                                 autocomplete="off"
                                 readonly="true"
@@ -1083,9 +1107,6 @@
                                 matInput
                                 allowText="textAreaValidator"
                                 formControlName="instructions"
-                                placeholder="{{
-                                  currentLanguageSet?.Prescription?.instructions
-                                }}"
                               />
                             </mat-form-field>
                           </div>

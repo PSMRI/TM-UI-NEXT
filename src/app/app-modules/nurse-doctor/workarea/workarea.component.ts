@@ -1158,6 +1158,8 @@ export class WorkareaComponent
                     this.getHealthIDDetails(res.data.response);
                   }
                 }
+                this.patientMedicalForm.reset();
+                this.confirmationService.alert(res.data.response, 'success');
               } else {
                 this.resetSpinnerandEnableTheSubmitButton();
                 this.confirmationService.alert(res.errorMessage, 'error');
@@ -3217,14 +3219,13 @@ export class WorkareaComponent
           (res: any) => {
             if (res.statusCode === 200 && res.data !== null) {
               if (this.isSpecialist) {
-                this.patientMedicalForm.reset();
                 this.linkCareContextBasedOnSpecialistScheduled();
-                this.confirmationService.alert(res.data.response, 'success');
-                this.router.navigate(['/nurse-doctor/doctor-worklist']);
               } else {
                 this.linkCareContextBasedOnTestsPrescribed();
-                this.confirmationService.alert(res.errorMessage, 'error');
               }
+              this.patientMedicalForm.reset();
+              this.confirmationService.alert(res.data.response, 'success');
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');

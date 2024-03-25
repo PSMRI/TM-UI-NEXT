@@ -26,6 +26,7 @@ import { HttpServiceService } from '../../services/http-service.service';
 import { SetLanguageComponent } from '../set-language.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MasterdataService } from 'src/app/app-modules/nurse-doctor/shared/services';
 
 @Component({
   selector: 'app-allergen-search',
@@ -50,14 +51,14 @@ export class AllergenSearchComponent implements OnInit, DoCheck {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public input: any,
-    // private masterdataService: MasterdataService,
+    private masterdataService: MasterdataService,
     public httpServiceService: HttpServiceService,
     public dialogRef: MatDialogRef<AllergenSearchComponent>,
   ) {}
 
   ngOnInit() {
     this.assignSelectedLanguage();
-    // this.search(this.input.searchTerm, 0);
+    this.search(this.input.searchTerm, 0);
   }
 
   ngDoCheck() {
@@ -84,33 +85,33 @@ export class AllergenSearchComponent implements OnInit, DoCheck {
     this.dialogRef.close(reqObj);
   }
   showProgressBar = false;
-  // search(term: string, pageNo: any): void {
-  //   if (term.length > 2) {
-  //     this.showProgressBar = true;
-  //     this.masterdataService
-  //       .searchDiagnosisBasedOnPageNo1(term, pageNo)
-  //       .subscribe(
-  //         (res: any) => {
-  //           if (res.statusCode === 200) {
-  //             this.showProgressBar = false;
-  //             if (res.data && res.data.sctMaster.length > 0) {
-  //               this.components.data = res.data.sctMaster;
-  //               this.components.paginator = this.paginator;
-  //             } else {
-  //               this.message = this.current_language_set.common.noRecordFound;
-  //             }
-  //           } else {
-  //             this.resetData();
-  //             this.showProgressBar = false;
-  //           }
-  //         },
-  //         err => {
-  //           this.resetData();
-  //           this.showProgressBar = false;
-  //         }
-  //       );
-  //   }
-  // }
+  search(term: string, pageNo: any): void {
+    if (term.length > 2) {
+      this.showProgressBar = true;
+      this.masterdataService
+        .searchDiagnosisBasedOnPageNo1(term, pageNo)
+        .subscribe(
+          (res: any) => {
+            if (res.statusCode === 200) {
+              this.showProgressBar = false;
+              if (res.data && res.data.sctMaster.length > 0) {
+                this.components.data = res.data.sctMaster;
+                this.components.paginator = this.paginator;
+              } else {
+                this.message = this.current_language_set.common.noRecordFound;
+              }
+            } else {
+              this.resetData();
+              this.showProgressBar = false;
+            }
+          },
+          (err) => {
+            this.resetData();
+            this.showProgressBar = false;
+          },
+        );
+    }
+  }
 
   resetData() {
     this.components.data = [];

@@ -29,6 +29,7 @@ import { HttpServiceService } from '../../services/http-service.service';
 import { SetLanguageComponent } from '../set-language.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MasterdataService } from 'src/app/app-modules/nurse-doctor/shared/services';
 
 @Component({
   selector: 'app-calibration',
@@ -47,7 +48,7 @@ export class CalibrationComponent implements OnInit, DoCheck {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public input: any,
-    // private masterdataService: MasterdataService,
+    private masterdataService: MasterdataService,
     private confirmationService: ConfirmationService,
     public httpServiceService: HttpServiceService,
     public dialogRef: MatDialogRef<CalibrationComponent>,
@@ -55,7 +56,7 @@ export class CalibrationComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.assignSelectedLanguage();
-    // this.masterData(this.input.providerServiceMapID, 0);
+    this.masterData(this.input.providerServiceMapID, 0);
   }
 
   ngDoCheck() {
@@ -67,35 +68,35 @@ export class CalibrationComponent implements OnInit, DoCheck {
     this.current_language_set = getLanguageJson.currentLanguageObject;
   }
 
-  // masterData(providerServiceMapID: any, pageNo: any) {
-  //   this.masterdataService
-  //     .fetchCalibrationStrips(providerServiceMapID, pageNo)
-  //     .subscribe(
-  //       (res: any) => {
-  //         if (res.statusCode === 200) {
-  //           if (
-  //             res.data &&
-  //             res.data.calibrationData !== undefined &&
-  //             res.data.calibrationData.length > 0
-  //           ) {
-  //             this.components.data = res.data.calibrationData;
-  //             this.dataList = res.data.calibrationData;
-  //             this.components.paginator = this.paginator;
-  //             console.log('component', this.components.data);
-  //           } else {
-  //             this.message = this.current_language_set.common.noRecordFound;
-  //             this.components.data = [];
-  //             this.components.paginator = this.paginator;
-  //           }
-  //         } else {
-  //           this.resetData();
-  //         }
-  //       },
-  //       (err: any) => {
-  //         this.resetData();
-  //       }
-  //     );
-  // }
+  masterData(providerServiceMapID: any, pageNo: any) {
+    this.masterdataService
+      .fetchCalibrationStrips(providerServiceMapID, pageNo)
+      .subscribe(
+        (res: any) => {
+          if (res.statusCode === 200) {
+            if (
+              res.data &&
+              res.data.calibrationData !== undefined &&
+              res.data.calibrationData.length > 0
+            ) {
+              this.components.data = res.data.calibrationData;
+              this.dataList = res.data.calibrationData;
+              this.components.paginator = this.paginator;
+              console.log('component', this.components.data);
+            } else {
+              this.message = this.current_language_set.common.noRecordFound;
+              this.components.data = [];
+              this.components.paginator = this.paginator;
+            }
+          } else {
+            this.resetData();
+          }
+        },
+        (err: any) => {
+          this.resetData();
+        },
+      );
+  }
 
   goToLink(item: any) {
     const today = new Date();

@@ -188,15 +188,15 @@
       *ngIf="lumpInBreast && lumpInBreast.value"
     >
       <mat-form-field class="form-input-text">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.breast?.lumpSize
+        }}</mat-label>
         <input
           autocomplete="off"
           matInput
           allowText="inputFieldValidator"
           defaultNull
-          placeholder=" {{
-            current_language_set?.ExaminationData?.cancerScreeningExamination
-              ?.breast?.lumpSize
-          }}"
           maxlength="100"
           name="lumpSize"
           id="lumpSize"
@@ -219,15 +219,15 @@
       *ngIf="lumpInBreast && lumpInBreast.value"
     >
       <mat-form-field class="form-input-text">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.breast?.lumpShape
+        }}</mat-label>
         <input
           autocomplete="off"
           matInput
           allowText="inputFieldValidator"
           defaultNull
-          placeholder="{{
-            current_language_set?.ExaminationData?.cancerScreeningExamination
-              ?.breast?.lumpShape
-          }}"
           maxlength="100"
           name="lumpShape"
           id="lumpShape"
@@ -250,15 +250,15 @@
       *ngIf="lumpInBreast && lumpInBreast.value"
     >
       <mat-form-field class="form-input-text">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.breast?.lumpTexture
+        }}</mat-label>
         <input
           autocomplete="off"
           matInput
           allowText="inputFieldValidator"
           defaultNull
-          placeholder="{{
-            current_language_set?.ExaminationData?.cancerScreeningExamination
-              ?.breast?.lumpTexture
-          }}"
           maxlength="100"
           name="lumpTexture"
           id="lumpTexture"

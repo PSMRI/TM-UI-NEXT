@@ -24,6 +24,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { HttpServiceService } from '../../services/http-service.service';
 import { SetLanguageComponent } from '../set-language.component';
 import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { SpecialistLoginComponent } from '../specialist-login/specialist-login.component';
 
 @Component({
   selector: 'app-footer',
@@ -34,6 +35,7 @@ export class AppFooterComponent implements OnInit, DoCheck {
   currentLanguageSet: any;
   status = false;
   isSpecialist = false;
+  snackBar: any;
 
   constructor(public httpServiceService: HttpServiceService) {}
   year: any;
@@ -59,15 +61,17 @@ export class AppFooterComponent implements OnInit, DoCheck {
   }
 
   openSnackBar() {
-    // let snackBarRef: MatSnackBarRef<SpecialistLoginComponent> = this.snackBar.openFromComponent(SpecialistLoginComponent, {
-    //   horizontalPosition: 'right',
-    //   data : {
-    //      message: 'string',action: 'Save'
-    //   }
-    // }
-    // );
-    // snackBarRef.afterDismissed().subscribe(() => {
-    //   console.log('locsl', JSON.parse(localStorage.getItem('swymedLogin')));
-    // })
+    const snackBarRef: MatSnackBarRef<SpecialistLoginComponent> =
+      this.snackBar.openFromComponent(SpecialistLoginComponent, {
+        horizontalPosition: 'right',
+        data: {
+          message: 'string',
+          action: 'Save',
+        },
+      });
+    snackBarRef.afterDismissed().subscribe(() => {
+      // value to be stored here -
+      //  console.log('locsl', JSON.parse(localStorage.getItem('swymedLogin')));
+    });
   }
 }

@@ -24,6 +24,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../services/http-service.service';
 import { ConfirmationService } from '../../services/confirmation.service';
 import { SetLanguageComponent } from '../set-language.component';
+import { DoctorService } from 'src/app/app-modules/nurse-doctor/shared/services';
 
 @Component({
   selector: 'app-open-previous-visit-details',
@@ -39,7 +40,7 @@ export class OpenPreviousVisitDetailsComponent implements OnInit {
 
   constructor(
     public httpServiceService: HttpServiceService,
-    // private doctorService: DoctorService,
+    private doctorService: DoctorService,
     private confirmationService: ConfirmationService,
   ) {}
   ngOnInit(): void {
@@ -54,26 +55,26 @@ export class OpenPreviousVisitDetailsComponent implements OnInit {
   }
 
   loadPreviousVisitDetails() {
-    // this.doctorService.getMMUHistory().subscribe(
-    //   (data: any) => {
-    //     console.log('data', data);
-    //     if (data.statusCode === 200) {
-    //       this.previousVisitData = data.data;
-    //       this.getEachVisitData();
-    //     } else {
-    //       this.confirmationService.alert(
-    //         this.currentLanguageSet.unableToLoadData,
-    //         'error'
-    //       );
-    //     }
-    //   },
-    //   err => {
-    //     this.confirmationService.alert(
-    //       this.currentLanguageSet.unableToLoadData,
-    //       'error'
-    //     );
-    //   }
-    // );
+    this.doctorService.getMMUHistory().subscribe(
+      (data: any) => {
+        console.log('data', data);
+        if (data.statusCode === 200) {
+          this.previousVisitData = data.data;
+          this.getEachVisitData();
+        } else {
+          this.confirmationService.alert(
+            this.currentLanguageSet.unableToLoadData,
+            'error',
+          );
+        }
+      },
+      (err) => {
+        this.confirmationService.alert(
+          this.currentLanguageSet.unableToLoadData,
+          'error',
+        );
+      },
+    );
   }
 
   getEachVisitData() {
@@ -85,12 +86,12 @@ export class OpenPreviousVisitDetailsComponent implements OnInit {
           beneficiaryRegID: item.beneficiaryRegID,
           visitCode: item.visitCode,
         };
-        // this.doctorService.getMMUCasesheetData(reqObj).subscribe((res: any) => {
-        //   if (res.statusCode === 200 && res.data !== null) {
-        //     this.previousVisitData[i]['benPreviousData'] = res.data;
-        //     this.filteredHistory = res.data;
-        //   }
-        // });
+        this.doctorService.getMMUCasesheetData(reqObj).subscribe((res: any) => {
+          if (res.statusCode === 200 && res.data !== null) {
+            this.previousVisitData[i]['benPreviousData'] = res.data;
+            this.filteredHistory = res.data;
+          }
+        });
       }
     });
     this.previousHistoryPageChanged({

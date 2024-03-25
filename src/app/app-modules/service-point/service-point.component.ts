@@ -188,7 +188,6 @@ export class ServicePointComponent implements OnInit, DoCheck {
 
   routeToDesignation(designation: any) {
     console.log('designation', designation);
-    designation = 'Registrar';
     switch (designation) {
       case 'Registrar':
         this.router.navigate(['/registrar/registration']);

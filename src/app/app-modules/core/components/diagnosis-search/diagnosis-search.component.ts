@@ -35,7 +35,6 @@ import { MasterdataService } from 'src/app/app-modules/nurse-doctor/shared/servi
 })
 export class DiagnosisSearchComponent implements OnInit, DoCheck {
   searchTerm: any;
-  // diagnosis$: Observable<any>;
   diagnosis$ = [];
   pageCount: any;
   selectedDiagnosisList: any = [];
