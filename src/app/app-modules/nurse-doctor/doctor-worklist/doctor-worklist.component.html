@@ -192,7 +192,6 @@
                 </th>
                 <td class="centered" mat-cell *matCellDef="let element">
                   <mat-checkbox
-                    class="control-label"
                     [disabled]="
                       element.statusCode === 1 ||
                       element.statusCode === 2 ||
@@ -234,30 +233,37 @@
               <ng-container matColumnDef="action">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: unset !important; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                   colspan="3"
-                  style="text-align: center"
                   id="action"
                 >
                   {{ currentLanguageSet?.bendetails?.action }}
                 </th>
-                <td mat-cell *matCellDef="let element">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  class="col-12"
+                  style="text-align: center; width: 26%"
+                >
                   <button
                     mat-raised-button
                     (click)="cancelTCRequest(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.cancelTc }}"
                     color="warn"
+                    class="mat_blue_table col-4"
                     [disabled]="element.specialist_flag !== 1"
                   >
                     {{ currentLanguageSet?.common?.cancel }}
                   </button>
                   <button
+                    style="margin: 0px 10px 0px 10px !important"
                     mat-raised-button
                     (click)="openScheduler(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.reschedule }}"
                     color="primary"
+                    class="mat_blue_table col-4"
                     [disabled]="element.specialist_flag !== 4"
                   >
                     {{ currentLanguageSet?.tc?.schedule }}
@@ -267,6 +273,7 @@
                     (click)="initiateTC(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.startTc }}"
                     color="accent"
+                    class="mat_blue_table col-4"
                     [disabled]="
                       element.specialist_flag !== 1 && !element.benArrivedFlag
                     "
