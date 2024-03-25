@@ -1,4 +1,4 @@
-<!-- <section id="quickSearch" class="container-fluid">
+<section id="quickSearch" class="container-fluid">
   <div class="row title info">
     <h4>{{ currentLanguageSet?.bendetails?.externalSearch }}</h4>
     <button
@@ -22,7 +22,7 @@
             <mat-select
               class="p-t-12 m-t-10"
               [style.width]="'100%'"
-              (change)="validateID(searchIdForm.controls.searchId.value)"
+              (change)="validateID(searchIdForm.controls['searchId'].value)"
               formControlName="searchId"
               autofocus
               required
@@ -51,12 +51,12 @@
             />
             <strong
               *ngIf="
-                searchIdForm.controls.searchId.value === 'National Health ID'
+                searchIdForm.controls['searchId'].value === 'National Health ID'
               "
               matSuffix
               >{{ abhaSuffix }}</strong
             >
-            <mat-error *ngIf="searchIdForm.controls.ID.hasError('pattern')">
+            <mat-error *ngIf="searchIdForm.controls['ID'].hasError('pattern')">
               {{ idErrorText }}
             </mat-error>
           </mat-form-field>
@@ -65,7 +65,10 @@
     </section>
   </mat-dialog-content>
 
-  <mat-dialog-actions align="right" class="padding15 margin15 pull-right">
+  <mat-dialog-actions
+    class="padding15 margin15 pull-right"
+    style="text-align: right"
+  >
     <button
       [disabled]="searchIdForm.invalid"
       mat-raised-button
@@ -77,4 +80,4 @@
     </button>
   </mat-dialog-actions>
   <div class="clearfix"></div>
-</section> -->
+</section>

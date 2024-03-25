@@ -72,7 +72,8 @@ export class ConfirmatoryDiagnosisDirective implements OnInit, DoCheck {
   }
 
   openDialog(): void {
-    const searchTerm = this.diagnosisListForm.value.confirmatoryDiagnosis;
+    const searchTerm =
+      this.diagnosisListForm.value.viewConfirmatoryDiagnosisProvided;
     if (searchTerm.length > 2) {
       const dialogRef = this.dialog.open(DiagnosisSearchComponent, {
         width: '800px',
@@ -96,10 +97,10 @@ export class ConfirmatoryDiagnosisDirective implements OnInit, DoCheck {
               result[j].conceptID,
             );
             (<FormGroup>formArray.at(i)).controls[
-              'confirmatoryDiagnosis'
+              'viewConfirmatoryDiagnosisProvided'
             ].setValue(result[j].term);
             (<FormGroup>formArray.at(i)).controls[
-              'confirmatoryDiagnosis'
+              'viewConfirmatoryDiagnosisProvided'
             ].disable();
             this.diagnosisListForm.markAsDirty();
             if (formArray.length < len + result.length - 1)

@@ -193,10 +193,6 @@
                     class="select-full-width"
                     name="typeOfAbortion"
                     formControlName="abortionType"
-                    placeholder="{{
-                      currentLanguageSet?.historyData?.opd_NCD_PNCHistory
-                        ?.obstetric?.typeOfAbortion
-                    }}"
                     [required]="
                       pastObstericHistory.value.pregOutcome?.pregOutcome ===
                       'Abortion'
@@ -355,10 +351,6 @@
                     class="select-full-width"
                     name="placeOfDelivery"
                     formControlName="deliveryPlace"
-                    placeholder="{{
-                      currentLanguageSet?.historyData?.opd_NCD_PNCHistory
-                        ?.obstetric?.placeofDelivery
-                    }}"
                     (selectionChange)="
                       resetOtherDeliveryPlace(pastObstericHistory)
                     "

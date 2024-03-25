@@ -100,15 +100,15 @@
   </div>
   <div class="col-xs-12 m-t-20">
     <mat-form-field class="input-full-width">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.Investigationdetails?.externalinvestigations
+      }}</mat-label>
       <textarea
         matInput
         allowText="textAreaValidator"
         defaultNull
         name="externalInvestigation"
         formControlName="externalInvestigations"
-        placeholder="{{
-          current_language_set?.Investigationdetails?.externalinvestigations
-        }} "
         maxlength="300"
       >
       </textarea>

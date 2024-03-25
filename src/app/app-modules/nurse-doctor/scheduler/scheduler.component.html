@@ -113,11 +113,11 @@
         </mat-form-field>
       </div>
       <div class="col-xs-12 box">
+        <mat-label>{{ currentLanguageSet?.common?.specialization }}</mat-label>
         <mat-select
           class="input-full-width"
           name="specialization"
           formControlName="specialization"
-          placeholder="{{ currentLanguageSet?.common?.specialization }}"
           (change)="getSpecialist()"
           required
         >
@@ -130,11 +130,13 @@
         </mat-select>
       </div>
       <div class="col-xs-12 box">
+        <mat-label>{{
+          currentLanguageSet?.common?.specialistDetails
+        }}</mat-label>
         <mat-select
           class="input-full-width"
           name="specialistDetails"
           formControlName="specialistDetails"
-          placeholder="{{ currentLanguageSet?.common?.specialistDetails }}"
           required
           (change)="getAvailableSlot(specialistDetails)"
         >

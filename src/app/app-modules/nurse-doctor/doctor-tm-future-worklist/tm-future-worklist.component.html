@@ -220,7 +220,7 @@
                   {{ dataSource.data.length }}
                 </div>
               </td>
-              <!-- <td>
+              <td mat-cell *matCellDef="let element">
                 <button
                   mat-raised-button
                   (click)="cancelTCRequest(element)"
@@ -230,8 +230,6 @@
                 >
                   {{ current_language_set?.common?.cancel }}
                 </button>
-              </td>
-              <td>
                 <button
                   mat-raised-button
                   (click)="reSchedule(element)"
@@ -241,7 +239,7 @@
                 >
                   {{ current_language_set?.tc?.schedule }}
                 </button>
-              </td> -->
+              </td>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>

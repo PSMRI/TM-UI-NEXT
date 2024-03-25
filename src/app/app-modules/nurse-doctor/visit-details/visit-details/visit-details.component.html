@@ -1,7 +1,7 @@
 <!-- {{patientVisitDetailsForm.value | json}} -->
 
 <div class="row m-t-20" [formGroup]="patientVisitDetailsForm">
-  <!-- <ng-container
+  <ng-container
     *ngIf="cbacData !== undefined && cbacData !== null && cbacData.length > 0"
   >
     <div
@@ -24,7 +24,7 @@
     >
       Please perform the necessary examinations to confirm.
     </div>
-  </ng-container> -->
+  </ng-container>
   <div
     class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box"
     *ngIf="mode?.toLowerCase() === 'view'"

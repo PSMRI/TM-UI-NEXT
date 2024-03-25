@@ -28,7 +28,12 @@ import {
   OnDestroy,
   DoCheck,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
 import { BeneficiaryDetailsService } from '../../../../core/services/beneficiary-details.service';
 import { CancerUtils } from '../../../shared/utility';
 import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-language.component';
@@ -83,6 +88,14 @@ export class SignsAndSymptomsComponent implements OnInit, OnDestroy, DoCheck {
     if (this.beneficiaryDetailsSubs) this.beneficiaryDetailsSubs.unsubscribe();
   }
 
+  getLymphNodes(): AbstractControl[] | null {
+    console.log('getLymnNodes', this.signsForm);
+    const lymphNodesControl = this.signsForm.get('lymphNodes');
+    return lymphNodesControl instanceof FormArray
+      ? lymphNodesControl.controls
+      : null;
+  }
+
   beneficiaryDetailsSubs: any;
   getBeneficiaryDetails() {
     this.beneficiaryDetailsSubs =
@@ -120,7 +133,7 @@ export class SignsAndSymptomsComponent implements OnInit, OnDestroy, DoCheck {
   }
 
   checkLymph(lymphNode_Enlarged: any) {
-    if (lymphNode_Enlarged === false) {
+    if (!lymphNode_Enlarged) {
       this.signsForm.patchValue({
         lymphNodes: new CancerUtils(this.fb).lymphNodesArray.map(
           (item) => item,

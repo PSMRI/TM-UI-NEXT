@@ -186,8 +186,8 @@
                 >
                   {{ currentLanguageSet?.bendetails?.beneficiaryArrived }}
                 </th>
-                <td class="centered">
-                  <!-- <mat-checkbox
+                <td class="centered" mat-cell *matCellDef="let element">
+                  <mat-checkbox
                     class="control-label"
                     [disabled]="
                       element.statusCode === 1 ||
@@ -196,11 +196,11 @@
                       element.statusCode === 9 ||
                       element.statusCode === 4
                     "
-                    (change)="toggleArrivalStatus($event, element.benFlowID, m)"
+                    (change)="toggleArrivalStatus($event, element.benFlowID)"
                     [(ngModel)]="element.benArrivedFlag"
                     placeholder="Confirm Whether Beneficiary has arrived"
-                    [value]="true"
-                  ></mat-checkbox> -->
+                    [value]="'true'"
+                  ></mat-checkbox>
                 </td>
               </ng-container>
 
@@ -237,40 +237,35 @@
                 >
                   {{ currentLanguageSet?.bendetails?.action }}
                 </th>
-                <td></td>
-                <!-- <td>
+                <td mat-cell *matCellDef="let element">
                   <button
                     mat-raised-button
                     (click)="cancelTCRequest(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.cancelTc }}"
                     color="warn"
-                    [disabled]="element.specialist_flag != 1"
+                    [disabled]="element.specialist_flag !== 1"
                   >
                     {{ currentLanguageSet?.common?.cancel }}
                   </button>
-                </td>
-                <td>
                   <button
                     mat-raised-button
                     (click)="openScheduler(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.reschedule }}"
                     color="primary"
-                    [disabled]="element.specialist_flag != 4"
+                    [disabled]="element.specialist_flag !== 4"
                   >
                     {{ currentLanguageSet?.tc?.schedule }}
                   </button>
-                </td>
-                <td>
                   <button
                     mat-raised-button
                     (click)="initiateTC(element)"
                     matTooltip="{{ currentLanguageSet?.tc?.startTc }}"
                     color="accent"
-                    [disabled]="element.specialist_flag != 1"
+                    [disabled]="element.specialist_flag !== 1"
                   >
                     <span class="material-icons">voice_chat</span>
                   </button>
-                </td> -->
+                </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

@@ -2,10 +2,12 @@
 <div class="m-t-10" [formGroup]="generalDiagnosisForm">
   <div class="row">
     <div class="col-xs-12 col-xs-6 box" *ngIf="enableNCDCondition">
+      <mat-label class="mat-label-text"
+        >{{ current_language_set?.casesheet?.ncdCondition }}*</mat-label
+      >
       <mat-select
         class="input-full-width"
         name="ncdScreeningCondition"
-        placeholder="{{ current_language_set?.casesheet?.ncdCondition }}*"
         multiple
         (change)="changeNcdScreeningCondition($event, $event)"
         [(ngModel)]="temp"
@@ -20,10 +22,12 @@
       </mat-select>
     </div>
     <div class="col-xs-12 col-xs-6 box" *ngIf="!enableNCDCondition">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.casesheet?.ncdCondition
+      }}</mat-label>
       <mat-select
         class="input-full-width"
         name="ncdScreeningCondition"
-        placeholder="{{ current_language_set?.casesheet?.ncdCondition }}"
         multiple
         (change)="changeNcdScreeningCondition($event, $event)"
         [(ngModel)]="temp"
@@ -39,6 +43,9 @@
     </div>
     <div class="col-xs-12" *ngIf="isNcdScreeningConditionOther">
       <mat-form-field class="input-full-width">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.ncdConditionOther
+        }}</mat-label>
         <textarea
           matInput
           allowText="textAreaValidator"
@@ -47,18 +54,18 @@
           name="ncdScreeningConditionOther"
           maxlength="20"
           formControlName="ncdScreeningConditionOther"
-          placeholder="
-        {{ current_language_set?.ncdConditionOther }}"
         >
         </textarea>
       </mat-form-field>
     </div>
     <div class="col-xs-12 col-xs-6 box">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.casesheet?.typeOfNcd
+      }}</mat-label>
       <mat-select
         class="input-full-width"
         name="ncdCareType"
         formControlName="ncdCareType"
-        placeholder="{{ current_language_set?.casesheet?.typeOfNcd }}"
       >
         <mat-option
           *ngFor="let ncdCareType of ncdCareTypes"
@@ -70,6 +77,9 @@
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="display: none">
       <mat-form-field class="input-full-width">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.casesheet?.ncdComplication
+        }}</mat-label>
         <textarea
           matInput
           allowText="textAreaValidator"
@@ -78,7 +88,6 @@
           name="ncdComplication"
           maxlength="300"
           formControlName="ncdComplication"
-          placeholder="{{ current_language_set?.casesheet?.ncdComplication }}"
         >
         </textarea>
       </mat-form-field>

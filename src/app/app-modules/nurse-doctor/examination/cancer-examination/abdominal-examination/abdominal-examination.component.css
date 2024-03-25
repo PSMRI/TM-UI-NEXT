@@ -32,3 +32,7 @@ img {
     border-top: none;
     vertical-align: middle;
 }
+
+.cell_postion{
+    padding-top: 8px !important;
+}

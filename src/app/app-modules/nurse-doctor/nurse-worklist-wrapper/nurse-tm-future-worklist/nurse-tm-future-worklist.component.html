@@ -224,8 +224,7 @@
                 >
                   {{ currentLanguageSet?.bendetails?.action }}
                 </th>
-                <td></td>
-                <!-- <td>
+                <td mat-cell *matCellDef="let element">
                   <button
                     mat-raised-button
                     (click)="cancelTCRequest(element)"
@@ -235,8 +234,6 @@
                   >
                     {{ currentLanguageSet?.common?.cancel }}
                   </button>
-                </td>
-                <td>
                   <button
                     mat-raised-button
                     (click)="openScheduler(element)"
@@ -246,7 +243,7 @@
                   >
                     {{ currentLanguageSet?.tc?.schedule }}
                   </button>
-                </td> -->
+                </td>
               </ng-container>
               <td colspan="4">
                 <ul class="description" *ngIf="dataSource.data.length > 0">

@@ -9,9 +9,11 @@
     </div>
 
     <div class="col-xs-6 custom-cell">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.common?.select
+      }}</mat-label>
       <mat-select
         floatPlaceholder="never"
-        placeholder="{{ current_language_set?.common?.select }}"
         name="limitedMouthOpening"
         formControlName="limitedMouthOpening"
       >
@@ -22,153 +24,165 @@
       </mat-select>
     </div>
 
-    <div class="col-xs-6 custom-cell">
-      <span>{{
-        current_language_set?.ExaminationData?.cancerScreeningExamination?.oral
-          ?.premalignantLesions
-      }}</span>
+    <div class="col-12 row">
+      <div class="col-6 custom-cell cell_postion">
+        <span>{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.oral?.premalignantLesions
+        }}</span>
+      </div>
+
+      <div class="col-6 custom-cell">
+        <mat-radio-group
+          name="premalignantLesions"
+          formControlName="premalignantLesions"
+          (change)="checkWithPremalignantLesion()"
+        >
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="true"
+            >{{ current_language_set?.common?.yes }}</mat-radio-button
+          >
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="false"
+            >{{ current_language_set?.common?.no }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
     </div>
 
-    <div class="col-xs-6 custom-cell">
-      <mat-radio-group
-        name="premalignantLesions"
-        formControlName="premalignantLesions"
-        (change)="checkWithPremalignantLesion()"
+    <div class="col-12 row">
+      <div
+        class="col-6 custom-cell cell_postion"
+        *ngIf="premalignantLesions && premalignantLesions.value"
       >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="true"
-          >{{ current_language_set?.common?.yes }}</mat-radio-button
-        >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="false"
-          >{{ current_language_set?.common?.no }}</mat-radio-button
-        >
-      </mat-radio-group>
-    </div>
+        <span>{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.oral?.typeofPremalignantLesions
+        }}</span>
+      </div>
 
-    <div
-      class="col-xs-6 custom-cell"
-      *ngIf="premalignantLesions && premalignantLesions.value"
-    >
-      <span>{{
-        current_language_set?.ExaminationData?.cancerScreeningExamination?.oral
-          ?.typeofPremalignantLesions
-      }}</span>
-    </div>
-
-    <div
-      class="col-xs-6 custom-cell"
-      *ngIf="premalignantLesions && premalignantLesions.value"
-    >
-      <mat-select
-        multiple
-        floatPlaceholder="never"
-        placeholder="{{ current_language_set?.common?.select }}"
-        name="preMalignantLesionTypeList"
-        id="preMalignantLesionTypeList"
-        formControlName="preMalignantLesionTypeList"
+      <div
+        class="col-6 custom-cell"
+        *ngIf="premalignantLesions && premalignantLesions.value"
       >
-        <mat-option value="Leukoplakia"> Leukoplakia </mat-option>
-        <mat-option value="Sub muscus fibrosis">
-          Sub muscus fibrosis
-        </mat-option>
-        <mat-option value="Melanoplakia"> Melanoplakia </mat-option>
-        <mat-option value="Erythroplakia"> Erythroplakia </mat-option>
-        <mat-option value="Non healing mouth ulcer(>2 weeks)">
-          Non healing mouth ulcer(>2 weeks)</mat-option
+        <mat-label class="mat-label-text">{{
+          current_language_set?.common?.select
+        }}</mat-label>
+        <mat-select
+          multiple
+          floatPlaceholder="never"
+          name="preMalignantLesionTypeList"
+          id="preMalignantLesionTypeList"
+          formControlName="preMalignantLesionTypeList"
         >
-        <mat-option value="Any other lesion"> Any other lesion</mat-option>
-      </mat-select>
+          <mat-option value="Leukoplakia"> Leukoplakia </mat-option>
+          <mat-option value="Sub muscus fibrosis">
+            Sub muscus fibrosis
+          </mat-option>
+          <mat-option value="Melanoplakia"> Melanoplakia </mat-option>
+          <mat-option value="Erythroplakia"> Erythroplakia </mat-option>
+          <mat-option value="Non healing mouth ulcer(>2 weeks)">
+            Non healing mouth ulcer(>2 weeks)</mat-option
+          >
+          <mat-option value="Any other lesion"> Any other lesion</mat-option>
+        </mat-select>
+      </div>
     </div>
 
-    <div
-      class="col-xs-6 custom-cell"
-      *ngIf="premalignantLesions && premalignantLesions.value && showOther"
-    >
-      <span>{{
-        current_language_set?.ExaminationData?.cancerScreeningExamination?.oral
-          ?.otherlesion
-      }}</span>
-    </div>
+    <div class="col-12 row">
+      <div
+        class="col-6 custom-cell cell_postion"
+        *ngIf="premalignantLesions && premalignantLesions.value && showOther"
+      >
+        <span>{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.oral?.otherlesion
+        }}</span>
+      </div>
 
-    <div
-      class="col-xs-6 custom-cell other"
-      *ngIf="premalignantLesions && premalignantLesions.value && showOther"
-    >
-      <mat-form-field class="input-full-width">
-        <input
-          autocomplete="off"
-          matInput
-          allowText="inputFieldValidator"
-          defaultNull
-          maxlength="50"
-          placeholder="{{
+      <div
+        class="col-6 custom-cell other"
+        *ngIf="premalignantLesions && premalignantLesions.value && showOther"
+      >
+        <mat-form-field class="input-full-width">
+          <mat-label class="mat-label-text">{{
             current_language_set?.ExaminationData?.cancerScreeningExamination
               ?.oral?.otherlesion
-          }}"
-          name="otherLesionType"
-          id="otherLesionType"
-          formControlName="otherLesionType"
-        />
-      </mat-form-field>
+          }}</mat-label>
+          <input
+            autocomplete="off"
+            matInput
+            allowText="inputFieldValidator"
+            defaultNull
+            maxlength="50"
+            name="otherLesionType"
+            id="otherLesionType"
+            formControlName="otherLesionType"
+          />
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="col-xs-6 custom-cell">
-      <span>{{
-        current_language_set?.ExaminationData?.cancerScreeningExamination?.oral
-          ?.prolongedirritation
-      }}</span>
+    <div class="col-12 row">
+      <div class="col-6 custom-cell cell_postion">
+        <span>{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.oral?.prolongedirritation
+        }}</span>
+      </div>
+
+      <div class="col-6 custom-cell">
+        <mat-radio-group
+          name="prolongedIrritation"
+          formControlName="prolongedIrritation"
+        >
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="true"
+            >{{ current_language_set?.common?.yes }}</mat-radio-button
+          >
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="false"
+            >{{ current_language_set?.common?.no }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
     </div>
 
-    <div class="col-xs-6 custom-cell">
-      <mat-radio-group
-        name="prolongedIrritation"
-        formControlName="prolongedIrritation"
-      >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="true"
-          >{{ current_language_set?.common?.yes }}</mat-radio-button
-        >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="false"
-          >{{ current_language_set?.common?.no }}</mat-radio-button
-        >
-      </mat-radio-group>
-    </div>
+    <div class="col-12 row">
+      <div class="col-6 custom-cell cell_postion">
+        <span>{{
+          current_language_set?.ExaminationData?.cancerScreeningExamination
+            ?.oral?.chronicburningsensation
+        }}</span>
+      </div>
 
-    <div class="col-xs-6 custom-cell">
-      <span>{{
-        current_language_set?.ExaminationData?.cancerScreeningExamination?.oral
-          ?.chronicburningsensation
-      }}</span>
-    </div>
-
-    <div class="col-xs-6 custom-cell">
-      <mat-radio-group
-        name="chronicBurningSensation"
-        formControlName="chronicBurningSensation"
-      >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="true"
-          >{{ current_language_set?.common?.yes }}</mat-radio-button
+      <div class="col-6 custom-cell">
+        <mat-radio-group
+          name="chronicBurningSensation"
+          formControlName="chronicBurningSensation"
         >
-        <mat-radio-button
-          color="primary"
-          class="form-radio-btn"
-          [value]="false"
-          >{{ current_language_set?.common?.no }}</mat-radio-button
-        >
-      </mat-radio-group>
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="true"
+            >{{ current_language_set?.common?.yes }}</mat-radio-button
+          >
+          <mat-radio-button
+            color="primary"
+            class="form-radio-btn"
+            [value]="false"
+            >{{ current_language_set?.common?.no }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
     </div>
   </div>
 
@@ -188,6 +202,10 @@
 
   <div class="col-xs-12 textarea-full-height">
     <mat-form-field class="form-textarea col-xs-12">
+      <mat-label>{{
+        current_language_set?.ExaminationData?.cancerScreeningExamination
+          ?.abdominal?.observation
+      }}</mat-label>
       <textarea
         matInput
         allowText="textAreaValidator"
@@ -196,10 +214,6 @@
         matTextareaAutosize
         name="observation"
         formControlName="observation"
-        placeholder="{{
-          current_language_set?.ExaminationData?.cancerScreeningExamination
-            ?.abdominal?.observation
-        }}"
       ></textarea>
     </mat-form-field>
   </div>

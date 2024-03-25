@@ -1,8 +1,12 @@
-<!-- <div>
+<div>
   <div class="title info">
     <h4>{{ current_language_set?.mmuRBSDetails }}</h4>
-    <button class="pull-right close-btn" (click)="closeDialog()" md-icon-button>
-      <md-icon class="md-24">close</md-icon>
+    <button
+      class="pull-right close-btn"
+      (click)="closeDialog()"
+      mat-icon-button
+    >
+      <mat-icon class="md-24">close</mat-icon>
     </button>
   </div>
 
@@ -15,21 +19,38 @@
             <th id="rbsResult">{{ current_language_set?.rbsTestRemarks }}</th>
           </tr>
         </thead>
-        <tbody *ngIf="input==undefined || input ==null ||((input.rbsResult === null || input.rbsResult === undefined) && (input.rbsRemarks === null || input.rbsRemarks === undefined))">
+        <tbody
+          *ngIf="
+            input === undefined ||
+            input === null ||
+            ((input.rbsResult === null || input.rbsResult === undefined) &&
+              (input.rbsRemarks === null || input.rbsRemarks === undefined))
+          "
+        >
           <tr>
             <td colspan="2">
-              <h4 class='norecord'>{{current_language_set?.common?.noRecordFound}}</h4>
+              <h4 class="norecord">
+                {{ current_language_set?.common?.noRecordFound }}
+              </h4>
             </td>
           </tr>
         </tbody>
-        <tbody *ngIf="input !=undefined && input !=null && ((input.rbsResult !== null || input.rbsResult !== undefined) || (input.rbsRemarks !== null || input.rbsRemarks !== undefined))">
-          <tr >
+        <tbody
+          *ngIf="
+            input !== undefined &&
+            input !== null &&
+            (input.rbsResult !== null ||
+              input.rbsResult !== undefined ||
+              input.rbsRemarks !== null ||
+              input.rbsRemarks !== undefined)
+          "
+        >
+          <tr>
             <td>{{ input.rbsResult }}</td>
             <td>{{ input.rbsRemarks }}</td>
           </tr>
         </tbody>
       </table>
     </section>
-
   </section>
-</div> -->
+</div>

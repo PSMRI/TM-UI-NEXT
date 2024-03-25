@@ -10,14 +10,14 @@
       </h5>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.typeofJoint
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="joint_TypeOfJoint"
             formControlName="joint_TypeOfJoint"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.typeofJoint
-            }}"
           >
             <mat-option
               *ngFor="let typeOfJoint of selectTypeOfJoint"
@@ -29,14 +29,14 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="joint_Laterality"
             formControlName="joint_Laterality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
-            }}"
           >
             <mat-option
               *ngFor="let jointLaterality of selectJointLaterality"
@@ -48,14 +48,14 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="joint_Abnormality"
             formControlName="joint_Abnormality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
-            }}"
           >
             <mat-option
               *ngFor="let jointAbnormality of selectJointAbnormality"
@@ -79,14 +79,14 @@
       </h5>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="upperLimb_Laterality"
             formControlName="upperLimb_Laterality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
-            }}"
           >
             <mat-option
               *ngFor="let upperLimbsLaterality of selectUpperLimbsLaterality"
@@ -98,14 +98,14 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="upperLimb_Abnormality"
             formControlName="upperLimb_Abnormality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
-            }}"
           >
             <mat-option
               *ngFor="let upperLimbsAbnormality of selectUpperLimbsAbnormality"
@@ -129,14 +129,14 @@
       </h5>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="lowerLimb_Laterality"
             formControlName="lowerLimb_Laterality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.laterality
-            }}"
           >
             <mat-option
               *ngFor="let lowerLimbsLaterality of selectLowerLimbsLaterality"
@@ -148,14 +148,14 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+              ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
+          }}</mat-label>
           <mat-select
             class="select-full-width"
             name="lowerLimb_Abnormality"
             formControlName="lowerLimb_Abnormality"
-            placeholder="{{
-              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                ?.systemic?.musculoskeletalANC_OPD_PNC?.abnormality
-            }}"
           >
             <mat-option
               *ngFor="let lowerLimbsAbnormality of selectLowerLimbsAbnormality"
@@ -180,6 +180,10 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <mat-form-field class="input-full-width" class="textarea-full-width">
+            <mat-label class="mat-label-text">{{
+              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+                ?.systemic?.musculoskeletalANC_OPD_PNC?.chestwall
+            }}</mat-label>
             <textarea
               matInput
               allowText="textAreaValidator"
@@ -187,10 +191,6 @@
               matTextareaAutosize
               name="chestWall"
               formControlName="chestWall"
-              placeholder="{{
-                current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                  ?.systemic?.musculoskeletalANC_OPD_PNC?.chestwall
-              }}"
               maxlength="300"
             ></textarea>
           </mat-form-field>
@@ -198,6 +198,10 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <mat-form-field class="input-full-width" class="textarea-full-width">
+            <mat-label class="mat-label-text">{{
+              current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+                ?.systemic?.musculoskeletalANC_OPD_PNC?.spine
+            }}</mat-label>
             <textarea
               matInput
               allowText="textAreaValidator"
@@ -205,10 +209,6 @@
               matTextareaAutosize
               name="spine"
               formControlName="spine"
-              placeholder="{{
-                current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-                  ?.systemic?.musculoskeletalANC_OPD_PNC?.spine
-              }}"
               maxlength="300"
             ></textarea>
           </mat-form-field>

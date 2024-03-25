@@ -27,3 +27,7 @@ img {
 .box{
     height: 60px;
 }
+
+.cell_postion{
+    padding-top: 8px !important;
+}

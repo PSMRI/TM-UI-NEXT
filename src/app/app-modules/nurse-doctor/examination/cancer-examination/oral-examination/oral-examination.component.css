@@ -44,3 +44,7 @@ img {
 .other {
     padding-top: 0px;
 }
+
+.cell_postion{
+    padding-top: 8px !important;
+}

@@ -310,7 +310,7 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
     this.currentPage = 1;
   }
 
-  toggleArrivalStatus(evt: any, benFlowID: any, index: any) {
+  toggleArrivalStatus(evt: any, benFlowID: any) {
     let message: string;
     if (evt.checked) {
       message = this.currentLanguageSet.alerts.info.beneficiaryArrive;
@@ -333,7 +333,15 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
           if (filteredBenIndex >= 0) {
             this.beneficiaryList[filteredBenIndex].benArrivedFlag = evt.checked;
             this.filteredBeneficiaryList = this.beneficiaryList;
-
+            this.dataSource.data = this.beneficiaryList;
+            this.dataSource.paginator = this.paginator;
+            if (
+              this.filterTerm === null &&
+              this.filterTerm === undefined &&
+              this.filterTerm === ''
+            ) {
+              this.filterBeneficiaryList(this.filterTerm);
+            }
             const arrivedBeneficiary = this.beneficiaryList[filteredBenIndex];
             this.doctorService
               .updateBeneficiaryArrivalStatus({
@@ -348,7 +356,7 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
                 (res: any) => {
                   if (res && res.statusCode && res.data) {
                     this.confirmationService.alert(
-                      res.data.response,
+                      this.currentLanguageSet.alerts.info.confirmArrival,
                       'success',
                     );
                   } else {
@@ -365,12 +373,13 @@ export class NurseTmWorklistComponent implements OnInit, DoCheck, OnDestroy {
               );
           }
         } else {
-          this.pagedList[index].benArrivedFlag = !evt.checked;
+          // this.pagedList[index].benArrivedFlag = !evt.checked;
         }
       });
 
     console.log(benFlowID, '', evt, '', this.beneficiaryList);
   }
+
   cancelTCRequest(beneficiary: any) {
     console.log(
       beneficiary.benFlowID,

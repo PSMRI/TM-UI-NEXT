@@ -110,7 +110,7 @@
     <div class="col-6 box">
       <mat-form-field>
         <mat-label class="mat-label-text">{{
-          currentLanguageSet?.historyData?.opdNCDPNCHistory?.development
+          currentLanguageSet?.historyData?.opd_NCD_PNCHistory?.development
             ?.developmentalProblems
         }}</mat-label>
         <mat-select
@@ -118,10 +118,6 @@
           class="select-full-width"
           name="developmentalProblems"
           formControlName="developmentProblems"
-          placeholder="{{
-            currentLanguageSet?.historyData?.opd_NCD_PNCHistory?.development
-              ?.developmentalProblems
-          }}"
         >
           <mat-option value="Nil">Nil</mat-option>
           <mat-option value="Cerebral Palsy">Cerebral Palsy</mat-option>
