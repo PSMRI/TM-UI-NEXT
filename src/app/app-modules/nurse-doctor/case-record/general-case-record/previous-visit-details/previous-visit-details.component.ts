@@ -32,9 +32,7 @@ import { HttpServiceService } from 'src/app/app-modules/core/services/http-servi
   templateUrl: './previous-visit-details.component.html',
   styleUrls: ['./previous-visit-details.component.css'],
 })
-export class PreviousVisitDetailsComponent
-  implements OnInit, OnChanges, DoCheck
-{
+export class PreviousVisitDetailsComponent implements OnInit, DoCheck {
   lineChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -148,10 +146,6 @@ export class PreviousVisitDetailsComponent
     const getLanguageJson = new SetLanguageComponent(this.httpServiceService);
     getLanguageJson.setLanguage();
     this.current_language_set = getLanguageJson.currentLanguageObject;
-  }
-
-  ngOnChanges() {
-    console.log('current vitals', this.vitals);
   }
 
   loadGraphData() {

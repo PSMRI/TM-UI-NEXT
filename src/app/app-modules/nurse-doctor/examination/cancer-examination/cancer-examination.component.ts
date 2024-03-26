@@ -103,9 +103,9 @@ export class CancerExaminationComponent
   }
 
   ngOnChanges() {
-    if (this.mode === 'update') this.upadteCancerExaminationDetails();
+    if (String(this.mode) === 'update') this.upadteCancerExaminationDetails();
 
-    if (this.mode === 'view') this.fetchCancerExaminationDetails();
+    if (String(this.mode) === 'view') this.fetchCancerExaminationDetails();
 
     const specialistFlagString = localStorage.getItem('specialistFlag');
     if (

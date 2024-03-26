@@ -179,7 +179,7 @@ export class GeneralPersonalHistoryComponent
           this.alcoholMasterData = masterData.typeOfAlcoholProducts;
           this.addMasters();
 
-          if (this.mode === 'view') {
+          if (String(this.mode) === 'view') {
             const visitID = localStorage.getItem('visitID');
             const benRegID = localStorage.getItem('beneficiaryRegID');
             this.getGeneralHistory(benRegID, visitID);

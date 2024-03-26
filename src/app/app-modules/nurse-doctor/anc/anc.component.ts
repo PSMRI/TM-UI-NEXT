@@ -88,7 +88,7 @@ export class AncComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
   }
 
   ngOnChanges() {
-    if (this.mode === 'view') {
+    if (String(this.mode) === 'view') {
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.patchDataToFields(benRegID, visitID);
@@ -102,7 +102,7 @@ export class AncComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.patchDataToFields(benRegID, visitID);
     }
-    if (this.mode === 'update') {
+    if (String(this.mode) === 'update') {
       this.updatePatientANC(this.patientANCForm);
     }
   }

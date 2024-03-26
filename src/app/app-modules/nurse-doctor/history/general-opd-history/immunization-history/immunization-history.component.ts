@@ -153,7 +153,7 @@ export class ImmunizationHistoryComponent
       this.immunizationHistoryForm.controls['immunizationList']
     )).patchValue(this.temp);
 
-    if (this.mode === 'view') {
+    if (String(this.mode) === 'view') {
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.loadVaccineData(benRegID, visitID);

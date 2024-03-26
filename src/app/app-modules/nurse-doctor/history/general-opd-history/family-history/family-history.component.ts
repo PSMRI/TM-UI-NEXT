@@ -107,7 +107,7 @@ export class FamilyHistoryComponent implements OnInit, DoCheck, OnDestroy {
 
           this.addFamilyDisease();
 
-          if (this.mode === 'view') {
+          if (String(this.mode) === 'view') {
             const visitID = localStorage.getItem('visitID');
             const benRegID = localStorage.getItem('beneficiaryRegID');
             this.getGeneralHistory(benRegID, visitID);
@@ -199,7 +199,7 @@ export class FamilyHistoryComponent implements OnInit, DoCheck, OnDestroy {
   ) {
     const disease: any = event.value;
     const previousValue: any = this.previousSelectedDiseaseList[i];
-    if (disease.diseaseType === 'None') {
+    if (disease?.diseaseType === 'None') {
       this.removeFamilyDiseaseExecptNone();
     }
 

@@ -76,16 +76,16 @@ export class WorkareaComponent
   @ViewChild('sidenav')
   sidenav: any;
 
-  visitMode!: string;
-  ancMode!: string;
-  pncMode!: string;
-  vitalsMode!: string;
-  historyMode!: string;
-  examinationMode!: string;
-  caseRecordMode!: string;
-  referMode!: string;
-  ncdScreeningMode!: string;
-  quickConsultMode!: string;
+  visitMode: any;
+  ancMode: any;
+  pncMode: any;
+  vitalsMode: any;
+  historyMode: any;
+  examinationMode: any;
+  caseRecordMode: any;
+  referMode: any;
+  ncdScreeningMode: any;
+  quickConsultMode: any;
   newLookupMode!: boolean;
 
   visitCategory: any;
@@ -3285,33 +3285,33 @@ export class WorkareaComponent
    * update patient data
    */
   updatePatientVitals() {
-    this.vitalsMode = String('update');
+    this.vitalsMode = new String('update');
   }
 
   updatePatientHistory() {
     if (this.visitCategory !== 'Cancer Screening') {
       if (this.visitCategory === 'NCD screening') {
         if (this.checkNCDScreeningHistory(this.patientMedicalForm))
-          this.historyMode = String('update');
+          this.historyMode = new String('update');
       } else {
         if (this.checkPastObstericHistory(this.patientMedicalForm))
-          this.historyMode = String('update');
+          this.historyMode = new String('update');
       }
     } else {
-      this.historyMode = String('update');
+      this.historyMode = new String('update');
     }
   }
 
   updatePatientExamination() {
-    this.examinationMode = String('update');
+    this.examinationMode = new String('update');
   }
 
   updatePatientANC() {
-    this.ancMode = String('update');
+    this.ancMode = new String('update');
   }
 
   updatePatientPNC() {
-    this.pncMode = String('update');
+    this.pncMode = new String('update');
   }
 
   updatePatientNcdScreening() {
@@ -3333,7 +3333,7 @@ export class WorkareaComponent
         this.current_language_set.alerts.info.mandatoryFields,
         required,
       );
-    } else this.ncdScreeningMode = String('update');
+    } else this.ncdScreeningMode = new String('update');
   }
 
   ngOnDestroy() {

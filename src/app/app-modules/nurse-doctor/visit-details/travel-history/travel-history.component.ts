@@ -120,7 +120,7 @@ export class TravelHistoryComponent
     this.currentLanguageSet = getLanguageJson.currentLanguageObject;
   }
   ngOnChanges() {
-    if (this.mode === 'view') {
+    if (String(this.mode) === 'view') {
       this.readTravel = true;
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
@@ -157,19 +157,18 @@ export class TravelHistoryComponent
           value.data.covidDetails !== null
         ) {
           this.covidHistoryDetails = value.data.covidDetails;
-          if (value.data.covidDetails.suspectedStatus) {
+          if (value.data.covidDetails?.suspectedStatus) {
             this.patientCovidForm.patchValue({ suspectedStatusUI: 'YES' });
           } else {
             this.patientCovidForm.patchValue({ suspectedStatusUI: 'NO' });
           }
-          this.recommendationStatus = value.data.covidDetails.recommendation;
-          this.recomArray = this.recommendationStatus.shift();
+          this.recommendationStatus = value.data.covidDetails?.recommendation;
+          this.recomArray = this.recommendationStatus?.shift();
           console.log('RecomA' + this.recomArray);
-          const testtravelarr = this.recomArray.join('\n');
+          const testtravelarr = this.recomArray?.join('\n');
           this.recommendationText = testtravelarr;
           console.log('Recom' + this.recommendationText);
-          console.log('TravelStatus' + this.covidHistoryDetails.travelStatus);
-          if (this.covidHistoryDetails.travelStatus === true) {
+          if (this.covidHistoryDetails?.travelStatus === true) {
             this.patientCovidForm.patchValue({ travelStatus: 'true' });
           } else {
             this.patientCovidForm.patchValue({ travelStatus: 'false' });
@@ -185,14 +184,14 @@ export class TravelHistoryComponent
             );
           }
 
-          if (value.data.covidDetails.travelList.length >= 0) {
+          if (value.data.covidDetails?.travelList.length >= 0) {
             this.istravelStatus = true;
           }
 
           this.travelListStatus();
           if (
-            value.data.covidDetails.travelList[0] === 'Domestic' ||
-            value.data.covidDetails.travelList[1] === 'Domestic'
+            value.data.covidDetails?.travelList[0] === 'Domestic' ||
+            value.data.covidDetails?.travelList[1] === 'Domestic'
           ) {
             this.domtravel = true;
             this.patientCovidForm.patchValue({
@@ -203,29 +202,31 @@ export class TravelHistoryComponent
               fromStateDom: value.data.covidDetails.fromStateDom,
             });
 
-            this.GetDistrictsFromDom(value.data.covidDetails.fromStateDom);
+            this.GetDistrictsFromDom(value.data.covidDetails?.fromStateDom);
             this.patientCovidForm.patchValue({
               fromDistrictDom: value.data.covidDetails.fromDistrictDom,
             });
-            this.GetSubDistrictFromDom(value.data.covidDetails.fromDistrictDom);
+            this.GetSubDistrictFromDom(
+              value.data.covidDetails?.fromDistrictDom,
+            );
             this.patientCovidForm.patchValue({
               fromSubDistrictDom: value.data.covidDetails.fromSubDistrictDom,
             });
             this.patientCovidForm.patchValue({
               toStateDom: value.data.covidDetails.toStateDom,
             });
-            this.GetDistrictsToDom(value.data.covidDetails.toStateDom);
+            this.GetDistrictsToDom(value.data.covidDetails?.toStateDom);
             this.patientCovidForm.patchValue({
               toDistrictDom: value.data.covidDetails.toDistrictDom,
             });
-            this.getSubDistrictToDom(value.data.covidDetails.toDistrictDom);
+            this.getSubDistrictToDom(value.data.covidDetails?.toDistrictDom);
             this.patientCovidForm.patchValue({
               toSubDistrictDom: value.data.covidDetails.toSubDistrictDom,
             });
           }
           if (
-            value.data.covidDetails.travelList[0] === 'International' ||
-            value.data.covidDetails.travelList[1] === 'International'
+            value.data.covidDetails?.travelList[0] === 'International' ||
+            value.data.covidDetails?.travelList[1] === 'International'
           ) {
             this.intertravel = true;
             this.patientCovidForm.patchValue({
@@ -241,7 +242,7 @@ export class TravelHistoryComponent
             this.patientCovidForm.patchValue({
               toCountryInter: value.data.covidDetails.toCountryInter,
             });
-            this.getCitiesToInter(value.data.covidDetails.toCountryInter);
+            this.getCitiesToInter(value.data.covidDetails?.toCountryInter);
             this.patientCovidForm.patchValue({
               toCityInter: value.data.covidDetails.toCityInter,
             });

@@ -217,7 +217,7 @@ export class GeneralPatientVitalsComponent
       this.showGlucoseQC = false;
     }
 
-    if (this.mode === 'view') {
+    if (String(this.mode) === 'view') {
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
       this.getGeneralVitalsData();
@@ -234,7 +234,7 @@ export class GeneralPatientVitalsComponent
       this.getGeneralVitalsData();
     }
 
-    if (this.mode === 'update') {
+    if (String(this.mode) === 'update') {
       this.doctorScreen = true;
       this.updateGeneralVitals(this.patientVitalsForm);
     }

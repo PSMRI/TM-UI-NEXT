@@ -123,7 +123,7 @@ export class NcdScreeningComponent
     this.currentLanguageSet = getLanguageJson.currentLanguageObject;
   }
   ngOnChanges() {
-    if (this.mode === 'update') {
+    if (String(this.mode) === 'update') {
       this.updateNCDScreeningDetails();
     }
   }
@@ -149,7 +149,7 @@ export class NcdScreeningComponent
           );
           // this.ncdTests = data.ncdTests;
 
-          if (this.mode === 'view') {
+          if (String(this.mode) === 'view') {
             const visitID = localStorage.getItem('visitID');
             const benRegID = localStorage.getItem('beneficiaryRegID');
             this.getNCDScreeingDetails(benRegID, visitID);

@@ -379,7 +379,7 @@ export class PncDiagnosisComponent
   }
 
   checkConfirmatoryDiagnosisValidity(confirmatoryDiagnosis: any) {
-    const temp = confirmatoryDiagnosis.value;
+    const temp = confirmatoryDiagnosis?.value;
     if (temp.term && temp.conceptID) {
       return false;
     } else {

@@ -214,6 +214,7 @@ export class TestAndRadiologyComponent implements OnInit, OnDestroy, DoCheck {
           this.labResults = res.data.LabReport.filter((lab: any) => {
             return lab.procedureType === 'Laboratory';
           });
+          this.filteredLabResults = this.labResults;
 
           if (visitCategory === 'NCD screening') {
             this.filteredLabResults.forEach((element: any) => {
@@ -540,7 +541,7 @@ export class TestAndRadiologyComponent implements OnInit, OnDestroy, DoCheck {
 
   showArchivedRadiologyTestResult(radiologyReport: any) {
     console.log('reports', radiologyReport);
-    const ViewTestReport = this.dialog.open(ViewTestReportComponent, {
+    this.dialog.open(ViewTestReportComponent, {
       data: radiologyReport,
       width: 0.8 * window.innerWidth + 'px',
       panelClass: 'dialog-width',
