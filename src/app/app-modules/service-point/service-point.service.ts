@@ -22,15 +22,11 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ServicePointService {
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getServicePoints(userId: string, serviceProviderId: string) {
     return this.http.post(environment.servicePointUrl, {

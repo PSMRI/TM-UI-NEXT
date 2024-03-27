@@ -58,7 +58,6 @@ export class PatientVisitDetailsComponent
   showPregnancyStatus = true;
   currentLanguageSet: any;
   disableVisit = false;
-  cbacData: any = [];
 
   constructor(
     private masterdataService: MasterdataService,
@@ -68,7 +67,6 @@ export class PatientVisitDetailsComponent
   ) {}
 
   ngOnInit() {
-    this.cbacData = this.beneficiaryDetailsService.cbacData;
     this.assignSelectedLanguage();
     this.getBenificiaryDetails();
     this.getVisitReasonAndCategory();

@@ -82,13 +82,9 @@ export class ServicePointComponent implements OnInit, DoCheck {
   servicePointForm = this.fb.group({
     vanID: ['', Validators.required],
     stateID: ['', Validators.required],
-    stateName: ['', Validators.required],
     districtID: ['', Validators.required],
-    districtName: ['', Validators.required],
     blockID: ['', Validators.required],
-    blockName: ['', Validators.required],
     districtBranchID: ['', Validators.required],
-    villageName: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -163,9 +159,7 @@ export class ServicePointComponent implements OnInit, DoCheck {
     console.log('selected Van ID', selectedVanID);
 
     const serviceLineDetails: any = this.vansList.find(
-      (van: any) =>
-        // this.vanID === van.vanID)[0];
-        van.vanID === selectedVanID,
+      (van: any) => van.vanID === selectedVanID,
     );
     if (serviceLineDetails)
       localStorage.setItem(
@@ -295,13 +289,9 @@ export class ServicePointComponent implements OnInit, DoCheck {
   saveLocationDataToStorage() {
     const locationData = {
       stateID: this.servicePointForm.controls.stateID.value,
-      // stateName : this.stateName,
       districtID: this.servicePointForm.controls.districtID.value,
-      districtName: this.servicePointForm.controls.districtName.value,
-      blockName: this.servicePointForm.controls.blockName.value,
       blockID: this.servicePointForm.controls.blockID.value,
       subDistrictID: this.servicePointForm.controls.districtBranchID.value,
-      villageName: this.servicePointForm.controls.villageName.value,
     };
 
     // Convert the object into a JSON string

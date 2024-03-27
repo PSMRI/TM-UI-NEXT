@@ -140,6 +140,7 @@
                 color="primary"
                 (click)="saveLocationDataToStorage()"
                 class="mat_blue p-l-r-38 f-s-18"
+                [disabled]="!servicePointForm.valid"
               >
                 {{ currentLanguageSet?.spoke_selection?.continue }}
               </button>

@@ -236,7 +236,9 @@
               class="pull-center"
               style="margin-top: 35px; text-align: center"
             >
-              <strong>{{ current_language_set?.noRecordsFound }}</strong>
+              <strong>{{
+                current_language_set?.common?.noRecordsFound
+              }}</strong>
             </div>
             <mat-paginator
               [hidden]="dataSource.data.length === 0"
@@ -627,7 +629,9 @@
               style="margin-top: 5px; text-align: center"
               *ngIf="historyOfTM.data.length === 0"
             >
-              <strong>{{ current_language_set?.noRecordsFound }}</strong>
+              <strong>{{
+                current_language_set?.common?.noRecordsFound
+              }}</strong>
             </div>
             <mat-paginator
               [hidden]="historyOfTM.data.length === 0"
@@ -799,7 +803,7 @@
             style="margin-top: 5px; text-align: center"
             *ngIf="historyOfMCTS.data.length === 0"
           >
-            <strong>{{ current_language_set?.noRecordsFound }}</strong>
+            <strong>{{ current_language_set?.common?.noRecordsFound }}</strong>
           </div>
           <mat-paginator
             [hidden]="historyOfMCTS.data.length === 0"
@@ -1021,7 +1025,7 @@
             style="margin-top: 5px; text-align: center"
             *ngIf="historyOf104.data.length === 0"
           >
-            <strong>{{ current_language_set?.noRecordsFound }}</strong>
+            <strong>{{ current_language_set?.common?.noRecordsFound }}</strong>
           </div>
           <mat-paginator
             [hidden]="historyOf104.data.length === 0"
