@@ -1,17 +1,16 @@
-<!-- <div class="title info">
+<div class="title info">
   <h4>{{ currentLanguageSet?.generateABHA }}</h4>
-  <button
-    class="pull-right close-btn"
-    mdDialogClose
+  <mat-icon
+    class="md-24 pull-right close-btn"
+    matDialogClose
     (click)="closeDialog()"
-    md-icon-button
+    mat-icon-button
+    >close</mat-icon
   >
-    <md-icon class="md-24">close</md-icon>
-  </button>
 </div>
 <div class="overlay" *ngIf="showProgressBar">
   <div class="overlay-content">
-    <md-spinner></md-spinner>
+    <mat-spinner></mat-spinner>
   </div>
 </div>
 <br />
@@ -20,60 +19,67 @@
   class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
   *ngIf="enablehealthIdOTPForm === false"
 >
-  <label
+  <mat-label
     ><strong
       >{{ currentLanguageSet?.registeredContactNumberIs }}
       {{ mobileNumber }}</strong
-    ></label
+    ></mat-label
   >
 </div>
 
 <div
   class="col-xs-12 col-sm-12"
+  style="overflow: hidden !important"
   [formGroup]="healthIdMobileForm"
   *ngIf="enablehealthIdOTPForm === false"
 >
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <md-checkbox (change)="enableMobileNo($event)"
+      <mat-checkbox (change)="enableMobileNo($event)"
         >{{ currentLanguageSet?.alternateNumber }}
-      </md-checkbox>
+      </mat-checkbox>
     </div>
 
-    <div *ngIf="altNum === true" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <md-form-field [style.width]="'100%'">
+    <div
+      *ngIf="altNum === true"
+      class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+    >
+      <mat-form-field [style.width]="'100%'">
+        <mat-label>{{ currentLanguageSet?.mobileNumber }}</mat-label>
         <input
           defaultNull
           autocomplete="off"
           allowText="number"
-          autofocus
           required
-          mdInput
+          matInput
           minlength="10"
           maxlength="10"
           [min]="10"
-          placeholder="{{ currentLanguageSet?.mobileNumber }}"
           formControlName="mobileNo"
           required
         />
-        <md-error *ngIf="healthIdMobileForm.controls.mobileNo.errors?.required">
-          {{ currentLanguageSet?.benDetailsAlert?.mobNoMandatory }}</md-error
+        <mat-error
+          *ngIf="healthIdMobileForm.controls['mobileNo'].errors?.['required']"
         >
-        <md-error
-          *ngIf="healthIdMobileForm.controls.mobileNo.errors?.minlength"
+          {{ currentLanguageSet?.benDetailsAlert?.mobNoMandatory }}</mat-error
         >
-          {{ currentLanguageSet?.benDetailsAlert?.minDigitsRequired }}</md-error
+        <mat-error
+          *ngIf="healthIdMobileForm.controls['mobileNo'].errors?.['minlength']"
         >
-      </md-form-field>
+          {{
+            currentLanguageSet?.benDetailsAlert?.minDigitsRequired
+          }}</mat-error
+        >
+      </mat-form-field>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <button
         [disabled]="!healthIdMobileForm.valid && altNum"
         (click)="getHealthIdOtp()"
-        md-raised-button
+        mat-raised-button
         color="accent"
-        class="pull-right font-regular f-s-18 m-t-8"
+        class="pull-right font-regular f-s-18 m-t-8 mat_blue"
       >
         {{ currentLanguageSet?.generateOTP }}
       </button>
@@ -88,38 +94,41 @@
 >
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <md-form-field [style.width]="'100%'">
+      <mat-form-field [style.width]="'100%'">
+        <mat-label>{{ currentLanguageSet?.enterOTP }}</mat-label>
         <input
           defaultNull
           autocomplete="off"
-          autofocus
           required
-          mdInput
+          matInput
           type="text"
-          placeholder="{{ currentLanguageSet?.enterOTP }}"
           formControlName="otp"
           minlength="6"
           maxlength="6"
           (keypress)="numberOnly($event)"
           required
         />
-      </md-form-field>
+      </mat-form-field>
     </div>
     <div class="col-sm-12 step-btn m-b-20" style="text-align: right">
       <button
         id="cancelButton"
-        md-raised-button
+        mat-raised-button
         type="button"
         color="primary"
+        class="mat_blue"
         (click)="getHealthIdOtp()"
+        style="margin: 5px"
       >
         {{ currentLanguageSet?.resendOTP }}
       </button>
       <button
         id="submitButton"
-        md-raised-button
+        mat-raised-button
         type="accent"
         color="accent"
+        class="mat_blue"
+        style="margin-right: 10px"
         [disabled]="!healthIdOTPForm.valid || !checkOTP()"
         (click)="verifyOTPOnSubmit()"
       >
@@ -127,4 +136,4 @@
       </button>
     </div>
   </div>
-</div> -->
+</div>

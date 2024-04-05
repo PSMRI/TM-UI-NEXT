@@ -2,13 +2,13 @@
   <div class="title info">
     <h4 *ngIf = "((!healthIDMapping && !enablehealthIdOTPForm && !searchPopup) || (searchDetails !== undefined && searchDetails !== null && searchDetails.length > 0))">{{currentLanguageSet?.abhaDetails}}</h4>
     <h4 *ngIf = "(healthIDMapping || enablehealthIdOTPForm) && !searchPopup">{{currentLanguageSet?.aBHACareContextMapping}}</h4>
-    <button class="pull-right close-btn" tooltip="{{currentLanguageSet?.common?.close}}" mdDialogClose (click)="closeDialog()" md-icon-button>
-      <md-icon class="md-24">close</md-icon>
+    <button class="pull-right close-btn" tooltip="{{currentLanguageSet?.common?.close}}" matDialogClose (click)="closeDialog()" mat-icon-button>
+      <mat-icon class="md-24">close</mat-icon>
     </button>
   </div>
   <div class="overlay" *ngIf="showProgressBar">
     <div class="overlay-content">
-      <md-spinner></md-spinner>
+      <mat-spinner></mat-spinner>
     </div>
   </div>
   <section class="message">
@@ -72,8 +72,8 @@
             <td >{{ data?.createdDate}} </td>
             <td >{{ data?.authenticationMode}} </td>
             <td>
-              <button md-icon-button  tooltip="{{currentLanguageSet?.printABHACard}}" (click)="printHealthIDCard(data)" class="pull-right  width-20px">
-                <md-icon>print</md-icon>
+              <button mat-icon-button  tooltip="{{currentLanguageSet?.printABHACard}}" (click)="printHealthIDCard(data)" class="pull-right  width-20px">
+                <mat-icon>print</mat-icon>
               </button> 
             </td>
           </tr>
@@ -112,10 +112,10 @@
             <td >{{ data?.createdDate}} </td>
             <td >{{ data?.authenticationMode}} </td>
             <td>
-              <md-radio-group [(ngModel)]="chooseHealthID" >
-                <md-radio-button color="primary" class="radio-btnn" [value] = "data" (change)="onRadioChange(data)">
-                </md-radio-button>
-              </md-radio-group>
+              <mat-radio-group [(ngModel)]="chooseHealthID" >
+                <mat-radio-button color="primary" class="radio-btnn" [value] = "data" (change)="onRadioChange(data)">
+                </mat-radio-button>
+              </mat-radio-group>
             </td>
           </tr>
         </tbody>
@@ -125,7 +125,7 @@
               <md2-pagination></md2-pagination>
             </td>
             <td colspan="3" *ngIf="healthIDArray?.length!==0">
-              <button md-raised-button class="pull-right" color='primary'  (click)="generateOtpForMapping()" 
+              <button mat-raised-button class="pull-right" color='primary'  (click)="generateOtpForMapping()" 
               [disabled]="(selectedHealthID === undefined || selectedHealthID === null)">{{currentLanguageSet?.generateOTP}}</button>
             </td>
           </tr>
@@ -138,13 +138,13 @@
 <div *ngIf="enablehealthIdOTPForm   && !searchPopup" class="col-xs-12 col-sm-12" [formGroup]="healthIdOTPForm" >
   <div class="row">
     <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <md-form-field [style.width]="'100%'" >
+      <mat-form-field [style.width]="'100%'" >
         <input
           defaultNull
           autocomplete="off"
           autofocus
           required
-          mdInput 
+          matInput 
           type="text"
           placeholder="{{currentLanguageSet?.enterOTP}}"
           formControlName="otp"
@@ -153,12 +153,12 @@
           (keypress)="numberOnly($event)"
         required
         />
-        </md-form-field>
+        </mat-form-field>
     </div>
     <div class="col-sm-12 step-btn m-b-20" style="text-align:right">
-      <button id="cancelButton" md-raised-button type="button" color="primary"
+      <button id="cancelButton" mat-raised-button type="button" color="primary"
       (click)="resendOtp()">{{currentLanguageSet?.resendOTP}}</button>
-          <button id="submitButton"  md-raised-button type="accent" color="accent"
+          <button id="submitButton"  mat-raised-button type="accent" color="accent"
           [disabled]="!healthIdOTPForm.valid || !(checkOTP())"  (click)="verifyOtp()">{{currentLanguageSet?.common?.submit}}</button>
     </div>
   </div>

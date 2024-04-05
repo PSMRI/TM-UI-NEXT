@@ -72,12 +72,20 @@ export class PncComponent implements OnInit, DoCheck, OnChanges, OnDestroy {
   dob!: Date;
 
   ngOnChanges() {
-    if (String(this.mode) === 'view') {
+    if (
+      this.mode !== undefined &&
+      this.mode !== null &&
+      String(this.mode).toLowerCase() === 'view'
+    ) {
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
     }
 
-    if (String(this.mode) === 'update') {
+    if (
+      this.mode !== undefined &&
+      this.mode !== null &&
+      String(this.mode).toLowerCase() === 'update'
+    ) {
       this.updatePatientPNC(this.patientPNCForm);
     }
   }

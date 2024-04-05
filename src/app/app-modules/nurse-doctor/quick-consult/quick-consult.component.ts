@@ -337,7 +337,6 @@ export class QuickConsultComponent
     this.filteredDrugMaster = [];
     drugMasterCopy.forEach((element: any) => {
       if (this.currentPrescription.formID === element.itemFormID) {
-        // element["isEDL"] = true;
         this.filteredDrugMaster.push(element);
       }
     });

@@ -353,51 +353,7 @@
       </mat-radio-group>
     </div>
   </div>
-  <div *ngIf="hideForANCAndQC">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-      <div class="form-group">
-        <span class="control-label">{{
-          current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-            ?.genExamination?.quickening
-        }}</span>
-        <div class="clearfix"></div>
-        <mat-radio-group
-          id="quickening"
-          name="quickening"
-          formControlName="quickening"
-        >
-          <mat-radio-button color="primary" class="radio-btn" value="Present">{{
-            current_language_set?.common?.present
-          }}</mat-radio-button>
-          <mat-radio-button color="primary" class="radio-btn" value="Absent">{{
-            current_language_set?.common?.absent
-          }}</mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-      <div class="form-group">
-        <span class="control-label">{{
-          current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
-            ?.genExamination?.foetalmovements
-        }}</span>
-        <div class="clearfix"></div>
-        <mat-radio-group
-          id="foetalMovements"
-          name="foetalMovements"
-          formControlName="foetalMovements"
-        >
-          <mat-radio-button color="primary" class="radio-btn" value="Present">{{
-            current_language_set?.common?.present
-          }}</mat-radio-button>
-          <mat-radio-button color="primary" class="radio-btn" value="Absent">{{
-            current_language_set?.common?.absent
-          }}</mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </div>
-  </div>
   <div
     class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box"
     [hidden]="edema !== 'Present'"
@@ -456,4 +412,50 @@
       </mat-radio-group>
     </div>
   </div>
+
+  <!-- <div *ngIf="hideForANCAndQC" class="row"> -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box" *ngIf="hideForANCAndQC">
+    <div class="form-group">
+      <span class="control-label">{{
+        current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+          ?.genExamination?.quickening
+      }}</span>
+      <div class="clearfix"></div>
+      <mat-radio-group
+        id="quickening"
+        name="quickening"
+        formControlName="quickening"
+      >
+        <mat-radio-button color="primary" class="radio-btn" value="Present">{{
+          current_language_set?.common?.present
+        }}</mat-radio-button>
+        <mat-radio-button color="primary" class="radio-btn" value="Absent">{{
+          current_language_set?.common?.absent
+        }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box" *ngIf="hideForANCAndQC">
+    <div class="form-group">
+      <span class="control-label">{{
+        current_language_set?.ExaminationData?.ANC_OPD_PNCExamination
+          ?.genExamination?.foetalmovements
+      }}</span>
+      <div class="clearfix"></div>
+      <mat-radio-group
+        id="foetalMovements"
+        name="foetalMovements"
+        formControlName="foetalMovements"
+      >
+        <mat-radio-button color="primary" class="radio-btn" value="Present">{{
+          current_language_set?.common?.present
+        }}</mat-radio-button>
+        <mat-radio-button color="primary" class="radio-btn" value="Absent">{{
+          current_language_set?.common?.absent
+        }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <!-- </div> -->
 </div>

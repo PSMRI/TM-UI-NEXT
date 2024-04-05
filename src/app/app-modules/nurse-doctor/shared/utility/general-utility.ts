@@ -814,9 +814,9 @@ export class GeneralUtils {
   createPatientPNCForm() {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     return this.fb.group({
-      deliveryPlace: null,
+      deliveryPlace: [null, Validators.required],
       otherDeliveryPlace: null,
-      deliveryType: null,
+      deliveryType: [null, Validators.required],
       dDate: null,
       deliveryComplication: null,
       otherDeliveryComplication: null,

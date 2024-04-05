@@ -184,7 +184,6 @@ export class PastObstericHistoryComponent
     this.nurseMasterDataSubscription =
       this.masterdataService.nurseMasterData$.subscribe((masterData) => {
         if (masterData) {
-          this.nurseMasterDataSubscription.unsubscribe();
           this.masterData = masterData;
           this.selectDeliveryTypes = this.masterData.deliveryTypes;
 

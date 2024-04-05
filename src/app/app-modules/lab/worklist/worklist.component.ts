@@ -157,7 +157,6 @@ export class WorklistComponent implements OnInit, OnDestroy, DoCheck {
         benName: element.benName,
         genderName: element.genderName || 'Not Available',
         age: element.age || 'Not Available',
-        // statusMessage: element.statusMessage || 'Not Available',
         VisitCategory: element.VisitCategory || 'Not Available',
         benVisitNo: element.benVisitNo || 'Not Available',
         districtName: element.districtName || 'Not Available',

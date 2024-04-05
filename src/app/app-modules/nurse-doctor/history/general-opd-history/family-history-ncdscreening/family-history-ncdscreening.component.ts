@@ -204,7 +204,6 @@ export class FamilyHistoryNcdscreeningComponent
             value.diseaseType !== null &&
             value.diseaseType.diseaseType !== 'Other'
           ) {
-            // }
             return value.diseaseType.diseaseType === item.diseaseType;
           } else return false;
         });
@@ -260,7 +259,7 @@ export class FamilyHistoryNcdscreeningComponent
         }
       });
 
-      const totalLength = this.diseaseSelectList.length + 1; //= 3
+      const totalLength = this.diseaseSelectList.length + 1;
       this.diseaseSelectList.splice(totalLength, 0, result.slice());
       this.sortDiseaseList(this.diseaseSelectList[index + 1]);
     }

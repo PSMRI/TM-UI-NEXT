@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationUtils } from '../shared/utility/registration-utility';
 import { RegistrarService } from '../shared/services/registrar.service';
 import { HealthIdOtpGenerationComponent } from '../health-id-otp-generation/health-id-otp-generation.component';
@@ -51,7 +51,7 @@ export class GenerateAbhaComponent implements OnInit {
   createAbhaGenerateForm() {
     return this.fb.group({
       modeofAbhaHealthID: null,
-      aadharNumber: null,
+      aadharNumber: [null, Validators.required],
     });
   }
 
@@ -78,13 +78,14 @@ export class GenerateAbhaComponent implements OnInit {
     if (this.modeofAbhaHealthID === 'AADHAR') {
       this.generateHealthIDCard();
       this.getOTP();
-    } else if (this.modeofAbhaHealthID === 'BIOMETRIC') {
-      this.aadharNumber = this.abhaGenerateForm.controls['aadharNumber'].value;
-      this.router.navigate([
-        '/registrar/rdServiceBio/',
-        { aadharNumber: this.aadharNumber },
-      ]);
     }
+    // else if (this.modeofAbhaHealthID === 'BIOMETRIC') {
+    //   this.aadharNumber = this.abhaGenerateForm.controls['aadharNumber'].value;
+    //   this.router.navigate([
+    //     '/registrar/rdServiceBio/',
+    //     { aadharNumber: this.aadharNumber },
+    //   ]);
+    // }
   }
 
   generateHealthIDCard() {
@@ -97,8 +98,8 @@ export class GenerateAbhaComponent implements OnInit {
 
   getOTP() {
     const dialogRef = this.dialog.open(HealthIdOtpGenerationComponent, {
-      height: '250px',
-      width: '420px',
+      height: '320px',
+      width: '500px',
       data: {
         aadharNumber: this.aadharNumber,
         healthIdMode: this.modeofAbhaHealthID,

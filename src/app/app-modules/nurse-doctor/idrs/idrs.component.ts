@@ -509,7 +509,6 @@ export class IdrsComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     this.systolicBpValueSubscription.unsubscribe();
     this.diastolicBpValueSubscription.unsubscribe();
     this.hypertensionSelectedFlagSubscription.unsubscribe();
-    // this.idrsScoreService.clearScoreFlag();
   }
   getPreviousVisit() {
     const obj = {
@@ -920,7 +919,6 @@ export class IdrsComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
                     60
                 ) {
                   disease.flag = false;
-                  // disease.disabled = true;
                 }
                 if (
                   disease !== undefined &&

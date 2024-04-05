@@ -15,61 +15,63 @@
             class="m-t-20"
           >
             <ng-container [formGroupName]="i">
-              <div class="col-xs-12 col-sm-9 box">
-                <mat-form-field class="input-full-width">
-                  <input
-                    matInput
-                    allowText="inputFieldValidator"
-                    appDiagnosisSearch
-                    name="viewProvisionalDiagnosisProvided"
-                    formControlName="viewProvisionalDiagnosisProvided"
-                    [diagnosisListForm]="diagnosis"
-                    maxlength="100"
-                    minlength="3"
-                    [addedDiagnosis]="
-                      generalDiagnosisForm.value.provisionalDiagnosisList
+              <div class="row">
+                <div class="col-xs-12 col-sm-9 box">
+                  <mat-form-field class="input-full-width">
+                    <input
+                      matInput
+                      allowText="inputFieldValidator"
+                      appDiagnosisSearch
+                      name="viewProvisionalDiagnosisProvided"
+                      formControlName="viewProvisionalDiagnosisProvided"
+                      [diagnosisListForm]="diagnosis"
+                      maxlength="100"
+                      minlength="3"
+                      [addedDiagnosis]="
+                        generalDiagnosisForm.value.provisionalDiagnosisList
+                      "
+                    />
+                    <mat-icon
+                      class="search-btn"
+                      matSuffix
+                      appDiagnosisSearch
+                      [diagnosisListForm]="diagnosis"
+                      [addedDiagnosis]="
+                        generalDiagnosisForm.value.provisionalDiagnosisList
+                      "
+                      >search</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-3 box pull-right">
+                  <button
+                    mat-mini-fab
+                    type="button"
+                    color="warn"
+                    class="mat_warn_circle"
+                    *ngIf="
+                      i !== 0 ||
+                      (i === 0 &&
+                        (diagnosis.touched ||
+                          diagnosis.get('viewProvisionalDiagnosisProvided')
+                            ?.disabled))
                     "
-                  />
-                  <mat-icon
-                    class="search-btn"
-                    matSuffix
-                    appDiagnosisSearch
-                    [diagnosisListForm]="diagnosis"
-                    [addedDiagnosis]="
-                      generalDiagnosisForm.value.provisionalDiagnosisList
-                    "
-                    >search</mat-icon
+                    (click)="removeProvisionalDiagnosis(i, diagnosis)"
                   >
-                </mat-form-field>
-              </div>
-              <div class="col-xs-12 col-sm-3 box pull-right">
-                <button
-                  mat-mini-fab
-                  type="button"
-                  color="warn"
-                  class="mat_warn_circle"
-                  *ngIf="
-                    i !== 0 ||
-                    (i === 0 &&
-                      (diagnosis.touched ||
-                        diagnosis.get('viewProvisionalDiagnosisProvided')
-                          ?.disabled))
-                  "
-                  (click)="removeProvisionalDiagnosis(i, diagnosis)"
-                >
-                  <mat-icon>close</mat-icon>
-                </button>
-                <button
-                  mat-mini-fab
-                  type="button"
-                  class="mat_blue_circle"
-                  color="primary"
-                  *ngIf="isLast"
-                  [disabled]="checkProvisionalDiagnosisValidity(diagnosis)"
-                  (click)="addProvisionalDiagnosis()"
-                >
-                  <mat-icon>add</mat-icon>
-                </button>
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <button
+                    mat-mini-fab
+                    type="button"
+                    class="mat_blue_circle"
+                    color="primary"
+                    *ngIf="isLast"
+                    [disabled]="checkProvisionalDiagnosisValidity(diagnosis)"
+                    (click)="addProvisionalDiagnosis()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
               </div>
             </ng-container>
           </div>

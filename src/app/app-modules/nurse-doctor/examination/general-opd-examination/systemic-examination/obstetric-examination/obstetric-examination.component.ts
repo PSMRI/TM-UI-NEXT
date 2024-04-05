@@ -270,7 +270,6 @@ export class ObstetricExaminationComponent
       this.lmpDate !== undefined &&
       !isNaN(this.lmpDate.getTime())
     ) {
-      //var newLmpDate = new Date(new Date(this.lmpDate).setHours(0, 0, 0, 0));
       const newLmpDate = this.datePipe.transform(this.lmpDate, 'yyyy-MM-dd');
       this.today = new Date();
       const todayDate = new Date(this.today + 'UTC');

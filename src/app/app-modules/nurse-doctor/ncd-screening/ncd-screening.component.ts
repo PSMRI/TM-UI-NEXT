@@ -73,7 +73,6 @@ export class NcdScreeningComponent
   startWeightTest = environment.startWeighturl;
   startBloodGlucose = environment.startBloodGlucoseurl;
   startBPTest = environment.startBPurl;
-  // ncdTests: any;
   laboratoryList = [
     {
       procedureID: 31,
@@ -147,7 +146,6 @@ export class NcdScreeningComponent
           this.ncdScreeningReasons = this.filterNCDScreeningReasons(
             Object.assign([], data.ncdScreeningReasons),
           );
-          // this.ncdTests = data.ncdTests;
 
           if (String(this.mode) === 'view') {
             const visitID = localStorage.getItem('visitID');
@@ -766,7 +764,6 @@ export class NcdScreeningComponent
     dialogRef.afterClosed().subscribe((result) => {
       console.log('he;;p', result, result['result']);
       if (result !== null) {
-        //result['result']
         this.NCDScreeningForm.patchValue({
           weight_Kg: result['result'],
         });

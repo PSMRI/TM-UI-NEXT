@@ -32,7 +32,7 @@ import { SetLanguageComponent } from '../../core/components/set-language.compone
 })
 export class ViewRadiologyUploadedFilesComponent implements OnInit, DoCheck {
   current_language_set: any;
-  fileIds = [];
+  fileIds: any = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public input: any,
     public httpServiceService: HttpServiceService,

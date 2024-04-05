@@ -1944,7 +1944,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 }
 
 .mat-input-infix, .mat-tab-label {
-  font-weight: 600 !important;
+  font-weight: 800 !important;
   font-family: SF-UI-Display-Regular, "Helvetica Neue", sans-serif;
   font-size: 15px !important;
   margin-bottom: -5px !important;

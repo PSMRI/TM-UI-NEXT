@@ -11,7 +11,7 @@
         class="select-full-width"
         name="placeOfDelivery"
         formControlName="deliveryPlace"
-        (change)="resetOtherPlaceOfDelivery()"
+        (selectionChange)="resetOtherPlaceOfDelivery()"
         required
       >
         <mat-option
@@ -58,14 +58,11 @@
       </mat-select>
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
       <mat-form-field class="fieldAlignment fontStyle">
-        <mat-label
-          class="mat-label-text"
-          class="mat-label-text"
-          class="fontStyle"
-          >{{ currentLanguageSet?.pncData?.dateofDelivery }}</mat-label
-        >
+        <mat-label class="mat-label-text" class="fontStyle">{{
+          currentLanguageSet?.pncData?.dateofDelivery
+        }}</mat-label>
         <input
           matInput
           style="width: 100%"
@@ -93,7 +90,7 @@
         class="select-full-width"
         name="deliveryComplication"
         formControlName="deliveryComplication"
-        (change)="resetOtherDeliveryComplication()"
+        (selectionChange)="resetOtherDeliveryComplication()"
       >
         <mat-option
           *ngFor="let complication of masterData?.deliveryComplicationTypes"
@@ -149,7 +146,7 @@
         class="select-full-width"
         name="postNatalComplication"
         formControlName="postNatalComplication"
-        (change)="resetOtherPostNatalComplication()"
+        (selectionChange)="resetOtherPostNatalComplication()"
       >
         <mat-option
           *ngFor="let complication of masterData?.postNatalComplications"

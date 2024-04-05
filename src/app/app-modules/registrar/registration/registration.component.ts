@@ -45,6 +45,9 @@ import { HttpServiceService } from '../../core/services/http-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SetLanguageComponent } from '../../core/components/set-language.component';
 import { Observable, of } from 'rxjs';
+import { GenerateAbhaComponent } from '../generate-abha/generate-abha.component';
+import { HealthIdOtpGenerationComponent } from '../health-id-otp-generation/health-id-otp-generation.component';
+import { HealthIdDisplayModalComponent } from '../../core/components/health-id-display-modal/health-id-display-modal.component';
 
 @Component({
   selector: 'app-registration',
@@ -81,6 +84,10 @@ export class RegistrationComponent
   emergencyRegistration = false;
   step = 0;
   currentLanguageSet: any;
+  enableMaritalStatusVal = false;
+  today!: Date;
+  formattedDate: any;
+  enableMaritalStatus = false;
 
   // Health ID card
   genrateHealthIDCard = false;
@@ -164,11 +171,95 @@ export class RegistrationComponent
     (<FormGroup>(
       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
     )).patchValue({ healthIdNumber: result.healthIdNumber });
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ firstName: result.firstName });
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ lastName: result.lastName });
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ phoneNo: result.phoneNo });
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ gender: result.gender });
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ genderName: result.genderName });
 
     (<FormGroup>(
       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
     )).controls['healthId'].disable();
     this.disableGenerateOTP = true;
+
+    const parts = result.dob.split('/');
+    const parsedDate = new Date(
+      parseInt(parts[2]),
+      parseInt(parts[1]) - 1,
+      parseInt(parts[0]),
+    );
+    (<FormGroup>(
+      this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+    )).patchValue({ dob: parsedDate });
+
+    if (
+      result.dob &&
+      (<FormGroup>(
+        this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+      )).controls['dob'].valid
+    ) {
+      const dateDiff = Date.now() - parsedDate.getTime();
+      const age = new Date(dateDiff);
+      const yob = Math.abs(age.getFullYear() - 1970);
+      const mob = Math.abs(age.getMonth());
+      const dob = Math.abs(age.getDate() - 1);
+      this.today = new Date();
+      if (yob > 0) {
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ age: yob });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ ageUnit: 'Years' });
+      } else if (mob > 0) {
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ age: mob });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ ageUnit: 'Months' });
+      } else if (dob > 0) {
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ age: dob });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ ageUnit: 'Days' });
+      }
+      if (parsedDate.setHours(0, 0, 0, 0) === this.today.setHours(0, 0, 0, 0)) {
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ age: 1 });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+        )).patchValue({ ageUnit: 'Day' });
+      }
+    }
+    const marriageAge = 12;
+    if (
+      (<FormGroup>(
+        this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+      )).value.age >= marriageAge &&
+      (<FormGroup>(
+        this.beneficiaryRegistrationForm.controls['personalDetailsForm']
+      )).value.ageUnit === 'Years'
+    ) {
+      this.enableMaritalStatusVal = true;
+      this.registrarService.isMarriageEnable(true);
+    } else {
+      this.enableMaritalStatusVal = false;
+      this.registrarService.isMarriageEnable(false);
+    }
   }
 
   /**
@@ -225,7 +316,6 @@ export class RegistrationComponent
    * Loading Data of Beneficiary as Observable
    */
   callBeneficiaryDataObservable(benID: any) {
-    // this.registrarService.getPatientDataAsObservable(benRegID);
     this.revisitDataSubscription =
       this.registrarService.beneficiaryEditDetails$.subscribe((res) => {
         if (res !== null && benID === res.beneficiaryID) {
@@ -313,7 +403,6 @@ export class RegistrationComponent
     const otherDetailsForm = <FormGroup>(
       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
     );
-    //  govID.pop();
     const govID = <FormArray>otherDetailsForm.controls['govID'];
     const otherGovID = <FormArray>otherDetailsForm.controls['otherGovID'];
     if (govID !== undefined && govID !== null && govID.length > 0) {
@@ -708,17 +797,15 @@ export class RegistrationComponent
     }
   }
   generateAbhaCard() {
-    // let dialogRef = this.dialog.open(GenerateAbhaComponent, {
-    //   height: '250px',
-    //   width: '420px',
-    //   disableClose: true,
-    // });
+    this.dialog.open(GenerateAbhaComponent, {
+      height: '300px',
+      width: '450px',
+      disableClose: true,
+    });
   }
 
   validValue?: boolean = false;
   generateABHACard() {
-    // this.getOTP();
-    // let validValue: boolean = false;
     this.validValue = this.checkgenerateOtpValids(
       this.beneficiaryRegistrationForm,
     );
@@ -727,8 +814,6 @@ export class RegistrationComponent
       this.generateHealthIDCard();
       this.getOTP();
     }
-    // if (this.patientRevisit) { this.getOTP(); } else
-    //     if (!this.patientRevisit) { this.getOTP(); }
   }
 
   generateHealthIDCard() {
@@ -889,8 +974,6 @@ export class RegistrationComponent
         .subscribe((res: any) => {
           if (res && res.statusCode === 200) {
             this.confirmationService.alert(res.data.response, 'success');
-            // var txt = res.data.response;
-            // var numb = txt.replace(/\D/g,'');
             if (this.checkValidHealthID('save')) {
               const reqObj = {
                 beneficiaryRegID: null,
@@ -1078,13 +1161,6 @@ export class RegistrationComponent
       dOB: personalForm.dob,
       fatherName: othersForm.fatherName || undefined,
       spouseName: personalForm.spouseName || undefined,
-      /*     'govtIdentityNo': '451328465465',
-          'govtIdentityTypeID': 1,
-          'govtIdentityType': {
-              'govtIdentityTypeID': 1,
-              'identityType': 'Aadhar',
-              'isGovtID': true
-          }, */
       changeInSelfDetails: true,
       changeInAddress: true,
       changeInContacts: true,
@@ -1094,10 +1170,8 @@ export class RegistrationComponent
       changeInAssociations: true,
       is1097: false,
       createdBy: localStorage.getItem('userName'),
-      // 'createdDate': '2018-04-27T14:37:15.000Z',
       changeInBankDetails: true,
       beneficiaryIdentities: iEMRids,
-      // 'marriageDate': '2017-04-27T14:38:26.000Z',
       ageAtMarriage: personalForm.ageAtMarriage || undefined,
       literacyStatus: personalForm.literacyStatus || undefined,
       motherName: othersForm.motherName || undefined,
@@ -1505,8 +1579,6 @@ export class RegistrationComponent
     const otherDetailsForm = <FormGroup>(
       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
     );
-    // let date= new Date(personalForm.controls['dob'].value);
-    // personalForm.controls['dob'].value.Now.ToString("MM/dd/yyyy hh:mm:ss");
     const date = new Date(personalForm.controls['dob'].value),
       mnth = ('0' + (date.getMonth() + 1)).slice(-2),
       day = ('0' + date.getDate()).slice(-2);
@@ -1553,53 +1625,52 @@ export class RegistrationComponent
     }
 
     console.log('date1', personalForm.controls['gender'].value);
-    // let dialogRef = this.dialog.open(HealthIdOtpGenerationComponent, {
-    //   height: '250px',
-    //   width: '420px',
-    //   data: {
-    //     firstName: personalForm.controls['firstName'].value,
-    //     lastName: personalForm.controls['lastName'].value,
-    //     fullName: personalForm.controls['fullName'].value,
-    //     gender:
-    //       personalForm.controls['genderName'].value === 'Female'
-    //         ? 'F'
-    //         : personalForm.controls['genderName'].value === 'Male'
-    //           ? 'M'
-    //           : 'O',
-    //     dayOfBirth: date1.getDate().toString(),
-    //     monthOfBirth: (date1.getMonth() + 1).toString(),
-    //     yearOfBirth: date1.getFullYear().toString(),
-    //     mobileNumber: personalForm.controls['phoneNo'].value,
-    //     address: addessValue,
-    //     pincode:
-    //       demographicsForm.controls['pincode'].value === null
-    //         ? 0
-    //         : demographicsForm.controls['pincode'].value,
-    //     email: otherDetailsForm.controls['emailID'].value,
-    //     healthId: otherDetailsForm.controls['healthId'].value,
-    //     healthIdMode: otherDetailsForm.controls['healthIdMode'].value,
-    //     aadharNumber: aadharNumber,
-    //     profilePhoto: personalForm.controls['image'].value,
-    //   },
-    // });
+    const dialogRef = this.dialog.open(HealthIdOtpGenerationComponent, {
+      height: '250px',
+      width: '420px',
+      data: {
+        firstName: personalForm.controls['firstName'].value,
+        lastName: personalForm.controls['lastName'].value,
+        fullName: personalForm.controls['fullName'].value,
+        gender:
+          personalForm.controls['genderName'].value === 'Female'
+            ? 'F'
+            : personalForm.controls['genderName'].value === 'Male'
+              ? 'M'
+              : 'O',
+        dayOfBirth: date1.getDate().toString(),
+        monthOfBirth: (date1.getMonth() + 1).toString(),
+        yearOfBirth: date1.getFullYear().toString(),
+        mobileNumber: personalForm.controls['phoneNo'].value,
+        address: addessValue,
+        pincode:
+          demographicsForm.controls['pincode'].value === null
+            ? 0
+            : demographicsForm.controls['pincode'].value,
+        email: otherDetailsForm.controls['emailID'].value,
+        healthId: otherDetailsForm.controls['healthId'].value,
+        healthIdMode: otherDetailsForm.controls['healthIdMode'].value,
+        // aadharNumber: aadharNumber, --Need to revert back
+        profilePhoto: personalForm.controls['image'].value,
+      },
+    });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('result', result);
-    //   if (result) {
-    //     (<FormGroup>(
-    //       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
-    //     )).patchValue({ healthId: result.healthIdNumber });
-    //     (<FormGroup>(
-    //       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
-    //     )).patchValue({ healthIdNumber: result.healthIdNumber });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('result', result);
+      if (result) {
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['otherDetailsForm']
+        )).patchValue({ healthId: result.healthIdNumber });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['otherDetailsForm']
+        )).patchValue({ healthIdNumber: result.healthIdNumber });
 
-    //     (<FormGroup>(
-    //       this.beneficiaryRegistrationForm.controls['otherDetailsForm']
-    //     )).controls['healthId'].disable();
-    //     // (<FormGroup>this.beneficiaryRegistrationForm.controls['otherDetailsForm']).controls['healthIdNumber'].disable();
-    //     this.disableGenerateOTP = true;
-    //   }
-    // });
+        (<FormGroup>(
+          this.beneficiaryRegistrationForm.controls['otherDetailsForm']
+        )).controls['healthId'].disable();
+        this.disableGenerateOTP = true;
+      }
+    });
   }
 
   viewHealthIdData() {
@@ -1610,9 +1681,9 @@ export class RegistrationComponent
     this.registrarService.getHealthIdDetails(reqObj).subscribe(
       (res: any) => {
         if (res.statusCode === 200) {
-          // this.dialog.open(HealthIdDisplayModalComponent, {
-          //   data: { dataList: res },
-          // });
+          this.dialog.open(HealthIdDisplayModalComponent, {
+            data: { dataList: res },
+          });
         } else {
           this.confirmationService.alert(
             this.currentLanguageSet.issueInGettingBeneficiaryABHADetails,

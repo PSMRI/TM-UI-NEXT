@@ -16,7 +16,7 @@
     >
       <div class="row" [formGroupName]="i">
         <div class="col-12 row">
-          <div class="col-4 input-full-width">
+          <div class="col-md-4">
             <mat-form-field class="input-full-width">
               <mat-label class="mat-label-text">{{
                 currentLanguageSet?.nurseData?.chiefComplaintsDetails
@@ -67,7 +67,7 @@
             </mat-form-field>
           </div>
           <div
-            class="col-4 input-full-width"
+            class="col-md-4 box"
             *ngIf="
               complaint?.value?.chiefComplaint !== null &&
               complaint?.value?.chiefComplaint !== ''
@@ -90,7 +90,7 @@
           </div>
 
           <div
-            class="col-4 box input-full-width"
+            class="col-md-4 box"
             *ngIf="
               complaint?.value?.duration !== null &&
               complaint?.value?.duration !== ''
@@ -116,7 +116,7 @@
         </div>
         <div class="col-12 row">
           <div
-            class="input-full-width"
+            class="col-md-4"
             *ngIf="
               complaint?.value?.chiefComplaint !== null &&
               complaint?.value?.chiefComplaint !== ''
@@ -141,32 +141,32 @@
             </mat-form-field>
           </div>
 
-          <div class="">
-            <button
-              type="button"
-              mat-mini-fab
-              class=".mat_warn_circle"
-              [id]="'removeBtn' + i"
-              *ngIf="i !== 0 || (i === 0 && complaint.touched)"
-              (click)="removeCheifComplaint(i, complaint)"
-              color="warn"
-              class="mat_warn_circle"
-            >
-              <span class="material-icons">close</span>
-            </button>
-            <button
-              color="primary"
-              class="mat_blue_circle"
-              type="button"
-              mat-mini-fab
-              [id]="'addBtn' + i"
-              *ngIf="isLast"
-              [disabled]="checkComplaintFormValidity(complaint)"
-              (click)="addCheifComplaint()"
-            >
-              <span class="material-icons">add</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            mat-mini-fab
+            class=".mat_warn_circle"
+            style="margin-right: 3px; margin-top: 25px"
+            [id]="'removeBtn' + i"
+            *ngIf="i !== 0 || (i === 0 && complaint.touched)"
+            (click)="removeCheifComplaint(i, complaint)"
+            color="warn"
+            class="mat_warn_circle"
+          >
+            <span class="material-icons">close</span>
+          </button>
+          <button
+            color="primary"
+            class="mat_blue_circle"
+            type="button"
+            style="margin-top: 25px"
+            mat-mini-fab
+            [id]="'addBtn' + i"
+            *ngIf="isLast"
+            [disabled]="checkComplaintFormValidity(complaint)"
+            (click)="addCheifComplaint()"
+          >
+            <span class="material-icons">add</span>
+          </button>
         </div>
       </div>
     </div>

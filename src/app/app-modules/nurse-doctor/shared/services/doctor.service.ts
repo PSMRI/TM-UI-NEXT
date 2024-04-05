@@ -2547,7 +2547,7 @@ export class DoctorService {
     visitCategory: any,
     otherDetails: any,
     tcRequest: any,
-  ): Observable<any> {
+  ): Observable<object> {
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
     const parkingPlaceID = JSON.parse(serviceLineDetails).parkingPlaceID;

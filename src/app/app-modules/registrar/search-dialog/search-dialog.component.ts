@@ -67,7 +67,6 @@ export class SearchDialogComponent implements OnInit, DoCheck {
   districtID: any;
   govtIDs: any;
   countryId = environment.countryId;
-  // @ViewChild('newSearchForm') form: any;
   today!: Date;
   languageComponent!: SetLanguageComponent;
   currentLanguageSet: any;

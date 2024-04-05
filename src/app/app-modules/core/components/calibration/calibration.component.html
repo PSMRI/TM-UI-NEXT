@@ -1,17 +1,16 @@
 <div class="title">
   <h4>{{ current_language_set?.coreComponents?.selectCallibrationStrip }}</h4>
-  <button
+  <mat-icon
     mat-icon-button
     matTooltip="{{ current_language_set?.common?.close }}"
     class="pull-right exit width-20px"
     (click)="close()"
+    >close</mat-icon
   >
-    <mat-icon>close</mat-icon>
-  </button>
 </div>
 <div class="container-fluid">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field style="width: 300px">
       <mat-label class="mat-label-text">{{
         current_language_set?.coreComponents?.inTableSearchStripCode
       }}</mat-label>
@@ -21,7 +20,7 @@
         #filterTerm
         (keyup)="filterPreviousData(filterTerm.value)"
       />
-      <mat-icon mdSuffix>search</mat-icon>
+      <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <div class="table-responsive">
       <table
@@ -85,7 +84,7 @@
       <strong>{{ current_language_set?.common?.noRecordsFound }}</strong>
     </div>
     <mat-paginator
-      [hidden]="components.data.length > 0"
+      [hidden]="components.data.length === 0"
       [pageSizeOptions]="[5, 10, 20]"
       [pageSize]="5"
       showFirstLastButtons

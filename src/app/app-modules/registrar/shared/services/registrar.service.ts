@@ -23,7 +23,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -61,16 +60,6 @@ export class RegistrarService {
   changePersonalDetailsData(res: any) {
     this.dialogData.next(res);
   }
-  // GenerateOTPEnable: any;
-  // GenerateOTP = new BehaviorSubject(this.GenerateOTPEnable);
-  // GenerateOTP$ = this.GenerateOTP.asObservable();
-
-  // setGenerateOTPFlag(value) {
-  //   this.GenerateOTPEnable = value;
-
-  //   this.GenerateOTP.next(value);
-
-  // }
 
   constructor(private http: HttpClient) {}
 
@@ -115,11 +104,6 @@ export class RegistrarService {
   identityQuickSearch(searchTerm: any) {
     return this.http.post(environment.identityQuickSearchUrl, searchTerm);
   }
-
-  // quickSearchByPhoneNO(searchTerm: any) {
-  //   return this.http.get(environment.quickSearchUrl, searchTerm)
-  //     .map((res) => res.json().data);
-  // }
 
   clearBeneficiaryEditDetails() {
     this.beneficiaryEditDetails.next(null);
@@ -306,5 +290,16 @@ export class RegistrarService {
 
   getBiometricData(pid: any) {
     return this.http.get(environment.getdeviceRDServiceUrl + pid);
+  }
+
+  maritalStatusDetail: any = null;
+  isMarriageStatus = new BehaviorSubject<any>(this.maritalStatusDetail);
+  maritalStatus$ = this.isMarriageStatus.asObservable();
+
+  isMarriageEnable(maritalStatus: any) {
+    this.isMarriageStatus.next(maritalStatus);
+  }
+  clearMaritalDetails() {
+    this.isMarriageStatus.next(null);
   }
 }

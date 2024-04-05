@@ -77,7 +77,7 @@ export class IotcomponentComponent implements OnInit, DoCheck {
     //SH20094090,calibration integration,09-06-2021
     if (this.procedure?.value?.calibrationStartAPI !== null) {
       const dialogRef = this.dialog.open(CalibrationComponent, {
-        width: '600px',
+        width: '800px',
         disableClose: true,
         data: { providerServiceMapID: providerServiceMapID },
       });

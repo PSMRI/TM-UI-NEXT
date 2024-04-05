@@ -50,16 +50,17 @@ export class SchedulerComponent implements OnInit, DoCheck {
   ) {}
   today!: Date;
   schedulerDate!: Date;
-  scheduledData: any;
+  scheduledData: any = null;
   ngOnInit() {
     this.assignSelectedLanguage();
+    console.log('this.dialogData', this.dialogData);
     if (this.dialogData) {
       this.scheduledData = this.dialogData;
-      console.log('this.dialogData', this.dialogData);
     } else {
       this.today = new Date();
       this.schedulerDate = new Date();
       this.schedulerForm = this.createSchedulerForm();
+      console.log('this.dialogData 2', this.dialogData);
     }
   }
   clearScheduledSlot() {

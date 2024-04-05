@@ -239,7 +239,7 @@
             <strong>{{ current_language_set?.common?.noRecordsFound }}</strong>
           </div>
           <mat-paginator
-            [hidden]="dataSource.data.length >= 0"
+            [hidden]="dataSource.data.length === 0"
             [pageSizeOptions]="[5, 10, 20]"
             [pageSize]="5"
             showFirstLastButtons

@@ -53,6 +53,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { SetLanguageComponent } from 'src/app/app-modules/core/components/set-language.component';
+import { HealthIdOtpSuccessComponent } from '../../health-id-otp-generation/health-id-otp-generation.component';
 @Component({
   selector: 'app-register-other-details',
   templateUrl: './register-other-details.component.html',
@@ -88,7 +89,6 @@ export class RegisterOtherDetailsComponent
 
   @Input()
   disableGenerateOTP!: boolean;
-  //currentLanguageSet: any;
   patterns: any;
 
   @Output() disableGenerateHealthID = new EventEmitter<any>();
@@ -262,9 +262,7 @@ export class RegisterOtherDetailsComponent
   loadMasterDataObservable() {
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
-        // console.log('res other', res)
         if (res !== null) {
-          // console.log(res,'res other')
           this.masterData = Object.assign({}, res);
           this.govIDMaster[0] = Object.assign({}, res);
           this.govLength = this.masterData.govIdEntityMaster.length;
@@ -287,7 +285,6 @@ export class RegisterOtherDetailsComponent
         if (res && res.beneficiaryID) {
           this.revisitData = Object.assign({}, res);
           if (this.patientRevisit) {
-            // this.setDemographicDefaults();
             this.loadBenEditDetails();
           }
         }
@@ -317,7 +314,6 @@ export class RegisterOtherDetailsComponent
       checked1: true,
       checked2: true,
     });
-    //  this.loadHealthIDMappingData();
     this.loadPreviousBenIdData();
   }
 
@@ -337,8 +333,6 @@ export class RegisterOtherDetailsComponent
         }
       });
       console.log(identityData, 'identityData');
-      // this.loadGovIDs(identityData);
-      // this.loadotherGovIDs(identityData);
       const govIDs: any = [];
       const otherGovIDs: any = [];
       identityData.forEach((item: any) => {
@@ -412,7 +406,6 @@ export class RegisterOtherDetailsComponent
 
   loadGovIDs(govtids: any) {
     console.log(govtids, 'here');
-    // let govIdIndex = 0;
     const id = <FormArray>this.otherDetailsForm.controls['govID'];
     console.log(id, 'formGovID');
     govtids.forEach((val: any, i: any) => {
@@ -432,9 +425,6 @@ export class RegisterOtherDetailsComponent
       this.addID(1, i);
       console.log(formGroupIndexed.value, 'formGroupValue');
       console.log(val, 'value to be added', i, 'and index');
-      // if (i !== 0) {
-      // govIdIndex++;
-      // }
       console.log(id, 'formGovID again');
     });
   }
@@ -451,7 +441,6 @@ export class RegisterOtherDetailsComponent
   }
   loadOtherGovIDs(otherGovtIDs: any) {
     console.log(otherGovtIDs, 'here');
-    // let govIdIndex = 0;
     const id = <FormArray>this.otherDetailsForm.controls['otherGovID'];
     console.log(id, 'formGovID');
     otherGovtIDs.forEach((val: any, i: any) => {
@@ -520,9 +509,6 @@ export class RegisterOtherDetailsComponent
       const id = <FormArray>this.otherDetailsForm.controls['govID'];
       const formGroupIndexed = <FormGroup>id.at(index);
       console.log(formGroupIndexed, 'formgroupIndexed');
-      // formGroupIndexed.patchValue({
-      //   idValue: null
-      //  })
       formGroupIndexed.controls['idValue'].reset();
 
       const toBePushed = this.masterData.govIdEntityMaster.filter(
@@ -530,7 +516,6 @@ export class RegisterOtherDetailsComponent
           return item.govtIdentityTypeID === this.previousGovID[index];
         },
       );
-      // })
       let indexToRemove;
       let newDataforOtherLists;
 
@@ -680,10 +665,6 @@ export class RegisterOtherDetailsComponent
   removeID(idtype: any, index: any) {
     let length = 0;
     length = this.otherDetailsForm.get('govID')?.value.length;
-    // console.log(index, 'index');
-    // console.log(length, 'length')
-    //id type '1' means govID
-    //id type '0' means otherGovID
     if (idtype === 1) {
       if (this.otherDetailsForm.value.govID[index].type !== null) {
         if (
@@ -693,7 +674,6 @@ export class RegisterOtherDetailsComponent
           // this.removedGovIDs.push(this.otherDetailsForm.value.govID[index]);
         }
         this.previousGovID.splice(index, 1);
-        // console.log(this.govIDMaster[index], 'its master');
         const values = this.govIDMaster[index].govIdEntityMaster.filter(
           (item: any) => {
             return (
@@ -702,7 +682,6 @@ export class RegisterOtherDetailsComponent
             );
           },
         );
-        // console.log(values, 'restoring');
         this.govIDMaster.splice(index, 1);
         this.govIDMaster.forEach((item: any) => {
           item.govIdEntityMaster.push(values[0]);
@@ -710,7 +689,6 @@ export class RegisterOtherDetailsComponent
       }
       const id = <FormArray>this.otherDetailsForm.controls['govID'];
       if (index === 0 && length - 1 === index) {
-        // console.log(id, 'here')
         id.at(index).patchValue({
           type: null,
           idValue: null,
@@ -744,7 +722,6 @@ export class RegisterOtherDetailsComponent
             this.otherDetailsForm.value.otherGovID[index].type
           );
         });
-        // console.log(values, 'restoring');
         this.otherGovIDMaster.splice(index, 1);
         this.otherGovIDMaster.forEach((item: any) => {
           item.otherGovIdEntityMaster.push(values[0]);
@@ -753,7 +730,6 @@ export class RegisterOtherDetailsComponent
 
       const id = <FormArray>this.otherDetailsForm.controls['otherGovID'];
       if (index === 0 && length - 1 === index) {
-        // console.log(id, 'here')
         id.at(index).patchValue({
           type: null,
           idValue: null,
@@ -777,7 +753,6 @@ export class RegisterOtherDetailsComponent
     //id type '1' means govID
     //id type '0' means otherGovID
 
-    // console.log(index, 'index');
     if (idtype === 1) {
       if (
         this.otherDetailsForm.value.govID[index] &&
@@ -791,8 +766,6 @@ export class RegisterOtherDetailsComponent
           this.currentLanguageSet.alerts.info.PleaseInputFieldFirst,
           'warn',
         );
-
-        // console.log('please enter value for This ID')
       }
     } else if (idtype === 0) {
       if (
@@ -807,8 +780,6 @@ export class RegisterOtherDetailsComponent
           this.currentLanguageSet.alerts.info.PleaseInputFieldFirst,
           'warn',
         );
-
-        // console.log('please enter value for This ID')
       }
     }
   }
@@ -1112,7 +1083,7 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
     private registrarService: RegistrarService,
     private confirmationValService: ConfirmationService,
     private router: Router,
-    private rdservice: RddeviceService,
+    // private rdservice: RddeviceService,
   ) {
     console.log('popupdata');
   }
@@ -1266,92 +1237,93 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
             );
           },
         );
-      } else if (
-        this.healthIdMode !== undefined &&
-        this.healthIdMode !== null &&
-        this.healthIdMode === 'BIOMETRIC'
-      ) {
-        {
-          this.healthIdMode = 'AADHAAR_BIO';
-          this.showProgressBar = true;
-          this.dialogRef.close();
-          const reqObj = {
-            authMethod: this.healthIdMode,
-            healthid: this.valhealthId,
-          };
-          this.registrarService.generateHealthIDCard(reqObj).subscribe(
-            (res: any) => {
-              if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
-                this.showProgressBar = false;
-                this.transactionId = res.data.txnId;
-                downloadABHACard = true;
-                this.router.navigate(['/registrar/rdServiceBio/']);
-                this.rdservice.pidDetailDetails$.subscribe((piddata) => {
-                  if (piddata !== null && piddata !== undefined) {
-                    this.pidRes = piddata;
-                  }
-                  if (
-                    this.pidRes !== null &&
-                    this.pidRes !== undefined &&
-                    downloadABHACard === true
-                  ) {
-                    const requestObj = {
-                      pid: this.pidRes ? this.pidRes : null,
-                      txnId: this.transactionId,
-                      authType: 'FINGERSCAN',
-                      bioType: 'FMR',
-                    };
-                    this.registrarService.confirmAadhar(requestObj).subscribe(
-                      (res: any) => {
-                        if (res.statusCode === 200 && res.data !== null) {
-                          this.healthIDCard = res.data.response;
-                          this.dialog.open(ViewHealthIdCardComponent, {
-                            height: '530px',
-                            width: '800px',
-                            data: {
-                              imgBase64: this.healthIDCard,
-                            },
-                          });
-
-                          this.dialogRef.close();
-                          // this.rdservice.getpidDetail(null);
-                        } else {
-                          this.showProgressBar = false;
-                          // this.rdservice.getpidDetail(null);
-                          this.confirmationValService.alert(
-                            this.currentLanguageSet.aBHACardNotAvailable,
-                            'error',
-                          );
-                        }
-                      },
-                      (err) => {
-                        this.showProgressBar = false;
-                        //  this.rdservice.getpidDetail(null);
-                        downloadABHACard = false;
-                        this.confirmationValService.alert(
-                          err.errorMessage,
-                          'error',
-                        );
-                      },
-                    );
-                  }
-                });
-              } else {
-                downloadABHACard = false;
-                // this.rdservice.getpidDetail(null);
-                this.showProgressBar = false;
-                this.confirmationValService.alert(res.errorMessage, 'error');
-              }
-            },
-            (err) => {
-              this.showProgressBar = false;
-              // this.rdservice.getpidDetail(null);
-              downloadABHACard = false;
-              this.confirmationValService.alert(err.errorMessage, 'error');
-            },
-          );
-        }
       }
+      // else if (
+      //   this.healthIdMode !== undefined &&
+      //   this.healthIdMode !== null &&
+      //   this.healthIdMode === 'BIOMETRIC'
+      // ) {
+      //   {
+      //     this.healthIdMode = 'AADHAAR_BIO';
+      //     this.showProgressBar = true;
+      //     this.dialogRef.close();
+      //     const reqObj = {
+      //       authMethod: this.healthIdMode,
+      //       healthid: this.valhealthId,
+      //     };
+      //     this.registrarService.generateHealthIDCard(reqObj).subscribe(
+      //       (res: any) => {
+      //         if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
+      //           this.showProgressBar = false;
+      //           this.transactionId = res.data.txnId;
+      //           downloadABHACard = true;
+      //           this.router.navigate(['/registrar/rdServiceBio/']);
+      //           this.rdservice.pidDetailDetails$.subscribe((piddata) => {
+      //             if (piddata !== null && piddata !== undefined) {
+      //               this.pidRes = piddata;
+      //             }
+      //             if (
+      //               this.pidRes !== null &&
+      //               this.pidRes !== undefined &&
+      //               downloadABHACard === true
+      //             ) {
+      //               const requestObj = {
+      //                 pid: this.pidRes ? this.pidRes : null,
+      //                 txnId: this.transactionId,
+      //                 authType: 'FINGERSCAN',
+      //                 bioType: 'FMR',
+      //               };
+      //               this.registrarService.confirmAadhar(requestObj).subscribe(
+      //                 (res: any) => {
+      //                   if (res.statusCode === 200 && res.data !== null) {
+      //                     this.healthIDCard = res.data.response;
+      //                     this.dialog.open(ViewHealthIdCardComponent, {
+      //                       height: '530px',
+      //                       width: '800px',
+      //                       data: {
+      //                         imgBase64: this.healthIDCard,
+      //                       },
+      //                     });
+
+      //                     this.dialogRef.close();
+      //                     // this.rdservice.getpidDetail(null);
+      //                   } else {
+      //                     this.showProgressBar = false;
+      //                     // this.rdservice.getpidDetail(null);
+      //                     this.confirmationValService.alert(
+      //                       this.currentLanguageSet.aBHACardNotAvailable,
+      //                       'error',
+      //                     );
+      //                   }
+      //                 },
+      //                 (err) => {
+      //                   this.showProgressBar = false;
+      //                   //  this.rdservice.getpidDetail(null);
+      //                   downloadABHACard = false;
+      //                   this.confirmationValService.alert(
+      //                     err.errorMessage,
+      //                     'error',
+      //                   );
+      //                 },
+      //               );
+      //             }
+      //           });
+      //         } else {
+      //           downloadABHACard = false;
+      //           // this.rdservice.getpidDetail(null);
+      //           this.showProgressBar = false;
+      //           this.confirmationValService.alert(res.errorMessage, 'error');
+      //         }
+      //       },
+      //       (err) => {
+      //         this.showProgressBar = false;
+      //         // this.rdservice.getpidDetail(null);
+      //         downloadABHACard = false;
+      //         this.confirmationValService.alert(err.errorMessage, 'error');
+      //       },
+      //     );
+      //   }
+      // }
     } else {
       this.showProgressBar = true;
       downloadABHACard = false;
@@ -1458,42 +1430,43 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
             );
           },
         );
-      } else if (
-        this.healthIdMode !== undefined &&
-        this.healthIdMode !== null &&
-        (this.healthIdMode === 'AADHAAR_BIO' ||
-          this.healthIdMode === 'BIOMETRIC')
-      ) {
-        this.showProgressBar = true;
-        const reqObj = {
-          authMethod: this.healthIdMode,
-          healthid: this.valhealthId,
-        };
-        this.registrarService.generateHealthIDCard(reqObj).subscribe(
-          (res: any) => {
-            if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
-              this.showProgressBar = false;
-              this.transactionId = res.data.txnId;
-
-              if (this.healthIdMode === 'AADHAAR_BIO')
-                this.confirmationValService.alert(
-                  this.currentLanguageSet.OTPSentToRegMobNo,
-                  'success',
-                );
-            } else {
-              this.showProgressBar = false;
-              this.confirmationValService.alert(res.status, 'error');
-            }
-          },
-          (err) => {
-            this.showProgressBar = false;
-            this.confirmationValService.alert(
-              this.currentLanguageSet.issueInGettingBeneficiaryABHADetails,
-              'error',
-            );
-          },
-        );
       }
+      // else if (
+      //   this.healthIdMode !== undefined &&
+      //   this.healthIdMode !== null &&
+      //   (this.healthIdMode === 'AADHAAR_BIO' ||
+      //     this.healthIdMode === 'BIOMETRIC')
+      // ) {
+      //   this.showProgressBar = true;
+      //   const reqObj = {
+      //     authMethod: this.healthIdMode,
+      //     healthid: this.valhealthId,
+      //   };
+      //   this.registrarService.generateHealthIDCard(reqObj).subscribe(
+      //     (res: any) => {
+      //       if (res.statusCode === 200 && Object.keys(res.data).length > 0) {
+      //         this.showProgressBar = false;
+      //         this.transactionId = res.data.txnId;
+
+      //         if (this.healthIdMode === 'AADHAAR_BIO')
+      //           this.confirmationValService.alert(
+      //             this.currentLanguageSet.OTPSentToRegMobNo,
+      //             'success',
+      //           );
+      //       } else {
+      //         this.showProgressBar = false;
+      //         this.confirmationValService.alert(res.status, 'error');
+      //       }
+      //     },
+      //     (err) => {
+      //       this.showProgressBar = false;
+      //       this.confirmationValService.alert(
+      //         this.currentLanguageSet.issueInGettingBeneficiaryABHADetails,
+      //         'error',
+      //       );
+      //     },
+      //   );
+      // }
     } else {
       this.showProgressBar = true;
       const reqObj = {
@@ -1629,20 +1602,20 @@ export class HealthIdValidateComponent implements OnInit, DoCheck {
               healthIdMode: this.healthIdMode,
               address: this.address,
             };
-            // let dialogRef = this.dialog.open(HealthIdOtpSuccessComponent, {
-            //   height: "260px",
-            //   width: "420px",
-            //   disableClose: true,
-            //   data: { res, "generateHealthIDCardBio": false }
-            // });
-            // this.dialogRef.close(dat);
+            const dialogRef = this.dialog.open(HealthIdOtpSuccessComponent, {
+              height: '260px',
+              width: '420px',
+              disableClose: true,
+              data: { res, generateHealthIDCardBio: false },
+            });
+            this.dialogRef.close(dat);
           } else {
             this.showProgressBar = false;
             const dat = {
               clearHealthID: true,
             };
             this.dialogRef.close(dat);
-            // this.closeDialog();
+            this.closeDialog();
             this.confirmationValService.alert(res.data.response, 'error');
           }
         } else {

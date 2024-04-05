@@ -287,14 +287,14 @@ export class WorkareaComponent
     }
     if (this.attendant === 'tcspecialist') {
       this.isSpecialist = true;
-      if (this.doctorFlag === 1) {
-        if (this.specialistFlag === 1) {
+      if (this.doctorFlag === '1') {
+        if (this.specialistFlag === '1') {
           this.doctorSaveAndTCSave = this.current_language_set.common.submit;
           this.isDoctorSave = true;
           console.log(
             'here for submit' + this.current_language_set.common.submit,
           );
-        } else if (this.specialistFlag === '3') {
+        } else if (this.specialistFlag === 3) {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.update;
           this.isDoctorUpdate = true;
@@ -304,7 +304,7 @@ export class WorkareaComponent
         }
       } else {
         this.isDoctorUpdate = true;
-        if (this.specialistFlag === '1') {
+        if (this.specialistFlag === 1) {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.submit;
         } else {
@@ -998,7 +998,7 @@ export class WorkareaComponent
 
   updateDoctorDiagnosisForm() {
     this.disableSubmitButton = true;
-    this.showProgressBar = true;
+    this.showProgressBar = false;
     const visitCategory = localStorage.getItem('visitCategory');
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -3703,6 +3703,7 @@ export class WorkareaComponent
     const mdDialogRef: MatDialogRef<SchedulerComponent> = this.mdDialog.open(
       SchedulerComponent,
       {
+        width: '900px',
         data: this.schedulerFormData,
       },
     );

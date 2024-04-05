@@ -64,6 +64,7 @@ export class RegisterPersonalDetailsComponent
 
   revisitData: any;
   revisitDataSubscription: any;
+  maritalStatusData = false;
 
   @Input()
   personalDetailsForm!: FormGroup;
@@ -74,6 +75,7 @@ export class RegisterPersonalDetailsComponent
   @ViewChild(BsDatepickerDirective)
   datepicker!: BsDatepickerDirective;
   personalDataOnHealthIDSubscription!: Subscription;
+  maritalSubscription!: Subscription;
 
   @HostListener('window:scroll')
   onScrollEvent() {
@@ -91,8 +93,6 @@ export class RegisterPersonalDetailsComponent
     private beneficiaryDetailsService: BeneficiaryDetailsService,
     public httpServiceService: HttpServiceService,
   ) {
-    // dateAdapter: DateAdapter<NativeDateAdapter>
-    // dateAdapter.setLocale('en-IN');
     setTheme('bs4'); // or 'bs4'
   }
 
@@ -154,6 +154,7 @@ export class RegisterPersonalDetailsComponent
     if (this.personalDataOnHealthIDSubscription) {
       this.personalDataOnHealthIDSubscription.unsubscribe();
     }
+    this.registrarService.clearMaritalDetails();
   }
 
   setPhoneSelectionEnabledByDefault() {
@@ -175,7 +176,6 @@ export class RegisterPersonalDetailsComponent
   loadMasterDataObservable() {
     this.masterDataSubscription =
       this.registrarService.registrationMasterDetails$.subscribe((res) => {
-        // console.log('res personal', res)
         if (res !== null) {
           this.masterData = res;
           if (this.patientRevisit) {
@@ -225,6 +225,21 @@ export class RegisterPersonalDetailsComponent
       });
   }
 
+  isMaritalStatus() {
+    this.maritalSubscription = this.registrarService.maritalStatus$.subscribe(
+      (response: any) => {
+        if (response === true) {
+          this.maritalStatusData = true;
+          this.enableMaritalStatus = true;
+          this.onGenderSelected();
+        } else {
+          this.maritalStatusData = false;
+          this.enableMaritalStatus = false;
+        }
+      },
+    );
+  }
+
   /***
    *
    * Load Editing Data to Form
@@ -271,20 +286,16 @@ export class RegisterPersonalDetailsComponent
       }`,
       spouseName: element.spouseName || null,
       ageAtMarriage: element.ageAtMarriage || null,
-      // income: element.i_bendemographics && element.i_bendemographics.incomeStatus || null,
       incomeName:
         (element.i_bendemographics && element.i_bendemographics.incomeStatus) ||
         null,
       literacyStatus: element.literacyStatus || null,
       educationQualification:
-        (element.i_bendemographics &&
-          element.i_bendemographics.i_beneficiaryeducation &&
-          element.i_bendemographics.i_beneficiaryeducation.educationID) ||
+        (element.i_bendemographics && element.i_bendemographics.educationID) ||
         null,
       educationQualificationName:
         (element.i_bendemographics &&
-          element.i_bendemographics.i_beneficiaryeducation &&
-          element.i_bendemographics.i_beneficiaryeducation.educationType) ||
+          element.i_bendemographics.educationName) ||
         null,
       occupation:
         (element.i_bendemographics && element.i_bendemographics.occupationID) ||
@@ -316,8 +327,6 @@ export class RegisterPersonalDetailsComponent
     } else {
       this.enableMarriageDetails = true;
     }
-
-    // console.log(this.personalDetailsForm.value ,'personal data updated ')
     this._parentBenRegID = `${
       (element.benPhoneMaps.length > 0 &&
         element.benPhoneMaps[0].parentBenRegID) ||
@@ -479,7 +488,6 @@ export class RegisterPersonalDetailsComponent
 
     if (literacyStatus !== 'Literate') {
       console.log(this.personalDetailsForm.controls, 'controls');
-      // this.personalDetailsForm.controls['educationQualification'].clearValidators();
       console.log(
         this.personalDetailsForm.controls['educationQualification'],
         'controls',
@@ -607,8 +615,6 @@ export class RegisterPersonalDetailsComponent
   dobChangeByCalender(dobval: any) {
     const date = new Date(this.dateForCalendar);
     console.log(this.personalDetailsForm.value.dob);
-    // console.log(this.dateForCalendar,'fromcalendar');
-    // console.log(date,'new')
     if (
       this.dateForCalendar &&
       (!dobval || dobval.length === 10) &&
@@ -657,8 +663,10 @@ export class RegisterPersonalDetailsComponent
       this.personalDetailsForm.value.ageUnit === 'Years'
     ) {
       this.enableMaritalStatus = true;
+      this.maritalStatusData = true;
     } else {
       this.enableMaritalStatus = false;
+      this.maritalStatusData = false;
       this.clearMaritalStatus();
     }
   }

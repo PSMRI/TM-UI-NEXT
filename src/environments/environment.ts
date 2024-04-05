@@ -295,7 +295,7 @@ export const environment = {
   savePNCDoctorDetailsUrl: `${TM_API}PNC/save/doctorData`,
 
   getPNCVisitDetailsUrl: `${TM_API}PNC/getBenVisitDetailsFrmNursePNC`,
-  getPNCDetailsUrl: `${TM_API}PNC//getBenPNCDetailsFrmNursePNC`,
+  getPNCDetailsUrl: `${TM_API}PNC/getBenPNCDetailsFrmNursePNC`,
   getPNCVitalsDetailsUrl: `${TM_API}PNC/getBenVitalDetailsFrmNurse`,
   getPNCHistoryDetailsUrl: `${TM_API}PNC/getBenHistoryDetails`,
   getPNCExaminationDataUrl: `${TM_API}PNC/getBenExaminationDetailsPNC`,
@@ -384,7 +384,7 @@ export const environment = {
   licenseUrl: `${COMMON_API}license.html`,
   apiVersionUrl: `${TM_API}version`,
   snomedCTRecordListURL1: `${COMMON_API}snomed/getSnomedCTRecordList`,
-  getCalibrationStrips: `${ADMIN_API}fetchCalibrationStrips`,
+  getCalibrationStrips: `${ADMIN_API}/fetchCalibrationStrips`,
   updateNCDScreeningIDRSDetailsUrl: `${TM_API}NCD/update/idrsScreen`,
   getNCDScreeningIDRSDetails: `${TM_API}NCD/getBenIdrsDetailsFrmNurse`,
   saveDoctorNCDScreeningDetails: `${TM_API}NCD/save/doctorData`,

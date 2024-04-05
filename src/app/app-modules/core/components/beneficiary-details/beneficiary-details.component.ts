@@ -139,7 +139,7 @@ export class BeneficiaryDetailsComponent implements OnInit, DoCheck, OnDestroy {
                   0,
                   this.healthIDValue.length - 1,
                 );
-                //this.beneficiaryDetailsService.healthID= this.healthIDValue;
+                this.beneficiaryDetailsService.healthID = this.healthIDValue;
               }
             }
           } else {

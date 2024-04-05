@@ -115,7 +115,7 @@
     >
       <h5>{{ current_language_set?.previousvisit?.bodyweighttrends }}</h5>
 
-      <!-- <canvas
+      <canvas
         baseChart
         [datasets]="weightChartData"
         [labels]="weightChartLabels"
@@ -123,7 +123,7 @@
         [legend]="weightChartLegend"
         [type]="'line'"
         (chartClick)="chartClicked('bw')"
-      ></canvas> -->
+      ></canvas>
     </div>
     <div class="no_records" *ngIf="!weightChartData.length">
       <h4>
@@ -140,7 +140,7 @@
       *ngIf="bpChartData.length && bpChartLabels.length"
     >
       <h5>{{ current_language_set?.previousvisit?.bloodPressureTrends }}</h5>
-      <!-- <canvas
+      <canvas
         baseChart
         [datasets]="weightChartData"
         [labels]="weightChartLabels"
@@ -148,7 +148,7 @@
         [legend]="weightChartLegend"
         [type]="'line'"
         (chartClick)="chartClicked('bp')"
-      ></canvas> -->
+      ></canvas>
     </div>
     <div class="no_records" *ngIf="!bpChartData.length">
       <h4>
@@ -166,7 +166,7 @@
     >
       <h5>{{ current_language_set?.previousvisit?.bloodGlucoseTrends }}</h5>
 
-      <!-- <canvas
+      <canvas
         baseChart
         [datasets]="weightChartData"
         [labels]="weightChartLabels"
@@ -174,7 +174,7 @@
         [legend]="weightChartLegend"
         [type]="'line'"
         (chartClick)="chartClicked('bg')"
-      ></canvas> -->
+      ></canvas>
     </div>
     <div class="no_records" *ngIf="!bgChartData.length">
       <h4>

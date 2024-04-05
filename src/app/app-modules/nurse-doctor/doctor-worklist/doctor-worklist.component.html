@@ -190,7 +190,12 @@
                 >
                   {{ currentLanguageSet?.bendetails?.beneficiaryArrived }}
                 </th>
-                <td class="centered" mat-cell *matCellDef="let element">
+                <td
+                  class="centered"
+                  mat-cell
+                  *matCellDef="let element"
+                  style="margin-top: 40px"
+                >
                   <mat-checkbox
                     [disabled]="
                       element.statusCode === 1 ||
@@ -355,7 +360,7 @@
             <strong>{{ currentLanguageSet?.common?.noRecordsFound }}</strong>
           </div>
           <div class="col-12 row">
-            <div class="col-6">
+            <div class="col-9">
               <ul class="description" *ngIf="dataSource.data.length > 0">
                 <li>
                   <div class="marker-p-f-c"></div>
@@ -407,17 +412,17 @@
                 </li>
               </ul>
             </div>
-            <div class="col-6">
-              <mat-paginator
-                style="display: unset !important"
-                [pageSizeOptions]="[5, 10, 20]"
-                [hidden]="dataSource.data.length === 0"
-                [pageSize]="5"
-                showFirstLastButtons
-                aria-label="Select patient in doctorWorklist"
-              >
-              </mat-paginator>
-            </div>
+          </div>
+          <div class="col-12">
+            <mat-paginator
+              style="display: unset !important"
+              [pageSizeOptions]="[5, 10, 20]"
+              [hidden]="dataSource.data.length === 0"
+              [pageSize]="5"
+              showFirstLastButtons
+              aria-label="Select patient in doctorWorklist"
+            >
+            </mat-paginator>
           </div>
         </section>
       </mat-card>

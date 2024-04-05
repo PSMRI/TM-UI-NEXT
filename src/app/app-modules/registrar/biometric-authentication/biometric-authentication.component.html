@@ -2,11 +2,11 @@
   <h4>Biometric Device Connection</h4>
   <button
     class="pull-right close-btn"
-    mdDialogClose
+    matDialogClose
     (click)="closeDialog()"
-    md-icon-button
+    mat-icon-button
   >
-    <md-icon class="md-24">close</md-icon>
+    <mat-icon class="md-24">close</mat-icon>
   </button>
 </div>
 <div class="col-xs-12 col-sm-12">
@@ -15,7 +15,7 @@
       Please plug the device and click on proceed to connect device
     </h4>
     <button
-      md-raised-button
+      mat-raised-button
       color="primary"
       class="pull-right m-t-8 f-s-18"
       style="margin-top: 50px !important"
@@ -24,11 +24,11 @@
       Proceed
     </button>
     <button
-      md-raised-button
+      mat-raised-button
       color="primary"
       class="pull-right m-t-8 f-s-18"
       style="margin: 10px; margin-top: 50px !important"
-      (click)="mdDialogRef.close()"
+      (click)="matDialogRef.close()"
     >
       Cancel
     </button>

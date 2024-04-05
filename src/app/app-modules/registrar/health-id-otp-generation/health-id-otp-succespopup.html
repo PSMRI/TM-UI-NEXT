@@ -1,58 +1,65 @@
-<!-- <div *ngIf="!verify">
+<div *ngIf="!verify">
   <h3 class="title success">Info</h3>
   <div class="message">
-    <label>{{currentLanguageSet?.aBHAGeneratedSuccessfully}}</label><br />
-    <label
-      ><strong>{{currentLanguageSet?.aBHA}}:</strong>
-      {{succdata.healthId}}</label
+    <mat-label>{{ currentLanguageSet?.aBHAGeneratedSuccessfully }}</mat-label
     ><br />
-    <label
-      ><strong>{{currentLanguageSet?.aBHANumber}}:</strong>
-      {{succdata.healthIdNumber}}</label
+    <mat-label
+      ><strong>{{ currentLanguageSet?.aBHA }}:</strong>
+      {{ succdata.healthId }}</mat-label
+    ><br />
+    <mat-label
+      ><strong>{{ currentLanguageSet?.aBHANumber }}:</strong>
+      {{ succdata.healthIdNumber }}</mat-label
     ><br /><br />
-    <label *ngIf="!healthIdCardBio" class="userConsent"
-      >{{currentLanguageSet?.doYouWantToDownloadABHACard}}</label
-    >
+    <mat-label *ngIf="!healthIdCardBio" class="userConsent">{{
+      currentLanguageSet?.doYouWantToDownloadABHACard
+    }}</mat-label>
   </div>
   <div class="action" *ngIf="!healthIdCardBio">
-    <button md-button md-dialog-close (click)="clearPIDData()">
-      {{currentLanguageSet?.common?.no}}
+    <button
+      mat-raised-button
+      class="full-width-login button-ok"
+      mat-dialog-close
+      (click)="clearPIDData()"
+    >
+      {{ currentLanguageSet?.common?.no }}
     </button>
     <button
-      md-button
-      class="background-primary"
+      mat-raised-button
+      class="background-primary mat_blue"
       cdkFocusInitial
       (click)="fetchOtp(succdata.healthId, succdata.healthIdNumber)"
     >
-      {{currentLanguageSet?.common?.yes}}
+      {{ currentLanguageSet?.common?.yes }}
     </button>
   </div>
   <div class="action" *ngIf="healthIdCardBio">
-    <button md-button md-dialog-close>
-      {{currentLanguageSet?.common?.ok}}
+    <button mat-raised-button mat-dialog-close>
+      {{ currentLanguageSet?.common?.ok }}
     </button>
   </div>
 </div>
 <div *ngIf="verify">
   <h3 class="title success">Info</h3>
   <div class="messageotp">
-    <label>{{currentLanguageSet?.aBHAValidatedSuccessfully}}</label><br />
-    <label
-      ><strong>{{currentLanguageSet?.aBHA}}:</strong
-      >{{succdata.Auth.Patient.Id}}</label
+    <mat-label>{{ currentLanguageSet?.aBHAValidatedSuccessfully }}</mat-label
     ><br />
-    <label
-      ><strong>{{currentLanguageSet?.casesheet?.name}}:</strong>
-      {{succdata.Auth.Patient.Name}}</label
+    <mat-label
+      ><strong>{{ currentLanguageSet?.aBHA }}:</strong
+      >{{ succdata.Auth.Patient.Id }}</mat-label
     ><br />
-    <label
-      ><strong>{{currentLanguageSet?.bendetails?.gender}}:</strong>
-      {{genderName}}</label
+    <mat-label
+      ><strong>{{ currentLanguageSet?.casesheet?.name }}:</strong>
+      {{ succdata.Auth.Patient.Name }}</mat-label
+    ><br />
+    <mat-label
+      ><strong>{{ currentLanguageSet?.bendetails?.gender }}:</strong>
+      {{ genderName }}</mat-label
     ><br /><br />
     <div class="action">
-      <button md-button md-dialog-close>
-        {{currentLanguageSet?.common?.ok}}
+      <button mat-raised-button mat-dialog-close>
+        {{ currentLanguageSet?.common?.ok }}
       </button>
     </div>
   </div>
-</div> -->
+</div>

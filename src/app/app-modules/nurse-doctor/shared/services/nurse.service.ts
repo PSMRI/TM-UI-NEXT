@@ -23,7 +23,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { SpinnerService } from '../../../core/services/spinner.service';
-import { shareReplay } from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -205,8 +204,6 @@ export class NurseService {
       environment.saveNurseCancerScreeningDetails,
       cancerVisitDetails,
     );
-
-    // return Observable.of({});
   }
 
   postCancerHistoryDetails(historyForm: any, otherDetails: any) {
@@ -223,8 +220,6 @@ export class NurseService {
         if (disease.cancerDiseaseType) {
           disease.cancerDiseaseType =
             disease.cancerDiseaseType.cancerDiseaseType;
-          //   disease.snomedCode = disease.cancerDiseaseType.snomedCode;
-          // disease.snomedTerm = disease.cancerDiseaseType.snomedTerm;
           if (disease.cancerDiseaseType === 'Any other Cancer')
             disease.cancerDiseaseType = disease.otherDiseaseType;
         }
@@ -378,7 +373,6 @@ export class NurseService {
     examinationDetails = Object.assign({}, examinationDetails, {
       imageCoordinates,
     });
-    // console.log("Nurse examination Details", JSON.stringify(examinationDetails, null, 4));
     return examinationDetails;
   }
   getPreviousVisitData(obj: any) {
@@ -513,8 +507,6 @@ export class NurseService {
       'Nurse ANC Visit Details',
       JSON.stringify(nurseANCVisitDetails, null, 4),
     );
-
-    // return Observable.of({});
     return this.http.post(
       environment.saveNurseANCDetails,
       nurseANCVisitDetails,
@@ -630,7 +622,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('visit details', JSON.stringify(patientVisitDetails, null, 4));
     return patientVisitDetails;
   }
 
@@ -649,7 +640,6 @@ export class NurseService {
         localStorage.getItem('providerServiceID');
       complaint.createdBy = localStorage.getItem('userName');
     }
-    // console.log('chiefComplaintsForm', JSON.stringify(patientChiefComplaintsForm, null, 4));
     return patientChiefComplaintsFormValue;
   }
 
@@ -660,7 +650,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('adherenceForm', JSON.stringify(adherenceForm, null, 4));
     return adherenceForm;
   }
 
@@ -671,7 +660,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('investigationsForm', JSON.stringify(investigationsForm, null, 4));
     return investigationsForm;
   }
 
@@ -682,7 +670,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('adherenceForm', JSON.stringify(adherenceForm, null, 4));
     return covidForm;
   }
 
@@ -717,7 +704,6 @@ export class NurseService {
       livebirths_L: obstetricFormula.livebirths_L,
       bloodGroup: obstetricFormula.bloodGroup,
     });
-    // console.log('combinedANCForm', JSON.stringify(combinedANCForm, null, 4));
     return combinedANCForm;
   }
 
@@ -728,7 +714,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('immunizationForm', JSON.stringify(immunizationForm, null, 4));
     return immunizationForm;
   }
 
@@ -739,7 +724,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Vitals Form', JSON.stringify(patientVitalsDetails, null, 4));
     return patientVitalsDetails;
   }
 
@@ -895,7 +879,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General examination', JSON.stringify(generalExaminationForm, null, 4));
     return generalExaminationForm;
   }
 
@@ -910,7 +893,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Head to Toe examination', JSON.stringify(headToToeExaminationForm, null, 4));
     return headToToeExaminationForm;
   }
 
@@ -929,7 +911,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Gastro Intestinal System', JSON.stringify(gastroIntestinalSystemForm, null, 4));
     return gastroIntestinalSystemForm;
   }
 
@@ -945,7 +926,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Cardio Vascular System', JSON.stringify(cardioVascularSystemForm, null, 4));
     return cardioVascularSystemForm;
   }
 
@@ -961,7 +941,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Respiratory System Form', JSON.stringify(respiratorySystemForm, null, 4));
     return respiratorySystemForm;
   }
 
@@ -977,7 +956,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Central Nervous System', JSON.stringify(centralNervousSystemForm, null, 4));
     return centralNervousSystemForm;
   }
 
@@ -993,7 +971,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Musculo Skeletal System', JSON.stringify(musculoSkeletalSystemForm, null, 4));
     return musculoSkeletalSystemForm;
   }
 
@@ -1009,7 +986,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('General Genito Urinary System', JSON.stringify(genitoUrinarySystemForm, null, 4));
     return genitoUrinarySystemForm;
   }
 
@@ -1025,7 +1001,6 @@ export class NurseService {
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
     });
-    // console.log('ANC Obstetric Examination', JSON.stringify(obstetricExaminationForANCForm, null, 4));
     return obstetricExaminationForANCForm;
   }
 
@@ -1139,7 +1114,6 @@ export class NurseService {
       pastIllness: illness,
       pastSurgery: surgery,
     });
-    // console.log("History Data", JSON.stringify(historyData, null, 4));
     return historyData;
   }
 
@@ -1166,8 +1140,6 @@ export class NurseService {
       comorbidityHistoryFormValue,
       otherDetails,
     );
-
-    // console.log("Comorbidity Data", JSON.stringify(comorbidityData, null, 4));
     return comorbidityData;
   }
 
@@ -1183,8 +1155,6 @@ export class NurseService {
       developmentHistoryFormValue,
       otherDetails,
     );
-
-    // console.log("Development Data", JSON.stringify(developmentData, null, 4));
     return developmentData;
   }
 
@@ -1197,8 +1167,6 @@ export class NurseService {
       if (item.diseaseType) {
         item.diseaseTypeID = '' + item.diseaseType.diseaseTypeID;
         item.diseaseType = item.diseaseType.diseaseType;
-        // item.snomedCode = item.diseaseType.snomedCode;
-        // item.snomedTerm = item.diseaseType.snomedTerm;
       }
     });
     const familyHistoryData = Object.assign(
@@ -1206,8 +1174,6 @@ export class NurseService {
       familyHistoryFormValue,
       otherDetails,
     );
-
-    // console.log("Family History Data", JSON.stringify(familyHistoryData, null, 4));
     return familyHistoryData;
   }
 
@@ -1223,8 +1189,6 @@ export class NurseService {
         foodIntoleranceStatus: +feedingHistoryFormValue.foodIntoleranceStatus,
       },
     );
-
-    // console.log("Feeding Data", JSON.stringify(feedingHistoryData, null, 4));
     return feedingHistoryData;
   }
 
@@ -1236,19 +1200,12 @@ export class NurseService {
       JSON.stringify(immunizationHistoryForm.value),
     );
     const immunizationList = immunizationFormValue.immunizationList;
-    // console.log(formData, 'formdata');
-    // formData.forEach((item)=>{
-    //   item.vaccines.forEach((vaccine)=>{
-    //     vaccine.status = ""+vaccine.status
-    //   })
-    // })
     const immunizationHistoryData = Object.assign(
       {},
       immunizationFormValue,
       { immunizationList: immunizationList },
       otherDetails,
     );
-    // console.log('immunization Data', JSON.stringify(immunizationHistoryData, null, 4));
     return immunizationHistoryData;
   }
 
@@ -1261,7 +1218,6 @@ export class NurseService {
       medicationHistoryFormValue,
       otherDetails,
     );
-    // console.log("Medication Data", JSON.stringify(medicationHistoryData, null, 4));
     return medicationHistoryData;
   }
 
@@ -1287,18 +1243,11 @@ export class NurseService {
       temp.bloodFlowDuration = temp.bloodFlowDuration.menstrualCycleRange;
     }
 
-    // if (temp.problemName) {
-    //   temp.menstrualProblemID = "" + temp.problemName.menstrualProblemID;
-    //   temp.problemName = temp.problemName.name;
-    // }
-
     if (!temp.lMPDate) {
       temp.lMPDate = undefined;
     }
 
     const menstrualHistoryData = Object.assign({}, temp, otherDetails);
-
-    // console.log("Menstrual History Data", JSON.stringify(menstrualHistoryData, null, 4));
     return menstrualHistoryData;
   }
 
@@ -1319,7 +1268,6 @@ export class NurseService {
       { otherVaccines: undefined, childOptionalVaccineList: otherVaccines },
       otherDetails,
     );
-    // console.log("Other vaccines Data", JSON.stringify(otherVaccinesData, null, 4));
     return otherVaccinesData;
   }
 
@@ -1333,12 +1281,6 @@ export class NurseService {
     const pastObstetricList =
       pastObstetricHistoryFormValue.pastObstericHistoryList;
     pastObstetricList.map((item: any) => {
-      // if (item.pregComplicationList) {
-      //   item.pregComplicationList.map(complication => {
-      //     complication.pregComplicationID = complication.complicationID;
-      //     complication.pregComplicationType = complication.complicationType;
-      //   })
-      // }
       if (item.durationType) {
         item.pregDurationID = item.durationType.pregDurationID;
         item.durationType = item.durationType.durationType;
@@ -1351,22 +1293,10 @@ export class NurseService {
         item.deliveryPlaceID = item.deliveryPlace.deliveryPlaceID;
         item.deliveryPlace = item.deliveryPlace.deliveryPlace;
       }
-      // if (item.deliveryComplicationType) {
-      //   item.deliveryComplicationID = item.deliveryComplicationType.complicationID;
-      //   item.deliveryComplicationType = item.deliveryComplicationType.complicationValue;
-      // }
-      // if (item.postpartumComplicationType) {
-      //   item.postpartumComplicationID = item.postpartumComplicationType.complicationID;
-      //   item.postpartumComplicationType = item.postpartumComplicationType.complicationValue;
-      // }
       if (item.pregOutcome) {
         item.pregOutcomeID = item.pregOutcome.pregOutcomeID;
         item.pregOutcome = item.pregOutcome.pregOutcome;
       }
-      // if (item.postNatalComplication) {
-      //   item.postNatalComplicationID = item.postNatalComplication.complicationID;
-      //   item.postNatalComplication = item.postNatalComplication.complicationValue;
-      // }
       if (item.newBornComplication) {
         item.newBornComplicationID = item.newBornComplication.complicationID;
         item.newBornComplication = item.newBornComplication.complicationValue;
@@ -1382,8 +1312,6 @@ export class NurseService {
         pastObstericHistoryList: undefined,
       },
     );
-
-    // console.log("Past Obstetric History Data", JSON.stringify(pastObstetricHistoryData, null, 4));
     return pastObstetricHistoryData;
   }
 
@@ -1464,7 +1392,6 @@ export class NurseService {
         allergicList: allergyList,
       },
     );
-    // console.log("Personal History Data", JSON.stringify(personalHistoryData, null, 4));
     return personalHistoryData;
   }
 
@@ -1580,47 +1507,6 @@ export class NurseService {
       createdBy: localStorage.getItem('userName'),
     };
 
-    // WDF requirement
-    // let postNCDScreeningFormValue = JSON.parse(JSON.stringify(medicalForm.controls['NCDScreeningForm'].value));
-    // console.log('postNCDScreeningFormValue', JSON.stringify(postNCDScreeningFormValue, null, 4));
-
-    // // if (postNCDScreeningFormValue.screeningCondition) {
-    // //   postNCDScreeningFormValue.ncdScreeningConditionID = postNCDScreeningFormValue.screeningCondition.ncdScreeningConditionID;
-    // //   postNCDScreeningFormValue.screeningCondition = postNCDScreeningFormValue.screeningCondition.ncdScreeningCondition;
-    // // }
-
-    // if (postNCDScreeningFormValue.reasonForScreening) {
-    //   postNCDScreeningFormValue.ncdScreeningReasonID = postNCDScreeningFormValue.reasonForScreening.ncdScreeningReasonID;
-    //   postNCDScreeningFormValue.reasonForScreening = postNCDScreeningFormValue.reasonForScreening.ncdScreeningReason;
-    // }
-
-    // if (postNCDScreeningFormValue.diabeticStatus) {
-    //   postNCDScreeningFormValue.diabeticStatusID = postNCDScreeningFormValue.diabeticStatus.bpAndDiabeticStatusID;
-    //   postNCDScreeningFormValue.diabeticStatus = postNCDScreeningFormValue.diabeticStatus.bpAndDiabeticStatus;
-    // }
-
-    // if (postNCDScreeningFormValue.bloodPressureStatus) {
-    //   postNCDScreeningFormValue.bloodPressureStatusID = postNCDScreeningFormValue.bloodPressureStatus.bpAndDiabeticStatusID;
-    //   postNCDScreeningFormValue.bloodPressureStatus = postNCDScreeningFormValue.bloodPressureStatus.bpAndDiabeticStatus;
-    // }
-
-    // if (postNCDScreeningFormValue.labTestOrders) {
-    //   // procedureName
-    //   let bP = false;
-    //   let bG = false;
-
-    //   postNCDScreeningFormValue.labTestOrders.filter((item) => {
-    //     if (item.procedureName === 'BP Measurement') {
-    //       bP = true;
-    //     }
-    //     if (item.procedureName === 'Blood Glucose Measurement') {
-    //       bG = true;
-    //     }
-    //   })
-    //   postNCDScreeningFormValue.isBloodGlucosePrescribed = bG;
-    //   postNCDScreeningFormValue.isBPPrescribed = bP;
-    // }
-
     // ncdScreeningVisitDetails
     const serviceLineDetails: any = localStorage.getItem('serviceLineDetails');
     const vanID = JSON.parse(serviceLineDetails).vanID;
@@ -1667,8 +1553,6 @@ export class NurseService {
         providerServiceMapID: localStorage.getItem('providerServiceID'),
       },
     );
-
-    //console.log('postNCDScreeningFormData', JSON.stringify(ncdScreeningVisitDetails, null, 4));
 
     return this.http.post(
       environment.postNCDScreeningDetails,
@@ -1730,7 +1614,6 @@ export class NurseService {
   }
 
   postGeneralHistoryForm(generalHistoryForm: any, beneficiary: any) {
-    // let patientHistoryFormValue = JSON.parse(JSON.stringify(patientHistoryForm));
     const temp = {
       beneficiaryRegID: '' + localStorage.getItem('beneficiaryRegID'),
       benVisitID: null,
@@ -1787,29 +1670,6 @@ export class NurseService {
         temp,
       ),
     };
-    // if (beneficiary.ageVal ) {
-    //   return {
-    //     "pastHistory": this.postGeneralPastHistory(generalHistoryForm.controls.pastHistory, temp),
-    //     "comorbidConditions": this.postGeneralComorbidityHistory(generalHistoryForm.controls.comorbidityHistory, temp),
-    //     "medicationHistory": this.postGeneralMedicationHistroy(generalHistoryForm.controls.medicationHistory, temp),
-    //     "femaleObstetricHistory": this.postGeneralPastObstetricHistory(generalHistoryForm.controls.pastObstericHistory, temp),
-    //     "menstrualHistory": this.postGeneralMenstrualHistory(generalHistoryForm.controls.menstrualHistory, temp),
-    //     "familyHistory": this.postGeneralFamilyHistory(generalHistoryForm.controls.familyHistory, temp),
-    //     "personalHistory": this.postGeneralPersonalHistory(generalHistoryForm.controls.personalHistory, temp),
-    //     "childVaccineDetails": this.postGeneralOtherVaccines(generalHistoryForm.controls.otherVaccines, temp),
-    //     "immunizationHistory": this.postGeneralImmunizationHistroy(generalHistoryForm.controls.immunizationHistory, temp),
-    //   }
-    // } else {
-    //   return {
-    //     "pastHistory": this.postGeneralPastHistory(generalHistoryForm.controls.pastHistory, temp),
-    //     "comorbidConditions": this.postGeneralComorbidityHistory(generalHistoryForm.controls.comorbidityHistory, temp),
-    //     "medicationHistory": this.postGeneralMedicationHistroy(generalHistoryForm.controls.medicationHistory, temp),
-    //     "femaleObstetricHistory": this.postGeneralPastObstetricHistory(generalHistoryForm.controls.pastObstericHistory, temp),
-    //     "menstrualHistory": this.postGeneralMenstrualHistory(generalHistoryForm.controls.menstrualHistory, temp),
-    //     "familyHistory": this.postGeneralFamilyHistory(generalHistoryForm.controls.familyHistory, temp),
-    //     "personalHistory": this.postGeneralPersonalHistory(generalHistoryForm.controls.personalHistory, temp),
-    //   }
-    // }
   }
 
   postNurseNCDCareVisitForm(
@@ -2004,9 +1864,6 @@ export class NurseService {
         temp.newBornHealthStatus.newBornHealthStatusID;
       temp.newBornHealthStatus = temp.newBornHealthStatus.newBornHealthStatus;
     }
-    // if (!temp.dateOfDelivery) {
-    //   temp.dateOfDelivery = undefined;
-    // }
 
     const patientPNCDetails = Object.assign({}, temp, {
       beneficiaryRegID: localStorage.getItem('beneficiaryRegID'),
@@ -2072,7 +1929,6 @@ export class NurseService {
       physicalActivityHistory.value,
       otherDetails,
     );
-    // console.log('General examination', JSON.stringify(generalExaminationForm, null, 4));
     return physicalActivityHistoryForm;
   }
   setNCDTemp(score: any) {
