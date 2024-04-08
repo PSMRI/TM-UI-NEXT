@@ -37,6 +37,7 @@ import { HttpServiceService } from '../../core/services/http-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { RegistrarService } from '../../registrar/shared/services/registrar.service';
 
 @Component({
   selector: 'app-worklist',
@@ -79,6 +80,7 @@ export class WorklistComponent implements OnInit, OnDestroy, DoCheck {
     private pharmacistService: PharmacistService,
     private cameraService: CameraService,
     private inventoryService: InventoryService,
+    private registrarService: RegistrarService,
   ) {}
 
   ngOnInit() {
@@ -226,41 +228,65 @@ export class WorklistComponent implements OnInit, OnDestroy, DoCheck {
 
   loadPharmaPage(beneficiary: any) {
     console.log(beneficiary);
-    // let benDetails = Object.assign({},beneficiary , {"currentlanguage":sessionStorage.getItem('setLanguage')});
     const data = {
       beneficiaryRegID: beneficiary.beneficiaryRegID,
       beneficiaryID: null,
     };
-    // this.registrarService.getHealthIdDetails(data)
-    //   .subscribe((healthIDDetails: any) => {
-    //     if (healthIDDetails.statusCode === 200) {
-    //       console.log("healthID",healthIDDetails);
-    //       if(healthIDDetails.data.BenHealthDetails !=undefined && healthIDDetails.data.BenHealthDetails !=null)
-    //       {
-    //       this.benDetails=healthIDDetails.data.BenHealthDetails;
-    //       if(this.benDetails.length >0)
-    //       {
-    //       this.benDetails.forEach((healthID: any,index: any) => {
-    //         if(healthID.healthId !=undefined && healthID.healthId !=null && (index !== this.benDetails.length-1))
-    //         this.healthIDArray.push(healthID.healthId+',');
-    //         else if(healthID.healthId !=undefined && healthID.healthId !=null)
-    //         this.healthIDArray.push(healthID.healthId);
-    //         if(healthID.healthId !=undefined && healthID.healthId !=null)
-    //         this.healthIDValue=this.healthIDValue+healthID.healthId+',';
-    //       })
-    //     }
-    //       if(this.healthIDValue !=undefined && this.healthIDValue !=null && this.healthIDValue.length >1)
-    //       {
-    //         this.healthIDValue=this.healthIDValue.substring(0,this.healthIDValue.length-1);
-    //       }
-    //     }
-    //     } else {
-    //       this.confirmationService.alert(this.currentLanguageSet.issueInGettingBeneficiaryABHADetails, 'error');
-    //     }
-    //   }, (err: any) => {
-    //     this.confirmationService.alert(this.currentLanguageSet.issueInGettingBeneficiaryABHADetails, 'error');
-
-    //   })
+    this.registrarService.getHealthIdDetails(data).subscribe(
+      (healthIDDetails: any) => {
+        if (healthIDDetails.statusCode === 200) {
+          console.log('healthID', healthIDDetails);
+          if (
+            healthIDDetails.data.BenHealthDetails !== undefined &&
+            healthIDDetails.data.BenHealthDetails !== null
+          ) {
+            this.benDetails = healthIDDetails.data.BenHealthDetails;
+            if (this.benDetails.length > 0) {
+              this.benDetails.forEach((healthID: any, index: any) => {
+                if (
+                  healthID.healthId !== undefined &&
+                  healthID.healthId !== null &&
+                  index !== this.benDetails.length - 1
+                )
+                  this.healthIDArray.push(healthID.healthId + ',');
+                else if (
+                  healthID.healthId !== undefined &&
+                  healthID.healthId !== null
+                )
+                  this.healthIDArray.push(healthID.healthId);
+                if (
+                  healthID.healthId !== undefined &&
+                  healthID.healthId !== null
+                )
+                  this.healthIDValue =
+                    this.healthIDValue + healthID.healthId + ',';
+              });
+            }
+            if (
+              this.healthIDValue !== undefined &&
+              this.healthIDValue !== null &&
+              this.healthIDValue.length > 1
+            ) {
+              this.healthIDValue = this.healthIDValue.substring(
+                0,
+                this.healthIDValue.length - 1,
+              );
+            }
+          }
+        } else {
+          this.confirmationService.alert(
+            this.currentLanguageSet.issueInGettingBeneficiaryABHADetails,
+            'error',
+          );
+        }
+      },
+      (err: any) => {
+        this.confirmationService.alert(
+          this.currentLanguageSet.issueInGettingBeneficiaryABHADetails,
+          'error',
+        );
+      },
+    );
     this.confirmationService
       .confirm(
         `info`,
@@ -272,21 +298,14 @@ export class WorklistComponent implements OnInit, OnDestroy, DoCheck {
             beneficiary.beneficiaryID,
             beneficiary.visitCode,
             beneficiary.benFlowID,
+            sessionStorage.getItem('setLanguage') !== undefined
+              ? sessionStorage.getItem('setLanguage')
+              : 'English',
             beneficiary.beneficiaryRegID,
-            sessionStorage.getItem('setLanguage'),
             this.healthIDValue,
           );
         }
       });
-    // this.confirmationService.confirm(`info`, `Currently pharma not available`).subscribe(result => {
-    //   if (result) {
-    //     localStorage.setItem('visitID', beneficiary.benVisitID);
-    //     localStorage.setItem('beneficiaryRegID', beneficiary.beneficiaryRegID);
-    //     localStorage.setItem('beneficiaryID', beneficiary.beneficiaryID);
-    //     localStorage.setItem('visitCategory', beneficiary.VisitCategory);
-    //     // this.router.navigate(['/pharmacist/patient/', beneficiary.beneficiaryRegID]);
-    //   }
-    // });
   }
 
   //AN40085822 13/10/2021 Integrating Multilingual Functionality --Start--
