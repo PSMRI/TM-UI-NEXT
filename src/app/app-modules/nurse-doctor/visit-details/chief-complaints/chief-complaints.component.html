@@ -29,7 +29,9 @@
                 matInput
                 name="chiefComplaint"
                 formControlName="chiefComplaint"
+                [(ngModel)]="chiefComplaint"
                 (keyup)="suggestChiefComplaintList(complaint, i)"
+                (blur)="reEnterChiefComplaint(complaint)"
                 #complaintType
                 [matAutocomplete]="auto"
               />
@@ -66,13 +68,7 @@
               />
             </mat-form-field>
           </div>
-          <div
-            class="col-md-4 box"
-            *ngIf="
-              complaint?.value?.chiefComplaint !== null &&
-              complaint?.value?.chiefComplaint !== ''
-            "
-          >
+          <div class="col-md-4 box">
             <mat-form-field class="input-full-width">
               <mat-label class="mat-label-text">{{
                 currentLanguageSet?.nurseData?.chiefComplaintsDetails?.duration
@@ -84,18 +80,14 @@
                 allowText="number"
                 maxlength="2"
                 formControlName="duration"
+                [(ngModel)]="duration"
+                (input)="onInputDuration(complaint)"
                 (selectionChange)="validateDuration(complaint)"
               />
             </mat-form-field>
           </div>
 
-          <div
-            class="col-md-4 box"
-            *ngIf="
-              complaint?.value?.duration !== null &&
-              complaint?.value?.duration !== ''
-            "
-          >
+          <div class="col-md-4 box">
             <mat-label class="mat-label-text">{{
               currentLanguageSet?.nurseData?.chiefComplaintsDetails
                 ?.unitOfDuration
@@ -115,13 +107,7 @@
           </div>
         </div>
         <div class="col-12 row">
-          <div
-            class="col-md-4"
-            *ngIf="
-              complaint?.value?.chiefComplaint !== null &&
-              complaint?.value?.chiefComplaint !== ''
-            "
-          >
+          <div class="col-md-4">
             <mat-form-field class="textarea-full-width">
               <mat-label class="mat-label-text">{{
                 currentLanguageSet?.nurseData?.chiefComplaintsDetails
