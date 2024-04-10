@@ -361,7 +361,6 @@ export class QuickConsultComponent
 
   filterMedicine(medicine: any) {
     console.log('here');
-
     if (medicine) {
       this.subFilteredDrugMaster = this.filteredDrugMaster.filter(
         (drug: any) => {
@@ -799,43 +798,45 @@ export class QuickConsultComponent
       })
       .subscribe((res) => {
         if (
-          res.benAnthropometryDetail !== null &&
-          res.benPhysicalVitalDetail !== null
+          res.data.benAnthropometryDetail !== null &&
+          res.data.benPhysicalVitalDetail !== null
         ) {
           this.patientQuickConsultForm.patchValue({
-            height_cm: res.benAnthropometryDetail.height_cm,
-            weight_Kg: res.benAnthropometryDetail.weight_Kg,
-            bMI: res.benAnthropometryDetail.bMI,
-            temperature: res.benPhysicalVitalDetail.temperature,
+            height_cm: res.data.benAnthropometryDetail.height_cm,
+            weight_Kg: res.data.benAnthropometryDetail.weight_Kg,
+            bMI: res.data.benAnthropometryDetail.bMI,
+            temperature: res.data.benPhysicalVitalDetail.temperature,
             systolicBP_1stReading:
-              res.benPhysicalVitalDetail.systolicBP_1stReading,
+              res.data.benPhysicalVitalDetail.systolicBP_1stReading,
             diastolicBP_1stReading:
-              res.benPhysicalVitalDetail.diastolicBP_1stReading,
-            pulseRate: res.benPhysicalVitalDetail.pulseRate,
-            respiratoryRate: res.benPhysicalVitalDetail.respiratoryRate,
+              res.data.benPhysicalVitalDetail.diastolicBP_1stReading,
+            pulseRate: res.data.benPhysicalVitalDetail.pulseRate,
+            respiratoryRate: res.data.benPhysicalVitalDetail.respiratoryRate,
             bloodGlucose_Fasting:
-              res.benPhysicalVitalDetail.bloodGlucose_Fasting,
-            bloodGlucose_Random: res.benPhysicalVitalDetail.bloodGlucose_Random,
-            bloodGlucose_2hr_PP: res.benPhysicalVitalDetail.bloodGlucose_2hr_PP,
-            sPO2: res.benPhysicalVitalDetail.sPO2,
-            rbsTestResult: res.benPhysicalVitalDetail.rbsTestResult,
-            rbsTestRemarks: res.benPhysicalVitalDetail.rbsTestRemarks,
+              res.data.benPhysicalVitalDetail.bloodGlucose_Fasting,
+            bloodGlucose_Random:
+              res.data.benPhysicalVitalDetail.bloodGlucose_Random,
+            bloodGlucose_2hr_PP:
+              res.data.benPhysicalVitalDetail.bloodGlucose_2hr_PP,
+            sPO2: res.data.benPhysicalVitalDetail.sPO2,
+            rbsTestResult: res.data.benPhysicalVitalDetail.rbsTestResult,
+            rbsTestRemarks: res.data.benPhysicalVitalDetail.rbsTestRemarks,
           });
           this.nurseService.rbsTestResultFromDoctorFetch = null;
           if (
-            res.benPhysicalVitalDetail.rbsTestResult !== undefined &&
-            res.benPhysicalVitalDetail.rbsTestResult !== null &&
+            res.data.benPhysicalVitalDetail.rbsTestResult !== undefined &&
+            res.data.benPhysicalVitalDetail.rbsTestResult !== null &&
             !this.nurseService.mmuVisitData
           ) {
             this.nurseService.rbsTestResultFromDoctorFetch =
-              res.benPhysicalVitalDetail.rbsTestResult;
+              res.data.benPhysicalVitalDetail.rbsTestResult;
             this.rbsResultChange();
           }
 
           //Sending RBS Test Result to patch in Lab Reports
-          if (res.benPhysicalVitalDetail) {
+          if (res.data.benPhysicalVitalDetail) {
             this.testInVitalsService.setVitalsRBSValueInReports(
-              res.benPhysicalVitalDetail,
+              res.data.benPhysicalVitalDetail,
             );
           }
         }
@@ -1335,11 +1336,14 @@ export class QuickConsultComponent
   }
 
   checkComplaintFormValidity(complaintForm: any) {
-    const temp = complaintForm.value;
-    if (temp.chiefComplaint && temp.conceptID) {
-      return false;
-    } else {
-      return true;
+    if (complaintForm) {
+      const temp = complaintForm?.value;
+      if (temp && temp.chiefComplaint && temp.conceptID) {
+        return false;
+      } else {
+        return true;
+      }
     }
+    return false;
   }
 }

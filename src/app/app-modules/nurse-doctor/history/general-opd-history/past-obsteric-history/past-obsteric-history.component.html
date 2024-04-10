@@ -54,7 +54,7 @@
           formControlName="value"
           class="checkbox"
           color="primary"
-          (selectionChange)="togglePastObstericHistory($event, i + 1)"
+          (chnage)="togglePastObstericHistory($event, i + 1)"
         >
           {{ i + 1 }}
         </mat-checkbox>
@@ -76,7 +76,7 @@
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
             <mat-form-field class="input-full-width mat_form_field_width">
               <mat-label class="mat-label-text">{{
-                currentLanguageSet?.historyData?.opdNCDPNCHistory?.obstetric
+                currentLanguageSet?.historyData?.opd_NCD_PNCHistory?.obstetric
                   ?.number
               }}</mat-label>
               <input
@@ -116,10 +116,12 @@
                       [disabled]="
                         !complicationOptionConstraints[i]
                           .showAllPregComplication &&
-                        ((complication?.pregComplicationType === 'None' &&
+                        (((complication?.pregComplicationType === 'None' ||
+                          complication?.pregComplicationType === 'Nil') &&
                           complicationOptionConstraints[i]
                             ?.disableNonePregnancyComplication) ||
-                          (complication?.pregComplicationType !== 'None' &&
+                          ((complication?.pregComplicationType !== 'None' ||
+                            complication?.pregComplicationType !== 'Nil') &&
                             !complicationOptionConstraints[i]
                               .disableNonePregnancyComplication))
                       "

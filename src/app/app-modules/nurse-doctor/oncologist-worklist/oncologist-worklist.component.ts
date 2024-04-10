@@ -185,12 +185,6 @@ export class OncologistWorklistComponent implements OnInit, DoCheck {
         }
       });
     }
-    this.activePage = 1;
-    this.pageChanged({
-      page: 1,
-      itemsPerPage: this.rowsPerPage,
-    });
-    this.currentPage = 1;
   }
 
   patientImageView(benregID: any) {

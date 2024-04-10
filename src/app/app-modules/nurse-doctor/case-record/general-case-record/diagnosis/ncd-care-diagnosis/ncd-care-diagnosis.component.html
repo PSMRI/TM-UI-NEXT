@@ -1,6 +1,10 @@
 <div class="m-t-10" [formGroup]="generalDiagnosisForm">
   <div class="row">
-    <div class="col-xs-12 col-xs-6 box" *ngIf="enableNCDCondition">
+    <div
+      class="col-xs-12 col-xs-6 box"
+      style="width: 300px"
+      *ngIf="enableNCDCondition"
+    >
       <mat-label class="mat-label-text"
         >{{ current_language_set?.casesheet?.ncdCondition }}*</mat-label
       >
@@ -20,7 +24,11 @@
         >
       </mat-select>
     </div>
-    <div class="col-xs-12 col-xs-6 box" *ngIf="!enableNCDCondition">
+    <div
+      class="col-xs-12 col-xs-6 box"
+      style="width: 300px"
+      *ngIf="!enableNCDCondition"
+    >
       <mat-label class="mat-label-text">{{
         current_language_set?.casesheet?.ncdCondition
       }}</mat-label>
@@ -40,7 +48,11 @@
         >
       </mat-select>
     </div>
-    <div class="col-xs-12" *ngIf="isNcdScreeningConditionOther">
+    <div
+      class="col-xs-12"
+      style="width: 300px"
+      *ngIf="isNcdScreeningConditionOther"
+    >
       <mat-form-field class="input-full-width">
         <mat-label class="mat-label-text">{{
           current_language_set?.ncdConditionOther
@@ -57,7 +69,7 @@
         </textarea>
       </mat-form-field>
     </div>
-    <div class="col-xs-12 col-xs-6 box">
+    <div class="col-xs-12 col-xs-6 box" style="width: 300px">
       <mat-label class="mat-label-text">{{
         current_language_set?.casesheet?.typeOfNcd
       }}</mat-label>
@@ -106,63 +118,67 @@
           "
         >
           <ng-container [formGroupName]="i">
-            <div class="col-xs-12 col-sm-9">
-              <mat-form-field class="input-full-width">
-                <input
-                  matInput
-                  allowText="inputFieldValidator"
-                  appDiagnosisSearch
-                  [diagnosisListForm]="diagnosis"
-                  name="viewProvisionalDiagnosisProvided"
-                  formControlName="viewProvisionalDiagnosisProvided"
-                  maxlength="100"
-                  minlength="3"
-                  [addedDiagnosis]="
-                    generalDiagnosisForm.value.provisionalDiagnosisList
+            <div class="row">
+              <div class="col-xs-12 col-sm-9">
+                <mat-form-field class="input-full-width">
+                  <input
+                    matInput
+                    allowText="inputFieldValidator"
+                    appDiagnosisSearch
+                    [diagnosisListForm]="diagnosis"
+                    name="viewProvisionalDiagnosisProvided"
+                    formControlName="viewProvisionalDiagnosisProvided"
+                    maxlength="100"
+                    minlength="3"
+                    [addedDiagnosis]="
+                      generalDiagnosisForm.value.provisionalDiagnosisList
+                    "
+                  />
+                  <mat-icon
+                    class="search-btn cursorPointer"
+                    matSuffix
+                    appDiagnosisSearch
+                    [diagnosisListForm]="diagnosis"
+                    [addedDiagnosis]="
+                      generalDiagnosisForm.value?.provisionalDiagnosisList
+                    "
+                    >search</mat-icon
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-3 m-t-10">
+                <button
+                  mat-mini-fab
+                  type="button"
+                  color="warn"
+                  class="mat_warn_circle"
+                  style="margin-right: 5px"
+                  *ngIf="
+                    diagnosis.get('viewProvisionalDiagnosisProvided')
+                      ?.disabled ||
+                    i !== 0 ||
+                    (i === 0 &&
+                      generalDiagnosisForm.get('provisionalDiagnosisList')
+                        ?.value.viewProvisionalDiagnosisProvided !== null &&
+                      generalDiagnosisForm.get('provisionalDiagnosisList')
+                        ?.value.viewProvisionalDiagnosisProvided !== '')
                   "
-                />
-                <mat-icon
-                  class="search-btn cursorPointer"
-                  matSuffix
-                  appDiagnosisSearch
-                  [diagnosisListForm]="diagnosis"
-                  [addedDiagnosis]="
-                    generalDiagnosisForm.value?.provisionalDiagnosisList
-                  "
-                  >search</mat-icon
+                  (click)="removeDiagnosisFromList(i, diagnosis)"
                 >
-              </mat-form-field>
-            </div>
-            <div class="col-xs-12 col-sm-3 m-t-10">
-              <button
-                mat-mini-fab
-                type="button"
-                color="warn"
-                class="mat_warn_circle"
-                *ngIf="
-                  diagnosis.get('viewProvisionalDiagnosisProvided')?.disabled ||
-                  i !== 0 ||
-                  (i === 0 &&
-                    generalDiagnosisForm.get('provisionalDiagnosisList')?.value
-                      .viewProvisionalDiagnosisProvided !== null &&
-                    generalDiagnosisForm.get('provisionalDiagnosisList')?.value
-                      .viewProvisionalDiagnosisProvided !== '')
-                "
-                (click)="removeDiagnosisFromList(i, diagnosis)"
-              >
-                <mat-icon>close</mat-icon>
-              </button>
-              <button
-                mat-mini-fab
-                type="button"
-                class="mat_blue_circle"
-                color="primary"
-                *ngIf="isLast"
-                [disabled]="checkProvisionalDiagnosisValidity(diagnosis)"
-                (click)="addDiagnosis()"
-              >
-                <mat-icon>add</mat-icon>
-              </button>
+                  <mat-icon>close</mat-icon>
+                </button>
+                <button
+                  mat-mini-fab
+                  type="button"
+                  class="mat_blue_circle"
+                  color="primary"
+                  *ngIf="isLast"
+                  [disabled]="checkProvisionalDiagnosisValidity(diagnosis)"
+                  (click)="addDiagnosis()"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
             </div>
           </ng-container>
         </div>

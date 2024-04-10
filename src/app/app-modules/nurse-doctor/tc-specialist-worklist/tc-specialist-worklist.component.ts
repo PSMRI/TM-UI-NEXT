@@ -69,9 +69,12 @@ export class TcSpecialistWorklistComponent
     'gender',
     'age',
     'visitCategory',
-    'district',
+    'village_spoke',
     'visitDate',
+    'tcDate',
+    'beneficiaryArrived',
     'image',
+    'action',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   dataSource = new MatTableDataSource<any>();
