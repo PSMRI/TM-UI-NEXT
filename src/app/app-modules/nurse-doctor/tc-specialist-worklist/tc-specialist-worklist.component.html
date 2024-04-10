@@ -162,22 +162,22 @@
                   <span style="color: #a6a6a6">{{ element.benVisitNo }}</span>
                 </td>
               </ng-container>
-              <ng-container matColumnDef="district">
+              <ng-container matColumnDef="village_spoke">
                 <th
                   mat-header-cell
                   style="border-bottom: none"
                   *matHeaderCellDef
                   mat-sort-header
                 >
-                  {{ currentLanguageSet?.bendetails?.district }}
+                  {{ currentLanguageSet?.bendetails?.village_spoke }}
                 </th>
                 <td
                   mat-cell
                   *matCellDef="let element"
                   (click)="beneficiaryTCRequestStatus(element)"
                 >
-                  {{ element.districtName | titlecase }} /
-                  {{ element.villageName | titlecase }}
+                  {{ element.villageName | titlecase }} /
+                  {{ element?.masterVan?.vehicalNo }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="visitDate">
@@ -195,6 +195,55 @@
                   (click)="beneficiaryTCRequestStatus(element)"
                 >
                   {{ element.benVisitDate }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="tcDate">
+                <th
+                  mat-header-cell
+                  style="border-bottom: none"
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  {{ currentLanguageSet?.bendetails?.tcDate }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  (click)="beneficiaryTCRequestStatus(element)"
+                >
+                  {{ element.tCRequestDate }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="beneficiaryArrived">
+                <th
+                  mat-header-cell
+                  style="border-bottom: none"
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  {{ currentLanguageSet?.bendetails?.beneficiaryArrived }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  (click)="beneficiaryTCRequestStatus(element)"
+                >
+                  <button
+                    *ngIf="element.benArrivedFlag"
+                    mat-mini-fab
+                    color="accent"
+                    class="mat_green"
+                  >
+                    <span color="accent" class="material-icons">done</span>
+                  </button>
+                  <button
+                    *ngIf="!element.benArrivedFlag"
+                    mat-mini-fab
+                    color="warn"
+                    class="mat_warn_circle"
+                  >
+                    <span class="material-icons">close</span>
+                  </button>
                 </td>
               </ng-container>
               <ng-container matColumnDef="image">
@@ -216,6 +265,31 @@
                     src="assets/images/Avatar-Profile_30X30.png "
                     alt="profile"
                   />
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th
+                  mat-header-cell
+                  style="border-bottom: none"
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  {{ currentLanguageSet?.bendetails?.action }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  (click)="cancelTCRequest(element)"
+                  matTooltip="{{ currentLanguageSet?.alerts?.info?.cancelReq }}"
+                >
+                  <button
+                    [disabled]="element.specialist_flag !== 1"
+                    mat-raised-button
+                    color="warn"
+                    class="mat_blue"
+                  >
+                    {{ currentLanguageSet?.common?.cancel }}
+                  </button>
                 </td>
               </ng-container>
 
@@ -255,8 +329,18 @@
                     </p>
                   </li>
                   <li>
-                    <div class="marker-dark-green"></div>
-                    <p>{{ currentLanguageSet?.common?.tmReferred }}</p>
+                    <div class="marker-a-f-t-p"></div>
+                    <p>
+                      {{
+                        currentLanguageSet?.alerts?.info?.fetosenseTest_pending
+                      }}
+                    </p>
+                  </li>
+                  <li>
+                    <div class="marker-a-f-t-d"></div>
+                    <p>
+                      {{ currentLanguageSet?.alerts?.info?.fetosenseTest_done }}
+                    </p>
                   </li>
                 </ul>
               </td>
@@ -301,8 +385,18 @@
                   </p>
                 </li>
                 <li>
-                  <div class="marker-dark-green"></div>
-                  <p>{{ currentLanguageSet?.common?.tmReferred }}</p>
+                  <div class="marker-a-f-t-p"></div>
+                  <p>
+                    {{
+                      currentLanguageSet?.alerts?.info?.fetosenseTest_pending
+                    }}
+                  </p>
+                </li>
+                <li>
+                  <div class="marker-a-f-t-d"></div>
+                  <p>
+                    {{ currentLanguageSet?.alerts?.info?.fetosenseTest_done }}
+                  </p>
                 </li>
               </ul>
             </div>

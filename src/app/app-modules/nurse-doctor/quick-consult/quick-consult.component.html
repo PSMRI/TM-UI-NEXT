@@ -161,6 +161,7 @@
                   mat-mini-fab
                   color="warn"
                   class="mat_warn_circle"
+                  style="margin-right: 5px"
                   [id]="'removeBtn' + i"
                   *ngIf="
                     i !== 0 ||
@@ -185,11 +186,11 @@
                 <button
                   class="mat_blue_circle"
                   *ngIf="isLast"
+                  [id]="'addBtn' + i"
+                  [disabled]="checkComplaintFormValidity(chiefComplaint)"
                   type="button"
                   mat-mini-fab
                   color="primary"
-                  [id]="'addBtn' + i"
-                  [disabled]="checkComplaintFormValidity(chiefComplaint)"
                   (click)="addChiefComplaint()"
                 >
                   <span class="material-icons">add</span>
@@ -606,7 +607,7 @@
                   <h4>
                     {{
                       currentLanguageSet?.DiagnosisDetails
-                        ?.viewProvisionalDiagnosisProvided
+                        ?.provisionaldiagnosis
                     }}*
                   </h4>
                 </header>
@@ -808,9 +809,7 @@
                       <mat-option
                         *ngFor="let item of subFilteredDrugMaster"
                         [value]="item"
-                        (onSelectionselectionChange)="
-                          selectMedicineObject($event)
-                        "
+                        (onSelectionChange)="selectMedicineObject($event)"
                       >
                         {{ item.itemName }} {{ item.strength
                         }}{{ item.unitOfMeasurement }}
@@ -828,7 +827,7 @@
                     currentLanguageSet?.Prescription?.dosage
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="dose"
                     [(ngModel)]="currentPrescription.dose"
                     [disabled]="!currentPrescription.drugID"
@@ -847,7 +846,7 @@
                     currentLanguageSet?.Prescription?.frequency
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="frequency"
                     [(ngModel)]="currentPrescription.frequency"
                     [disabled]="!currentPrescription.drugID"
@@ -869,7 +868,7 @@
                       ?.duration
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="duration"
                     [(ngModel)]="currentPrescription.duration"
                     [disabled]="!currentPrescription.drugID"
@@ -888,7 +887,7 @@
                     currentLanguageSet?.Prescription?.unit
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="unit"
                     [(ngModel)]="currentPrescription.unit"
                     [disabled]="!currentPrescription.drugID"
@@ -914,7 +913,7 @@
                     currentLanguageSet?.Prescription?.quantity
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="quantity"
                     [(ngModel)]="currentPrescription.qtyPrescribed"
                     [disabled]="!currentPrescription.drugID"
@@ -943,7 +942,7 @@
                     currentLanguageSet?.Prescription?.Route
                   }}</mat-label>
                   <mat-select
-                    class="input-full-width"
+                    class="input-full-width-select"
                     name="route"
                     [(ngModel)]="currentPrescription.route"
                     [disabled]="!currentPrescription.drugID"
@@ -983,6 +982,7 @@
                     [disabled]="prescriptionForm.invalid"
                     mat-raised-button
                     color="primary"
+                    class="mat_blue"
                     type="button"
                     (click)="submitForUpload()"
                   >
@@ -1015,11 +1015,7 @@
                         <legend>
                           {{ drug.value.drugName }}
                           {{ drug.value.drugStrength }}
-                          {{
-                            drug.value.isEDL
-                              ? ""
-                              : currentLanguageSet?.nonEDLMedicine
-                          }}
+                          {{ drug.value.isEDL ? "" : "- (Non-EDL) Medicine" }}
                         </legend>
                         <div class="row">
                           <div class="col-md-1 right-padding-remove-desktop">
@@ -1103,7 +1099,6 @@
                                 readonly="true"
                                 type="text"
                                 matInput
-                                allowText="textAreaValidator"
                                 formControlName="instructions"
                               />
                             </mat-form-field>
@@ -1112,9 +1107,9 @@
                             <button
                               mat-mini-fab
                               id="deleteMedicine"
-                              style="margin-right: 3px"
                               (click)="deleteMedicine(j, drug.value.id)"
                               color="warn"
+                              class="mat_warn_circle"
                             >
                               <span class="material-icons">close</span>
                             </button>

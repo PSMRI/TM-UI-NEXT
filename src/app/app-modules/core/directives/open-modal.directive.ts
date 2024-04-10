@@ -73,7 +73,8 @@ export class OpenModalDirective implements OnInit, DoCheck {
   }
 
   openDialog(): void {
-    const searchTerm = this.diagnosisListForm.value.provisionalDiagnosis;
+    const searchTerm =
+      this.diagnosisListForm.value.viewProvisionalDiagnosisProvided;
     if (searchTerm.length > 2) {
       const dialogRef = this.dialog.open(DiagnosisSearchComponent, {
         width: '800px',

@@ -277,6 +277,7 @@ export class ObstetricExaminationComponent
 
       const serviceLineDetails: any =
         localStorage.getItem('serviceLineDetails');
+      const providerServiceID: any = localStorage.getItem('providerServiceID');
       const reqObj = {
         beneficiaryRegID: this.beneficiary.beneficiaryRegID,
         benFlowID: this.beneficiary.benFlowID,
@@ -286,7 +287,7 @@ export class ObstetricExaminationComponent
         foetalMonitorTestId: testId,
         testName: testName,
         vanID: JSON.parse(serviceLineDetails).vanID,
-        parkingPlaceID: JSON.parse(serviceLineDetails).parkingPlaceID,
+        ProviderServiceMapID: JSON.parse(providerServiceID),
         createdBy: localStorage.getItem('userName'),
       };
 

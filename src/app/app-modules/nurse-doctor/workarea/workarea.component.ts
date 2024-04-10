@@ -1415,8 +1415,7 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
