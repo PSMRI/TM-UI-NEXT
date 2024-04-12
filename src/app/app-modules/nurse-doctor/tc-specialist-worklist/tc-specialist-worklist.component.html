@@ -232,7 +232,7 @@
                     *ngIf="element.benArrivedFlag"
                     mat-mini-fab
                     color="accent"
-                    class="mat_green"
+                    class="mat_green_circle"
                   >
                     <span color="accent" class="material-icons">done</span>
                   </button>
@@ -286,7 +286,7 @@
                     [disabled]="element.specialist_flag !== 1"
                     mat-raised-button
                     color="warn"
-                    class="mat_blue"
+                    class="mat_red"
                   >
                     {{ currentLanguageSet?.common?.cancel }}
                   </button>
@@ -325,7 +325,7 @@
                   <li>
                     <div class="marker-c-d"></div>
                     <p>
-                      {{ currentLanguageSet?.alerts?.info?.consultationDone }}
+                      {{ currentLanguageSet?.alerts?.info?.consultation_done }}
                     </p>
                   </li>
                   <li>
@@ -356,7 +356,7 @@
             <strong>{{ currentLanguageSet?.common?.noRecordsFound }}</strong>
           </div>
           <div class="col-12 row">
-            <div class="col-6">
+            <div class="col-12">
               <ul class="description" *ngIf="dataSource.data.length > 0">
                 <li>
                   <div class="marker-p-f-c"></div>
@@ -381,7 +381,7 @@
                 <li>
                   <div class="marker-c-d"></div>
                   <p>
-                    {{ currentLanguageSet?.alerts?.info?.consultationDone }}
+                    {{ currentLanguageSet?.alerts?.info?.consultation_done }}
                   </p>
                 </li>
                 <li>
@@ -400,7 +400,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-6">
+            <div class="col-12" style="margin-top: 40px !important">
               <mat-paginator
                 style="display: unset !important"
                 [pageSizeOptions]="[5, 10, 20]"

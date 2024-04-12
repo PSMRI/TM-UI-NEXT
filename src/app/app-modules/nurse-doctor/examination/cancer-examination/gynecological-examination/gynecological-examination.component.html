@@ -8,17 +8,19 @@
         }}
       </div>
       <div class="col-6 box">
-        <mat-label class="mat-label-text">{{
-          current_language_set?.common?.select
-        }}</mat-label>
-        <mat-select
-          name="appearanceOfCervix"
-          formControlName="appearanceOfCervix"
-        >
-          <mat-option value="Negative"> Negative </mat-option>
-          <mat-option value="Positive"> Positive </mat-option>
-          <mat-option value="Suspect"> Suspect </mat-option>
-        </mat-select>
+        <mat-form-field [style.width]="'100%'">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.common?.select
+          }}</mat-label>
+          <mat-select
+            name="appearanceOfCervix"
+            formControlName="appearanceOfCervix"
+          >
+            <mat-option value="Negative"> Negative </mat-option>
+            <mat-option value="Positive"> Positive </mat-option>
+            <mat-option value="Suspect"> Suspect </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
 
@@ -30,18 +32,20 @@
         }}
       </div>
       <div class="col-6 box">
-        <mat-label class="mat-label-text">{{
-          current_language_set?.common?.select
-        }}</mat-label>
-        <mat-select
-          multiple
-          name="typeOfLesionList"
-          formControlName="typeOfLesionList"
-        >
-          <mat-option value="Proliferative"> Proliferative </mat-option>
-          <mat-option value="Ulcerative"> Ulcerative </mat-option>
-          <mat-option value="Infiltrative"> Infiltrative </mat-option>
-        </mat-select>
+        <mat-form-field [style.width]="'100%'">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.common?.select
+          }}</mat-label>
+          <mat-select
+            multiple
+            name="typeOfLesionList"
+            formControlName="typeOfLesionList"
+          >
+            <mat-option value="Proliferative"> Proliferative </mat-option>
+            <mat-option value="Ulcerative"> Ulcerative </mat-option>
+            <mat-option value="Infiltrative"> Infiltrative </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <div class="col-12 row">

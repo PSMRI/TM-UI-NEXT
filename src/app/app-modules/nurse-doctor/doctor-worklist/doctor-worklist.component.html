@@ -283,7 +283,9 @@
                       element.specialist_flag !== 1 && !element.benArrivedFlag
                     "
                   >
-                    <span class="material-icons">voice_chat</span>
+                    <span class="material-icons" style="vertical-align: middle"
+                      >voice_chat</span
+                    >
                   </button>
                 </td>
               </ng-container>
@@ -360,7 +362,7 @@
             <strong>{{ currentLanguageSet?.common?.noRecordsFound }}</strong>
           </div>
           <div class="col-12 row">
-            <div class="col-9">
+            <div class="col-12">
               <ul class="description" *ngIf="dataSource.data.length > 0">
                 <li>
                   <div class="marker-p-f-c"></div>
@@ -413,7 +415,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-12" style="margin-top: 10px">
             <mat-paginator
               style="display: unset !important"
               [pageSizeOptions]="[5, 10, 20]"

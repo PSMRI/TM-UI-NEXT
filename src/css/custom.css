@@ -1019,6 +1019,7 @@ em {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  margin-bottom: 30px;
 }
 
 .footer {

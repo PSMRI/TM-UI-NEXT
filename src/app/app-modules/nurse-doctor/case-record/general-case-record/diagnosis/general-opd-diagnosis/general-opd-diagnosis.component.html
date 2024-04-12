@@ -22,7 +22,7 @@
                   appDiagnosisSearch
                   [diagnosisListForm]="diagnosis"
                   required
-                  name="viewProvisionalDiagnosisProvided"
+                  name="viewDiagnosisProvided"
                   formControlName="viewProvisionalDiagnosisProvided"
                   maxlength="100"
                   minlength="3"
@@ -46,6 +46,7 @@
                 type="button"
                 color="warn"
                 class="mat_warn_circle"
+                style="margin-right: 5px"
                 *ngIf="
                   diagnosis.get('viewProvisionalDiagnosisProvided')?.disabled ||
                   i !== 0 ||

@@ -288,7 +288,7 @@ export class WorkareaComponent
     if (this.attendant === 'tcspecialist') {
       this.isSpecialist = true;
       if (this.doctorFlag === '1') {
-        if (this.specialistFlag === '1') {
+        if (this.specialistFlag === 1) {
           this.doctorSaveAndTCSave = this.current_language_set.common.submit;
           this.isDoctorSave = true;
           console.log(
@@ -964,6 +964,7 @@ export class WorkareaComponent
                 ),
               );
               this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
               sessionStorage.removeItem('instFlag');
               sessionStorage.removeItem('suspectFlag');
               if (this.isSpecialist) {
@@ -1159,7 +1160,6 @@ export class WorkareaComponent
                   }
                 }
                 this.patientMedicalForm.reset();
-                this.confirmationService.alert(res.data.response, 'success');
               } else {
                 this.resetSpinnerandEnableTheSubmitButton();
                 this.confirmationService.alert(res.errorMessage, 'error');
@@ -1318,6 +1318,8 @@ export class WorkareaComponent
                   );
                 }
               }
+              this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');
@@ -1523,8 +1525,7 @@ export class WorkareaComponent
 
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
@@ -1596,8 +1597,7 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
@@ -1643,8 +1643,7 @@ export class WorkareaComponent
 
       if (diagForm1.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
     }
@@ -1658,8 +1657,7 @@ export class WorkareaComponent
       const diagForm1 = <FormGroup>diagForm.controls['diagnosisForm'];
       if (diagForm1.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
     }
@@ -2032,8 +2030,7 @@ export class WorkareaComponent
 
       if (diagForm.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
     }
@@ -2048,8 +2045,7 @@ export class WorkareaComponent
 
       if (diagForm.controls['provisionalDiagnosisPrimaryDoctor'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
     }
@@ -2311,8 +2307,7 @@ export class WorkareaComponent
         this.enableProvisionalDiag === true
       ) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
@@ -2447,8 +2442,7 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
@@ -2480,8 +2474,7 @@ export class WorkareaComponent
       const diagForm3 = <FormGroup>diagForm2.controls[0];
       if (diagForm3.controls['viewProvisionalDiagnosisProvided'].errors) {
         required.push(
-          this.current_language_set.DiagnosisDetails
-            .viewProvisionalDiagnosisProvided,
+          this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
         );
       }
 
@@ -2506,8 +2499,7 @@ export class WorkareaComponent
 
     if (form.controls['provisionalDiagnosisList'].errors) {
       required.push(
-        this.current_language_set.DiagnosisDetails
-          .viewProvisionalDiagnosisProvided,
+        this.current_language_set.DiagnosisDetails.provisionaldiagnosis,
       );
     }
 
@@ -2620,6 +2612,7 @@ export class WorkareaComponent
                   );
                 }
               }
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');
@@ -2652,7 +2645,6 @@ export class WorkareaComponent
                   patientQuickConsultDetails.labTestOrders !== null &&
                   patientQuickConsultDetails.labTestOrders.length > 0
                 ) {
-                  this.confirmationService.alert(res.data.response, 'success');
                   this.navigateToSpecialistWorklist();
                 } else {
                   this.getHealthIDDetails(res.data.response);
@@ -2665,7 +2657,6 @@ export class WorkareaComponent
                   (this.schedulerData !== undefined &&
                     this.schedulerData !== null)
                 ) {
-                  this.confirmationService.alert(res.data.response, 'success');
                   this.navigateToDoctorWorklist();
                 } else {
                   this.getHealthIDDetails(res.data.response);
@@ -2790,6 +2781,8 @@ export class WorkareaComponent
               } else {
                 this.linkCareContextBasedOnTestsPrescribed();
               }
+              this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');
@@ -2956,6 +2949,8 @@ export class WorkareaComponent
                   );
                 }
               }
+              this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');
@@ -2995,6 +2990,8 @@ export class WorkareaComponent
               } else {
                 this.linkCareContextBasedOnTestsPrescribed();
               }
+              this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');
@@ -3223,7 +3220,6 @@ export class WorkareaComponent
                 this.linkCareContextBasedOnTestsPrescribed();
               }
               this.patientMedicalForm.reset();
-              this.confirmationService.alert(res.data.response, 'success');
               this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
@@ -3267,6 +3263,8 @@ export class WorkareaComponent
               } else {
                 this.linkCareContextBasedOnTestsPrescribed();
               }
+              this.patientMedicalForm.reset();
+              this.router.navigate(['/nurse-doctor/doctor-worklist']);
             } else {
               this.resetSpinnerandEnableTheSubmitButton();
               this.confirmationService.alert(res.errorMessage, 'error');

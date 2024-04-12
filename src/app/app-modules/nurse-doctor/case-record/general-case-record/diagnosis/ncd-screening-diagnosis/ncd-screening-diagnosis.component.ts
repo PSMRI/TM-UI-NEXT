@@ -193,19 +193,17 @@ export class NcdScreeningDiagnosisComponent
       });
   }
 
-  patchDiagnosisDetails(viewProvisionalDiagnosisProvided: any) {
-    const savedDiagnosisData = viewProvisionalDiagnosisProvided;
+  patchDiagnosisDetails(provisionalDiagnosis: any) {
+    const savedDiagnosisData = provisionalDiagnosis;
     const diagnosisArrayList = this.generalDiagnosisForm.controls[
       'provisionalDiagnosisList'
     ] as FormArray;
-    console.log('from diagnosis' + viewProvisionalDiagnosisProvided[0].term);
+    console.log('from diagnosis' + provisionalDiagnosis[0].term);
     if (
-      viewProvisionalDiagnosisProvided[0].term !== '' &&
-      viewProvisionalDiagnosisProvided[0].conceptID !== ''
+      provisionalDiagnosis[0].term !== '' &&
+      provisionalDiagnosis[0].conceptID !== ''
     ) {
-      console.log(
-        'from diagnosis second' + viewProvisionalDiagnosisProvided[0].term,
-      );
+      console.log('from diagnosis second' + provisionalDiagnosis[0].term);
 
       for (let i = 0; i < savedDiagnosisData.length; i++) {
         diagnosisArrayList.at(i).patchValue({
@@ -274,8 +272,8 @@ export class NcdScreeningDiagnosisComponent
       diagnosisListForm.push(this.utils.initProvisionalDiagnosisList());
     }
   }
-  checkProvisionalDiagnosisValidity(viewProvisionalDiagnosisProvided: any) {
-    const temp = viewProvisionalDiagnosisProvided.value;
+  checkProvisionalDiagnosisValidity(provisionalDiagnosis: any) {
+    const temp = provisionalDiagnosis.value;
     if (temp.term && temp.conceptID) {
       return false;
     } else {

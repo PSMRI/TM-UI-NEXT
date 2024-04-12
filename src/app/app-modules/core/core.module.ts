@@ -54,7 +54,6 @@ import { CalibrationComponent } from './components/calibration/calibration.compo
 import { ConfirmatoryDiagnosisDirective } from './directives/confirmatory-diagnosis.directive';
 import { DisableFormControlDirective } from './directives/disableFormControl.directive';
 import { NullDefaultValueDirective } from './directives/null-default-value.directive';
-import { OpenModalDirective } from './directives/open-modal.directive';
 import { AllergenSearchComponent } from './components/allergen-search/allergen-search.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StringValidatorDirective } from './directives/stringValidator.directive';
@@ -104,7 +103,6 @@ import { RegistrarService } from '../registrar/shared/services/registrar.service
     SpecialistLoginComponent,
     MyEmailDirective,
     MyMobileNumberDirective,
-    OpenModalDirective,
     ConfirmatoryDiagnosisDirective,
     MyNameDirective,
     MyPasswordDirective,
@@ -137,7 +135,6 @@ import { RegistrarService } from '../registrar/shared/services/registrar.service
     PreviousDetailsComponent,
     MyEmailDirective,
     MyMobileNumberDirective,
-    OpenModalDirective,
     ConfirmatoryDiagnosisDirective,
     MyNameDirective,
     MyPasswordDirective,

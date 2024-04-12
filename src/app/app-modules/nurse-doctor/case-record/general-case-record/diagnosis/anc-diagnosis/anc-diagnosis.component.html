@@ -49,36 +49,38 @@
         </mat-form-field>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-        <mat-label class="mat-label-text">{{
-          current_language_set?.casesheet?.complications
-        }}</mat-label>
-        <mat-select
-          class="select-full-width"
-          name="complicationOfCurrentPregnancyList"
-          formControlName="complicationOfCurrentPregnancyList"
-          multiple
-          (change)="
-            resetOtherPregnancyComplication(
-              complicationOfCurrentPregnancyList,
-              0
-            );
-            displayPositive(complicationOfCurrentPregnancyList)
-          "
-        >
-          <mat-option
-            *ngFor="let complication of masterData?.pregComplicationTypes"
-            [value]="complication"
-            [disabled]="
-              !showAllPregComplication &&
-              ((disableNonePregnancyComplication &&
-                complication.pregComplicationType === 'None') ||
-                (!disableNonePregnancyComplication &&
-                  complication.pregComplicationType !== 'None'))
+        <mat-form-field [style.width]="'100%'">
+          <mat-label class="mat-label-text">{{
+            current_language_set?.casesheet?.complications
+          }}</mat-label>
+          <mat-select
+            class="select-full-width"
+            name="complicationOfCurrentPregnancyList"
+            formControlName="complicationOfCurrentPregnancyList"
+            multiple
+            (change)="
+              resetOtherPregnancyComplication(
+                complicationOfCurrentPregnancyList,
+                0
+              );
+              displayPositive(complicationOfCurrentPregnancyList)
             "
           >
-            {{ complication.pregComplicationType }}
-          </mat-option>
-        </mat-select>
+            <mat-option
+              *ngFor="let complication of masterData?.pregComplicationTypes"
+              [value]="complication"
+              [disabled]="
+                !showAllPregComplication &&
+                ((disableNonePregnancyComplication &&
+                  complication.pregComplicationType === 'None') ||
+                  (!disableNonePregnancyComplication &&
+                    complication.pregComplicationType !== 'None'))
+              "
+            >
+              {{ complication.pregComplicationType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div
         class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box"

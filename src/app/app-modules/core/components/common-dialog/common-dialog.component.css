@@ -7,6 +7,14 @@
     font-weight: 400;
 }
 
+.action .button-confirm {
+    border: 1px solid lightgray;
+    margin-left: 5px;
+    width: 70px;
+    background-color: #0277bd !important;
+    color: white !important;
+}
+
 .message {
     font-size: 16px;
     /* color: rgba(0, 0, 0, 0.6); */

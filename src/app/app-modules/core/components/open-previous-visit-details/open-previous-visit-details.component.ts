@@ -55,7 +55,7 @@ export class OpenPreviousVisitDetailsComponent implements OnInit {
   }
 
   loadPreviousVisitDetails() {
-    this.doctorService.getMMUHistory().subscribe(
+    this.doctorService.getTMHistory().subscribe(
       (data: any) => {
         console.log('data', data);
         if (data.statusCode === 200) {
@@ -86,7 +86,7 @@ export class OpenPreviousVisitDetailsComponent implements OnInit {
           beneficiaryRegID: item.beneficiaryRegID,
           visitCode: item.visitCode,
         };
-        this.doctorService.getMMUCasesheetData(reqObj).subscribe((res: any) => {
+        this.doctorService.getTMCasesheetData(reqObj).subscribe((res: any) => {
           if (res.statusCode === 200 && res.data !== null) {
             this.previousVisitData[i]['benPreviousData'] = res.data;
             this.filteredHistory = res.data;

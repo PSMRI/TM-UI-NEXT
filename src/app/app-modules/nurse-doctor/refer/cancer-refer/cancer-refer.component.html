@@ -6,97 +6,111 @@
   <div class="row m-t-20">
     <!-- Save Institute ID and serviceName-->
 
-    <div class="col-xs-6 tcell">
-      <span class="align-middle">
-        {{ currentLanguageSet?.Referdetails?.higherhealthcarecenter }}</span
-      >
-    </div>
-    <div class="col-xs-6 tcell">
-      <mat-form-field>
-        <mat-label class="mat-label-text">{{
-          currentLanguageSet?.common?.select
-        }}</mat-label>
-        <mat-select
-          name="referredToInstituteID"
-          (ngModelChange)="higherhealthcarecenter($event)"
-          formControlName="referredToInstituteID"
-        >
-          <mat-option
-            *ngFor="let center of higherHealthcareCenter"
-            [value]="center.institutionID"
-            >{{ center.institutionName }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-xs-6 tcell">
-      <span class="align-middle">
-        {{ currentLanguageSet?.Referdetails?.additionalservices }}</span
-      >
-    </div>
-    <div class="col-xs-6 tcell">
-      <mat-form-field>
-        <mat-label class="mat-label-text">{{
-          currentLanguageSet?.common?.select
-        }}</mat-label>
-        <mat-select
-          (ngModelChange)="additionalservices($event)"
-          multiple="true"
-          name="refrredToAdditionalServiceList"
-          formControlName="refrredToAdditionalServiceList"
-        >
-          <mat-option
-            *ngFor="let service of additionalServices"
-            [value]="service.serviceName"
-            [disabled]="canDisable(service)"
-          >
-            {{ service.serviceName }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div *ngIf="selectValue > 0; else elseBlock" class="col-xs-6 tcell">
-      <span class="align-middle">
-        {{ currentLanguageSet?.Referdetails?.referralReason }}*</span
-      >
-    </div>
-    <ng-template #elseBlock>
-      <div class="col-xs-6 tcell">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 tcell">
         <span class="align-middle">
-          {{ currentLanguageSet?.Referdetails?.referralReason }}</span
+          {{ currentLanguageSet?.Referdetails?.higherhealthcarecenter }}</span
         >
       </div>
-    </ng-template>
-
-    <div *ngIf="selectValue > 0; else elseBlockText" class="col-xs-6">
-      <mat-form-field class="referreason" [style.width]="'100%'">
-        <textarea
-          matInput
-          allowText="textAreaValidator"
-          matTextareaAutosize
-          required="true"
-          formControlName="referralReason"
-          name="Remarks"
-          maxLength="300"
-        ></textarea>
-      </mat-form-field>
+      <div class="col-sm-6 col-md-3 box">
+        <mat-form-field [style.width]="'100%'">
+          <mat-label class="mat-label-text">{{
+            currentLanguageSet?.common?.select
+          }}</mat-label>
+          <mat-select
+            name="referredToInstituteID"
+            (ngModelChange)="higherhealthcarecenter($event)"
+            formControlName="referredToInstituteID"
+          >
+            <mat-option
+              *ngFor="let center of higherHealthcareCenter"
+              [value]="center.institutionID"
+              >{{ center.institutionName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-    <ng-template #elseBlockText>
-      <div class="col-xs-6">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 tcell">
+        <span class="align-middle">
+          {{ currentLanguageSet?.Referdetails?.additionalservices }}</span
+        >
+      </div>
+      <div class="col-sm-6 col-md-3 box">
+        <mat-form-field [style.width]="'100%'">
+          <mat-label class="mat-label-text">{{
+            currentLanguageSet?.common?.select
+          }}</mat-label>
+          <mat-select
+            (ngModelChange)="additionalservices($event)"
+            multiple="true"
+            name="refrredToAdditionalServiceList"
+            formControlName="refrredToAdditionalServiceList"
+          >
+            <mat-option
+              *ngFor="let service of additionalServices"
+              [value]="service.serviceName"
+              [disabled]="canDisable(service)"
+            >
+              {{ service.serviceName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex">
+      <div
+        *ngIf="selectValue > 0; else elseBlock"
+        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 tcell"
+      >
+        <span class="align-middle">
+          {{ currentLanguageSet?.Referdetails?.referralReason }}*</span
+        >
+      </div>
+      <ng-template #elseBlock>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 tcell">
+          <span class="align-middle">
+            {{ currentLanguageSet?.Referdetails?.referralReason }}</span
+          >
+        </div>
+      </ng-template>
+
+      <div
+        *ngIf="selectValue > 0; else elseBlockText"
+        class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
+      >
         <mat-form-field class="referreason" [style.width]="'100%'">
           <textarea
             matInput
             allowText="textAreaValidator"
             matTextareaAutosize
+            required="true"
             formControlName="referralReason"
             name="Remarks"
             maxLength="300"
           ></textarea>
         </mat-form-field>
       </div>
-    </ng-template>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <ng-template #elseBlockText>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <mat-form-field class="referreason" [style.width]="'100%'">
+            <textarea
+              matInput
+              allowText="textAreaValidator"
+              matTextareaAutosize
+              formControlName="referralReason"
+              name="Remarks"
+              maxLength="300"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 alignment">
         {{ currentLanguageSet?.Referdetails?.revisitDate }}
       </div>

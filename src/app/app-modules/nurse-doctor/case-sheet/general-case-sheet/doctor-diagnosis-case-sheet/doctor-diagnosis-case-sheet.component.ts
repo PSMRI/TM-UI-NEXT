@@ -231,7 +231,7 @@ export class DoctorDiagnosisCaseSheetComponent
           findings: temp.findings,
           prescription: temp.prescription,
           diagnosis: {
-            viewProvisionalDiagnosisProvided: temp.diagnosis.diagnosisProvided,
+            provisionalDiagnosis: temp.diagnosis.diagnosisProvided,
             specialistAdvice: temp.diagnosis.instruction,
             externalInvestigation: temp.diagnosis.externalInvestigation,
           },

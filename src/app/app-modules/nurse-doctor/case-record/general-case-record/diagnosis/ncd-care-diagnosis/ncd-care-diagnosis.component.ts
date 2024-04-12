@@ -154,19 +154,17 @@ export class NcdCareDiagnosisComponent implements OnInit, DoCheck {
 
     this.generalDiagnosisForm.patchValue(diagnosis);
   }
-  patchProvisionalDiagnosisDetails(viewProvisionalDiagnosisProvided: any) {
-    const savedDiagnosisData = viewProvisionalDiagnosisProvided;
+  patchProvisionalDiagnosisDetails(provisionalDiagnosis: any) {
+    const savedDiagnosisData = provisionalDiagnosis;
     const diagnosisArrayList = this.generalDiagnosisForm.controls[
       'provisionalDiagnosisList'
     ] as FormArray;
-    console.log('from diagnosis' + viewProvisionalDiagnosisProvided[0].term);
+    console.log('from diagnosis' + provisionalDiagnosis[0].term);
     if (
-      viewProvisionalDiagnosisProvided[0].term !== '' &&
-      viewProvisionalDiagnosisProvided[0].conceptID !== ''
+      provisionalDiagnosis[0].term !== '' &&
+      provisionalDiagnosis[0].conceptID !== ''
     ) {
-      console.log(
-        'from diagnosis second' + viewProvisionalDiagnosisProvided[0].term,
-      );
+      console.log('from diagnosis second' + provisionalDiagnosis[0].term);
 
       for (let i = 0; i < savedDiagnosisData.length; i++) {
         diagnosisArrayList.at(i).patchValue({

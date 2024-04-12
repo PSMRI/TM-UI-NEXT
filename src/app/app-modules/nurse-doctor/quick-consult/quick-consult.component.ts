@@ -614,7 +614,8 @@ export class QuickConsultComponent
       const complaintDetails = response.findings;
       if (complaintDetails && complaintDetails.complaints) {
         this.benChiefComplaints = complaintDetails.complaints;
-        this.benChiefComplaints.forEach((chiefComplaint: any) => {
+        this.dataSource.data = complaintDetails.complaints;
+        this.dataSource.data.forEach((chiefComplaint) => {
           this.filterInitialComplaints(chiefComplaint);
         });
       }
@@ -1318,8 +1319,8 @@ export class QuickConsultComponent
       }
     }
   }
-  checkProvisionalDiagnosisValidity(viewProvisionalDiagnosisProvided: any) {
-    const temp = viewProvisionalDiagnosisProvided.value;
+  checkProvisionalDiagnosisValidity(provisionalDiagnosis: any) {
+    const temp = provisionalDiagnosis.value;
     if (temp.term && temp.conceptID) {
       return false;
     } else {

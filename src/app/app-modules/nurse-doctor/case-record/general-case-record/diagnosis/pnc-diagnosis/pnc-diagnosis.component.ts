@@ -369,8 +369,8 @@ export class PncDiagnosisComponent
     }
   }
 
-  checkProvisionalDiagnosisValidity(viewProvisionalDiagnosisProvided: any) {
-    const temp = viewProvisionalDiagnosisProvided.value;
+  checkProvisionalDiagnosisValidity(provisionalDiagnosis: any) {
+    const temp = provisionalDiagnosis.value;
     if (temp.term && temp.conceptID) {
       return false;
     } else {

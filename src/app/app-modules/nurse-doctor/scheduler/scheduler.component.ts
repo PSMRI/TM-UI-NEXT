@@ -114,6 +114,7 @@ export class SchedulerComponent implements OnInit, DoCheck {
       });
       this.schedulerDate = checkdate;
       this.today = today;
+      this.getMasterSpecializationSchedule();
     }
   }
 
@@ -140,6 +141,28 @@ export class SchedulerComponent implements OnInit, DoCheck {
     this.masterSpecialistDetails = [];
     const today = new Date();
     this.allocationDate.setMinutes(today.getMinutes() + 330);
+    this.schedulerForm.patchValue({
+      specialization: null,
+      specialistDetails: null,
+    });
+    this.doctorService.getMasterSpecialization().subscribe(
+      (response: any) => {
+        if (response && response.statusCode === 200) {
+          this.masterSpecialization = response.data;
+        } else {
+          this.confirmationService.alert(response.errorMessage, 'error');
+        }
+      },
+      (err) => {
+        this.confirmationService.alert(err, 'error');
+      },
+    );
+  }
+
+  getMasterSpecializationSchedule() {
+    this.availableSlotList = null;
+    this.masterSpecialization = [];
+    this.masterSpecialistDetails = [];
     this.schedulerForm.patchValue({
       specialization: null,
       specialistDetails: null,

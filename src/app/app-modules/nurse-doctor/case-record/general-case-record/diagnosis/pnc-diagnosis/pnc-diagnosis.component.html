@@ -49,6 +49,7 @@
                     type="button"
                     color="warn"
                     class="mat_warn_circle"
+                    style="margin-right: 5px"
                     *ngIf="
                       i !== 0 ||
                       (i === 0 &&
@@ -98,12 +99,12 @@
                     matInput
                     appConfirmatoryDiagnosis
                     [diagnosisListForm]="confirmatoryDiagnosis"
-                    name="confirmatoryDiagnosis"
-                    formControlName="confirmatoryDiagnosis"
+                    name="viewConfirmatoryDiagnosisProvided"
+                    formControlName="viewConfirmatoryDiagnosisProvided"
                     maxlength="100"
                     minlength="3"
                     [previousSelected]="
-                      generalDiagnosisForm.value.confirmatoryDiagnosisList
+                      generalDiagnosisForm.value?.confirmatoryDiagnosisList
                     "
                   />
                   <mat-icon

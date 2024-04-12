@@ -1,18 +1,23 @@
 <div class="row m-t-20" [formGroup]="respiratorySystemForm">
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-    <mat-label class="mat-label-text">{{
-      current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
-        ?.respiratoryANC_OPD_PNC?.trachea
-    }}</mat-label>
-    <mat-select
-      class="select-full-width"
-      name="trachea"
-      formControlName="trachea"
-    >
-      <mat-option *ngFor="let trachea of selectTrachea" [value]="trachea.name">
-        {{ trachea.name }}
-      </mat-option>
-    </mat-select>
+    <mat-form-field [style.width]="'100%'">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
+          ?.respiratoryANC_OPD_PNC?.trachea
+      }}</mat-label>
+      <mat-select
+        class="select-full-width"
+        name="trachea"
+        formControlName="trachea"
+      >
+        <mat-option
+          *ngFor="let trachea of selectTrachea"
+          [value]="trachea.name"
+        >
+          {{ trachea.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -79,22 +84,24 @@
   </div>
 
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-    <mat-label class="mat-label-text">{{
-      current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
-        ?.respiratoryANC_OPD_PNC?.breathsounds
-    }}</mat-label>
-    <mat-select
-      class="select-full-width"
-      name="auscultation_BreathSounds"
-      formControlName="auscultation_BreathSounds"
-    >
-      <mat-option
-        *ngFor="let breathSound of selectBreathSounds"
-        [value]="breathSound.name"
+    <mat-form-field [style.width]="'100%'">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
+          ?.respiratoryANC_OPD_PNC?.breathsounds
+      }}</mat-label>
+      <mat-select
+        class="select-full-width"
+        name="auscultation_BreathSounds"
+        formControlName="auscultation_BreathSounds"
       >
-        {{ breathSound.name }}
-      </mat-option>
-    </mat-select>
+        <mat-option
+          *ngFor="let breathSound of selectBreathSounds"
+          [value]="breathSound.name"
+        >
+          {{ breathSound.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
@@ -193,21 +200,23 @@
   </div>
 
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 box">
-    <mat-label class="mat-label-text">{{
-      current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
-        ?.respiratoryANC_OPD_PNC?.percussion
-    }}</mat-label>
-    <mat-select
-      class="select-full-width"
-      name="percussion"
-      formControlName="percussion"
-    >
-      <mat-option
-        *ngFor="let percussion of selectPercussion"
-        [value]="percussion.name"
+    <mat-form-field [style.width]="'100%'">
+      <mat-label class="mat-label-text">{{
+        current_language_set?.ExaminationData?.ANC_OPD_PNCExamination?.systemic
+          ?.respiratoryANC_OPD_PNC?.percussion
+      }}</mat-label>
+      <mat-select
+        class="select-full-width"
+        name="percussion"
+        formControlName="percussion"
       >
-        {{ percussion.name }}
-      </mat-option>
-    </mat-select>
+        <mat-option
+          *ngFor="let percussion of selectPercussion"
+          [value]="percussion.name"
+        >
+          {{ percussion.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </div>

@@ -29,24 +29,26 @@
       style="width: 300px"
       *ngIf="!enableNCDCondition"
     >
-      <mat-label class="mat-label-text">{{
-        current_language_set?.casesheet?.ncdCondition
-      }}</mat-label>
-      <mat-select
-        class="input-full-width"
-        name="ncdScreeningCondition"
-        multiple
-        (change)="changeNcdScreeningCondition($event, $event)"
-        [(ngModel)]="temp"
-        [ngModelOptions]="{ standalone: true }"
-      >
-        <mat-option
-          *ngFor="let ncdCareCondition of ncdCareConditions"
-          [value]="ncdCareCondition.screeningCondition"
+      <mat-form-field [style.width]="'100%'">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.casesheet?.ncdCondition
+        }}</mat-label>
+        <mat-select
+          class="input-full-width"
+          name="ncdScreeningCondition"
+          multiple
+          (change)="changeNcdScreeningCondition($event, $event)"
+          [(ngModel)]="temp"
+          [ngModelOptions]="{ standalone: true }"
         >
-          {{ ncdCareCondition.screeningCondition }}</mat-option
-        >
-      </mat-select>
+          <mat-option
+            *ngFor="let ncdCareCondition of ncdCareConditions"
+            [value]="ncdCareCondition.screeningCondition"
+          >
+            {{ ncdCareCondition.screeningCondition }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
     </div>
     <div
       class="col-xs-12"
@@ -70,21 +72,23 @@
       </mat-form-field>
     </div>
     <div class="col-xs-12 col-xs-6 box" style="width: 300px">
-      <mat-label class="mat-label-text">{{
-        current_language_set?.casesheet?.typeOfNcd
-      }}</mat-label>
-      <mat-select
-        class="input-full-width"
-        name="ncdCareType"
-        formControlName="ncdCareType"
-      >
-        <mat-option
-          *ngFor="let ncdCareType of ncdCareTypes"
-          [value]="ncdCareType"
+      <mat-form-field [style.width]="'100%'">
+        <mat-label class="mat-label-text">{{
+          current_language_set?.casesheet?.typeOfNcd
+        }}</mat-label>
+        <mat-select
+          class="input-full-width"
+          name="ncdCareType"
+          formControlName="ncdCareType"
         >
-          {{ ncdCareType.ncdCareType }}</mat-option
-        >
-      </mat-select>
+          <mat-option
+            *ngFor="let ncdCareType of ncdCareTypes"
+            [value]="ncdCareType"
+          >
+            {{ ncdCareType.ncdCareType }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="display: none">
       <mat-form-field class="input-full-width">
@@ -126,7 +130,7 @@
                     allowText="inputFieldValidator"
                     appDiagnosisSearch
                     [diagnosisListForm]="diagnosis"
-                    name="viewProvisionalDiagnosisProvided"
+                    name="viewDiagnosisProvided"
                     formControlName="viewProvisionalDiagnosisProvided"
                     maxlength="100"
                     minlength="3"
