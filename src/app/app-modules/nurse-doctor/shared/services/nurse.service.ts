@@ -631,8 +631,10 @@ export class NurseService {
     );
     for (const complaint of patientChiefComplaintsFormValue) {
       if (complaint.chiefComplaint !== null) {
-        complaint.chiefComplaintID = complaint.chiefComplaint.chiefComplaintID;
-        complaint.chiefComplaint = complaint.chiefComplaint.chiefComplaint;
+        // complaint.chiefComplaintID = complaint.chiefComplaint.chiefComplaintID;
+        // complaint.chiefComplaint = complaint.chiefComplaint.chiefComplaint;
+        complaint.chiefComplaintID = complaint.chiefComplaintIDData;
+        complaint.chiefComplaint = complaint.chiefComplaintData;
       }
       complaint.beneficiaryRegID = localStorage.getItem('beneficiaryRegID');
       complaint.benVisitID = benVisitID;
