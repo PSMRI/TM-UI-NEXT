@@ -168,6 +168,11 @@ export class GeneralPatientVitalsComponent
     );
     this.attendant = this.route.snapshot.params['attendant'];
     this.getBeneficiaryDetails();
+    if (this.benAge < 18) {
+      this.disabledLungAssesment = true;
+    } else {
+      this.disabledLungAssesment = false;
+    }
     this.rbsSelectedInInvestigationSubscription =
       this.nurseService.rbsSelectedInInvestigation$.subscribe((response) =>
         response === undefined
@@ -1186,7 +1191,6 @@ export class GeneralPatientVitalsComponent
   }
 
   startAssessment() {
-    const todayDate = new Date();
     const symptoms = {
       frequent_cough: this.frequentCough ? 1 : 0,
       sputum: this.sputum ? 1 : 0,
@@ -1200,7 +1204,6 @@ export class GeneralPatientVitalsComponent
       gender: this.benGenderType,
       age: this.benAge,
       patientId: localStorage.getItem('beneficiaryRegID'),
-      // timestamp: moment(todayDate).format('YYYY-MM-DD HH:mm:ss'),
       assessmentId: null,
       providerServiceMapID: localStorage.getItem('providerServiceID'),
       createdBy: localStorage.getItem('userName'),
@@ -1260,4 +1263,6 @@ export class GeneralPatientVitalsComponent
       }
     });
   }
+
+  //--End--
 }

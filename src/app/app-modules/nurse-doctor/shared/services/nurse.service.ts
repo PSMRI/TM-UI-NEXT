@@ -630,11 +630,9 @@ export class NurseService {
       JSON.stringify(patientChiefComplaintsForm),
     );
     for (const complaint of patientChiefComplaintsFormValue) {
-      if (complaint.chiefComplaint !== null) {
-        // complaint.chiefComplaintID = complaint.chiefComplaint.chiefComplaintID;
-        // complaint.chiefComplaint = complaint.chiefComplaint.chiefComplaint;
-        complaint.chiefComplaintID = complaint.chiefComplaintIDData;
-        complaint.chiefComplaint = complaint.chiefComplaintData;
+      if (complaint.chiefComplaint) {
+        complaint.chiefComplaintID = complaint.chiefComplaint.chiefComplaintID;
+        complaint.chiefComplaint = complaint.chiefComplaint.chiefComplaint;
       }
       complaint.beneficiaryRegID = localStorage.getItem('beneficiaryRegID');
       complaint.benVisitID = benVisitID;
