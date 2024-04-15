@@ -33,6 +33,7 @@ import {
 } from '@angular/material/dialog';
 import { HttpServiceService } from '../../services/http-service.service';
 import { HealthIdValidateComponent } from 'src/app/app-modules/registrar/registration/register-other-details/register-other-details.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-health-id-display-modal',
@@ -41,7 +42,7 @@ import { HealthIdValidateComponent } from 'src/app/app-modules/registrar/registr
   providers: [DatePipe],
 })
 export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
-  healthIDArray: any = [];
+  // healthIDArray: any = [];
   chooseHealthID: any;
   currentLanguageSet: any;
   healthIDMapped: any;
@@ -52,8 +53,34 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
   selectedHealthID: any;
   healthIdOTPForm!: FormGroup;
   showProgressBar = false;
-  searchDetails: any = [];
+  // searchDetails: any = [];
   searchPopup = false;
+  displayedColumns: any = [
+    'sno',
+    'healthIDNo',
+    'healthID',
+    'createdDate',
+    'healthIDMode',
+  ];
+  searchDetails = new MatTableDataSource<any>();
+
+  displayedColumns1: any = [
+    'sno',
+    'healthIDNo',
+    'healthID',
+    'createdDate',
+    'healthIDMode',
+    'action',
+  ];
+  displayedColumns2: any = [
+    'sno',
+    'healthIDNo',
+    'healthID',
+    'createdDate',
+    'healthIDMode',
+    'rblMode',
+  ];
+  healthIDArray = new MatTableDataSource<any>();
 
   constructor(
     public dialogRef: MatDialogRef<HealthIdDisplayModalComponent>,
@@ -70,7 +97,7 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     console.log('datalist', this.input);
-    this.searchDetails = null;
+    this.searchDetails.data = [];
     this.selectedHealthID = null;
     this.searchPopup = false;
     this.assignSelectedLanguage();
@@ -82,7 +109,7 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
       this.input.dataList.length > 0 &&
       this.input.search === true
     )
-      this.searchDetails = this.input.dataList;
+      this.searchDetails.data = this.input.dataList;
     if (
       this.input.dataList !== undefined &&
       this.input.dataList.data !== undefined &&
@@ -112,7 +139,7 @@ export class HealthIdDisplayModalComponent implements OnInit, DoCheck {
           healthID.createdDate,
           'yyyy-MM-dd hh:mm:ss a',
         );
-        this.healthIDArray.push(healthID);
+        this.healthIDArray.data.push(healthID);
       });
     }
   }

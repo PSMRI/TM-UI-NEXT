@@ -88,22 +88,24 @@
           </div>
 
           <div class="col-md-4 box">
-            <mat-label class="mat-label-text">{{
-              currentLanguageSet?.nurseData?.chiefComplaintsDetails
-                ?.unitOfDuration
-            }}</mat-label>
-            <mat-select
-              class="input-full-width"
-              name="unitOfDuration"
-              formControlName="unitOfDuration"
-              (selectionChange)="validateDuration(complaint)"
-            >
-              <mat-option value="Hours">Hour(s)</mat-option>
-              <mat-option value="Days">Day(s)</mat-option>
-              <mat-option value="Weeks">Week(s)</mat-option>
-              <mat-option value="Months">Month(s)</mat-option>
-              <mat-option value="Years">Year(s)</mat-option>
-            </mat-select>
+            <mat-form-field class="input-full-width">
+              <mat-label class="mat-label-text">{{
+                currentLanguageSet?.nurseData?.chiefComplaintsDetails
+                  ?.unitOfDuration
+              }}</mat-label>
+              <mat-select
+                class="input-full-width"
+                name="unitOfDuration"
+                formControlName="unitOfDuration"
+                (selectionChange)="validateDuration(complaint)"
+              >
+                <mat-option value="Hours">Hour(s)</mat-option>
+                <mat-option value="Days">Day(s)</mat-option>
+                <mat-option value="Weeks">Week(s)</mat-option>
+                <mat-option value="Months">Month(s)</mat-option>
+                <mat-option value="Years">Year(s)</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div class="col-12 row">

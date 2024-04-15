@@ -445,6 +445,14 @@ mat-mdc-form-field-label-always-float {
   border: 1px solid #ddd;
 }
 
+.table-responsive-radiology {
+  margin: 0px;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
 .mat-tab-group {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }

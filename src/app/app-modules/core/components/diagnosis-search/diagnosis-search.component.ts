@@ -20,7 +20,14 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { Component, OnInit, Inject, DoCheck, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  DoCheck,
+  ViewChild,
+  OnChanges,
+} from '@angular/core';
 import { HttpServiceService } from '../../services/http-service.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SetLanguageComponent } from '../set-language.component';
@@ -33,7 +40,7 @@ import { MasterdataService } from 'src/app/app-modules/nurse-doctor/shared/servi
   templateUrl: './diagnosis-search.component.html',
   styleUrls: ['./diagnosis-search.component.css'],
 })
-export class DiagnosisSearchComponent implements OnInit, DoCheck {
+export class DiagnosisSearchComponent implements OnInit, DoCheck, OnChanges {
   searchTerm: any;
   diagnosis$ = [];
   pageCount: any;
@@ -62,11 +69,15 @@ export class DiagnosisSearchComponent implements OnInit, DoCheck {
     public httpServiceService: HttpServiceService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.assignSelectedLanguage();
-    this.search(this.input.searchTerm, 0);
-    if (this.input.diagonasisType)
-      this.placeHolderSearch = this.input.diagonasisType;
+    await this.search(this.input.searchTerm, 0);
+    if (this.input.diagonasisType) console.log(this.input, 'ADDED Diagnosis');
+    this.placeHolderSearch = this.input.diagonasisType;
+  }
+
+  ngOnChanges() {
+    console.log(this.input, 'ADDED Diagnosis');
   }
 
   ngDoCheck() {

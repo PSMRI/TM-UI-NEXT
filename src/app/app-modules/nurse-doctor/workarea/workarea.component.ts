@@ -288,13 +288,13 @@ export class WorkareaComponent
     if (this.attendant === 'tcspecialist') {
       this.isSpecialist = true;
       if (this.doctorFlag === '1') {
-        if (this.specialistFlag === 1) {
+        if (this.specialistFlag === '1') {
           this.doctorSaveAndTCSave = this.current_language_set.common.submit;
           this.isDoctorSave = true;
           console.log(
             'here for submit' + this.current_language_set.common.submit,
           );
-        } else if (this.specialistFlag === 3) {
+        } else if (this.specialistFlag === '3') {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.update;
           this.isDoctorUpdate = true;
@@ -304,7 +304,7 @@ export class WorkareaComponent
         }
       } else {
         this.isDoctorUpdate = true;
-        if (this.specialistFlag === 1) {
+        if (this.specialistFlag === '1') {
           this.doctorUpdateAndTCSubmit =
             this.current_language_set.common.submit;
         } else {
@@ -1855,7 +1855,10 @@ export class WorkareaComponent
         );
       }
       if (vitalsForm.controls['weight_Kg'].errors) {
-        required.push(this.current_language_set.common.weight);
+        required.push(
+          this.current_language_set.vitalsDetails
+            .AnthropometryDataANC_OPD_NCD_PNC.weight,
+        );
       }
       if (vitalsForm.controls['temperature'].errors) {
         required.push(

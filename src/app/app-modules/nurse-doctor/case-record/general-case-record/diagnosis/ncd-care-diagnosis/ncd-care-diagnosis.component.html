@@ -5,24 +5,26 @@
       style="width: 300px"
       *ngIf="enableNCDCondition"
     >
-      <mat-label class="mat-label-text"
-        >{{ current_language_set?.casesheet?.ncdCondition }}*</mat-label
-      >
-      <mat-select
-        class="input-full-width"
-        name="ncdScreeningCondition"
-        multiple
-        (change)="changeNcdScreeningCondition($event, $event)"
-        [(ngModel)]="temp"
-        [ngModelOptions]="{ standalone: true }"
-      >
-        <mat-option
-          *ngFor="let ncdCareCondition of ncdCareConditions"
-          [value]="ncdCareCondition.screeningCondition"
+      <mat-form-field [style.width]="'100%'">
+        <mat-label class="mat-label-text"
+          >{{ current_language_set?.casesheet?.ncdCondition }}*</mat-label
         >
-          {{ ncdCareCondition.screeningCondition }}</mat-option
+        <mat-select
+          class="input-full-width"
+          name="ncdScreeningConditionArray"
+          multiple
+          (selectionChange)="changeNcdScreeningCondition($event, $event)"
+          [(ngModel)]="temp"
+          [ngModelOptions]="{ standalone: true }"
         >
-      </mat-select>
+          <mat-option
+            *ngFor="let ncdCareCondition of ncdCareConditions"
+            [value]="ncdCareCondition.screeningCondition"
+          >
+            {{ ncdCareCondition.screeningCondition }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
     </div>
     <div
       class="col-xs-12 col-xs-6 box"
@@ -35,9 +37,9 @@
         }}</mat-label>
         <mat-select
           class="input-full-width"
-          name="ncdScreeningCondition"
+          name="ncdScreeningConditionArray"
           multiple
-          (change)="changeNcdScreeningCondition($event, $event)"
+          (selectionChange)="changeNcdScreeningCondition($event, $event)"
           [(ngModel)]="temp"
           [ngModelOptions]="{ standalone: true }"
         >
@@ -134,7 +136,7 @@
                     formControlName="viewProvisionalDiagnosisProvided"
                     maxlength="100"
                     minlength="3"
-                    [addedDiagnosis]="
+                    [previousSelected]="
                       generalDiagnosisForm.value.provisionalDiagnosisList
                     "
                   />
@@ -143,7 +145,7 @@
                     matSuffix
                     appDiagnosisSearch
                     [diagnosisListForm]="diagnosis"
-                    [addedDiagnosis]="
+                    [previousSelected]="
                       generalDiagnosisForm.value?.provisionalDiagnosisList
                     "
                     >search</mat-icon

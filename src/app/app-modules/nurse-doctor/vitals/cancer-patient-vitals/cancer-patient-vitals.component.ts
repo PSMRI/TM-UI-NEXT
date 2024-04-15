@@ -496,7 +496,7 @@ export class CancerPatientVitalsComponent
     if (
       this.female &&
       this.pregnancyStatus !== null &&
-      this.pregnancyStatus.toLowerCase() !== 'yes'
+      this.pregnancyStatus?.trim()?.toLowerCase() !== 'yes'
     )
       this.normalWaist = patientWaist < 80 ? true : false;
     else if (!this.female) this.normalWaist = patientWaist < 90 ? true : false;

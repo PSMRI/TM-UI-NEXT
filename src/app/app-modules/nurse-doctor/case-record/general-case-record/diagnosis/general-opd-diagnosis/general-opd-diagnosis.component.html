@@ -27,13 +27,16 @@
                   maxlength="100"
                   minlength="3"
                   required
+                  [previousSelected]="
+                    generalDiagnosisForm.value.provisionalDiagnosisList
+                  "
                 />
                 <mat-icon
                   class="search-btn cursorPointer"
                   matSuffix
                   appDiagnosisSearch
                   [diagnosisListForm]="diagnosis"
-                  [addedDiagnosis]="
+                  [previousSelected]="
                     generalDiagnosisForm.value.provisionalDiagnosisList
                   "
                   >search</mat-icon
