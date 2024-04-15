@@ -28,7 +28,7 @@
         name="totalNoOfPreg "
         allowText="number"
         allowMax="10"
-        [attr.readonly]="visitType === 'ANC' ? 'readonly' : null"
+        [readonly]="visitType === 'ANC' ? true : false"
         formControlName="totalNoOfPreg"
         (blur)="checkTotalPregnancy(totalNoOfPreg)"
       />
@@ -54,7 +54,7 @@
           formControlName="value"
           class="checkbox"
           color="primary"
-          (chnage)="togglePastObstericHistory($event, i + 1)"
+          (change)="togglePastObstericHistory($event, i + 1)"
         >
           {{ i + 1 }}
         </mat-checkbox>
