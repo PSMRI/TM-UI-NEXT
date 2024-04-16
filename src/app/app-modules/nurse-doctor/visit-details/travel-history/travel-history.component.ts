@@ -120,7 +120,7 @@ export class TravelHistoryComponent
     this.currentLanguageSet = getLanguageJson.currentLanguageObject;
   }
   ngOnChanges() {
-    if (String(this.mode) === 'view') {
+    if (this.mode?.toLowerCase() === 'view') {
       this.readTravel = true;
       const visitID = localStorage.getItem('visitID');
       const benRegID = localStorage.getItem('beneficiaryRegID');
@@ -151,10 +151,10 @@ export class TravelHistoryComponent
       .getVisitComplaintDetails(beneficiaryRegID, visitID)
       .subscribe((value: any) => {
         if (
-          value !== null &&
+          value &&
           value.statusCode === 200 &&
-          value.data !== null &&
-          value.data.covidDetails !== null
+          value.data &&
+          value.data.covidDetails
         ) {
           this.covidHistoryDetails = value.data.covidDetails;
           if (value.data.covidDetails?.suspectedStatus) {
@@ -193,6 +193,7 @@ export class TravelHistoryComponent
             value.data.covidDetails?.travelList[0] === 'Domestic' ||
             value.data.covidDetails?.travelList[1] === 'Domestic'
           ) {
+            this.istravelModeDomestic = true;
             this.domtravel = true;
             this.patientCovidForm.patchValue({
               modeOfTravelDomestic:
@@ -228,6 +229,7 @@ export class TravelHistoryComponent
             value.data.covidDetails?.travelList[0] === 'International' ||
             value.data.covidDetails?.travelList[1] === 'International'
           ) {
+            this.istravelModeInternatinal = true;
             this.intertravel = true;
             this.patientCovidForm.patchValue({
               modeOfTravelInter: value.data.covidDetails.modeOfTravelInter,

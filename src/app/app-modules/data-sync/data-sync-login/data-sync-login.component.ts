@@ -22,9 +22,6 @@
 
 import { Component, OnInit, Injector, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-
-import * as CryptoJS from 'crypto-js';
-import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataSyncService } from '../shared/service/data-sync.service';
 import { HttpServiceService } from '../../core/services/http-service.service';
@@ -38,41 +35,20 @@ import { SetLanguageComponent } from '../../core/components/set-language.compone
   providers: [DataSyncService],
 })
 export class DataSyncLoginComponent implements OnInit, DoCheck {
-  userName: any;
-  password: any;
+  userName!: string;
+  password!: string;
 
   dynamictype = 'password';
   dialogRef: any;
   data: any;
-  showProgressBar = false;
   current_language_set: any;
-  encryptedVar: any;
-  key: any;
-  iv: any;
-  SALT = 'RandomInitVector';
-  Key_IV = 'Piramal12Piramal';
-  encPassword: any;
-  _keySize: any;
-  _ivSize: any;
-  _iterationCount: any;
-
   constructor(
     private router: Router,
+    public httpServiceService: HttpServiceService,
     private dataSyncService: DataSyncService,
     private injector: Injector,
-    public httpServiceService: HttpServiceService,
     private confirmationService: ConfirmationService,
-    private fb: FormBuilder,
-  ) {
-    this._keySize = 256;
-    this._ivSize = 128;
-    this._iterationCount = 1989;
-  }
-
-  loginForm = this.fb.group({
-    userName: [''],
-    password: [''],
-  });
+  ) {}
 
   ngOnInit() {
     this.assignSelectedLanguage();
@@ -97,218 +73,35 @@ export class DataSyncLoginComponent implements OnInit, DoCheck {
     this.dynamictype = 'password';
   }
 
-  get keySize() {
-    return this._keySize;
-  }
-
-  set keySize(value) {
-    this._keySize = value;
-  }
-
-  get iterationCount() {
-    return this._iterationCount;
-  }
-
-  set iterationCount(value) {
-    this._iterationCount = value;
-  }
-
-  generateKey(salt: any, passPhrase: any) {
-    return CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
-      hasher: CryptoJS.algo.SHA512,
-      keySize: this.keySize / 32,
-      iterations: this._iterationCount,
-    });
-  }
-
-  encryptWithIvSalt(salt: any, iv: any, passPhrase: any, plainText: any) {
-    const key = this.generateKey(salt, passPhrase);
-    const encrypted = CryptoJS.AES.encrypt(plainText, key, {
-      iv: CryptoJS.enc.Hex.parse(iv),
-    });
-    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
-  }
-
-  encrypt(passPhrase: any, plainText: any) {
-    const iv = CryptoJS.lib.WordArray.random(this._ivSize / 8).toString(
-      CryptoJS.enc.Hex,
-    );
-    const salt = CryptoJS.lib.WordArray.random(this.keySize / 8).toString(
-      CryptoJS.enc.Hex,
-    );
-    const ciphertext = this.encryptWithIvSalt(salt, iv, passPhrase, plainText);
-    return salt + iv + ciphertext;
-  }
-
-  /*ADID: KA40094929 Karyamsetty Helen Grace 
-   added a concurrent login changes
-  */
   dataSyncLogin() {
-    this.showProgressBar = true;
-    const encriptPassword = this.encrypt(this.Key_IV, this.password);
-
     if (this.userName && this.password) {
       this.dataSyncService
-        .dataSyncLogin(this.userName, encriptPassword, false)
-        .subscribe(
-          (res: any) => {
-            if (res.statusCode === 200) {
-              if (res.data && res.data !== null && res.data !== undefined) {
-                const mmuService = res.data.previlegeObj.filter((item: any) => {
-                  return item.serviceName === 'MMU';
-                });
-                if (
-                  mmuService !== undefined &&
-                  mmuService !== null &&
-                  mmuService.length > 0
-                ) {
-                  this.showProgressBar = false;
-                  localStorage.setItem('serverKey', res.data.key);
-                  this.getDataSyncMMU(res);
-                } else {
-                  this.showProgressBar = false;
-                  localStorage.removeItem('serverKey');
-                  this.confirmationService.alert(
-                    "User doesn't have previlege to perform this activity. Please contact administrator.",
-                  );
-                }
-              } else {
-                this.confirmationService.alert(
-                  'Seems you are logged in from somewhere else, Logout from there & try back in.',
-                  'error',
-                );
-              }
-            } else if (res.statusCode === 5002) {
-              if (
-                res.errorMessage ===
-                'You are already logged in,please confirm to logout from other device and login again'
-              ) {
-                this.confirmationService
-                  .confirm('info', res.errorMessage)
-                  .subscribe((confirmResponse) => {
-                    if (confirmResponse) {
-                      // this.dataSyncService
-                      //   .userlogoutPreviousSession(this.userName)
-                      //   .subscribe((userlogoutPreviousSession: any) => {
-                      //     if (userlogoutPreviousSession.statusCode === 200) {
-                      //       this.dataSyncService
-                      //         .dataSyncLogin(
-                      //           this.userName,
-                      //           encriptPassword,
-                      //           true
-                      //         )
-                      //         .subscribe((userLoggedIn: any) => {
-                      //           if (userLoggedIn.statusCode === 200) {
-                      //             if (
-                      //               userLoggedIn.data &&
-                      //               userLoggedIn.data !== null &&
-                      //               userLoggedIn.data !== undefined
-                      //             ) {
-                      //               userLoggedIn.data.previlegeObj.forEach(
-                      //                 (item: any) => {
-                      //                   if (
-                      //                     item?.roles[0]
-                      //                       ?.serviceRoleScreenMappings[0]
-                      //                       ?.providerServiceMapping
-                      //                       ?.serviceID !== '2'
-                      //                   ) {
-                      //                     localStorage.removeItem('serverKey');
-                      //                     this.confirmationService.alert(
-                      //                       "User doesn't have previlege to perform this activity. Please contact administrator."
-                      //                     );
-                      //                     this.showProgressBar = false;
-                      //                   } else {
-                      //                     this.showProgressBar = false;
-                      //                     localStorage.setItem(
-                      //                       'serverKey',
-                      //                       userLoggedIn.data.key
-                      //                     );
-                      //                     this.getDataSyncMMU(userLoggedIn);
-                      //                     this.showProgressBar = false;
-                      //                   }
-                      //                 }
-                      //               );
-                      //             } else {
-                      //               this.confirmationService.alert(
-                      //                 'Seems you are logged in from somewhere else, Logout from there & try back in.',
-                      //                 'error'
-                      //               );
-                      //               this.showProgressBar = false;
-                      //             }
-                      //           } else {
-                      //             this.confirmationService.alert(
-                      //               userLoggedIn.errorMessage,
-                      //               'error'
-                      //             );
-                      //             this.showProgressBar = false;
-                      //           }
-                      //         });
-                      //     } else {
-                      //       this.confirmationService.alert(
-                      //         userlogoutPreviousSession.errorMessage,
-                      //         'error'
-                      //       );
-                      //       this.showProgressBar = false;
-                      //     }
-                      //   });
-                    } else {
-                      this.showProgressBar = false;
-                    }
-                  });
-              } else {
-                this.confirmationService.alert(res.errorMessage, 'error');
-                this.showProgressBar = false;
-              }
+        .dataSyncLogin(this.userName, this.password)
+        .subscribe((res: any) => {
+          if ((res.statusCode = '200' && res.data)) {
+            localStorage.setItem('serverKey', res.data.key);
+            if (this.data && this.data.masterDowloadFirstTime) {
+              const mmuService = res.data.previlegeObj.filter((item: any) => {
+                return item.serviceName === 'MMU';
+              });
+              sessionStorage.setItem('key', res.data.key);
+              localStorage.setItem('providerServiceID', '2049');
+              this.dialogRef.close(true);
             } else {
-              this.confirmationService.alert(res.errorMessage, 'error');
-              this.showProgressBar = false;
-              sessionStorage.setItem(
-                'authorizeToViewTMcasesheet',
-                'NotAuthorized',
-              );
+              this.router.navigate(['/datasync/workarea']);
             }
-          },
-          (err: any) => {
-            this.confirmationService.alert(err.errorMessage, 'error');
-            this.showProgressBar = false;
-          },
-        );
+          } else {
+            this.confirmationService.alert(res.errorMessage, 'error');
+          }
+        });
     } else {
       this.confirmationService.alert(
         this.current_language_set.alerts.info.usernamenPass,
       );
-      this.showProgressBar = false;
-    }
-  }
-
-  //added get datasync data on login to a new method
-  getDataSyncMMU(res: any) {
-    if (
-      this.data?.masterDowloadFirstTime ||
-      this.data?.provideAuthorizationToViewTmCS
-    ) {
-      const mmuService = res.data.previlegeObj.filter((item: any) => {
-        return item.serviceName === 'MMU';
-      });
-      localStorage.setItem(
-        'dataSyncProviderServiceMapID',
-        mmuService[0].providerServiceMapID,
-      );
-      if (this.data.provideAuthorizationToViewTmCS) {
-        sessionStorage.setItem('authorizeToViewTMcasesheet', 'Authorized');
-      } else {
-        console.log('normal flow');
-      }
-      this.dialogRef.close(true);
-    } else {
-      this.showProgressBar = false;
-      sessionStorage.setItem('authorizeToViewTMcasesheet', 'NotAuthorized');
-      this.router.navigate(['/datasync/workarea']);
     }
   }
 
   closeDialog() {
-    sessionStorage.setItem('authorizeToViewTMcasesheet', 'NotAuthorized');
     this.dialogRef.close(false);
   }
 }

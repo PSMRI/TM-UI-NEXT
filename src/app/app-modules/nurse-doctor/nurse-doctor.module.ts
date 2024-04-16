@@ -163,7 +163,6 @@ import { PncCaseSheetComponent } from './case-sheet/general-case-sheet/pnc-case-
 @NgModule({
   imports: [
     CommonModule,
-    // ChartsModule,
     NurseDoctorRoutingModule,
     CoreModule,
     ReactiveFormsModule,

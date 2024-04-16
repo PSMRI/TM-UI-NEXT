@@ -64,7 +64,7 @@
         multiple
         name="labTest"
         formControlName="labTest"
-        (change)="checkTestName($event)"
+        (selectionChange)="checkTestName($event)"
       >
         <mat-option
           *ngFor="let nonRadiology of nonRadiologyMaster"

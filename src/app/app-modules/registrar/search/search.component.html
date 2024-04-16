@@ -174,7 +174,7 @@
             <td
               mat-cell
               *matCellDef="let beneficiary"
-              (click)="patientRevisited(beneficiary.benObject)"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary.benObject)"
             >
               {{ beneficiary?.beneficiaryID }}
             </td>
@@ -370,86 +370,247 @@
         </mat-paginator>
 
         <!-- Table For Displaying External Beneficiary data from Mongo-->
-        <!-- <table *ngIf="externalBeneficiaryList?.length > 0" class="table table-striped " aria-describedby="externalBeneficiaryTable">
-          <thead>
+        <table
+          *ngIf="externalBeneficiaryList?.data?.length > 0"
+          mat-table
+          [dataSource]="dataSourceOne"
+          class="mat-elevation-z8 responsiveTable"
+          aria-describedby="externalBeneficiaryTable"
+        >
+          <ng-container matColumnDef="sNo">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              S.No
+            </th>
+            <td mat-cell *matCellDef="let beneficiary">
+              {{ beneficiary?.sNo }}
+            </td>
+          </ng-container>
 
-            <tr style="text-align:center">
-              <th id="sNo">S.No</th>
-              <th id="amritID">Amrit ID</th>
-              <th id="healthID">ABHA</th>
-              <th id="healthIdNumber">ABHA Number</th>
-              <th id="externalID">External ID</th>
-              <th id="benName">Name</th>
-              <th id="gender">Gender</th>
-              <th id="dob">Date Of Birth</th>
-              <th id="state">State</th>
-              <th id="district">District</th>
-              <th id="action">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-template [ngIf]="filteredExternalBeneficiaryList.length === 0">
-              <tr *ngFor="let row of blankTable">
-                <td colspan="11" *ngIf="row == 3">
-                  <h4 class="norecord">{{ curren_language_set?.common?.noRecordFound }}</h4>
-                </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-              </tr>
-            </ng-template>
-            <tr *ngFor="let beneficiary of externalPagedList" class="table-hover">
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{filteredExternalBeneficiaryList.indexOf(beneficiary) + 1}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.amritID === null ? 'NA' : beneficiary?.amritID}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.healthID === null ? 'NA' : beneficiary?.healthID}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.healthIdNumber === null ? 'NA' : beneficiary?.healthIdNumber}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.externalId === null ? 'NA' : beneficiary?.externalId}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.benName}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary.gender | titlecase}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary?.dob}}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)">{{beneficiary.state | titlecase }}</td>
-              <td (click)="sendRegisteredBeneficiaryToNurse(beneficiary)" >{{beneficiary.district | titlecase }}</td>
-              <td>
-                <button  md-raised-button type="button" color="primary" [disabled]="beneficiary?.amritID !== '' && beneficiary?.amritID !== null && beneficiary?.amritID !== undefined && beneficiary?.externalId !== null && 
-                beneficiary?.externalId !== undefined && beneficiary?.externalId !== ''"
-                  (click)="migrateBeneficiaryToAmrit(beneficiary.benObject)">
-                  Register to AMRIT
-                </button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2">
-                <div *ngIf="filteredExternalBeneficiaryList.length > 0" class="totalCount"> {{currentLanguageSet?.common?.totalCount}} :
-                  {{ filteredExternalBeneficiaryList.length }}</div>
-              </td>
-              <td colspan="9">
-                  <ul class="pagination">
-                    <li [ngClass]="{disabled:(pageNo == 0 || pageNo == 1 || (externalBeneficiaryList ==null ||
-                      externalBeneficiaryList == undefined ||externalBeneficiaryList.length == 0))}">
-                      <a (click)="prevPage()">
-                        <</a>
-                    </li>
-                    <li>
-                      <a >{{pageNo}}</a>
-                    </li>
-                    <li [ngClass]="{disabled:(externalBeneficiaryList ==null ||
-                      externalBeneficiaryList == undefined ||externalBeneficiaryList.length == 0)}">
-                      <a (click)="nextPage()">></a>
-                    </li>
-                  </ul>
-              </td>
-            </tr>
-          </tfoot>
-        </table> -->
+          <ng-container matColumnDef="amritID">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Amrit ID
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary?.amritID === null ? "NA" : beneficiary?.amritID }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="healthID">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              ABHA
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{
+                beneficiary?.healthID === null ? "NA" : beneficiary?.healthID
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="healthIdNumber">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              ABHA Number
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{
+                beneficiary?.healthIdNumber === null
+                  ? "NA"
+                  : beneficiary?.healthIdNumber
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="externalID">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              External ID
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{
+                beneficiary?.externalId === null
+                  ? "NA"
+                  : beneficiary?.externalId
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="benName">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Name
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary?.benName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Gender
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary.gender | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dob">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Date Of Birth
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary?.dob }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              State
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary.state | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="district">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              District
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let beneficiary"
+              (click)="sendRegisteredBeneficiaryToNurse(beneficiary)"
+            >
+              {{ beneficiary.district | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th
+              mat-header-cell
+              style="border-bottom: none"
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Action
+            </th>
+            <td mat-cell *matCellDef="let beneficiary">
+              <button
+                mat-raised-button
+                type="button"
+                color="primary"
+                [disabled]="
+                  beneficiary?.amritID !== '' &&
+                  beneficiary?.amritID !== null &&
+                  beneficiary?.amritID !== undefined &&
+                  beneficiary?.externalId !== null &&
+                  beneficiary?.externalId !== undefined &&
+                  beneficiary?.externalId !== ''
+                "
+                (click)="migrateBeneficiaryToAmrit(beneficiary.benObject)"
+              >
+                Register to AMRIT
+              </button>
+            </td>
+          </ng-container>
+          <!-- Repeat ng-container for other columns -->
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+        </table>
+        <div
+          class="pull-center"
+          style="margin-top: 5px; text-align: center"
+          [hidden]="dataSourceOne.data.length > 0"
+        >
+          <strong>{{ currentLanguageSet?.common?.noRecordsFound }}</strong>
+        </div>
+        <mat-paginator
+          *ngIf="dataSourceOne.data.length > 0"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageSize]="5"
+          showFirstLastButtons
+          aria-label="Select patient in search Worklist"
+        >
+        </mat-paginator>
       </section>
     </mat-card>
   </div>

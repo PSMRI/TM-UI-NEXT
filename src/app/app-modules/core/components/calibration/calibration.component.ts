@@ -80,6 +80,9 @@ export class CalibrationComponent implements OnInit, DoCheck {
               res.data.calibrationData.length > 0
             ) {
               this.components.data = res.data.calibrationData;
+              this.components.data.forEach((item: any, i: number) => {
+                item.sno = i + 1;
+              });
               this.dataList = res.data.calibrationData;
               this.components.paginator = this.paginator;
               console.log('component', this.components.data);

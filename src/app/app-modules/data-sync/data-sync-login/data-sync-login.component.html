@@ -2,72 +2,62 @@
   class="login-form-container"
   [ngClass]="{ stretch: data && data.masterDowloadFirstTime }"
 >
-  <mat-icon
-    *ngIf="data?.masterDowloadFirstTime || data?.provideAuthorizationToViewTmCS"
+  <button
+    *ngIf="data?.masterDowloadFirstTime"
+    class="close-button"
     (click)="closeDialog()"
-    class="close-button cursorPointer md-24"
-    >close</mat-icon
+    mat-icon-button
   >
+    <mat-icon class="md-24">close</mat-icon>
+  </button>
   <mat-card class="m-t-40">
     <mat-card-title class="sync-login-title">
-      <h4>
-        {{
-          current_language_set?.common?.confirmYourIdentityToPerformThisAction
-            ? current_language_set?.common
-                ?.confirmYourIdentityToPerformThisAction
-            : "Confirm your identity to perform this action"
-        }}
-      </h4>
+      <h4>Confirm your identity to perform this action</h4>
     </mat-card-title>
-    <div class="overlay" *ngIf="showProgressBar">
-      <div class="overlay-content">
-        <mat-spinner></mat-spinner>
-      </div>
-    </div>
+
     <mat-card-content class="m-t-30">
       <form
-        [formGroup]="loginForm"
-        (ngSubmit)="loginForm.valid && dataSyncLogin()"
+        name="loginForm"
+        (submit)="loginForm.form.valid && dataSyncLogin()"
+        #loginForm="ngForm"
       >
         <div class="container-fluid">
           <div class="row no-gutters">
+            <div class="col-xs-1 col-md-1 col-sm-1 box">
+              <em class="material-icons prefix-icon">account_box</em>
+            </div>
             <div class="col-xs-11 col-md-11 col-sm-11 box">
-              <mat-form-field class="full-width">
-                <mat-icon matPrefix>account_box</mat-icon>
-                <mat-label class="mat-label-text">Enter User Name</mat-label>
+              <mat-form-field class="input-full-width">
                 <input
                   matInput
                   allowText="usernameValidator"
                   type="text"
-                  id="userID"
-                  formControlName="userName"
+                  autocomplete="off"
+                  placeholder="User Name"
+                  [(ngModel)]="userName"
                   name="userName"
-                  #focus
                 />
               </mat-form-field>
             </div>
           </div>
           <div class="row no-gutters">
+            <div class="col-xs-1 col-md-1 col-sm-1 box">
+              <em class="material-icons prefix-icon">lock</em>
+            </div>
             <div class="col-xs-11 col-md-11 col-sm-11 box">
-              <mat-form-field class="full-width">
-                <mat-icon matPrefix>lock</mat-icon>
-                <mat-label class="mat-label-text">Enter Password</mat-label>
+              <mat-form-field class="input-full-width">
                 <input
                   matInput
                   [type]="dynamictype"
                   autocomplete="off"
-                  id="password"
-                  formControlName="password"
+                  placeholder="Password"
+                  [(ngModel)]="password"
                   name="password"
                 />
                 <mat-icon
                   matSuffix
                   class="material-icons cursorPointer"
-                  matTooltip="{{
-                    current_language_set?.common?.showPassword
-                      ? current_language_set?.common?.showPassword
-                      : 'Show Password'
-                  }}"
+                  matTooltip="Show Password"
                   (mousedown)="showPWD()"
                   (mouseup)="hidePWD()"
                   style="color: gray"
@@ -82,13 +72,9 @@
                 mat-raised-button
                 color="primary"
                 type="submit"
-                class="full-width-login submit"
+                class="input-full-width"
               >
-                {{
-                  current_language_set?.common?.proceed
-                    ? current_language_set?.common?.proceed
-                    : "Proceed"
-                }}
+                Proceed
               </button>
             </div>
           </div>

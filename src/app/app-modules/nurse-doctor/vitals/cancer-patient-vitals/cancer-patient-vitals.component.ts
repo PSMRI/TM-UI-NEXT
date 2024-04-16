@@ -215,13 +215,7 @@ export class CancerPatientVitalsComponent
           ) {
             this.female = true;
           }
-          if (
-            beneficiary !== undefined &&
-            beneficiary.genderName !== undefined &&
-            beneficiary.genderName !== null &&
-            beneficiary.genderName &&
-            beneficiary.genderName.toLowerCase() === 'male'
-          ) {
+          if (beneficiary?.genderName?.trim()?.toLowerCase() === 'male') {
             this.male = true;
           }
         },

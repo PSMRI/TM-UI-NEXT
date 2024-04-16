@@ -88,17 +88,17 @@ table {
 }
 
 .element-row {
-  position: relative;
+  position: relative !important;
 }
 
 .element-row:not(.expanded) {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .element-row:not(.expanded):hover {
-  background: grey;
+  background: grey !important;
 }
 
 .element-row.expanded {
-  border-bottom-color: transparent;
+  border-bottom-color: transparent !important;
 }

@@ -78,6 +78,7 @@ export class TestAndRadiologyComponent implements OnInit, OnDestroy, DoCheck {
     this.visitCategory = localStorage.getItem('visitCategory');
 
     this.testInVitalsService.vitalRBSTestResult$.subscribe((response) => {
+      console.log('vital subscription response: ', response);
       if (response.visitCode) {
         if (response.rbsTestResult) {
           this.vitalsRBSResp = null;
@@ -100,23 +101,23 @@ export class TestAndRadiologyComponent implements OnInit, OnDestroy, DoCheck {
             ],
           };
         }
+      }
 
-        if (
-          localStorage.getItem('referredVisitCode') === 'undefined' ||
-          localStorage.getItem('referredVisitCode') === null
-        ) {
-          this.getTestResults(
-            this.beneficiaryRegID,
-            this.visitID,
-            this.visitCategory,
-          );
-        } else {
-          this.getMMUTestResults(
-            this.beneficiaryRegID,
-            this.visitID,
-            this.visitCategory,
-          );
-        }
+      if (
+        localStorage.getItem('referredVisitCode') === 'undefined' ||
+        localStorage.getItem('referredVisitCode') === null
+      ) {
+        this.getTestResults(
+          this.beneficiaryRegID,
+          this.visitID,
+          this.visitCategory,
+        );
+      } else {
+        this.getMMUTestResults(
+          this.beneficiaryRegID,
+          this.visitID,
+          this.visitCategory,
+        );
       }
     });
 
@@ -175,6 +176,7 @@ export class TestAndRadiologyComponent implements OnInit, OnDestroy, DoCheck {
       this.labResults = [vitalsRBSResponse].concat(this.labResults);
 
       this.filteredLabResults = this.labResults;
+      console.log(this.filteredLabResults, 'DATAAAAAAAAAAAAA');
 
       this.currentLabPageChanged({
         page: this.currentLabActivePage,

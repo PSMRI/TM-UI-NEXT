@@ -35,11 +35,10 @@ export class DataSyncService {
     return this.http.get(environment.getDataSYNCGroupUrl);
   }
 
-  dataSyncLogin(userName: string, password: string, doLogout: any) {
+  dataSyncLogin(userName: string, password: string) {
     return this.http.post(environment.syncLoginUrl, {
       userName,
       password,
-      doLogout,
     });
   }
 

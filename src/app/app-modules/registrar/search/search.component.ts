@@ -27,10 +27,8 @@ import {
   DoCheck,
   ViewChild,
 } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
-
 import { ConfirmationService } from '../../core/services/confirmation.service';
 import { CameraService } from '../../core/services/camera.service';
 import { BeneficiaryDetailsService } from '../../core/services/beneficiary-details.service';
@@ -44,6 +42,7 @@ import { QuickSearchComponent } from '../quick-search/quick-search.component';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { HealthIdDisplayModalComponent } from '../../core/components/health-id-display-modal/health-id-display-modal.component';
 
 @Component({
   selector: 'app-search',
@@ -95,6 +94,21 @@ export class SearchComponent implements OnInit, DoCheck {
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   dataSource = new MatTableDataSource<any>();
 
+  displayedColumns1: string[] = [
+    'sNo',
+    'amritID',
+    'healthID',
+    'healthIdNumber',
+    'externalID',
+    'benName',
+    'gender',
+    'dob',
+    'state',
+    'district',
+    'action',
+  ];
+  dataSourceOne = new MatTableDataSource<any>();
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
@@ -102,7 +116,6 @@ export class SearchComponent implements OnInit, DoCheck {
     private registrarService: RegistrarService,
     private cameraService: CameraService,
     private router: Router,
-    private route: ActivatedRoute,
     public httpServiceService: HttpServiceService,
     private beneficiaryDetailsService: BeneficiaryDetailsService,
     private commonService: CommonService,
@@ -337,9 +350,9 @@ export class SearchComponent implements OnInit, DoCheck {
       data.benObject.abhaDetails !== null &&
       data.benObject.abhaDetails.length > 0
     ) {
-      // this.dialog.open(HealthIdDisplayModalComponent, {
-      //   data: { 'dataList': data.benObject.abhaDetails ,'search':true}
-      // } );
+      this.dialog.open(HealthIdDisplayModalComponent, {
+        data: { dataList: data.benObject.abhaDetails, search: true },
+      });
     } else
       this.confirmationService.alert(
         this.currentLanguageSet.abhaDetailsNotAvailable,
@@ -855,7 +868,7 @@ export class SearchComponent implements OnInit, DoCheck {
     this.pageNo = this.pageNo + 1;
     if (this.externalSearchTerm.pageNo !== undefined && this.pageNo !== null)
       this.externalSearchTerm.pageNo = this.pageNo - 1;
-    // this.searchBeneficiaryInMongo(this.pageNo);
+    this.searchBeneficiaryInMongo(this.pageNo);
     this.registrarService
       .externalSearchIdentity(this.externalSearchTerm)
       .subscribe(
@@ -888,8 +901,10 @@ export class SearchComponent implements OnInit, DoCheck {
                 'info',
               );
               this.pageNo = this.pageNo - 1;
-              // this.externalBeneficiaryList =[];
-              // this.filteredExternalBeneficiaryList =[];
+              this.externalBeneficiaryList = [];
+              this.filteredExternalBeneficiaryList = [];
+              this.dataSourceOne.data = [];
+              this.dataSourceOne.paginator = this.paginator;
             }
           }
         },

@@ -43,7 +43,7 @@ export class ViewHealthIdCardComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.assignSelectedLanguage();
-    // this.convertIMGToPDF(this.data.imgBase64);
+    this.convertIMGToPDF(this.data.imgBase64);
   }
 
   ngDoCheck() {
@@ -86,19 +86,19 @@ export class ViewHealthIdCardComponent implements OnInit, DoCheck {
     );
     const blobData = this.convertBase64ToBlobData(srcFilePath);
 
-    // if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    //   //IE
-    //   window.navigator.msSaveOrOpenBlob(blobData, 'ABHACard');
-    // } else {
-    //   // chrome
-    //   const blob = new Blob([blobData], { type: 'image/png' });
-    //   const url = window.URL.createObjectURL(blob);
-    //   // window.open(url);
-    //   const link = document.createElement('a');
-    //   link.href = url;
-    //   link.download = 'ABHACard';
-    //   link.click();
-    // }
+    if (window.navigator && 'msSaveOrOpenBlob' in window.navigator) {
+      //IE
+      (window.navigator as any).msSaveOrOpenBlob(blobData, 'ABHACard');
+    } else {
+      // chrome
+      const blob = new Blob([blobData], { type: 'image/png' });
+      const url = window.URL.createObjectURL(blob);
+      // window.open(url);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'ABHACard';
+      link.click();
+    }
   }
 
   convertBase64ToBlobData(base64Data: any) {
@@ -125,23 +125,23 @@ export class ViewHealthIdCardComponent implements OnInit, DoCheck {
   }
 
   downloadPdf(base64String: any, fileName: any) {
-    // if(window.navigator && window.navigator.msSaveOrOpenBlob){
-    //   // download PDF in IE
-    //   let byteChar = atob(base64String);
-    //   let byteArray = new Array(byteChar.length);
-    //   for(let i = 0; i < byteChar.length; i++){
-    //     byteArray[i] = byteChar.charCodeAt(i);
-    //   }
-    //   let uIntArray = new Uint8Array(byteArray);
-    //   let blob = new Blob([uIntArray], {type : 'application/pdf'});
-    //   window.navigator.msSaveOrOpenBlob(blob, `${fileName}.pdf`);
-    // } else {
-    //   // Download PDF in Chrome etc.
-    //   const source = `data:application/pdf;base64,${base64String}`;
-    //   const link = document.createElement("a");
-    //   link.href = source;
-    //   link.download = `${fileName}.pdf`
-    //   link.click();
-    // }
+    if (window.navigator && 'msSaveOrOpenBlob' in window.navigator) {
+      // download PDF in IE
+      const byteChar = atob(base64String);
+      const byteArray = new Array(byteChar.length);
+      for (let i = 0; i < byteChar.length; i++) {
+        byteArray[i] = byteChar.charCodeAt(i);
+      }
+      const uIntArray = new Uint8Array(byteArray);
+      const blob = new Blob([uIntArray], { type: 'application/pdf' });
+      (window.navigator as any).msSaveOrOpenBlob(blob, `${fileName}.pdf`);
+    } else {
+      // Download PDF in Chrome etc.
+      const source = `data:application/pdf;base64,${base64String}`;
+      const link = document.createElement('a');
+      link.href = source;
+      link.download = `${fileName}.pdf`;
+      link.click();
+    }
   }
 }
