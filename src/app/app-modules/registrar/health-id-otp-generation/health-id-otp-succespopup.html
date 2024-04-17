@@ -19,6 +19,7 @@
     <button
       mat-raised-button
       class="full-width-login button-ok"
+      style="margin-right: 8px; width: 60px"
       mat-dialog-close
       (click)="clearPIDData()"
     >
@@ -26,7 +27,14 @@
     </button>
     <button
       mat-raised-button
-      class="background-primary mat_blue"
+      style="
+        background-color: #0277bd;
+        color: white;
+        border: unset;
+        width: 60px;
+        border: 1px solid lightgray;
+      "
+      class="background-primary"
       cdkFocusInitial
       (click)="fetchOtp(succdata.healthId, succdata.healthIdNumber)"
     >

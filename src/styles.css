@@ -654,3 +654,9 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
 }
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  display: block;
+  width: 100%;
+  height: auto !important;
+}

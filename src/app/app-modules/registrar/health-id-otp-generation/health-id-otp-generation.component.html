@@ -92,7 +92,7 @@
   class="col-xs-12 col-sm-12"
   [formGroup]="healthIdOTPForm"
 >
-  <div class="row">
+  <div class="row" style="width: 102%">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <mat-form-field [style.width]="'100%'">
         <mat-label>{{ currentLanguageSet?.enterOTP }}</mat-label>
@@ -122,12 +122,13 @@
       >
         {{ currentLanguageSet?.resendOTP }}
       </button>
+
       <button
         id="submitButton"
         mat-raised-button
         type="accent"
         color="accent"
-        class="mat_blue"
+        class="mat_green"
         style="margin-right: 10px"
         [disabled]="!healthIdOTPForm.valid || !checkOTP()"
         (click)="verifyOTPOnSubmit()"
