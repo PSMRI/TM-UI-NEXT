@@ -54,6 +54,10 @@ export class CommonDialogComponent implements OnInit, DoCheck {
   public mandatories: any;
   public alertError: any;
 
+  public alertFetsenseMessage!: boolean;
+  public confirmcalibration!: boolean;
+  public confirmHealthID!: boolean;
+
   // Choose from Radio Button
   public choice!: boolean;
   public values: any;
@@ -65,13 +69,9 @@ export class CommonDialogComponent implements OnInit, DoCheck {
   public choiceSelect!: boolean;
   public options: any;
   public selectedOption: any;
-  confirmcalibration!: boolean;
+  public confirmCBAC!: boolean;
+  public cbacData: any = [];
   current_language_set: any;
-  confirmHealthID = false;
-  alertFetsenseMessage: any;
-  confirmCBAC: any;
-  cbacData: any;
-  confirmCareContext: any;
 
   constructor(
     public dialogRef: MatDialogRef<CommonDialogComponent>,
@@ -107,7 +107,7 @@ export class CommonDialogComponent implements OnInit, DoCheck {
 
     if (timer && timer > 0) {
       this.intervalRef = setInterval(() => {
-        if (timer == 0) {
+        if (timer === 0) {
           clearInterval(this.intervalRef);
           this.dialogRef.close({ action: 'timeout' });
         } else {

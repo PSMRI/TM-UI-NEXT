@@ -23,7 +23,7 @@
 /*
  * SH2004040 - Created on 21-07-21
  */
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpServiceService } from '../services/http-service.service';
 
 @Component({
@@ -32,10 +32,6 @@ import { HttpServiceService } from '../services/http-service.service';
 export class SetLanguageComponent {
   currentLanguageObject: any;
   constructor(private httpServices: HttpServiceService) {}
-
-  // ngDoCheck() {
-  //   this.setLanguage();
-  // }
 
   setLanguage() {
     const languageSubscription = this.httpServices.currentLangugae$.subscribe(

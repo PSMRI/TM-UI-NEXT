@@ -438,7 +438,7 @@ color:#545454;
 }
 
 .f-s-16 {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .f-s-18 {
@@ -1019,6 +1019,7 @@ em {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  margin-bottom: 30px;
 }
 
 .footer {
@@ -1944,7 +1945,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 }
 
 .mat-input-infix, .mat-tab-label {
-  font-weight: 600 !important;
+  font-weight: 800 !important;
   font-family: SF-UI-Display-Regular, "Helvetica Neue", sans-serif;
   font-size: 15px !important;
   margin-bottom: -5px !important;

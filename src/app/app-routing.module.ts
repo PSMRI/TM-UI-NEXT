@@ -21,10 +21,16 @@
  */
 
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './user-login/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ServiceComponent } from './user-login/service/service.component';
+import { LoginComponent } from './app-modules/login/login.component';
+import { TmLogoutComponent } from './app-modules/tm-logout/tm-logout.component';
+import { SetSecurityQuestionsComponent } from './app-modules/set-security-questions/set-security-questions.component';
+import { SetPasswordComponent } from './app-modules/set-password/set-password.component';
+import { ServiceComponent } from './app-modules/service/service.component';
 import { AuthGuard } from './app-modules/core/services/auth-guard.service';
+import { ServicePointComponent } from './app-modules/service-point/service-point.component';
+import { ServicePointResolve } from './app-modules/service-point/service-point-resolve.service';
+import { ResetPasswordComponent } from './app-modules/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -36,66 +42,73 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  // {
-  //   path: 'logout-tm',
-  //   component: TmLogoutComponent
-  // },
-  // {
-  //   path: 'set-security-questions',
-  //   component: SetSecurityQuestionsComponent,
-  // },
-  // {
-  //   path: 'reset-password',
-  //   component: ResetPasswordComponent,
-  // },
-  // {
-  //   path: 'set-password',
-  //   component: SetPasswordComponent,
-  //   // canActivate: [AuthGuard],
-  // },
+  {
+    path: 'logout-tm',
+    component: TmLogoutComponent,
+  },
+  {
+    path: 'set-security-questions',
+    component: SetSecurityQuestionsComponent,
+  },
+  {
+    path: 'set-password',
+    component: SetPasswordComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+  },
   {
     path: 'service',
     component: ServiceComponent,
     canActivate: [AuthGuard],
   },
-  // {
-  //   path: 'servicePoint',
-  //   component: ServicePointComponent,
-  //   canActivate: [AuthGuard],
-  //   resolve: {
-  //     servicePoints: ServicePointResolve
-  //   }
-  // },
-  // {
-  //   path: 'registrar',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: './app-modules/registrar/registrar.module#RegistrarModule'
-  // },
-  // {
-  //   path: 'common',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: './app-modules/nurse-doctor/nurse-doctor.module#NurseDoctorModule'
-  // },
-  // {
-  //   path: 'lab',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: './app-modules/lab/lab.module#LabModule'
-  // },
-  // {
-  //   path: 'pharmacist',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: './app-modules/pharmacist/pharmacist.module#PharmacistModule'
-  // },
-  // {
-  //   path: 'datasync',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: './app-modules/data-sync/dataSync.module#DataSYNCModule'
-  // },
-  // {
-  //   path: '**',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: 'servicePoint',
+    component: ServicePointComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      servicePoints: ServicePointResolve,
+    },
+  },
+  {
+    path: 'registrar',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/registrar/registrar.module').then(
+        (module) => module.RegistrarModule,
+      ),
+  },
+  {
+    path: 'nurse-doctor',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/nurse-doctor/nurse-doctor.module').then(
+        (module) => module.NurseDoctorModule,
+      ),
+  },
+  {
+    path: 'lab',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/lab/lab.module').then((module) => module.LabModule),
+  },
+  {
+    path: 'pharmacist',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/pharmacist/pharmacist.module').then(
+        (module) => module.PharmacistModule,
+      ),
+  },
+  {
+    path: 'datasync',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./app-modules/data-sync/dataSync.module').then(
+        (module) => module.DataSYNCModule,
+      ),
+  },
 ];
 
 @NgModule({

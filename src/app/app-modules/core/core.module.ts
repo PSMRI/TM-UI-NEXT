@@ -20,22 +20,62 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 
-import { NgModule, ErrorHandler, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { SpinnerService } from './services/spinner.service';
-import { ConfirmationService } from './services/confirmation.service';
-import { CameraService } from './services/camera.service';
-import { AuthGuard } from './services/auth-guard.service';
-import { AuthService } from './services/auth.service';
-import { BeneficiaryDetailsService } from './services/beneficiary-details.service';
-import { CommonService } from './services/common-services.service';
-import { InventoryService } from './services/inventory.service';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from './material.module';
+import { AppFooterComponent } from './components/app-footer/app-footer.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { CommonDialogComponent } from './components/common-dialog/common-dialog.component';
+import { SetLanguageComponent } from './components/set-language.component';
+import {
+  ConfirmationService,
+  CameraService,
+  AuthService,
+  SpinnerService,
+  BeneficiaryDetailsService,
+} from './services';
+import { AuthGuard } from './services/auth-guard.service';
+import { CommonService } from './services/common-services.service';
+import { HttpServiceService } from './services/http-service.service';
+import { InventoryService } from './services/inventory.service';
+import { IotService } from './services/iot.service';
+import { CameraDialogComponent } from './components/camera-dialog/camera-dialog.component';
+import { WebcamModule } from 'ngx-webcam';
+import { CanDeactivateGuardService } from './services/can-deactivate-guard.service';
+import { BeneficiaryDetailsComponent } from './components/beneficiary-details/beneficiary-details.component';
+import { ViewRadiologyUploadedFilesComponent } from '../lab/view-radiology-uploaded-files/view-radiology-uploaded-files.component';
+import { PreviousDetailsComponent } from './components/previous-details/previous-details.component';
+import { MatTableModule } from '@angular/material/table';
+import { IotcomponentComponent } from './components/iotcomponent/iotcomponent.component';
+import { CalibrationComponent } from './components/calibration/calibration.component';
+import { ConfirmatoryDiagnosisDirective } from './directives/confirmatory-diagnosis.directive';
+import { DisableFormControlDirective } from './directives/disableFormControl.directive';
+import { NullDefaultValueDirective } from './directives/null-default-value.directive';
+import { AllergenSearchComponent } from './components/allergen-search/allergen-search.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { StringValidatorDirective } from './directives/stringValidator.directive';
+import { NumberValidatorDirective } from './directives/numberValidator.directive';
+import { OpenPreviousVisitDetailsComponent } from './components/open-previous-visit-details/open-previous-visit-details.component';
+import { ShowCommitAndVersionDetailsComponent } from './components/show-commit-and-version-details/show-commit-and-version-details.component';
+import { IotBluetoothComponent } from './components/iot-bluetooth/iot-bluetooth.component';
+import { MyEmailDirective } from './directives/email/myEmail.directive';
+import { MyMobileNumberDirective } from './directives/MobileNumber/myMobileNumber.directive';
+import { MyNameDirective } from './directives/name/myName.directive';
+import { MyPasswordDirective } from './directives/password/myPassword.directive';
+import { MmuRbsDetailsComponent } from './components/mmu-rbs-details/mmu-rbs-details.component';
+import { SpecialistLoginComponent } from './components/specialist-login/specialist-login.component';
+import { DiagnosisSearchComponent } from './components/diagnosis-search/diagnosis-search.component';
+import { DiagnosisSearchDirective } from './directives/provisionalDiagnosis.directive';
+import { HealthIdDisplayModalComponent } from './components/health-id-display-modal/health-id-display-modal.component';
+import { HttpInterceptorService } from './services/http-interceptor.service';
+import { TelemedicineService } from './services/telemedicine.service';
+import { MyHealthIdDirective } from './directives/myHealthId/myHealthId.directive';
+import { NgChartsModule } from 'ng2-charts';
+import { MasterdataService } from '../nurse-doctor/shared/services';
+import { RegistrarService } from '../registrar/shared/services/registrar.service';
 
 @NgModule({
   imports: [
@@ -45,84 +85,98 @@ import { CommonDialogComponent } from './components/common-dialog/common-dialog.
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    // ChartsModule,
-    // WebCamModule,
-    // PaginationModule.forRoot()
+    NgChartsModule,
+    WebcamModule,
+    MatTableModule,
   ],
   declarations: [
     CommonDialogComponent,
-    // CameraDialogComponent,
-    // ProvisionalSearchComponent,
-    // TextareaDialogComponent,
-    // SpinnerComponent,
-    // BeneficiaryDetailsComponent,
-    // AppFooterComponent,
-    // AppHeaderComponent,
-    // PreviousDetailsComponent,
-    // ShowCommitAndVersionDetailsComponent,CalibrationComponent,
-    // myEmail, myMobileNumber, OpenModalDirective, ConfirmatoryDiagnosisDirective, myName, myPassword, StringValidator, NullDefaultValueDirective, NumberValidator, DisableFormControlDirective,
-    // ViewRadiologyUploadedFilesComponent, IotcomponentComponent,IotBluetoothComponent,AllergenSearchComponent, DataSyncLoginComponent,OpenPreviousVisitDetailsComponent,
-    // SetLanguageComponent
+    CameraDialogComponent,
+    SpinnerComponent,
+    BeneficiaryDetailsComponent,
+    AppFooterComponent,
+    AppHeaderComponent,
+    PreviousDetailsComponent,
+    ShowCommitAndVersionDetailsComponent,
+    CalibrationComponent,
+    MmuRbsDetailsComponent,
+    SpecialistLoginComponent,
+    MyEmailDirective,
+    MyMobileNumberDirective,
+    ConfirmatoryDiagnosisDirective,
+    MyNameDirective,
+    MyPasswordDirective,
+    StringValidatorDirective,
+    NullDefaultValueDirective,
+    NumberValidatorDirective,
+    IotcomponentComponent,
+    IotBluetoothComponent,
+    AllergenSearchComponent,
+    OpenPreviousVisitDetailsComponent,
+    DisableFormControlDirective,
+    ViewRadiologyUploadedFilesComponent,
+    DiagnosisSearchComponent,
+    DiagnosisSearchDirective,
+    HealthIdDisplayModalComponent,
+    MyHealthIdDirective,
   ],
   exports: [
     MaterialModule,
     CommonDialogComponent,
-    // CameraDialogComponent,
-    // TextareaDialogComponent,
-    // SpinnerComponent,
-    // BeneficiaryDetailsComponent,
-    // AppFooterComponent,
-    // AppHeaderComponent,
-    // PreviousDetailsComponent,
-    // PaginationModule, ShowCommitAndVersionDetailsComponent,
-    // myEmail, myMobileNumber, OpenModalDirective, ConfirmatoryDiagnosisDirective, myName, myPassword, DisableFormControlDirective, StringValidator, NumberValidator, NullDefaultValueDirective,
-    // IotcomponentComponent,
-    // IotBluetoothComponent,AllergenSearchComponent, DataSyncLoginComponent,CalibrationComponent,OpenPreviousVisitDetailsComponent
+    AppFooterComponent,
+    AppHeaderComponent,
+    IotBluetoothComponent,
+    ShowCommitAndVersionDetailsComponent,
+    CameraDialogComponent,
+    SpinnerComponent,
+    BeneficiaryDetailsComponent,
+    SpecialistLoginComponent,
+    MmuRbsDetailsComponent,
+    PreviousDetailsComponent,
+    MyEmailDirective,
+    MyMobileNumberDirective,
+    ConfirmatoryDiagnosisDirective,
+    MyNameDirective,
+    MyPasswordDirective,
+    DisableFormControlDirective,
+    StringValidatorDirective,
+    NumberValidatorDirective,
+    NullDefaultValueDirective,
+    IotcomponentComponent,
+    AllergenSearchComponent,
+    CalibrationComponent,
+    HealthIdDisplayModalComponent,
+    OpenPreviousVisitDetailsComponent,
+    WebcamModule,
+    DiagnosisSearchComponent,
+    DiagnosisSearchDirective,
+    NgChartsModule,
   ],
-  // entryComponents: [
-  //   CommonDialogComponent,
-  //   CameraDialogComponent,
-  //   TextareaDialogComponent,
-  //   SpinnerComponent,
-  //   PreviousDetailsComponent,
-  //   ProvisionalSearchComponent,
-  //   ShowCommitAndVersionDetailsComponent,
-  //   ViewRadiologyUploadedFilesComponent,
-  //   IotcomponentComponent,
-  //   IotBluetoothComponent,
-  //   AllergenSearchComponent,
-  //   DataSyncLoginComponent,CalibrationComponent,
-  //   OpenPreviousVisitDetailsComponent
-  // ]
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [
+        HttpInterceptorService,
+        HttpServiceService,
         ConfirmationService,
         CameraService,
-        // TextareaDialog,
         AuthGuard,
+        AppHeaderComponent,
         AuthService,
         SpinnerService,
         BeneficiaryDetailsService,
         CommonService,
         InventoryService,
-        // CanDeactivateGuardService,
-        // MasterdataService,
-        // HttpServiceService,
-        // IotService,
-        // {
-        //   provide: Http,
-        //   useFactory: HttpInterceptorFactory,
-        //   deps: [XHRBackend, RequestOptions, Router, SpinnerService, ConfirmationService]
-        // }
+        CanDeactivateGuardService,
+        TelemedicineService,
+        IotService,
+        HttpServiceService,
+        SetLanguageComponent,
+        MasterdataService,
+        RegistrarService,
       ],
     };
   }
 }
-
-// export function HttpInterceptorFactory(backend: XHRBackend, options: RequestOptions, router: Router, spinner: SpinnerService, confirmation: ConfirmationService) {
-//   return new HttpInterceptor(backend, options, router, spinner, confirmation);
-// }

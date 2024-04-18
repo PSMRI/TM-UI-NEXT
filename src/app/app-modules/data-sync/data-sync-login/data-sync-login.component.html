@@ -1,0 +1,85 @@
+<div
+  class="login-form-container"
+  [ngClass]="{ stretch: data && data.masterDowloadFirstTime }"
+>
+  <button
+    *ngIf="data?.masterDowloadFirstTime"
+    class="close-button"
+    (click)="closeDialog()"
+    mat-icon-button
+  >
+    <mat-icon class="md-24">close</mat-icon>
+  </button>
+  <mat-card class="m-t-40">
+    <mat-card-title class="sync-login-title">
+      <h4>Confirm your identity to perform this action</h4>
+    </mat-card-title>
+
+    <mat-card-content class="m-t-30">
+      <form
+        name="loginForm"
+        (submit)="loginForm.form.valid && dataSyncLogin()"
+        #loginForm="ngForm"
+      >
+        <div class="container-fluid">
+          <div class="row no-gutters">
+            <div class="col-xs-1 col-md-1 col-sm-1 box">
+              <em class="material-icons prefix-icon">account_box</em>
+            </div>
+            <div class="col-xs-11 col-md-11 col-sm-11 box">
+              <mat-form-field class="input-full-width">
+                <input
+                  matInput
+                  allowText="usernameValidator"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="User Name"
+                  [(ngModel)]="userName"
+                  name="userName"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-xs-1 col-md-1 col-sm-1 box">
+              <em class="material-icons prefix-icon">lock</em>
+            </div>
+            <div class="col-xs-11 col-md-11 col-sm-11 box">
+              <mat-form-field class="input-full-width">
+                <input
+                  matInput
+                  [type]="dynamictype"
+                  autocomplete="off"
+                  placeholder="Password"
+                  [(ngModel)]="password"
+                  name="password"
+                />
+                <mat-icon
+                  matSuffix
+                  class="material-icons cursorPointer"
+                  matTooltip="Show Password"
+                  (mousedown)="showPWD()"
+                  (mouseup)="hidePWD()"
+                  style="color: gray"
+                  >visibility</mat-icon
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12 box">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="input-full-width"
+              >
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

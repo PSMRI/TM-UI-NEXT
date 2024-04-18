@@ -25,17 +25,17 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-const commonIP = 'http://10.208.122.38:8080/';
-const tmIP = 'http://10.208.122.38:8080/';
-const mmuIP = 'http://10.208.122.38:8080/';
-const schedulerIP = 'http://10.208.122.38:8080/';
-const tmUI_IP = 'http://10.208.122.38:8080/';
-const schedulerUI_IP = 'http://10.208.122.38:8080/';
-const inventoryUI_IP = 'http://10.208.122.38:8080/';
+const commonIP = 'http://183.82.107.186:8080/';
+const tmIP = 'http://183.82.107.186:8080/';
+const mmuIP = 'http://183.82.107.186:8080/';
+const schedulerIP = 'http://183.82.107.186:8080/';
+const tmUI_IP = 'http://183.82.107.186:8080/';
+const schedulerUI_IP = 'http://183.82.107.186:8080/';
+const inventoryUI_IP = 'http://183.82.107.186:8080/';
 const SERVER_IP = 'dataSYNCIP';
 const SWYMED_IP = 'swymed://14.143.13.109';
-const adminIP = 'http://10.208.122.38:8080';
-const FHIRIP = 'http://10.208.122.38:8080';
+const adminIP = 'http://183.82.107.186:8080';
+const FHIRIP = 'http://183.82.107.186:8080';
 
 // With API MAN Configuration
 // const COMMON_API_OPEN = `http://${IP}:8080/apiman-gateway/IEMR/Common/open/`;
@@ -52,7 +52,7 @@ const MMU_API = `${mmuIP}mmuapi-v1.0/`;
 const COMMON_API_OPEN_SYNC = `${SERVER_IP}commonapi-v1.0/`;
 const SCHEDULER_API = `${schedulerIP}schedulerapi-v1.0/`;
 const ADMIN_API = `${adminIP}/adminapi-v1.0`;
-const biologicalScreeningDeviceAPI = `${ADMIN_API}/diagnostics/biologicalScreeningDevice`;
+const IOT_API = 'http://localhost:8085/ezdx-hub-connect-srv';
 const FHIR_API = `${FHIRIP}/fhirapi-v1.0/`;
 const mmuUICasesheet = `${tmUI_IP}tmui-v1.0`;
 
@@ -133,7 +133,7 @@ export const environment = {
   visitDetailMasterDataUrl: `${TM_API}master/get/visitReasonAndCategories`,
   nurseMasterDataUrl: `${TM_API}master/nurse/masterData/`,
   doctorMasterDataUrl: `${TM_API}master/doctor/masterData/`,
-  snomedCTRecordURL: `${TM_API}/snomed/getSnomedCTRecord`,
+  snomedCTRecordURL: `${TM_API}snomed/getSnomedCTRecord`,
   getCalibrationStrips: `${ADMIN_API}/fetchCalibrationStrips`,
   /**
    * Lab Data Urls
@@ -296,7 +296,7 @@ export const environment = {
   savePNCDoctorDetailsUrl: `${TM_API}PNC/save/doctorData`,
 
   getPNCVisitDetailsUrl: `${TM_API}PNC/getBenVisitDetailsFrmNursePNC`,
-  getPNCDetailsUrl: `${TM_API}PNC//getBenPNCDetailsFrmNursePNC`,
+  getPNCDetailsUrl: `${TM_API}PNC/getBenPNCDetailsFrmNursePNC`,
   getPNCVitalsDetailsUrl: `${TM_API}PNC/getBenVitalDetailsFrmNurse`,
   getPNCHistoryDetailsUrl: `${TM_API}PNC/getBenHistoryDetails`,
   getPNCExaminationDataUrl: `${TM_API}PNC/getBenExaminationDetailsPNC`,
@@ -386,11 +386,11 @@ export const environment = {
   apiVersionUrl: `${TM_API}version`,
   snomedCTRecordListURL1: `${COMMON_API}snomed/getSnomedCTRecordList`,
 
-  ioturl: `${biologicalScreeningDeviceAPI}`,
-  deviceStatusurl: `${biologicalScreeningDeviceAPI}/api/v1/bluetooth/hub/connection_status`,
-  deviceDisconnectUrl: `${biologicalScreeningDeviceAPI}/api/v1/bluetooth/hub/disconnect`,
-  deviceBluetoothurl: `${biologicalScreeningDeviceAPI}/api/v1/bluetooth/service_discovery`,
-  connectdeviceBluetoothurl: `${biologicalScreeningDeviceAPI}/api/v1/bluetooth/hub_connection`,
+  ioturl: '' + IOT_API,
+  deviceStatusurl: IOT_API + '/api/v1/bluetooth/hub/connection_status',
+  deviceBluetoothurl: IOT_API + '/api/v1/bluetooth/service_discovery',
+  deviceDisconnectUrl: `${IOT_API}/api/v1/bluetooth/hub/disconnect`,
+  connectdeviceBluetoothurl: IOT_API + '/api/v1/bluetooth/hub_connection',
 
   startWeighturl: '/api/v1/physical_tests/weight',
   startTempurl: '/api/v1/physical_tests/temperature',
