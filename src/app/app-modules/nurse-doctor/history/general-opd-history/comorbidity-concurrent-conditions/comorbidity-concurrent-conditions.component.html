@@ -81,19 +81,7 @@
           </mat-form-field>
         </div>
 
-        <div
-          class="col-3 box"
-          *ngIf="
-            (comorbidityConcurrentConditions?.value?.comorbidConditions !==
-              null &&
-              comorbidityConcurrentConditions?.value?.comorbidConditions !==
-                '') ||
-            comorbidityConcurrentConditions.value.comorbidConditions
-              ?.comorbidCondition === 'None' ||
-            comorbidityConcurrentConditions.value.comorbidConditions
-              ?.comorbidCondition === 'Nil'
-          "
-        >
+        <div class="col-3 box">
           <mat-form-field class="input-full-width">
             <mat-label class="mat-label-text">{{
               currentLanguageSet?.DurationData?.duration
@@ -111,17 +99,7 @@
           </mat-form-field>
         </div>
 
-        <div
-          class="col-3 box"
-          *ngIf="
-            (comorbidityConcurrentConditions?.value?.timePeriodAgo !== null &&
-              comorbidityConcurrentConditions?.value?.timePeriodAgo !== '') ||
-            comorbidityConcurrentConditions.value.comorbidConditions
-              ?.comorbidCondition === 'None' ||
-            comorbidityConcurrentConditions.value.comorbidConditions
-              ?.comorbidCondition === 'Nil'
-          "
-        >
+        <div class="col-3 box">
           <mat-form-field>
             <mat-label class="mat-label-text">{{
               currentLanguageSet?.DurationData?.durationUnit

@@ -252,6 +252,7 @@
                   (selectionChange)="filtergovIDs(id.value.type, i)"
                   formControlName="type"
                   style="line-height: unset"
+                  [required]="isGidRequired"
                 >
                   <mat-option
                     *ngFor="let govIDType of govIDMaster[i]?.govIdEntityMaster"
