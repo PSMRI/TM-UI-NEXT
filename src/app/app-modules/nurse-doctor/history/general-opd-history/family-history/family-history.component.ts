@@ -201,13 +201,12 @@ export class FamilyHistoryComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   filterFamilyDiseaseList(
-    event: any,
+    disease: any,
     i: any,
     familyDiseaseForm?: AbstractControl<any, any>,
   ) {
-    const disease: any = event.value;
     const previousValue: any = this.previousSelectedDiseaseList[i];
-    if (disease?.diseaseType === 'None') {
+    if (disease.diseaseType === 'None') {
       this.removeFamilyDiseaseExecptNone();
     }
 
@@ -363,9 +362,11 @@ export class FamilyHistoryComponent implements OnInit, DoCheck, OnDestroy {
     });
   }
 
-  checkValidity(diseaseForm: any) {
-    const temp = diseaseForm.value;
-    if (temp.diseaseType && temp.familyMembers) {
+  checkValidity(diseaseForm: AbstractControl<any, any>) {
+    if (
+      diseaseForm?.get('diseaseType')?.value &&
+      diseaseForm?.get('familyMembers')?.value
+    ) {
       return false;
     } else {
       return true;

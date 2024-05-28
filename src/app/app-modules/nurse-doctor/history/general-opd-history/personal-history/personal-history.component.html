@@ -286,10 +286,7 @@
           </div>
 
           <div class="col-xs-12 col-sm-6 col-md-2 box">
-            <mat-radio-group
-              formControlName="perDay"
-              (selectionChange)="perDayChange()"
-            >
+            <mat-radio-group formControlName="perDay" (change)="perDayChange()">
               <mat-radio-button
                 color="primary"
                 class="radio-button"
@@ -318,7 +315,7 @@
                 maxlength="2"
                 allowText="number"
                 formControlName="duration"
-                (selectionChange)="validateDuration(tobacco)"
+                (change)="validateDuration(tobacco)"
               />
             </mat-form-field>
           </div>
@@ -495,7 +492,7 @@
                 maxlength="2"
                 allowText="number"
                 formControlName="duration"
-                (selectionChange)="validateDuration(alcohol)"
+                (change)="validateDuration(alcohol)"
               />
             </mat-form-field>
           </div>
@@ -610,7 +607,7 @@
                 appDefaultNull
                 maxlength="200"
                 formControlName="snomedTerm"
-                (selectionChange)="removeSnomedCode(allergy, i)"
+                (change)="removeSnomedCode(allergy, i)"
                 [disabled]="!allergy.value.allergyType"
                 (keyup.enter)="
                   searchComponents(allergy.value.snomedTerm, i, allergy)
@@ -654,7 +651,7 @@
                 class="select-full-width"
                 multiple
                 formControlName="typeOfAllergicReactions"
-                (selectionChange)="canEnableOtherAllergy(allergy)"
+                (change)="canEnableOtherAllergy(allergy)"
               >
                 <mat-option
                   *ngFor="

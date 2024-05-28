@@ -276,11 +276,10 @@ export class FamilyHistoryNcdscreeningComponent
   }
 
   filterFamilyDiseaseList(
-    event: any,
+    disease: any,
     i: any,
     familyDiseaseForm?: AbstractControl<any, any>,
   ) {
-    const disease: any = event;
     const familyDiseaseList = <FormArray>(
       this.familyHistoryForm.controls['familyDiseaseList']
     );
@@ -512,9 +511,11 @@ export class FamilyHistoryNcdscreeningComponent
     });
   }
 
-  checkValidity(diseaseForm: any) {
-    const temp = diseaseForm.value;
-    if (temp.diseaseType && temp.familyMembers) {
+  checkValidity(diseaseForm: AbstractControl<any, any>) {
+    if (
+      diseaseForm?.get('diseaseType')?.value &&
+      diseaseForm?.get('familyMembers')?.value
+    ) {
       return false;
     } else {
       return true;
