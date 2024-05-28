@@ -214,6 +214,47 @@
                 </td>
               </ng-container>
 
+              <ng-container matColumnDef="action">
+                <th
+                  mat-header-cell
+                  style="border-bottom: unset !important; text-align: center"
+                  *matHeaderCellDef
+                  mat-sort-header
+                  colspan="3"
+                  id="action"
+                >
+                  {{ current_language_set?.bendetails?.action }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  class="col-12"
+                  style="text-align: center; width: 26%"
+                >
+                  <button
+                    mat-raised-button
+                    (click)="cancelTCRequest(element)"
+                    matTooltip="{{ current_language_set?.tc?.cancelTc }}"
+                    color="warn"
+                    class="mat_blue_table col-4"
+                    [disabled]="element.specialist_flag !== 1"
+                  >
+                    {{ current_language_set?.common?.cancel }}
+                  </button>
+                  <button
+                    style="margin: 0px 10px 0px 10px !important"
+                    mat-raised-button
+                    (click)="reSchedule(element)"
+                    matTooltip="{{ current_language_set?.tc?.reschedule }}"
+                    color="primary"
+                    class="mat_blue_table col-4"
+                    [disabled]="element.specialist_flag !== 4"
+                  >
+                    {{ current_language_set?.tc?.schedule }}
+                  </button>
+                </td>
+              </ng-container>
+
               <td colspan="2">
                 <div class="totalCount" *ngIf="dataSource.data.length > 0">
                   {{ current_language_set?.common?.totalCount }} :
