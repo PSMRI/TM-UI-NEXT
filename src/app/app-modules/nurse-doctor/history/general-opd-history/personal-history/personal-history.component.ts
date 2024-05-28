@@ -536,6 +536,11 @@ export class GeneralPersonalHistoryComponent
           this.generalPersonalHistoryForm.markAsDirty();
           if (tobaccoList.length === 1 && !!tobaccoForm) {
             tobaccoForm.reset();
+            tobaccoForm?.get('number')?.disable();
+            tobaccoForm?.get('perDay')?.disable();
+            tobaccoForm?.get('duration')?.disable();
+            tobaccoForm?.get('durationUnit')?.disable();
+            tobaccoForm.markAsUntouched();
           } else {
             const removedValue = this.previousSelectedTobaccoList[i];
 
@@ -632,6 +637,11 @@ export class GeneralPersonalHistoryComponent
           this.generalPersonalHistoryForm.markAsDirty();
           if (alcoholList.length === 1 && !!alcoholForm) {
             alcoholForm.reset();
+            alcoholForm?.get('alcoholIntakeFrequency')?.disable();
+            alcoholForm?.get('avgAlcoholConsumption')?.disable();
+            alcoholForm?.get('duration')?.disable();
+            alcoholForm?.get('durationUnit')?.disable();
+            alcoholForm.markAsUntouched();
           } else {
             const removedValue = this.previousSelectedAlcoholList[i];
 
@@ -743,12 +753,12 @@ export class GeneralPersonalHistoryComponent
       tobaccoUseTypeID: null,
       tobaccoUseType: null,
       otherTobaccoUseType: null,
-      number: null,
+      number: { value: null, disabled: true },
       numberperDay: null,
       numberperWeek: null,
-      perDay: null,
-      duration: null,
-      durationUnit: null,
+      perDay: { value: null, disabled: true },
+      duration: { value: null, disabled: true },
+      durationUnit: { value: null, disabled: true },
     });
   }
 
@@ -757,10 +767,10 @@ export class GeneralPersonalHistoryComponent
       alcoholTypeID: null,
       typeOfAlcohol: null,
       otherAlcoholType: null,
-      alcoholIntakeFrequency: null,
-      avgAlcoholConsumption: null,
-      duration: null,
-      durationUnit: null,
+      alcoholIntakeFrequency: { value: null, disabled: true },
+      avgAlcoholConsumption: { value: null, disabled: true },
+      duration: { value: null, disabled: true },
+      durationUnit: { value: null, disabled: true },
     });
   }
 
@@ -768,9 +778,9 @@ export class GeneralPersonalHistoryComponent
     return this.fb.group({
       allergyType: null,
       allergyName: null,
-      snomedTerm: null,
+      snomedTerm: { value: null, disabled: true },
       snomedCode: null,
-      typeOfAllergicReactions: null,
+      typeOfAllergicReactions: { value: null, disabled: true },
       otherAllergicReaction: null,
       enableOtherAllergy: false,
     });
@@ -962,6 +972,14 @@ export class GeneralPersonalHistoryComponent
       );
       formGroup.patchValue({ duration: null, durationUnit: null });
     }
+    // to diable the fields
+    if (duration && !durationUnit) {
+      formGroup?.get('durationUnit')?.enable();
+      formGroup?.get('durationUnit')?.reset();
+    } else if (!duration) {
+      formGroup?.get('durationUnit')?.disable();
+      formGroup?.get('durationUnit')?.reset();
+    }
   }
 
   checkTobaccoStatus() {
@@ -1013,13 +1031,13 @@ export class GeneralPersonalHistoryComponent
     });
   }
 
-  checkTobaccoValidity(tobaccoForm: any) {
+  checkTobaccoValidity(tobaccoForm: AbstractControl<any, any>) {
     const temp = tobaccoForm.value;
     if (
-      temp.tobaccoUseType &&
-      temp.number &&
-      temp.duration &&
-      temp.durationUnit
+      tobaccoForm?.get('tobaccoUseType')?.value &&
+      tobaccoForm?.get('number')?.value &&
+      tobaccoForm?.get('duration')?.value &&
+      tobaccoForm?.get('durationUnit')?.value
     ) {
       return false;
     } else {
@@ -1027,14 +1045,13 @@ export class GeneralPersonalHistoryComponent
     }
   }
 
-  checkAlcoholValidity(alcoholForm: any) {
-    const temp = alcoholForm.value;
+  checkAlcoholValidity(alcoholForm: AbstractControl<any, any>) {
     if (
-      temp.typeOfAlcohol &&
-      temp.alcoholIntakeFrequency &&
-      temp.avgAlcoholConsumption &&
-      temp.duration &&
-      temp.durationUnit
+      alcoholForm?.get('typeOfAlcohol')?.value &&
+      alcoholForm?.get('alcoholIntakeFrequency')?.value &&
+      alcoholForm?.get('avgAlcoholConsumption')?.value &&
+      alcoholForm?.get('duration')?.value &&
+      alcoholForm?.get('durationUnit')?.value
     ) {
       return false;
     } else {
@@ -1042,13 +1059,12 @@ export class GeneralPersonalHistoryComponent
     }
   }
 
-  checkAllergyValidity(allergyForm: any) {
-    const temp = allergyForm.value;
+  checkAllergyValidity(allergyForm: AbstractControl<any, any>) {
     if (
-      temp.allergyType &&
-      temp.snomedTerm &&
-      temp.snomedCode &&
-      temp.typeOfAllergicReactions
+      allergyForm?.get('allergyType')?.value &&
+      allergyForm?.get('snomedTerm')?.value &&
+      allergyForm?.get('snomedCode')?.value &&
+      allergyForm?.get('typeOfAllergicReactions')?.value
     ) {
       return false;
     } else {
@@ -1063,6 +1079,13 @@ export class GeneralPersonalHistoryComponent
   ): void {
     const searchTerm = term;
     console.log('searchTerm', this.generalPersonalHistoryForm);
+    // to enable the fields
+    if (allergyForm?.value?.snomedTerm) {
+      allergyForm?.get('typeOfAllergicReactions')?.enable();
+    } else {
+      allergyForm?.get('typeOfAllergicReactions')?.disable();
+      allergyForm?.get('typeOfAllergicReactions')?.reset();
+    }
     if (searchTerm.length > 2) {
       const dialogRef = this.dialog.open(AllergenSearchComponent, {
         data: { searchTerm: searchTerm },
@@ -1144,5 +1167,47 @@ export class GeneralPersonalHistoryComponent
     const getLanguageJson = new SetLanguageComponent(this.httpServiceService);
     getLanguageJson.setLanguage();
     this.currentLanguageSet = getLanguageJson.currentLanguageObject;
+  }
+
+  enableFields(tobaccoForm?: AbstractControl<any, any>) {
+    if (tobaccoForm?.value?.number) {
+      tobaccoForm?.get('perDay')?.enable();
+      tobaccoForm?.get('perDay')?.reset();
+      tobaccoForm?.get('duration')?.enable();
+      tobaccoForm?.get('duration')?.reset();
+    } else {
+      tobaccoForm?.get('perDay')?.disable();
+      tobaccoForm?.get('perDay')?.reset();
+      tobaccoForm?.get('duration')?.disable();
+      tobaccoForm?.get('duration')?.reset();
+      tobaccoForm?.get('durationUnit')?.disable();
+      tobaccoForm?.get('durationUnit')?.reset();
+    }
+  }
+
+  onChangeAlcIntakFreq(alcoholForm?: AbstractControl<any, any>) {
+    if (alcoholForm?.value?.alcoholIntakeFrequency) {
+      alcoholForm?.get('avgAlcoholConsumption')?.enable();
+      alcoholForm?.get('avgAlcoholConsumption')?.reset();
+    } else {
+      alcoholForm?.get('avgAlcoholConsumption')?.disable();
+      alcoholForm?.get('avgAlcoholConsumption')?.reset();
+      alcoholForm?.get('duration')?.disable();
+      alcoholForm?.get('duration')?.reset();
+      alcoholForm?.get('durationUnit')?.disable();
+      alcoholForm?.get('durationUnit')?.reset();
+    }
+  }
+
+  onChangeAvgAlcoholConsumption(alcoholForm?: AbstractControl<any, any>) {
+    if (alcoholForm?.value?.avgAlcoholConsumption) {
+      alcoholForm?.get('duration')?.enable();
+      alcoholForm?.get('duration')?.reset();
+    } else {
+      alcoholForm?.get('duration')?.disable();
+      alcoholForm?.get('duration')?.reset();
+      alcoholForm?.get('durationUnit')?.disable();
+      alcoholForm?.get('durationUnit')?.reset();
+    }
   }
 }

@@ -88,13 +88,7 @@
           </mat-form-field>
         </div>
 
-        <div
-          class="col-3 box"
-          *ngIf="
-            vaccine.value.vaccineName !== null &&
-            vaccine.value.vaccineName !== ''
-          "
-        >
+        <div class="col-3 box">
           <mat-form-field class="input-full-width">
             <mat-label class="mat-label-text">{{
               currentLanguageSet?.historyData?.opd_NCD_PNCHistory?.otherVaccine
@@ -113,14 +107,7 @@
           </mat-form-field>
         </div>
 
-        <div
-          class="col-3 box"
-          *ngIf="
-            vaccine?.value?.actualReceivingAge !== null &&
-            vaccine?.value?.actualReceivingAge !== '' &&
-            vaccine.value.actualReceivingAge > 0
-          "
-        >
+        <div class="col-3 box">
           <mat-form-field>
             <mat-label class="mat-label-text">{{
               currentLanguageSet?.historyData?.opd_NCD_PNCHistory?.otherVaccine
@@ -145,7 +132,7 @@
             class="mat_warn_circle"
             style="margin-right: 5px"
             id="removeOtherVaccine"
-            *ngIf="i !== 0 || (i === 0 && vaccine.touched)"
+            *ngIf="i !== 0 || (i === 0 && (vaccine.touched || vaccine.dirty))"
             (click)="removeOtherVaccine(i, vaccine)"
           >
             <mat-icon class="md-18">close</mat-icon>

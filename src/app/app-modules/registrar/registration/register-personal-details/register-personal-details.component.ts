@@ -104,6 +104,7 @@ export class RegisterPersonalDetailsComponent
     this.setImageChangeFlagToFalseByDefault();
     this.setCalendarConfig();
     this.assignSelectedLanguage();
+    this.isMaritalStatus();
     this.registrarService.changePersonalDetailsData(null);
     this.personalDataOnHealthIDSubscription =
       this.registrarService.dialogResult$.subscribe((res) => {

@@ -279,6 +279,8 @@
                 maxlength="2"
                 allowText="number"
                 formControlName="number"
+                (blur)="perDayChange()"
+                (input)="enableFields(tobacco)"
               />
             </mat-form-field>
           </div>
@@ -447,6 +449,7 @@
                 id="frequencyIntake"
                 class="select-full-width"
                 formControlName="alcoholIntakeFrequency"
+                (selectionChange)="onChangeAlcIntakFreq(alcohol)"
               >
                 <mat-option
                   *ngFor="let frequency of masterData?.frequencyOfAlcoholIntake"
@@ -468,6 +471,7 @@
               <mat-select
                 class="select-full-width"
                 formControlName="avgAlcoholConsumption"
+                (selectionChange)="onChangeAvgAlcoholConsumption(alcohol)"
               >
                 <mat-option
                   *ngFor="let quantity of masterData?.quantityOfAlcoholIntake"

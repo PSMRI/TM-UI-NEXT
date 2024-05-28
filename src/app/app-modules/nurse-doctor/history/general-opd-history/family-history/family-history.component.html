@@ -40,7 +40,7 @@
               name="diseaseType"
               formControlName="diseaseType"
               (selectionChange)="
-                filterFamilyDiseaseList($event, i, familyDisease)
+                filterFamilyDiseaseList($event.value, i, familyDisease)
               "
             >
               <mat-option
@@ -121,7 +121,7 @@
             style="margin-right: 5px"
             *ngIf="
               i !== 0 ||
-              (i === 0 && familyDisease.touched && familyDisease.dirty)
+              (i === 0 && (familyDisease.touched || familyDisease.dirty))
             "
             (click)="removeFamilyDisease(i, familyDisease)"
           >
