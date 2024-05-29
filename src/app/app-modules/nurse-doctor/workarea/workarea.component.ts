@@ -835,7 +835,7 @@ export class WorkareaComponent
     this.patientMedicalForm.removeControl('patientANCForm');
     this.patientMedicalForm.removeControl('patientCaseRecordForm');
     this.patientMedicalForm.removeControl('patientReferForm');
-    // this.patientMedicalForm.removeControl('NCDScreeningForm');
+    this.patientMedicalForm.removeControl('NCDScreeningForm');
     this.patientMedicalForm.removeControl('idrsScreeningForm');
 
     this.showQuickConsult = false;
@@ -847,6 +847,7 @@ export class WorkareaComponent
     this.showPNC = false;
     this.showCaseRecord = false;
     this.showRefer = false;
+    this.changeDetectorRef.detectChanges();
   }
 
   submitPatientMedicalDetailsForm(medicalForm: any) {
