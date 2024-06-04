@@ -127,6 +127,7 @@ export const environment = {
    */
 
   getDistrictListUrl: `${TM_API}location/get/districtMaster/`,
+  getDistrictTalukUrl: `${MMU_API}location/get/DistrictTalukMaster/`,
   getSubDistrictListUrl: `${TM_API}location/get/districtBlockMaster/`,
   getVillageListUrl: `${TM_API}location/get/villageMasterFromBlockID/`,
   demographicsCurrentMasterUrl: `${TM_API}location/getLocDetailsBasedOnSpIDAndPsmID`,
@@ -463,4 +464,7 @@ export const environment = {
 
   generateABHAForBio: `${FHIR_API}healthIDWithBio/verifyBio`,
   generateABHAForBioMobileOTP: `${FHIR_API}healthIDWithBio/generateMobileOTP`,
+
+  /* Customization APIs*/
+  getAllRegistrationData: `${COMMON_API}customization/fetchAllData`,
 };

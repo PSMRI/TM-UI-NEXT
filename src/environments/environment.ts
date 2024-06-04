@@ -46,12 +46,12 @@ const SWYMED_IP = 'swymed://14.143.13.109';
 // const SCHEDULER_API = `http://${IP}:8080/apiman-gateway/IEMR/Scheduling/1.0/`;
 
 // Without API MAN Configuration
-const COMMON_API_OPEN = `${commonIP}/commonapi-v1.0/`;
-const COMMON_API = `${commonIP}/commonapi-v1.0/`;
+const COMMON_API_OPEN = `${commonIP}/commonapi-v1.1/`;
+const COMMON_API = `${commonIP}/commonapi-v1.1/`;
 const TM_API = `${tmIP}/tmapi-v1.0/`;
 const API104 = `${IP104}/104api-v1.0/`;
 const MMU_API = `${mmuIP}/mmuapi-v1.0/`;
-const COMMON_API_OPEN_SYNC = `http://${SERVER_IP}:8080/commonapi-v1.0/`;
+const COMMON_API_OPEN_SYNC = `http://${SERVER_IP}:8080/commonapi-v1.1/`;
 const SCHEDULER_API = `${schedulerIP}/schedulerapi-v1.0/`;
 const mmuUICasesheet = 'http://localhost:4200/';
 const ADMIN_API = `${adminIP}/adminapi-v1.0`;
@@ -135,6 +135,8 @@ export const environment = {
   nurseMasterDataUrl: `${TM_API}master/nurse/masterData/`,
   doctorMasterDataUrl: `${TM_API}master/doctor/masterData/`,
   snomedCTRecordURL: `${TM_API}snomed/getSnomedCTRecord`,
+  getDistrictTalukUrl: `${MMU_API}location/get/DistrictTalukMaster/`,
+
   /**
    * Lab Data Urls
    */
@@ -470,4 +472,7 @@ export const environment = {
 
   generateABHAForBio: `${FHIR_API}healthIDWithBio/verifyBio`,
   generateABHAForBioMobileOTP: `${FHIR_API}healthIDWithBio/generateMobileOTP`,
+
+  /* Customization APIs*/
+  getAllRegistrationData: `${COMMON_API}customization/fetchAllData`,
 };

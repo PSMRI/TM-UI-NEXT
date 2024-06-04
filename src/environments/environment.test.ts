@@ -133,6 +133,8 @@ export const environment = {
   doctorMasterDataUrl: `${TM_API}master/doctor/masterData/`,
   snomedCTRecordURL: `${TM_API}snomed/getSnomedCTRecord`,
   getCalibrationStrips: `${ADMIN_API}/fetchCalibrationStrips`,
+  getDistrictTalukUrl: `${MMU_API}location/get/DistrictTalukMaster/`,
+
   /**
    * Lab Data Urls
    */
@@ -467,4 +469,7 @@ export const environment = {
 
   generateABHAForBio: `${FHIR_API}healthIDWithBio/verifyBio`,
   generateABHAForBioMobileOTP: `${FHIR_API}healthIDWithBio/generateMobileOTP`,
+
+  /* Customization APIs*/
+  getAllRegistrationData: `${COMMON_API}customization/fetchAllData`,
 };
