@@ -37,6 +37,7 @@ const inventoryUI_IP = 'http://183.82.107.186:8080';
 const SERVER_IP = '10.208.122.39';
 
 const SWYMED_IP = 'swymed://14.143.13.109';
+const identityIP = 'http://183.82.107.186:8080/';
 
 // With API MAN Configuration
 // const COMMON_API_OPEN = `http://${IP}:8080/apiman-gateway/IEMR/Common/open/`;
@@ -46,6 +47,7 @@ const SWYMED_IP = 'swymed://14.143.13.109';
 // const SCHEDULER_API = `http://${IP}:8080/apiman-gateway/IEMR/Scheduling/1.0/`;
 
 // Without API MAN Configuration
+const IDENTITY_API = `${identityIP}/identity-0.0.1/`;
 const COMMON_API_OPEN = `${commonIP}/commonapi-v1.1/`;
 const COMMON_API = `${commonIP}/commonapi-v1.1/`;
 const TM_API = `${tmIP}/tmapi-v1.0/`;
@@ -475,4 +477,13 @@ export const environment = {
 
   /* Customization APIs*/
   getAllRegistrationData: `${COMMON_API}customization/fetchAllData`,
+
+  /*Family Tagging Urls */
+  relationShipUrl: `${TM_API}registrar/registrarMasterData`,
+  saveFamilyTaggingUrl: `${IDENTITY_API}family/addTag`,
+  editFamilyTaggingUrl: `${IDENTITY_API}family/editFamilyTagging`,
+  untagFamilyUrl: `${IDENTITY_API}family/untag`,
+  familySearchUrl: `${IDENTITY_API}family/searchFamily`,
+  createFamilyUrl: `${IDENTITY_API}family/createFamily`,
+  getFamilyMemberUrl: `${IDENTITY_API}family/getFamilyDetails`,
 };
