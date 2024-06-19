@@ -1218,6 +1218,7 @@
                 "consultationDone": "Tele-Consultation Done",
                 "pendingForTC": "Pending For TC",
                 "tCCancelled": "TC Cancelled",
+                "beneficaryConsent":"Beneficiary Consent",
                 "pendingforLabtestResult": "Pending for labtest result",
                 "labtestDone": "Labtest done",
                 "consultation_done": "Consultation done",
