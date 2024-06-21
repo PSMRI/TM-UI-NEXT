@@ -1,7 +1,7 @@
 .circle {
   position: relative;
   padding: 0;
-  width: 300px;
+  width: 320px;
   height: 100px;
   z-index: 1;
   background: #3175c0;
@@ -46,7 +46,7 @@ label {
   50% { opacity: 1; }
 }
 .note {
-  font-size: 12px;
+  font-size: 14px;
   color: #4d4d33;
 }
 

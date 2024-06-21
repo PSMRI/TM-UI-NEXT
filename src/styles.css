@@ -733,3 +733,20 @@ control.mat-mdc-form-field-input-control {
 /* .mat-mdc-form-field-hint-wrapper {
   color: red !important;
 } */
+.mat-mdc-text-field-wrapper {
+  padding-left: unset !important;
+}
+.mat-mdc-paginator .mat-mdc-select-value {
+  padding-left: 15px !important;
+}
+.mdc-form-field>label {
+  font-weight: bold !important;
+}
+.mdc-form-field>label {
+  margin-left: -4px !important;
+ 
+}
+.mat-mdc-radio-button .mdc-form-field {
+
+  margin-left: -10px !important;
+}
