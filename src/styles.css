@@ -748,5 +748,8 @@ control.mat-mdc-form-field-input-control {
 }
 .mat-mdc-radio-button .mdc-form-field {
 
-  margin-left: -10px !important;
+  margin-left: -5px !important;
+}
+.mat-mdc-table thead{
+    text-align: center !important;
 }
