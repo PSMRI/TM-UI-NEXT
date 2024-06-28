@@ -625,10 +625,6 @@ input:-internal-autofill-selected {
   padding: 0 !important;
 }
 
-/* .mat-label-text {
-  color: rgba(0, 0, 0, 0.6);
-} */
-
 .mdc-form-field>label {
   color: #000;
 }
@@ -682,9 +678,10 @@ control.mat-mdc-form-field-input-control {
   font-weight: 700 !important;
 }
 .mat-label-text {
-  color: #999999 !important;
+  color: #999 !important;
   font-size: 15px !important;
-  font-weight: 550 !important;}
+  font-weight: 700 !important;
+}
 
 .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
   top: 32px !important;
@@ -692,23 +689,7 @@ control.mat-mdc-form-field-input-control {
 .mdc-floating-label {
   will-change: unset !important;
 }
-/* .mat-label-text {
-  color: rgba(0, 0, 0, 0.54) !important;
-  font-weight: 700 !important;
-  letter-spacing: initial !important;
-  font-size: 15px !important;
-}
-.mdc-form-field>label {
-  color: #000;
-  font-weight: 700;
-}
-.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
-  transition: opacity 150ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 700;
-}
-.mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
-  font-size: 15px !important;
-} */
+
 .mat-select-disabled .mat-select-underline {
   background-color: transparent;
   background-position: 0 bottom;
@@ -749,5 +730,8 @@ control.mat-mdc-form-field-input-control {
 .mat-mdc-radio-button .mdc-form-field {
 
   margin-left: -5px !important;
+}
+.mdc-text-field--filled .mdc-floating-label {
+  font-family: SF-UI-Display-Regular !important;
 }
 
