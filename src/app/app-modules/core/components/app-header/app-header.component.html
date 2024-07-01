@@ -41,6 +41,7 @@
         <li
           *ngIf="isAuthenticated"
           class="nav-item cursorPointer"
+          style="padding: 0px 5px 0px 5px"
           matTooltip="{{ currentLanguageSet?.common?.connectBluetooth }}"
           [ngClass]="{ connected: isConnected }"
         >
@@ -83,7 +84,7 @@
         <li
           class="nav-item cursorPointer"
           *ngIf="isAuthenticated"
-          style="margin-top: 6px"
+          style="margin-top: 6px; padding: 0px 5px 0px 5px"
         >
           <mat-icon
             alt="Help"
@@ -101,7 +102,14 @@
           <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
           <a tabindex="{0}" (click)="getSwymedLogout()">
             <mat-icon color="warn">power_settings_new</mat-icon>
-            <span style="color: #ffffff; vertical-align: top">Logout</span>
+            <span
+              style="
+                color: #ffffff;
+                vertical-align: top;
+                padding: 0px 5px 0px 5px;
+              "
+              >Logout</span
+            >
           </a>
         </li>
       </ul>

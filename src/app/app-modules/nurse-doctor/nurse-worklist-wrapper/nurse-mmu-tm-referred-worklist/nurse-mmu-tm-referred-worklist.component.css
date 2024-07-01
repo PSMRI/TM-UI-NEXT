@@ -75,10 +75,14 @@ md2-pagination {
   
   .first-visit-marker {
     background: #43760f;
+    margin-right: 5px;
+
   }
   
   .revisit-marker {
     background: #ff9900;
+    margin-right: 5px;
+
   }
   
   .totalCount,
