@@ -234,7 +234,16 @@ export class NurseMmuTmReferredWorklistComponent
   }
 
   filterBeneficiaryList(searchTerm: string) {
-    if (!searchTerm) this.filteredBeneficiaryList = this.beneficiaryList;
+    if (!searchTerm) {
+      this.filteredBeneficiaryList = this.beneficiaryList;
+      this.dataSource.data = this.filteredBeneficiaryList;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.data.forEach(
+        (sectionCount: any, index: number) => {
+          sectionCount.sno = index + 1;
+        },
+      );
+    }
     else {
       this.filteredBeneficiaryList = [];
       this.dataSource.data = [];
@@ -280,7 +289,7 @@ export class NurseMmuTmReferredWorklistComponent
                   break;
                 }
               } else {
-                const val = 'Revist';
+                const val = 'Revisit';
                 if (val.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
                   this.filteredBeneficiaryList.push(item);
                   this.dataSource.data.push(item);
