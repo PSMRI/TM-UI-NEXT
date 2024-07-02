@@ -835,7 +835,7 @@ export class WorkareaComponent
     this.patientMedicalForm.removeControl('patientANCForm');
     this.patientMedicalForm.removeControl('patientCaseRecordForm');
     this.patientMedicalForm.removeControl('patientReferForm');
-    // this.patientMedicalForm.removeControl('NCDScreeningForm');
+    this.patientMedicalForm.removeControl('NCDScreeningForm');
     this.patientMedicalForm.removeControl('idrsScreeningForm');
 
     this.showQuickConsult = false;
@@ -4003,7 +4003,9 @@ export class WorkareaComponent
   openBenPreviousisitDetails() {
     this.mdDialog.open(OpenPreviousVisitDetailsComponent, {
       disableClose: true,
-      width: '95%',
+      width: '100%',
+      height: 'auto',
+      maxWidth: '90vw',
       panelClass: 'preview-casesheet',
       data: {
         previous: true,

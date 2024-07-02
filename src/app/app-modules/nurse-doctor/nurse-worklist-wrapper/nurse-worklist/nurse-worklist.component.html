@@ -40,17 +40,18 @@
   <div class="row m-t-10 m-b-40">
     <div class="col-sm-12">
       <mat-card>
-        <section class="table-responsive">
-          <div class="mat-elevation-z8 responsiveTable">
+        <section class="">
+          <div class="">
             <table
               mat-table
               [dataSource]="dataSource"
               aria-describedby="nurseWorklist"
+              class="table table-striped"
             >
               <ng-container matColumnDef="sno">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -71,7 +72,7 @@
               <ng-container matColumnDef="beneficiaryID">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -88,7 +89,7 @@
               <ng-container matColumnDef="beneficiaryName">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -105,7 +106,7 @@
               <ng-container matColumnDef="gender">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -122,7 +123,7 @@
               <ng-container matColumnDef="age">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -139,7 +140,7 @@
               <ng-container matColumnDef="status">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -156,7 +157,7 @@
               <ng-container matColumnDef="fatherName">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -173,7 +174,7 @@
               <ng-container matColumnDef="district">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -191,7 +192,7 @@
               <ng-container matColumnDef="phoneNo">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
@@ -208,7 +209,7 @@
               <ng-container matColumnDef="image">
                 <th
                   mat-header-cell
-                  style="border-bottom: none"
+                  style="border-bottom: none; text-align: center"
                   *matHeaderCellDef
                   mat-sort-header
                 >
